@@ -31,7 +31,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClassName = 'course.scheduler.senior.project.App'
+    mainClassName = 'coursescheduler.CourseScheduler'
 }
 
 checkstyle {
