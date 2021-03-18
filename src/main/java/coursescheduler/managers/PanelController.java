@@ -9,7 +9,7 @@ import javax.swing.JComponent;
 /**
  * Updates container with page element.
  *
- * @param <P> will be shown as contained page.
+ * @param <P> element to show as page.
  */
 public interface PanelController<P extends JComponent> {
     /**
