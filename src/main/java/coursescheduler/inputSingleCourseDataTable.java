@@ -70,49 +70,49 @@ public class inputSingleCourseDataTable
     public DefaultTableModel setID(int input, DefaultTableModel modelInput)
     {
         DefaultTableModel model = modelInput;
-        model.setValueAt(input, 1, 1); //College
+        model.setValueAt(input, 1, 1); //ID
         return model;
     }
     
     public DefaultTableModel setName(String input, DefaultTableModel modelInput)
     {
         DefaultTableModel model = modelInput;
-        model.setValueAt(input, 2, 1); //College
+        model.setValueAt(input, 2, 1); //Name
         return model;
     }
     
     public DefaultTableModel setProfessor(String input, DefaultTableModel modelInput)
     {
         DefaultTableModel model = modelInput;
-        model.setValueAt(input, 3, 1); //College
+        model.setValueAt(input, 3, 1); //Professor
         return model;
     }
     
     public DefaultTableModel setRoom(String input, DefaultTableModel modelInput)
     {
         DefaultTableModel model = modelInput;
-        model.setValueAt(input, 4, 1); //College
+        model.setValueAt(input, 4, 1); //Room
         return model;
     }
     
     public DefaultTableModel setTimes(String input, DefaultTableModel modelInput)
     {
         DefaultTableModel model = modelInput;
-        model.setValueAt(input, 5, 1); //College
+        model.setValueAt(input, 5, 1); //Time
         return model;
     }
     
     public DefaultTableModel setDays(String input, DefaultTableModel modelInput)
     {
         DefaultTableModel model = modelInput;
-        model.setValueAt(input, 6, 1); //College
+        model.setValueAt(input, 6, 1); //Days
         return model;
     }
     
     public DefaultTableModel setSeats(int input, DefaultTableModel modelInput)
     {
         DefaultTableModel model = modelInput;
-        model.setValueAt(input, 7, 1); //College
+        model.setValueAt(input, 7, 1); //Seats
         return model;
     }
 }
