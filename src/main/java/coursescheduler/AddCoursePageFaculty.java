@@ -1,9 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package coursescheduler;
+import coursescheduler.managers.PanelController;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -11,9 +8,12 @@ package coursescheduler;
  */
 public class AddCoursePageFaculty extends javax.swing.JPanel {
     String page = "ADD_COURSE_FACULTY";
-    PanelManager controller;
+    PanelController controller;
+    inputSingleCourseDataTable editor;
+    boolean validSelection = false;
+    
 
-    public void setController(PanelManager input)
+    public void setController(PanelController input)
     {
         controller = input;
     }
@@ -24,7 +24,67 @@ public class AddCoursePageFaculty extends javax.swing.JPanel {
     }
     public AddCoursePageFaculty() {
         initComponents();
+        editor = new inputSingleCourseDataTable();
     }
+    
+    public void setTable(Object[] input)
+    {
+        Table1.setModel(editor.setTableData(input, (DefaultTableModel) Table1.getModel()));
+    }
+    
+    public void setCollege(String input)
+    {
+        Table1.setModel(editor.setCollege(input, (DefaultTableModel) Table1.getModel()));
+    }
+    
+    public void setID(int input)
+    {
+        Table1.setModel(editor.setID(input, (DefaultTableModel) Table1.getModel()));
+    }
+    
+    public void setName(String input)
+    {
+        Table1.setModel(editor.setName(input, (DefaultTableModel) Table1.getModel()));
+    }
+    
+    public void setProfessor(String input)
+    {
+        Table1.setModel(editor.setProfessor(input, (DefaultTableModel) Table1.getModel()));
+    }
+    
+    public void setRoom(String input)
+    {
+        Table1.setModel(editor.setRoom(input, (DefaultTableModel) Table1.getModel()));
+    }
+    
+    public void setTimes(String input)
+    {
+        Table1.setModel(editor.setTimes(input, (DefaultTableModel) Table1.getModel()));
+    }
+    
+    public void setDays(String input)
+    {
+        Table1.setModel(editor.setDays(input, (DefaultTableModel) Table1.getModel()));
+    }
+    
+    public void setSeats(int input)
+    {
+        Table1.setModel(editor.setSeats(input, (DefaultTableModel) Table1.getModel()));
+    }
+    
+    void checkSelection()
+    {
+        String course = (String) allCoursesCombo.getSelectedItem();
+        if (!(course.equals("") && !(course.equals("Select Course"))))
+        {
+            validSelection = true;
+        }
+        else
+        {
+            validSelection = false;
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,7 +97,7 @@ public class AddCoursePageFaculty extends javax.swing.JPanel {
 
         allCoursesCombo = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Table1 = new javax.swing.JTable();
         addCourseSubmitButton = new javax.swing.JButton();
         addCourseCancelButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -49,7 +109,7 @@ public class AddCoursePageFaculty extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"College:", null},
                 {"ID:", null},
@@ -72,11 +132,21 @@ public class AddCoursePageFaculty extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(Table1);
 
         addCourseSubmitButton.setText("Submit");
+        addCourseSubmitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCourseSubmitButtonActionPerformed(evt);
+            }
+        });
 
         addCourseCancelButton.setText("Cancel");
+        addCourseCancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCourseCancelButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Add Course");
@@ -120,16 +190,27 @@ public class AddCoursePageFaculty extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void allCoursesComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allCoursesComboActionPerformed
-        // TODO add your handling code here:
+        // Combo box (when the user selects something from the combo box)
+        
     }//GEN-LAST:event_allCoursesComboActionPerformed
+
+    private void addCourseSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseSubmitButtonActionPerformed
+        // Submit button
+        
+    }//GEN-LAST:event_addCourseSubmitButtonActionPerformed
+
+    private void addCourseCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseCancelButtonActionPerformed
+        // Cancel button
+        
+    }//GEN-LAST:event_addCourseCancelButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Table1;
     private javax.swing.JButton addCourseCancelButton;
     private javax.swing.JButton addCourseSubmitButton;
     private javax.swing.JComboBox<String> allCoursesCombo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
