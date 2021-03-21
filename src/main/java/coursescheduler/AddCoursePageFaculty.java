@@ -27,6 +27,11 @@ public class AddCoursePageFaculty extends javax.swing.JPanel {
         editor = new inputSingleCourseDataTable();
     }
     
+    public DefaultTableModel getModel()
+    {
+        return (DefaultTableModel) Table1.getModel();
+    }
+    
     public void setTable(Object[] input)
     {
         Table1.setModel(editor.setTableData(input, (DefaultTableModel) Table1.getModel()));

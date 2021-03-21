@@ -15,7 +15,6 @@ public class AddCourseDepartmentChair extends javax.swing.JPanel {
     String page = "ADD_COURSE_DEPARTMENT_CHAIR";
     PanelController controller;
     inputSingleCourseDataTable editor;
-    addCourse_checkInputs check;
     boolean validCollege = false;
     boolean validID = false;
     boolean validName = false;
@@ -40,8 +39,12 @@ public class AddCourseDepartmentChair extends javax.swing.JPanel {
     public AddCourseDepartmentChair() 
     {
         initComponents();
-        editor = new inputSingleCourseDataTable();
-        check = new addCourse_checkInputs();
+        editor = new inputSingleCourseDataTable();;
+    }
+    
+    public DefaultTableModel getModel()
+    {
+        return (DefaultTableModel) Table1.getModel();
     }
     
     public void setTable(Object[] input)
