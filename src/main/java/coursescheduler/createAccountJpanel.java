@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package coursescheduler;
-
+import coursescheduler.managers.PanelController;
 /**
  *
  * @author evilc
@@ -14,7 +14,7 @@ public class createAccountJpanel extends javax.swing.JPanel {
     String tempEmail = "";
     String tempPassword = "";
     String tempRole = "";
-    PanelManager controller;
+    PanelController controller;
     String page = "CREATE_ACCOUNT";
     /**
      * Creates new form createAccountJpanel
@@ -23,7 +23,7 @@ public class createAccountJpanel extends javax.swing.JPanel {
         initComponents();
     }
     
-    public void setController(PanelManager input)
+    public void setController(PanelController input)
     {
         controller = input;
     }
