@@ -4,16 +4,17 @@
  * and open the template in the editor.
  */
 package coursescheduler;
-
+import coursescheduler.managers.PanelController;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author evilc
  */
 public class DepartmentChairPage extends javax.swing.JPanel {
     String page = "DEPARTMENT_CHAIR";
-    PanelManager controller;
+    PanelController controller;
 
-    public void setController(PanelManager input)
+    public void setController(PanelController input)
     {
         controller = input;
     }
@@ -24,6 +25,16 @@ public class DepartmentChairPage extends javax.swing.JPanel {
     }
     public DepartmentChairPage() {
         initComponents();
+    }
+    
+    public DefaultTableModel getTableModel()
+    {
+        return (DefaultTableModel) currentCoursesTable.getModel();
+    }
+    
+    public void setTableModel(DefaultTableModel input)
+    {
+        currentCoursesTable.setModel(input);
     }
 
     /**
@@ -48,7 +59,7 @@ public class DepartmentChairPage extends javax.swing.JPanel {
         saveCSVFileButton = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
 
-        backToLoginButton.setText("Back to Login");
+        backToLoginButton.setText("Back");
         backToLoginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backToLoginButtonActionPerformed(evt);
@@ -200,35 +211,35 @@ public class DepartmentChairPage extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void scheduleGeneratorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleGeneratorButtonActionPerformed
-        // TODO add your handling code here:
+        //Schedule generator button clicked
     }//GEN-LAST:event_scheduleGeneratorButtonActionPerformed
 
     private void addCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseButtonActionPerformed
-        // TODO add your handling code here:
+        //Add course button clicked
     }//GEN-LAST:event_addCourseButtonActionPerformed
 
     private void editCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCourseButtonActionPerformed
-        // TODO add your handling code here:
+        //Edit course button clicked
     }//GEN-LAST:event_editCourseButtonActionPerformed
 
     private void removeCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCourseButtonActionPerformed
-        // TODO add your handling code here:
+        //Remove course button clicked
     }//GEN-LAST:event_removeCourseButtonActionPerformed
 
     private void loadCSVFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadCSVFileButtonActionPerformed
-        // TODO add your handling code here:
+        //Load CSV file button clicked
     }//GEN-LAST:event_loadCSVFileButtonActionPerformed
 
     private void saveCSVFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveCSVFileButtonActionPerformed
-        // TODO add your handling code here:
+        //Save CSV file button clicked
     }//GEN-LAST:event_saveCSVFileButtonActionPerformed
 
     private void backToLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToLoginButtonActionPerformed
-        // TODO add your handling code here:
+        //Back button clicked
     }//GEN-LAST:event_backToLoginButtonActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+        //Exit button clicked
     }//GEN-LAST:event_jButton7ActionPerformed
 
 
