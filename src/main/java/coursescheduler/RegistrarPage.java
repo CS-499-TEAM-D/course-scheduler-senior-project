@@ -5,15 +5,18 @@
  */
 package coursescheduler;
 
+import javax.swing.table.DefaultTableModel;
+import coursescheduler.managers.PanelController;
+
 /**
  *
  * @author evilc
  */
 public class RegistrarPage extends javax.swing.JPanel {
     String page = "REGISTRAR";
-    PanelManager controller;
+    PanelController controller;
 
-    public void setController(PanelManager input)
+    public void setController(PanelController input)
     {
         controller = input;
     }
@@ -21,6 +24,16 @@ public class RegistrarPage extends javax.swing.JPanel {
     public String returnPage()
     {
         return page;
+    }
+    
+    public DefaultTableModel getModel()
+    {
+        return (DefaultTableModel) currentCoursesTable.getModel();
+    }
+    
+    public void setModel(DefaultTableModel input)
+    {
+        currentCoursesTable.setModel(input);
     }
     /**
      * Creates new form RegistrarPage
@@ -45,7 +58,7 @@ public class RegistrarPage extends javax.swing.JPanel {
         currentCoursesTable = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         saveCSVFileButton = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        exitButton = new javax.swing.JButton();
         backToLoginButton = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -111,14 +124,14 @@ public class RegistrarPage extends javax.swing.JPanel {
             }
         });
 
-        jButton7.setText("Exit");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        exitButton.setText("Exit");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                exitButtonActionPerformed(evt);
             }
         });
 
-        backToLoginButton.setText("Back to Login");
+        backToLoginButton.setText("Back");
         backToLoginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backToLoginButtonActionPerformed(evt);
@@ -144,7 +157,7 @@ public class RegistrarPage extends javax.swing.JPanel {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(backToLoginButton)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton7))
+                            .addComponent(exitButton))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -165,36 +178,36 @@ public class RegistrarPage extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backToLoginButton)
-                    .addComponent(jButton7))
+                    .addComponent(exitButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void scheduleGeneratorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleGeneratorButtonActionPerformed
-        // TODO add your handling code here:
+        //Schedulge generator button clicked
     }//GEN-LAST:event_scheduleGeneratorButtonActionPerformed
 
     private void loadCSVFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadCSVFileButtonActionPerformed
-        // TODO add your handling code here:
+        //Load CSV file button pressed
     }//GEN-LAST:event_loadCSVFileButtonActionPerformed
 
     private void saveCSVFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveCSVFileButtonActionPerformed
-        // TODO add your handling code here:
+        //Save CSV file button pressed
     }//GEN-LAST:event_saveCSVFileButtonActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        //Exit button pressed
+    }//GEN-LAST:event_exitButtonActionPerformed
 
     private void backToLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToLoginButtonActionPerformed
-        // TODO add your handling code here:
+        //Back button pressed
     }//GEN-LAST:event_backToLoginButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backToLoginButton;
     private javax.swing.JTable currentCoursesTable;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton exitButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
