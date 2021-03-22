@@ -57,7 +57,7 @@ public class DepartmentChairPage extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         currentCoursesTable = new javax.swing.JTable();
         saveCSVFileButton = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        exitButton = new javax.swing.JButton();
 
         backToLoginButton.setText("Back");
         backToLoginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -147,10 +147,10 @@ public class DepartmentChairPage extends javax.swing.JPanel {
             }
         });
 
-        jButton7.setText("Exit");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        exitButton.setText("Exit");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                exitButtonActionPerformed(evt);
             }
         });
 
@@ -179,7 +179,7 @@ public class DepartmentChairPage extends javax.swing.JPanel {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(backToLoginButton)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton7))
+                            .addComponent(exitButton))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
@@ -205,7 +205,7 @@ public class DepartmentChairPage extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backToLoginButton)
-                    .addComponent(jButton7))
+                    .addComponent(exitButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -238,9 +238,9 @@ public class DepartmentChairPage extends javax.swing.JPanel {
         //Back button clicked
     }//GEN-LAST:event_backToLoginButtonActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         //Exit button clicked
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_exitButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -248,7 +248,7 @@ public class DepartmentChairPage extends javax.swing.JPanel {
     private javax.swing.JButton backToLoginButton;
     private javax.swing.JTable currentCoursesTable;
     private javax.swing.JButton editCourseButton;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton exitButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
