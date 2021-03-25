@@ -6,7 +6,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author evilc
  */
-public class RemoveCoursePage extends javax.swing.JPanel {
+public class RemoveCourse extends javax.swing.JPanel {
     String page = "REMOVE_COURSE";
     PanelController controller;
     inputSingleCourseDataTable editor;
@@ -31,7 +31,7 @@ public class RemoveCoursePage extends javax.swing.JPanel {
     {
         return page;
     }
-    public RemoveCoursePage() {
+    public RemoveCourse() {
         initComponents();
         editor = new inputSingleCourseDataTable();
     }
