@@ -96,7 +96,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="back" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="backButton" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="submitNumberOfSchedulesToGenerate" min="-2" max="-2" attributes="0"/>
@@ -215,7 +215,7 @@
                                   <Component id="resultDisplay" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="back" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="backButton" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
@@ -304,7 +304,6 @@
       <Properties>
         <Property name="maximum" type="int" value="30"/>
         <Property name="minimum" type="int" value="1"/>
-        <Property name="value" type="int" value="30"/>
       </Properties>
       <Events>
         <EventHandler event="ancestorMoved" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="numberOfSchedulesToGenerateSliderAncestorMoved"/>
@@ -428,12 +427,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="submitNumberOfSchedulesToGenerateActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="back">
+    <Component class="javax.swing.JButton" name="backButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Back"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="currentPasswordInput">

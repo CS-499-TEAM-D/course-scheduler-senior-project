@@ -6,6 +6,7 @@
 package coursescheduler;
 import coursescheduler.managers.PanelController;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -30,6 +31,35 @@ public class SettingsPage extends javax.swing.JPanel {
     //List<data type for a full schedule> schedules = new ArrayList<>();
     //TODO: Implement backend "connections" and connect to InputMultipleCoursesPreview class
 
+    public void updateTextSize()
+    {
+        this.setTextSize(textSize);
+        int size1 = jLabel1.getFont().getSize();
+        int difference1 = size1 - textSize;
+        Font newFont1 = new Font("Tahoma", Font.PLAIN,  textSize);
+        Font newFont2 = new Font("Tahoma", Font.PLAIN,  (textSize + difference1));
+        jLabel1.setFont(newFont2); //Settings
+        jLabel2.setFont(newFont1); //General Settings
+        jLabel3.setFont(newFont1); //Generator Settings
+        jLabel4.setFont(newFont1); //Text Size
+        jLabel5.setFont(newFont1); //Maximum Number of
+        jLabel6.setFont(newFont1); //Schedules to Generate
+        jLabel7.setFont(newFont1); //Username
+        jLabel8.setFont(newFont1); //Chnage Password
+        jLabel9.setFont(newFont1); //Enter Current
+        jLabel10.setFont(newFont1); //Change Username
+        jLabel11.setFont(newFont1); //Password
+        jLabel12.setFont(newFont1); //New Password
+        jLabel13.setFont(newFont1); //Resizable Windows
+        jLabel16.setFont(newFont1); //Retype New Password    
+        submitTextSize.setFont(newFont1);
+        submitUsername.setFont(newFont1);
+        submitPassword.setFont(newFont1);
+        submitNumberOfSchedulesToGenerate.setFont(newFont1);
+        resizableWindowsSubmit.setFont(newFont1);
+        backButton.setFont(newFont1);
+    }
+    
     public void setCurrentUsername(String input)
     {
         currentUsername = input;
@@ -168,7 +198,7 @@ public class SettingsPage extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         retypeNewPasswordError = new javax.swing.JLabel();
         submitNumberOfSchedulesToGenerate = new javax.swing.JButton();
-        back = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
         currentPasswordInput = new javax.swing.JPasswordField();
         newPasswordInput = new javax.swing.JPasswordField();
         retypeNewPasswordInput = new javax.swing.JPasswordField();
@@ -216,7 +246,6 @@ public class SettingsPage extends javax.swing.JPanel {
 
         numberOfSchedulesToGenerateSlider.setMaximum(30);
         numberOfSchedulesToGenerateSlider.setMinimum(1);
-        numberOfSchedulesToGenerateSlider.setValue(30);
         numberOfSchedulesToGenerateSlider.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
             }
@@ -285,10 +314,10 @@ public class SettingsPage extends javax.swing.JPanel {
             }
         });
 
-        back.setText("Back");
-        back.addActionListener(new java.awt.event.ActionListener() {
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
 
@@ -399,7 +428,7 @@ public class SettingsPage extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(back, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(backButton, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(submitNumberOfSchedulesToGenerate)
@@ -494,7 +523,7 @@ public class SettingsPage extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(submitPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(resultDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(back, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(backButton, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -590,13 +619,13 @@ public class SettingsPage extends javax.swing.JPanel {
         resultDisplay.setText("");
     }//GEN-LAST:event_usernameInputActionPerformed
 
-    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         //Back buton pressed
-    }//GEN-LAST:event_backActionPerformed
+    }//GEN-LAST:event_backButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton back;
+    private javax.swing.JButton backButton;
     private javax.swing.JPasswordField currentPasswordInput;
     private javax.swing.JLabel errorDisplay;
     private javax.swing.JLabel jLabel1;
