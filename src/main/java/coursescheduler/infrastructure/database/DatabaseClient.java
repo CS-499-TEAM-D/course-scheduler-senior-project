@@ -1,4 +1,4 @@
-package DatabaseModule;
+package coursescheduler.infrastructure.database;
 
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.model.UpdateValuesResponse;
@@ -12,10 +12,10 @@ import java.util.List;
 /**
  * Entry-point for Course Scheduler desktop application.
  */
-final class DatabaseClient {
+public final class DatabaseClient {
 
 
-    public static void main(String... args) throws IOException, GeneralSecurityException {
+    public DatabaseClient() throws IOException, GeneralSecurityException {
         // Build a new authorized API client service.
 
         // final String spreadsheetId = "1NNZsNlZRHzTG1w977LBTz_wVJ8YTYgJfLMPCSYWpE6Y"; // <-- LIVE DATA
@@ -40,18 +40,21 @@ final class DatabaseClient {
                         "~Chris", "Odom"
                 )
         );
+
         ValueRange rangeToWrite = new ValueRange().setValues(valuesToWrite);
         UpdateValuesResponse writeRequestResult = service.spreadsheets()
                                                          .values()
                                                          .update(spreadsheetId, "C4:D4", rangeToWrite)
                                                          .setValueInputOption("RAW")
                                                          .execute();
+
         // read request for the service
         final String range = "A1:D4";
         ValueRange response = service.spreadsheets()
                                      .values()
                                      .get(spreadsheetId, range)
                                      .execute();
+
         List<List<Object>> valuesToRead = response.getValues();
 
 

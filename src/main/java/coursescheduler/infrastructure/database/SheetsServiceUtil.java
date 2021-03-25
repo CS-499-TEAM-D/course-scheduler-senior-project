@@ -1,4 +1,4 @@
-package DatabaseModule;
+package coursescheduler.infrastructure.database;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 
 public class SheetsServiceUtil {
+
     private static final String APPLICATION_NAME = "Course Scheduler";
 
     public static Sheets getSheetsService() throws IOException, GeneralSecurityException {
