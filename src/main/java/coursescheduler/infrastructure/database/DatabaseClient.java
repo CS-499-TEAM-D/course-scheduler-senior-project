@@ -20,19 +20,9 @@ public final class DatabaseClient {
 
         // final String spreadsheetId = "1NNZsNlZRHzTG1w977LBTz_wVJ8YTYgJfLMPCSYWpE6Y"; // <-- LIVE DATA
         final String spreadsheetId = "17hrTlcbE9zvMlg8eH2Q7wsZjzXcCEqYfv_oVBqe4GKc"; // <-- TEST DATA
-
-
-
+        
         Sheets service = SheetsServiceUtil.getSheetsService();
 
-        /**
-         * For code reviewers, this code block first writes to a remote google sheet,
-         * then reads from it and prints it out to the console.  The sheet must be
-         * written to first because the range for reading contains empty elements
-         * which will return an error if not written to.
-         *
-         * This code block has successful read and write elements.
-         */
 
         // write request for the service
         List<List<Object>> valuesToWrite = Arrays.asList(
