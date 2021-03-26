@@ -5,6 +5,7 @@
  */
 package coursescheduler;
 import coursescheduler.managers.PanelController;
+import java.awt.Font;
 import javax.swing.table.DefaultTableModel;
 //TODO: Implement backend "connections" and connect to InputMultipleCoursesPreview class
 /**
@@ -14,6 +15,28 @@ import javax.swing.table.DefaultTableModel;
 public class PreviewCoursesPage extends javax.swing.JPanel {
     String page = "PREVIEW_COURSES";
     PanelController controller;
+    int textSize = 12;
+  
+    public void setTextSize(int input)
+    {
+        textSize = input;
+    }
+    
+    public int getTextSize()
+    {
+        return textSize;
+    }
+
+    public void updateTextSize()
+    {
+        this.setTextSize(textSize);
+        int size1 = jLabel2.getFont().getSize();
+        int difference1 = size1 - textSize;
+        Font newFont1 = new Font("Tahoma", Font.PLAIN,  textSize);
+        Font newFont2 = new Font("Tahoma", Font.PLAIN,  (textSize + difference1));
+        jLabel2.setFont(newFont2); //Current Courses Loaded
+        backButton.setFont(newFont1);
+    }
 
     public void setController(PanelController input)
     {
@@ -51,7 +74,7 @@ public class PreviewCoursesPage extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         currentCoursesTable = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        backToLoginButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         currentCoursesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,7 +96,7 @@ public class PreviewCoursesPage extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "College", "ID", "Name", "Professor", "Room(s)", "Times", "Days", "Seats"
+                "College", "ID", "Name", "Professor", "Room", "Times", "Days", "Seats"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -89,10 +112,10 @@ public class PreviewCoursesPage extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Current Courses Loaded:");
 
-        backToLoginButton.setText("Back");
-        backToLoginButton.addActionListener(new java.awt.event.ActionListener() {
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backToLoginButtonActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
 
@@ -108,7 +131,7 @@ public class PreviewCoursesPage extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(backToLoginButton)
+                .addComponent(backButton)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -119,18 +142,18 @@ public class PreviewCoursesPage extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(backToLoginButton)
+                .addComponent(backButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void backToLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToLoginButtonActionPerformed
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         //Back button pressed
-    }//GEN-LAST:event_backToLoginButtonActionPerformed
+    }//GEN-LAST:event_backButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backToLoginButton;
+    private javax.swing.JButton backButton;
     private javax.swing.JTable currentCoursesTable;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
