@@ -99,6 +99,7 @@ public class RegistrarPage extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Registrar");
 
+        scheduleGeneratorButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         scheduleGeneratorButton.setText("Schedule Generator");
         scheduleGeneratorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,6 +107,7 @@ public class RegistrarPage extends javax.swing.JPanel {
             }
         });
 
+        loadCSVFileButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         loadCSVFileButton.setText("Load CSV File");
         loadCSVFileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,11 +135,11 @@ public class RegistrarPage extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "College", "ID", "Name", "Professor", "Room(s)", "Times", "Days", "Seats"
+                "College", "ID", "Name", "Professor", "Room", "Times", "Days", "Seats"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, true, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -145,13 +147,11 @@ public class RegistrarPage extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(currentCoursesTable);
-        if (currentCoursesTable.getColumnModel().getColumnCount() > 0) {
-            currentCoursesTable.getColumnModel().getColumn(7).setResizable(false);
-        }
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Current Courses Loaded:");
 
+        prelimCoursesButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         prelimCoursesButton.setText("Prelimnary Courses");
         prelimCoursesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,6 +159,7 @@ public class RegistrarPage extends javax.swing.JPanel {
             }
         });
 
+        backButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,6 +167,7 @@ public class RegistrarPage extends javax.swing.JPanel {
             }
         });
 
+        settingsButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         settingsButton.setText("Settings");
         settingsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,6 +175,7 @@ public class RegistrarPage extends javax.swing.JPanel {
             }
         });
 
+        saveCSVFileButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         saveCSVFileButton.setText("Save as CSV File");
         saveCSVFileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,7 +188,7 @@ public class RegistrarPage extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
@@ -193,16 +196,19 @@ public class RegistrarPage extends javax.swing.JPanel {
                         .addComponent(backButton, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(scheduleGeneratorButton, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                            .addComponent(loadCSVFileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(scheduleGeneratorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(loadCSVFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(prelimCoursesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(saveCSVFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addComponent(settingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(saveCSVFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(prelimCoursesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(settingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
