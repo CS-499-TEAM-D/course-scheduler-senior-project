@@ -20,18 +20,23 @@ repositories {
 
 dependencies {
     // Application Dependencies
-    implementation 'com.google.guava:guava:29.0-jre'
+    implementation(
+            'com.google.guava:guava:29.0-jre', // Extended powerful general purpose library
+    )
 
     // Test Dependencies
     testImplementation(
-            'junit:junit:4.13', // JUnit test framework
+            'org.junit.jupiter:junit-jupiter:5.4.2', // JUnit5 Testing framework
+            'junit:junit:4.13', // JUnit4 test framework
             'org.mockito:mockito-core:2.+', // Mockito mocking framework
+            'org.assertj:assertj-core:3.19.0' // Asserting Framework
+
     )
 }
 
 application {
     // Define the main class for the application.
-    mainClassName = 'coursescheduler.CourseScheduler'
+    mainClassName = 'coursescheduler.Driver'
 }
 
 checkstyle {
@@ -41,15 +46,15 @@ checkstyle {
 
 checkstyleMain {
     // Set checkstyleMain to run after verifyGoogleJavaFormat.
-    dependsOn(tasks.verifyGoogleJavaFormat)
+//    dependsOn(tasks.verifyGoogleJavaFormat)
 }
 
 checkstyleTest {
     // Set checkstyleTest to run after verifyGoogleJavaFormat.
-    dependsOn(tasks.verifyGoogleJavaFormat)
+    //    dependsOn(tasks.verifyGoogleJavaFormat)
 }
 
 verifyGoogleJavaFormat {
     // Set verifyGoogleJavaFormat to run after googleJavaFormat.
-    dependsOn(tasks.googleJavaFormat)
+//    dependsOn(tasks.googleJavaFormat)
 }
