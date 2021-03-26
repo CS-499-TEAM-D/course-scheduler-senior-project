@@ -26,12 +26,12 @@
                           <Component id="scheduleGeneratorButton" max="32767" attributes="0"/>
                           <Component id="loadCSVFileButton" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="saveCSVFileButton" pref="138" max="32767" attributes="0"/>
                           <Component id="addCourseButton" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="removeCourseButton" pref="133" max="32767" attributes="0"/>
                           <Component id="settingsButton" max="32767" attributes="0"/>
