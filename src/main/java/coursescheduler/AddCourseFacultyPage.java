@@ -143,7 +143,7 @@ public class AddCourseFacultyPage extends javax.swing.JPanel {
                 {"ID:", null},
                 {"Name:", null},
                 {"Professor:", null},
-                {"Room(s):", null},
+                {"Room:", null},
                 {"Times:", null},
                 {"Days:", null},
                 {"Seats:", null}

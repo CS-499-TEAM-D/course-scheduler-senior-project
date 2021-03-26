@@ -182,7 +182,7 @@
                   <Data value="ID:"/>
                   <Data value="Name:"/>
                   <Data value="Professor:"/>
-                  <Data value="Room(s):"/>
+                  <Data value="Room:"/>
                   <Data value="Times:"/>
                   <Data value="Days:"/>
                   <Data value="Seats:"/>
