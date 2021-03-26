@@ -5,6 +5,7 @@
  */
 package coursescheduler;
 import coursescheduler.managers.PanelController;
+import java.awt.Font;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,6 +22,31 @@ public class LoadSchedulePage extends javax.swing.JPanel {
     boolean validFile = false;
     //List<data type for a full schedule> schedules = new ArrayList<>();
     //TODO: connect to CSV file parser and connect to GenerateSchedulePage
+    int textSize = 12;
+  
+    public void setTextSize(int input)
+    {
+        textSize = input;
+    }
+    
+    public int getTextSize()
+    {
+        return textSize;
+    }
+
+    public void updateTextSize()
+    {
+        this.setTextSize(textSize);
+        int size1 = jLabel1.getFont().getSize();
+        int difference1 = size1 - textSize;
+        Font newFont1 = new Font("Tahoma", Font.PLAIN,  textSize);
+        Font newFont2 = new Font("Tahoma", Font.PLAIN,  (textSize + difference1));
+        jLabel1.setFont(newFont2); //Load Schedule
+        jLabel4.setFont(newFont1); //Enter the full path to the file you wish to open (a .CSV file):
+        loadPathInput.setFont(newFont1);
+        loadButton.setFont(newFont1);
+        backButton.setFont(newFont1);
+    }
 
     public void setController(PanelController input)
     {
@@ -41,7 +67,7 @@ public class LoadSchedulePage extends javax.swing.JPanel {
         checkFilePath();
         if (validFile)
         {
-            return loadPath_input.getText();
+            return loadPathInput.getText();
         }
         else
         {
@@ -56,7 +82,7 @@ public class LoadSchedulePage extends javax.swing.JPanel {
         Path p1;
         if (validFile)
         {
-            String temp1 = loadPath_input.getText();
+            String temp1 = loadPathInput.getText();
             p1 = Paths.get(temp1);
         }
         else
@@ -69,7 +95,7 @@ public class LoadSchedulePage extends javax.swing.JPanel {
     
     public void checkFilePath()
     {
-        File csvFile = new File(loadPath_input.getText());
+        File csvFile = new File(loadPathInput.getText());
         if (csvFile.exists())
         {
             loadSchedule_error.setText("");
@@ -95,11 +121,12 @@ public class LoadSchedulePage extends javax.swing.JPanel {
         backButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         loadButton = new javax.swing.JButton();
-        loadPath_input = new javax.swing.JTextField();
+        loadPathInput = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         errorDisplay = new javax.swing.JLabel();
         loadSchedule_error = new javax.swing.JLabel();
 
+        backButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,6 +137,7 @@ public class LoadSchedulePage extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Load Schedule");
 
+        loadButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         loadButton.setText("Load");
         loadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,13 +145,19 @@ public class LoadSchedulePage extends javax.swing.JPanel {
             }
         });
 
-        loadPath_input.addActionListener(new java.awt.event.ActionListener() {
+        loadPathInput.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        loadPathInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadPath_inputActionPerformed(evt);
+                loadPathInputActionPerformed(evt);
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Enter the full path to the file you wish to open (a .CSV file):");
+
+        errorDisplay.setForeground(java.awt.Color.red);
+
+        loadSchedule_error.setForeground(java.awt.Color.red);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -132,10 +166,10 @@ public class LoadSchedulePage extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4)
-                            .addComponent(loadPath_input, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                            .addComponent(loadPathInput)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(backButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -144,9 +178,9 @@ public class LoadSchedulePage extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(loadSchedule_error, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(22, 22, 22)
                         .addComponent(jLabel1)))
-                .addGap(10, 10, 10))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,7 +191,7 @@ public class LoadSchedulePage extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loadPath_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(loadPathInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(loadSchedule_error, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addComponent(errorDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,9 +211,9 @@ public class LoadSchedulePage extends javax.swing.JPanel {
         //Back button clicked
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void loadPath_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadPath_inputActionPerformed
+    private void loadPathInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadPathInputActionPerformed
         //Activates when the user inputs something for the load file path
-    }//GEN-LAST:event_loadPath_inputActionPerformed
+    }//GEN-LAST:event_loadPathInputActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -188,7 +222,7 @@ public class LoadSchedulePage extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JButton loadButton;
-    private javax.swing.JTextField loadPath_input;
+    private javax.swing.JTextField loadPathInput;
     private javax.swing.JLabel loadSchedule_error;
     // End of variables declaration//GEN-END:variables
 }
