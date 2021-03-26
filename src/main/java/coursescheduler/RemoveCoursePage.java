@@ -38,7 +38,7 @@ public class RemoveCoursePage extends javax.swing.JPanel {
     }
     public void clearTable()
     {
-        DefaultTableModel model = (DefaultTableModel) Table1.getModel();
+        DefaultTableModel model = (DefaultTableModel) courseInfoTable.getModel();
         for (int i = 0; i < model.getRowCount(); i++)
         {
             model.setValueAt("", i, 0);
@@ -62,47 +62,47 @@ public class RemoveCoursePage extends javax.swing.JPanel {
     
     public void setTable(Object[] input)
     {
-        Table1.setModel(editor.setTableData(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setTableData(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setCollege(String input)
     {
-        Table1.setModel(editor.setCollege(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setCollege(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setID(int input)
     {
-        Table1.setModel(editor.setID(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setID(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setName(String input)
     {
-        Table1.setModel(editor.setName(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setName(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setProfessor(String input)
     {
-        Table1.setModel(editor.setProfessor(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setProfessor(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setRoom(String input)
     {
-        Table1.setModel(editor.setRoom(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setRoom(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setTimes(String input)
     {
-        Table1.setModel(editor.setTimes(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setTimes(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setDays(String input)
     {
-        Table1.setModel(editor.setDays(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setDays(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setSeats(int input)
     {
-        Table1.setModel(editor.setSeats(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setSeats(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     void checkSelection()
@@ -130,7 +130,7 @@ public class RemoveCoursePage extends javax.swing.JPanel {
 
         selectCourseComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Table1 = new javax.swing.JTable();
+        courseInfoTable = new javax.swing.JTable();
         removeButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -143,7 +143,7 @@ public class RemoveCoursePage extends javax.swing.JPanel {
             }
         });
 
-        Table1.setModel(new javax.swing.table.DefaultTableModel(
+        courseInfoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"College:", null},
                 {"ID:", null},
@@ -166,7 +166,7 @@ public class RemoveCoursePage extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(Table1);
+        jScrollPane1.setViewportView(courseInfoTable);
 
         removeButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         removeButton.setText("Remove");
@@ -242,8 +242,8 @@ public class RemoveCoursePage extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Table1;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JTable courseInfoTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton removeButton;
