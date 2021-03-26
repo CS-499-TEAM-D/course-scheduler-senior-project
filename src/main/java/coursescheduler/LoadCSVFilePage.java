@@ -5,23 +5,48 @@
  */
 package coursescheduler;
 import coursescheduler.managers.PanelController;
+import java.awt.Font;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author evilc
  */
-public class LoadSchedulePage extends javax.swing.JPanel {
-    String page = "LOAD_SCHEDULE";
+public class LoadCSVFilePage extends javax.swing.JPanel {
+    String page = "LOAD_CSV_FILE";
     PanelController controller;
     boolean validFile = false;
-    //List<data type for a full schedule> schedules = new ArrayList<>();
+    int textSize = 12;
     //TODO: connect to CSV file parser and connect to GenerateSchedulePage
 
+    public void setTextSize(int input)
+    {
+        textSize = input;
+    }
+    
+    public int getTextSize()
+    {
+        return textSize;
+    }
+    
+    public void updateTextSize()
+    {
+        this.setTextSize(textSize);
+        int size1 = jLabel1.getFont().getSize();
+        int difference1 = size1 - textSize;
+        Font newFont1 = new Font("Tahoma", Font.PLAIN,  textSize);
+        Font newFont2 = new Font("Tahoma", Font.PLAIN,  (textSize + difference1));
+        jLabel1.setFont(newFont2); //Load CSV File
+        jLabel4.setFont(newFont1); //Enter the full path to the file you wish to open (a .CSV file):
+        loadButton.setFont(newFont1);
+        backButton.setFont(newFont1);
+    }
+    
+    
     public void setController(PanelController input)
     {
         controller = input;
@@ -32,7 +57,7 @@ public class LoadSchedulePage extends javax.swing.JPanel {
         return page;
     }
     
-    public LoadSchedulePage() {
+    public LoadCSVFilePage() {
         initComponents();
     }
     
@@ -100,6 +125,7 @@ public class LoadSchedulePage extends javax.swing.JPanel {
         errorDisplay = new javax.swing.JLabel();
         loadSchedule_error = new javax.swing.JLabel();
 
+        backButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,8 +134,9 @@ public class LoadSchedulePage extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Load Schedule");
+        jLabel1.setText("Load CSV File");
 
+        loadButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         loadButton.setText("Load");
         loadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,6 +150,7 @@ public class LoadSchedulePage extends javax.swing.JPanel {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Enter the full path to the file you wish to open (a .CSV file):");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -135,7 +163,7 @@ public class LoadSchedulePage extends javax.swing.JPanel {
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4)
-                            .addComponent(loadPath_input, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                            .addComponent(loadPath_input)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(backButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
