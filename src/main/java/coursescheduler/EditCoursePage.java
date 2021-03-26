@@ -7,12 +7,13 @@ package coursescheduler;
 
 import javax.swing.table.DefaultTableModel;
 import coursescheduler.managers.PanelController;
+import java.awt.Font;
 
 /**
  *
  * @author evilc
  */
-public class EditCourse extends javax.swing.JPanel {
+public class EditCoursePage extends javax.swing.JPanel {
     String page = "EDIT_COURSE";
     PanelController controller;
     boolean validCollege = false;
@@ -25,7 +26,48 @@ public class EditCourse extends javax.swing.JPanel {
     boolean validSeats = false;
     boolean allInputsValid = false;
     inputSingleCourseDataTable editor;
+    int textSize = 12;
+  
+    public void setTextSize(int input)
+    {
+        textSize = input;
+    }
+    
+    public int getTextSize()
+    {
+        return textSize;
+    }
 
+    public void updateTextSize()
+    {
+        this.setTextSize(textSize);
+        int size1 = jLabel1.getFont().getSize();
+        int difference1 = size1 - textSize;
+        Font newFont1 = new Font("Tahoma", Font.PLAIN,  textSize);
+        Font newFont2 = new Font("Tahoma", Font.PLAIN,  (textSize + difference1));
+        jLabel1.setFont(newFont2); //Edit Course
+        jLabel2.setFont(newFont1); //College:
+        jLabel3.setFont(newFont1); //ID:
+        jLabel4.setFont(newFont1); //Professor:
+        jLabel5.setFont(newFont1); //Room:
+        jLabel6.setFont(newFont1); //Times:
+        jLabel7.setFont(newFont1); //Days:
+        jLabel8.setFont(newFont1); //Course:
+        jLabel9.setFont(newFont1); //Seats:
+        jLabel11.setFont(newFont1); //Name:
+        selectCourseComboBox.setFont(newFont1);
+        selectCollegeComboBox.setFont(newFont1);
+        selectRoomComboBox.setFont(newFont1);
+        selectTimesComboBox.setFont(newFont1);
+        selectDaysComboBox.setFont(newFont1);
+        idInput.setFont(newFont1);
+        professorInput.setFont(newFont1);
+        nameInput.setFont(newFont1);
+        seatsInput.setFont(newFont1);
+        cancelButton.setFont(newFont1);
+        submitButton.setFont(newFont1);
+    }
+    
     public void setController(PanelController input)
     {
         controller = input;
@@ -35,64 +77,64 @@ public class EditCourse extends javax.swing.JPanel {
     {
         return page;
     }
-    public EditCourse() {
+    public EditCoursePage() {
         initComponents();
         editor = new inputSingleCourseDataTable();
     }
     
     public DefaultTableModel getModel()
     {
-        return (DefaultTableModel) Table1.getModel();
+        return (DefaultTableModel) courseInfoTable.getModel();
     }
     
     public void setTable(Object[] input)
     {
-        Table1.setModel(editor.setTableData(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setTableData(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setCollege(String input)
     {
-        Table1.setModel(editor.setCollege(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setCollege(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setID(int input)
     {
-        Table1.setModel(editor.setID(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setID(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setName(String input)
     {
-        Table1.setModel(editor.setName(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setName(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setProfessor(String input)
     {
-        Table1.setModel(editor.setProfessor(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setProfessor(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setRoom(String input)
     {
-        Table1.setModel(editor.setRoom(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setRoom(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setTimes(String input)
     {
-        Table1.setModel(editor.setTimes(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setTimes(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setDays(String input)
     {
-        Table1.setModel(editor.setDays(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setDays(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setSeats(int input)
     {
-        Table1.setModel(editor.setSeats(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setSeats(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
      public void checkSeats()
     {
-        String Seats_string = editCourseSeatsInput.getText();
+        String Seats_string = seatsInput.getText();
         int Seats;
         if (!Seats_string.equals(""))
         {
@@ -125,7 +167,7 @@ public class EditCourse extends javax.swing.JPanel {
     
     public void checkRoom()
     {
-        String Room = (String) editCourseRoomsCombo.getSelectedItem();
+        String Room = (String) selectRoomComboBox.getSelectedItem();
         if (!(Room.equals("")) && !(Room.equals("Select Room")))
         {
             validRoom = true;
@@ -140,7 +182,7 @@ public class EditCourse extends javax.swing.JPanel {
     
     public void checkTimes()
     {
-        String Times = (String) editCourseTimesCombo.getSelectedItem();
+        String Times = (String) selectTimesComboBox.getSelectedItem();
         if (!(Times.equals("")) && !(Times.equals("Select Time")))
         {
             validTimes = true;
@@ -155,7 +197,7 @@ public class EditCourse extends javax.swing.JPanel {
     
     public void checkDays()
     {
-        String Days = (String) editCourseDaysCombo.getSelectedItem();
+        String Days = (String) selectDaysComboBox.getSelectedItem();
         if (!(Days.equals("")) && !(Days.equals("Select Days")))
         {
             validDays = true;
@@ -170,7 +212,7 @@ public class EditCourse extends javax.swing.JPanel {
     
     public void checkCollege()
     {
-        String College = (String) editCourseCollegeCombo.getSelectedItem();
+        String College = (String) selectCollegeComboBox.getSelectedItem();
         if (!(College.equals("") && !(College.equals("Select College"))))
         {
             editCourseError_College.setText("");
@@ -185,7 +227,7 @@ public class EditCourse extends javax.swing.JPanel {
     
     public void checkName()
     {
-        String Name = editCourseNameInput.getText();
+        String Name = nameInput.getText();
         if (!(Name.equals("")))
         {
             validName = true;
@@ -200,7 +242,7 @@ public class EditCourse extends javax.swing.JPanel {
     
     public void checkID()
     {
-        String ID_string = editCourseIDInput.getText();
+        String ID_string = idInput.getText();
         int ID;
         if (!ID_string.equals(""))
         {
@@ -225,7 +267,7 @@ public class EditCourse extends javax.swing.JPanel {
     
     public void checkProfessor()
     {
-        String Professor = editCourseProfessorInput.getText();
+        String Professor = professorInput.getText();
         if (!(Professor.equals("")))
         {
             validProfessor = true;
@@ -264,7 +306,7 @@ public class EditCourse extends javax.swing.JPanel {
         checkSeats();
         if (validSeats)
         {
-             String Seats_string = editCourseSeatsInput.getText();
+             String Seats_string = seatsInput.getText();
              seats = Integer.parseInt(Seats_string.trim());
         }
         return seats;
@@ -276,7 +318,7 @@ public class EditCourse extends javax.swing.JPanel {
         checkID();
         if (validID)
         {
-             String ID_string = editCourseSeatsInput.getText();
+             String ID_string = seatsInput.getText();
              ID = Integer.parseInt(ID_string.trim());
         }
         return ID;
@@ -288,7 +330,7 @@ public class EditCourse extends javax.swing.JPanel {
         checkCollege();
         if (validCollege)
         {
-            college = (String) editCourseCollegeCombo.getSelectedItem();
+            college = (String) selectCollegeComboBox.getSelectedItem();
         }
         return college;
     }
@@ -299,7 +341,7 @@ public class EditCourse extends javax.swing.JPanel {
         checkRoom();
         if (validRoom)
         {
-            room = (String) editCourseRoomsCombo.getSelectedItem();
+            room = (String) selectRoomComboBox.getSelectedItem();
         }
         return room;
     }
@@ -310,7 +352,7 @@ public class EditCourse extends javax.swing.JPanel {
         checkTimes();
         if (validTimes)
         {
-            times = (String) editCourseTimesCombo.getSelectedItem();
+            times = (String) selectTimesComboBox.getSelectedItem();
         }
         return times;
     }
@@ -321,7 +363,7 @@ public class EditCourse extends javax.swing.JPanel {
         checkDays();
         if (validDays)
         {
-            days = (String) editCourseDaysCombo.getSelectedItem();
+            days = (String) selectDaysComboBox.getSelectedItem();
         }
         return days;
     }
@@ -332,7 +374,7 @@ public class EditCourse extends javax.swing.JPanel {
        checkProfessor();
        if(validProfessor)
        {
-           professor = editCourseProfessorInput.getText();
+           professor = professorInput.getText();
        }
        return professor;
     }
@@ -343,7 +385,7 @@ public class EditCourse extends javax.swing.JPanel {
        checkName();
        if(validName)
        {
-           name = editCourseNameInput.getText();
+           name = nameInput.getText();
        }
        return name;
     }
@@ -359,26 +401,25 @@ public class EditCourse extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Table1 = new javax.swing.JTable();
-        addCourseSubmitButton = new javax.swing.JButton();
-        addCourseCancelButton = new javax.swing.JButton();
+        courseInfoTable = new javax.swing.JTable();
+        submitButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        editCourseProfessorInput = new javax.swing.JTextField();
-        editCourseIDInput = new javax.swing.JTextField();
-        editCourseTimesCombo = new javax.swing.JComboBox<>();
-        editCourseDaysCombo = new javax.swing.JComboBox<>();
-        editCourseCollegeCombo = new javax.swing.JComboBox<>();
+        professorInput = new javax.swing.JTextField();
+        idInput = new javax.swing.JTextField();
+        selectTimesComboBox = new javax.swing.JComboBox<>();
+        selectDaysComboBox = new javax.swing.JComboBox<>();
+        selectCollegeComboBox = new javax.swing.JComboBox<>();
         addCourseErrorDisplay1 = new javax.swing.JLabel();
-        editCourseCollegeCombo1 = new javax.swing.JComboBox<>();
+        selectCourseComboBox = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        editCourseSeatsInput = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
+        seatsInput = new javax.swing.JTextField();
         editCourseError_Course = new javax.swing.JLabel();
         editCourseError_College = new javax.swing.JLabel();
         editCourseError_Professor = new javax.swing.JLabel();
@@ -388,20 +429,20 @@ public class EditCourse extends javax.swing.JPanel {
         editCourseError_Days = new javax.swing.JLabel();
         editCourseError_Seats = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        editCourseNameInput = new javax.swing.JTextField();
+        nameInput = new javax.swing.JTextField();
         editCourseError_Name = new javax.swing.JLabel();
-        editCourseRoomsCombo = new javax.swing.JComboBox<>();
+        selectRoomComboBox = new javax.swing.JComboBox<>();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Edit Course");
 
-        Table1.setModel(new javax.swing.table.DefaultTableModel(
+        courseInfoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"College:", null},
                 {"ID:", null},
                 {"Name:", null},
                 {"Professor:", null},
-                {"Room(s):", null},
+                {"Room:", null},
                 {"Times:", null},
                 {"Days:", null},
                 {"Seats:", null}
@@ -409,12 +450,25 @@ public class EditCourse extends javax.swing.JPanel {
             new String [] {
                 "Course Info", ""
             }
-        ));
-        jScrollPane1.setViewportView(Table1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
 
-        addCourseSubmitButton.setText("Submit");
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(courseInfoTable);
 
-        addCourseCancelButton.setText("Cancel");
+        submitButton.setText("Submit");
+
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("College:");
@@ -426,7 +480,7 @@ public class EditCourse extends javax.swing.JPanel {
         jLabel4.setText("Professor:");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel5.setText("Room(s):");
+        jLabel5.setText("Room:");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Times:");
@@ -434,13 +488,21 @@ public class EditCourse extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("Days:");
 
-        editCourseTimesCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Times" }));
+        professorInput.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        editCourseDaysCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Days" }));
+        idInput.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        editCourseCollegeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select College" }));
+        selectTimesComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        selectTimesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Times" }));
 
-        editCourseCollegeCombo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Course" }));
+        selectDaysComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        selectDaysComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Days" }));
+
+        selectCollegeComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        selectCollegeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select College" }));
+
+        selectCourseComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        selectCourseComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Course" }));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setText("Course:");
@@ -448,56 +510,76 @@ public class EditCourse extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel9.setText("Seats:");
 
+        seatsInput.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        editCourseError_Course.setForeground(java.awt.Color.red);
+
+        editCourseError_College.setForeground(java.awt.Color.red);
+
+        editCourseError_Professor.setForeground(java.awt.Color.red);
+
+        editCourseError_ID.setForeground(java.awt.Color.red);
+
+        editCourseError_Room.setForeground(java.awt.Color.red);
+
+        editCourseError_Times.setForeground(java.awt.Color.red);
+
+        editCourseError_Days.setForeground(java.awt.Color.red);
+
+        editCourseError_Seats.setForeground(java.awt.Color.red);
+
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel11.setText("Name:");
 
-        editCourseRoomsCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Times" }));
+        nameInput.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        editCourseError_Name.setForeground(java.awt.Color.red);
+
+        selectRoomComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        selectRoomComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Room" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel1))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(addCourseCancelButton)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(cancelButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addCourseSubmitButton))
+                        .addComponent(submitButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(1, 1, 1))
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel11))
-                                .addGap(0, 0, 0)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(editCourseSeatsInput, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(editCourseCollegeCombo1, javax.swing.GroupLayout.Alignment.TRAILING, 0, 176, Short.MAX_VALUE)
-                                    .addComponent(editCourseDaysCombo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(editCourseTimesCombo, javax.swing.GroupLayout.Alignment.TRAILING, 0, 176, Short.MAX_VALUE)
-                                    .addComponent(editCourseIDInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                                    .addComponent(editCourseNameInput, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(editCourseProfessorInput, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(editCourseCollegeCombo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(editCourseRoomsCombo, 0, 176, Short.MAX_VALUE))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(1, 1, 1))
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addGap(0, 0, 0)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(seatsInput, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(selectCourseComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, 176, Short.MAX_VALUE)
+                            .addComponent(selectDaysComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(selectTimesComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, 176, Short.MAX_VALUE)
+                            .addComponent(idInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                            .addComponent(nameInput, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(professorInput, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(selectCollegeComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(selectRoomComboBox, 0, 176, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addCourseErrorDisplay1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
@@ -510,16 +592,10 @@ public class EditCourse extends javax.swing.JPanel {
                     .addComponent(editCourseError_Days, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editCourseError_Seats, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editCourseError_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(422, 422, 422))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -527,17 +603,17 @@ public class EditCourse extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(editCourseCollegeCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(selectCourseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)
                             .addComponent(editCourseError_Course, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(editCourseCollegeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(selectCollegeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
                             .addComponent(editCourseError_College, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(editCourseIDInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(idInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
                             .addComponent(editCourseError_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(addCourseErrorDisplay1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -549,51 +625,51 @@ public class EditCourse extends javax.swing.JPanel {
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(editCourseNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(editCourseError_Professor, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editCourseProfessorInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(professorInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(editCourseError_Room, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(editCourseRoomsCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(selectRoomComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(editCourseError_Times, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editCourseTimesCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectTimesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(editCourseError_Days, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editCourseDaysCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectDaysComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(editCourseError_Seats, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editCourseSeatsInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seatsInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addGap(5, 5, 5)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addCourseSubmitButton)
-                    .addComponent(addCourseCancelButton))
-                .addGap(4, 4, 4))
+                    .addComponent(submitButton)
+                    .addComponent(cancelButton))
+                .addGap(14, 14, 14))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Table1;
-    private javax.swing.JButton addCourseCancelButton;
     private javax.swing.JLabel addCourseErrorDisplay1;
-    private javax.swing.JButton addCourseSubmitButton;
-    private javax.swing.JComboBox<String> editCourseCollegeCombo;
-    private javax.swing.JComboBox<String> editCourseCollegeCombo1;
-    private javax.swing.JComboBox<String> editCourseDaysCombo;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JTable courseInfoTable;
     private javax.swing.JLabel editCourseError_College;
     private javax.swing.JLabel editCourseError_Course;
     private javax.swing.JLabel editCourseError_Days;
@@ -603,14 +679,8 @@ public class EditCourse extends javax.swing.JPanel {
     private javax.swing.JLabel editCourseError_Room;
     private javax.swing.JLabel editCourseError_Seats;
     private javax.swing.JLabel editCourseError_Times;
-    private javax.swing.JTextField editCourseIDInput;
-    private javax.swing.JTextField editCourseNameInput;
-    private javax.swing.JTextField editCourseProfessorInput;
-    private javax.swing.JComboBox<String> editCourseRoomsCombo;
-    private javax.swing.JTextField editCourseSeatsInput;
-    private javax.swing.JComboBox<String> editCourseTimesCombo;
+    private javax.swing.JTextField idInput;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -621,5 +691,14 @@ public class EditCourse extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField nameInput;
+    private javax.swing.JTextField professorInput;
+    private javax.swing.JTextField seatsInput;
+    private javax.swing.JComboBox<String> selectCollegeComboBox;
+    private javax.swing.JComboBox<String> selectCourseComboBox;
+    private javax.swing.JComboBox<String> selectDaysComboBox;
+    private javax.swing.JComboBox<String> selectRoomComboBox;
+    private javax.swing.JComboBox<String> selectTimesComboBox;
+    private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
 }
