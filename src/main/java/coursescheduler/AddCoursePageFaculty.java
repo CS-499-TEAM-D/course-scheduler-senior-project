@@ -1,5 +1,6 @@
 package coursescheduler;
 import coursescheduler.managers.PanelController;
+import java.awt.Font;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -11,7 +12,29 @@ public class AddCoursePageFaculty extends javax.swing.JPanel {
     PanelController controller;
     inputSingleCourseDataTable editor;
     boolean validSelection = false;
+    int textSize = 12;
     
+    public void setTextSize(int input)
+    {
+        textSize = input;
+    }
+    
+    public int getTextSize()
+    {
+        return textSize;
+    }
+    
+    public void updateTextSize()
+    {
+        this.setTextSize(textSize);
+        int size1 = jLabel1.getFont().getSize();
+        int difference1 = size1 - textSize;
+        Font newFont1 = new Font("Tahoma", Font.PLAIN,  textSize);
+        Font newFont2 = new Font("Tahoma", Font.PLAIN,  (textSize + difference1));
+        jLabel1.setFont(newFont2); //Add Course
+        cancelButton.setFont(newFont1);
+        submitButton.setFont(newFont1);
+    }
 
     public void setController(PanelController input)
     {
@@ -29,57 +52,57 @@ public class AddCoursePageFaculty extends javax.swing.JPanel {
     
     public DefaultTableModel getModel()
     {
-        return (DefaultTableModel) Table1.getModel();
+        return (DefaultTableModel) courseInfoTable.getModel();
     }
     
     public void setTable(Object[] input)
     {
-        Table1.setModel(editor.setTableData(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setTableData(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setCollege(String input)
     {
-        Table1.setModel(editor.setCollege(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setCollege(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setID(int input)
     {
-        Table1.setModel(editor.setID(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setID(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setName(String input)
     {
-        Table1.setModel(editor.setName(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setName(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setProfessor(String input)
     {
-        Table1.setModel(editor.setProfessor(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setProfessor(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setRoom(String input)
     {
-        Table1.setModel(editor.setRoom(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setRoom(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setTimes(String input)
     {
-        Table1.setModel(editor.setTimes(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setTimes(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setDays(String input)
     {
-        Table1.setModel(editor.setDays(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setDays(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setSeats(int input)
     {
-        Table1.setModel(editor.setSeats(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setSeats(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     void checkSelection()
     {
-        String course = (String) allCoursesCombo.getSelectedItem();
+        String course = (String) selectCourseComboBox.getSelectedItem();
         if (!(course.equals("") && !(course.equals("Select Course"))))
         {
             validSelection = true;
@@ -100,21 +123,21 @@ public class AddCoursePageFaculty extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        allCoursesCombo = new javax.swing.JComboBox<>();
+        selectCourseComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Table1 = new javax.swing.JTable();
-        addCourseSubmitButton = new javax.swing.JButton();
-        addCourseCancelButton = new javax.swing.JButton();
+        courseInfoTable = new javax.swing.JTable();
+        submitButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        allCoursesCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Course" }));
-        allCoursesCombo.addActionListener(new java.awt.event.ActionListener() {
+        selectCourseComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Course" }));
+        selectCourseComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                allCoursesComboActionPerformed(evt);
+                selectCourseComboBoxActionPerformed(evt);
             }
         });
 
-        Table1.setModel(new javax.swing.table.DefaultTableModel(
+        courseInfoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"College:", null},
                 {"ID:", null},
@@ -137,19 +160,19 @@ public class AddCoursePageFaculty extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(Table1);
+        jScrollPane1.setViewportView(courseInfoTable);
 
-        addCourseSubmitButton.setText("Submit");
-        addCourseSubmitButton.addActionListener(new java.awt.event.ActionListener() {
+        submitButton.setText("Submit");
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addCourseSubmitButtonActionPerformed(evt);
+                submitButtonActionPerformed(evt);
             }
         });
 
-        addCourseCancelButton.setText("Cancel");
-        addCourseCancelButton.addActionListener(new java.awt.event.ActionListener() {
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addCourseCancelButtonActionPerformed(evt);
+                cancelButtonActionPerformed(evt);
             }
         });
 
@@ -165,11 +188,11 @@ public class AddCoursePageFaculty extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(allCoursesCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(selectCourseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(addCourseCancelButton)
+                        .addComponent(cancelButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addCourseSubmitButton))
+                        .addComponent(submitButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -183,39 +206,39 @@ public class AddCoursePageFaculty extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(23, 23, 23)
-                .addComponent(allCoursesCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(selectCourseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addCourseSubmitButton)
-                    .addComponent(addCourseCancelButton))
+                    .addComponent(submitButton)
+                    .addComponent(cancelButton))
                 .addGap(4, 4, 4))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void allCoursesComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allCoursesComboActionPerformed
+    private void selectCourseComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectCourseComboBoxActionPerformed
         // Combo box (when the user selects something from the combo box)
         
-    }//GEN-LAST:event_allCoursesComboActionPerformed
+    }//GEN-LAST:event_selectCourseComboBoxActionPerformed
 
-    private void addCourseSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseSubmitButtonActionPerformed
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // Submit button
         
-    }//GEN-LAST:event_addCourseSubmitButtonActionPerformed
+    }//GEN-LAST:event_submitButtonActionPerformed
 
-    private void addCourseCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseCancelButtonActionPerformed
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // Cancel button
         
-    }//GEN-LAST:event_addCourseCancelButtonActionPerformed
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Table1;
-    private javax.swing.JButton addCourseCancelButton;
-    private javax.swing.JButton addCourseSubmitButton;
-    private javax.swing.JComboBox<String> allCoursesCombo;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JTable courseInfoTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> selectCourseComboBox;
+    private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
 }
