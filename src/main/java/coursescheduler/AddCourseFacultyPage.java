@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author evilc
  */
-public class AddCoursePageFaculty extends javax.swing.JPanel {
+public class AddCourseFacultyPage extends javax.swing.JPanel {
     String page = "ADD_COURSE_FACULTY";
     PanelController controller;
     inputSingleCourseDataTable editor;
@@ -45,7 +45,7 @@ public class AddCoursePageFaculty extends javax.swing.JPanel {
     {
         return page;
     }
-    public AddCoursePageFaculty() {
+    public AddCourseFacultyPage() {
         initComponents();
         editor = new inputSingleCourseDataTable();
     }

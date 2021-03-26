@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author evilc
  */
-public class AddCourseDepartmentChair extends javax.swing.JPanel {
+public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
     String page = "ADD_COURSE_DEPARTMENT_CHAIR";
     PanelController controller;
     inputSingleCourseDataTable editor;
@@ -76,7 +76,7 @@ public class AddCourseDepartmentChair extends javax.swing.JPanel {
         return page;
     }
     
-    public AddCourseDepartmentChair() 
+    public AddCourseDepartmentChairPage() 
     {
         initComponents();
         editor = new inputSingleCourseDataTable();;
