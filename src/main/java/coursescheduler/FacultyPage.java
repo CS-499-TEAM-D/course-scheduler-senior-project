@@ -37,11 +37,8 @@ public class FacultyPage extends javax.swing.JPanel {
         Font newFont1 = new Font("Tahoma", Font.PLAIN,  textSize);
         Font newFont2 = new Font("Tahoma", Font.PLAIN,  (textSize + difference1));
         Font newFont3 = new Font("Tahoma", Font.PLAIN,  (textSize + difference2));
-        jLabel1.setFont(newFont2); //Add Course
-        jLabel2.setFont(newFont3); //College:
-        scheduleGeneratorButton.setFont(newFont1);
-        saveCSVFileButton.setFont(newFont1);
-        loadCSVFileButton.setFont(newFont1);
+        jLabel1.setFont(newFont2); //Faculty
+        jLabel2.setFont(newFont3); //Current Courses Loaded:
         addCourseButton.setFont(newFont1);
         removeCourseButton.setFont(newFont1);
         backButton.setFont(newFont1);
@@ -81,35 +78,15 @@ public class FacultyPage extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        scheduleGeneratorButton = new javax.swing.JButton();
-        loadCSVFileButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         currentCoursesTable = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        saveCSVFileButton = new javax.swing.JButton();
         addCourseButton = new javax.swing.JButton();
         removeCourseButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
-        settingsButton = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Faculty");
-
-        scheduleGeneratorButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        scheduleGeneratorButton.setText("Schedule Generator");
-        scheduleGeneratorButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                scheduleGeneratorButtonActionPerformed(evt);
-            }
-        });
-
-        loadCSVFileButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        loadCSVFileButton.setText("Load CSV File");
-        loadCSVFileButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadCSVFileButtonActionPerformed(evt);
-            }
-        });
 
         currentCoursesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -147,14 +124,6 @@ public class FacultyPage extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Current Courses Loaded:");
 
-        saveCSVFileButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        saveCSVFileButton.setText("Save as CSV File");
-        saveCSVFileButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveCSVFileButtonActionPerformed(evt);
-            }
-        });
-
         addCourseButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         addCourseButton.setText("Add Course");
         addCourseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -172,18 +141,10 @@ public class FacultyPage extends javax.swing.JPanel {
         });
 
         backButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        backButton.setText("Back");
+        backButton.setText("Back to Login");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
-            }
-        });
-
-        settingsButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        settingsButton.setText("Settings");
-        settingsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                settingsButtonActionPerformed(evt);
             }
         });
 
@@ -197,17 +158,9 @@ public class FacultyPage extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(scheduleGeneratorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(loadCSVFileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(saveCSVFileButton, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                            .addComponent(addCourseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(removeCourseButton, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                            .addComponent(settingsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(addCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(removeCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(backButton, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -220,15 +173,9 @@ public class FacultyPage extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(scheduleGeneratorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(removeCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loadCSVFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveCSVFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(settingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addGap(77, 77, 77)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,18 +184,6 @@ public class FacultyPage extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void scheduleGeneratorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleGeneratorButtonActionPerformed
-        //Schedule generator button pressed
-    }//GEN-LAST:event_scheduleGeneratorButtonActionPerformed
-
-    private void loadCSVFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadCSVFileButtonActionPerformed
-        //Load CSV file button pressed
-    }//GEN-LAST:event_loadCSVFileButtonActionPerformed
-
-    private void saveCSVFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveCSVFileButtonActionPerformed
-        //Save CSV file button pressed
-    }//GEN-LAST:event_saveCSVFileButtonActionPerformed
 
     private void addCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseButtonActionPerformed
         //Add course button pressed
@@ -262,10 +197,6 @@ public class FacultyPage extends javax.swing.JPanel {
         //Back button pressed
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
-        //Settings button pressed
-    }//GEN-LAST:event_settingsButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addCourseButton;
@@ -274,10 +205,6 @@ public class FacultyPage extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton loadCSVFileButton;
     private javax.swing.JButton removeCourseButton;
-    private javax.swing.JButton saveCSVFileButton;
-    private javax.swing.JButton scheduleGeneratorButton;
-    private javax.swing.JButton settingsButton;
     // End of variables declaration//GEN-END:variables
 }
