@@ -64,7 +64,7 @@ public class debuggerControl
         tabbedPane.addTab("View Courses", icon, page1, "");
         
 
-        
+
         tabbedPane.addTab("Schedule Generator", icon, page2, "");
         
         //JComponent panel2 = makeTextPanel("Panel #2");

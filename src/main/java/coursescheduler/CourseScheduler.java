@@ -1,9 +1,19 @@
 package coursescheduler;
+import javax.swing.JPanel;
+import coursescheduler.managers.PanelController;
 
-/** Entry-point for Course Scheduler desktop application. */
-final class CourseScheduler {
-  public static void main(String[] args) 
-  {
-      debuggerControl control = new debuggerControl();
+/** Sets up and starts the CourseScheduler application. */
+final class CourseScheduler implements App {
+  private final PanelController controller;
+  private final JPanel loginPage;
+
+  CourseScheduler(PanelController controller, JPanel departmentChairPage) {
+    this.controller = controller;
+    this.loginPage = departmentChairPage;
+  }
+
+  @Override
+  public void run() {
+    controller.initializeStartPage(loginPage);
   }
 }
