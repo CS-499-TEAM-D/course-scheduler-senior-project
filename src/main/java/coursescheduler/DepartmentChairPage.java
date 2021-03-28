@@ -38,9 +38,6 @@ public class DepartmentChairPage extends javax.swing.JPanel {
         Font newFont3 = new Font("Tahoma", Font.PLAIN,  (textSize + difference2));
         jLabel1.setFont(newFont2); //Add Course
         jLabel2.setFont(newFont3); //College:
-        scheduleGeneratorButton.setFont(newFont1);
-        saveCSVFileButton.setFont(newFont1);
-        loadCSVFileButton.setFont(newFont1);
         addCourseButton.setFont(newFont1);
         editCourseButton.setFont(newFont1);
         removeCourseButton.setFont(newFont1);
