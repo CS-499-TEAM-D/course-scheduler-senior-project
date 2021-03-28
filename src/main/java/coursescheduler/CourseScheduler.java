@@ -5,9 +5,5 @@ final class CourseScheduler {
   public static void main(String[] args) 
   {
       debuggerControl control = new debuggerControl();
-      debuggerFrame debugger = new debuggerFrame();
-      debugger.setVisible(true);
-      
-      
   }
 }

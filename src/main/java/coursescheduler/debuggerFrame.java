@@ -27,12 +27,14 @@ public class debuggerFrame extends javax.swing.JFrame {
     {
         allPages.add(pageInput);
         allPages_Names.add(input);
-        allPagesComboBox.addItem(input);
+        //allPagesComboBox.addItem(input);
         this.add(pageInput);
+        /*
         for (int i = 0; i < allPagesComboBox.getItemCount(); i ++)
         {
             hidePage(getPage(allPagesComboBox.getItemAt(i)));
         }
+        */
     }
     
     
@@ -83,33 +85,11 @@ public class debuggerFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        allPagesComboBox = new javax.swing.JComboBox<>();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.FlowLayout());
 
-        allPagesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Page" }));
-        allPagesComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                allPagesComboBoxActionPerformed(evt);
-            }
-        });
-        getContentPane().add(allPagesComboBox);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void allPagesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allPagesComboBoxActionPerformed
-
-        if (!allPagesComboBox.getSelectedItem().equals("Select Page"))
-        {
-            for (int i = 0; i < allPagesComboBox.getItemCount(); i ++)
-            {
-                hidePage(getPage(allPagesComboBox.getItemAt(i)));
-            }
-            showPage(getPage((String)allPagesComboBox.getSelectedItem()));
-        }
-    }//GEN-LAST:event_allPagesComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,12 +121,11 @@ public class debuggerFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new debuggerFrame().setVisible(true);
+                //also new debuggerFrame().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> allPagesComboBox;
     // End of variables declaration//GEN-END:variables
 }
