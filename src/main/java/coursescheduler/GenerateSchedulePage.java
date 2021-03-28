@@ -47,10 +47,6 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
         jLabel3.setFont(newFont1);
         numberOfSchedulesGeneratedTextField.setFont(newFont1);
         selectScheduleComboBox.setFont(newFont1);
-        viewCoursesAddedButton.setFont(newFont1);
-        saveScheduleButton.setFont(newFont1);
-        loadScheduleButton.setFont(newFont1);
-        settingsButton.setFont(newFont1);
         clearButton.setFont(newFont1);
         backButton.setFont(newFont1);
     }
@@ -165,48 +161,19 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        backButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        viewCoursesAddedButton = new javax.swing.JButton();
-        loadScheduleButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         currentCoursesTable = new javax.swing.JTable();
-        saveScheduleButton = new javax.swing.JButton();
         generateScheduleButton = new javax.swing.JButton();
-        settingsButton = new javax.swing.JButton();
         selectScheduleComboBox = new javax.swing.JComboBox<>();
         errorBox = new javax.swing.JLabel();
         clearButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         numberOfSchedulesGeneratedTextField = new javax.swing.JTextField();
 
-        backButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        backButton.setText("Back");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Schedule Generator");
-
-        viewCoursesAddedButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        viewCoursesAddedButton.setText("View Courses Added");
-        viewCoursesAddedButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewCoursesAddedButtonActionPerformed(evt);
-            }
-        });
-
-        loadScheduleButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        loadScheduleButton.setText("Load Schedule");
-        loadScheduleButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadScheduleButtonActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Schedule Generated:");
@@ -248,27 +215,11 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(currentCoursesTable);
 
-        saveScheduleButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        saveScheduleButton.setText("Save Schedule");
-        saveScheduleButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveScheduleButtonActionPerformed(evt);
-            }
-        });
-
         generateScheduleButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         generateScheduleButton.setText("Generate Schedule");
         generateScheduleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 generateScheduleButtonActionPerformed(evt);
-            }
-        });
-
-        settingsButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        settingsButton.setText("Settings");
-        settingsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                settingsButtonActionPerformed(evt);
             }
         });
 
@@ -298,6 +249,10 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(generateScheduleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(errorBox, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
@@ -309,19 +264,6 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
                             .addGap(13, 13, 13)
                             .addComponent(selectScheduleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jLabel1)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(viewCoursesAddedButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(loadScheduleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(generateScheduleButton, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                                .addComponent(saveScheduleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(settingsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                                .addComponent(clearButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(backButton)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
@@ -332,15 +274,9 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(viewCoursesAddedButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(generateScheduleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(settingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loadScheduleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveScheduleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addGap(77, 77, 77)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(selectScheduleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -350,35 +286,13 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(errorBox, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(backButton)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void viewCoursesAddedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewCoursesAddedButtonActionPerformed
-        //Preview courses button pressed
-    }//GEN-LAST:event_viewCoursesAddedButtonActionPerformed
-
-    private void loadScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadScheduleButtonActionPerformed
-        //Load schedule button pressed
-    }//GEN-LAST:event_loadScheduleButtonActionPerformed
-
-    private void saveScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveScheduleButtonActionPerformed
-        //Save schedule button pressed
-    }//GEN-LAST:event_saveScheduleButtonActionPerformed
-
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        //Back button clicked
-    }//GEN-LAST:event_backButtonActionPerformed
 
     private void generateScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateScheduleButtonActionPerformed
         //Generate schedule button pressed
     }//GEN-LAST:event_generateScheduleButtonActionPerformed
-
-    private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
-        //Settings button pressed
-    }//GEN-LAST:event_settingsButtonActionPerformed
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         //Clear button pressed
@@ -396,7 +310,6 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backButton;
     private javax.swing.JButton clearButton;
     private javax.swing.JTable currentCoursesTable;
     private javax.swing.JLabel errorBox;
@@ -405,11 +318,7 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton loadScheduleButton;
     private javax.swing.JTextField numberOfSchedulesGeneratedTextField;
-    private javax.swing.JButton saveScheduleButton;
     private javax.swing.JComboBox<String> selectScheduleComboBox;
-    private javax.swing.JButton settingsButton;
-    private javax.swing.JButton viewCoursesAddedButton;
     // End of variables declaration//GEN-END:variables
 }
