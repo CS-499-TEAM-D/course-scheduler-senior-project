@@ -48,7 +48,6 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
         numberOfSchedulesGeneratedTextField.setFont(newFont1);
         selectScheduleComboBox.setFont(newFont1);
         clearButton.setFont(newFont1);
-        backButton.setFont(newFont1);
     }
 
     public void setController(PanelController input)
