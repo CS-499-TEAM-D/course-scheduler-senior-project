@@ -6,6 +6,7 @@
 package coursescheduler;
 import coursescheduler.managers.PanelController;
 import java.awt.Font;
+import javax.swing.JPopupMenu;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -14,6 +15,9 @@ import javax.swing.table.DefaultTableModel;
 public class DepartmentChairPage extends javax.swing.JPanel {
     String page = "DEPARTMENT_CHAIR";
     PanelController controller;
+    InputMultipleCoursesTable tableController;
+    
+    
     int textSize = 12;
   
     public void setTextSize(int input)
@@ -55,6 +59,7 @@ public class DepartmentChairPage extends javax.swing.JPanel {
     }
     public DepartmentChairPage() {
         initComponents();
+        tableController = new InputMultipleCoursesTable();
     }
     
     public DefaultTableModel getTableModel()
