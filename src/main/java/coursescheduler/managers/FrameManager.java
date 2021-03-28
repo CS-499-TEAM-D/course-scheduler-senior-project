@@ -26,11 +26,13 @@ abstract class FrameManager<C extends Container, P extends JPanel> implements Pa
   @Override
   public PanelController<P> initializeStartPage(P page) {
     Dimension parentSize = container.getSize();
+
     panelWrapper.setSize(parentSize);
     panelWrapper.setPreferredSize(parentSize);
     panelWrapper.setMaximumSize(parentSize);
     panelWrapper.setLayout(new BorderLayout());
     panelWrapper.add(page, BorderLayout.CENTER);
+
     container.setLayout(new BorderLayout());
     container.add(panelWrapper, BorderLayout.CENTER);
     container.setVisible(true);
