@@ -1,14 +1,12 @@
 package coursescheduler;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class CourseSchedulerTest {
-  @Before
-  public void setUp() {}
+  private final CourseScheduler courseScheduler = new CourseScheduler();
 
   @Test
   public void main_defaultState_shouldNotFail() {
-    CourseScheduler.main(new String[] {});
+    courseScheduler.run();
   }
 }
