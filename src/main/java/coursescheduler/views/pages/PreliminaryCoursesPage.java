@@ -1,4 +1,4 @@
-package coursescheduler;
+package coursescheduler.views.pages;
 import coursescheduler.managers.PanelController;
 import java.awt.Font;
 import javax.swing.JComboBox;

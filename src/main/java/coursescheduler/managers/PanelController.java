@@ -13,7 +13,7 @@ public interface PanelController<P extends JPanel> {
    *
    * @return
    */
-  PanelController initializeStartPage(P page);
+  PanelController init(P page);
 
   /**
    * Updates the current displayed page.
@@ -21,4 +21,8 @@ public interface PanelController<P extends JPanel> {
    * @param page element to display.
    */
   void updatePage(P page);
+  void createPopup(String pageName);
+  void removePopup();
+
+  
 }

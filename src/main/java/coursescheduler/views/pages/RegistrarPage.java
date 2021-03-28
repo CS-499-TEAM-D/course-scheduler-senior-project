@@ -3,30 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package coursescheduler;
+package coursescheduler.views.pages;
+
+import javax.swing.table.DefaultTableModel;
 import coursescheduler.managers.PanelController;
 import java.awt.Font;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author evilc
  */
-public class FacultyPage extends javax.swing.JPanel {
-    String page = "FACULTY";
+public class RegistrarPage extends javax.swing.JPanel {
+    String page = "REGISTRAR";
     PanelController controller;
-    int textSize = 12;
-  
+    //TODO: add in control for resizing the window, like if it can be resized or not
+    int textSize = 12; //Doesn't impact the text in tables; may change this in the future
+    
     public void setTextSize(int input)
     {
         textSize = input;
+        
     }
     
     public int getTextSize()
     {
         return textSize;
     }
-
+    
     public void updateTextSize()
     {
         this.setTextSize(textSize);
@@ -37,11 +40,10 @@ public class FacultyPage extends javax.swing.JPanel {
         Font newFont1 = new Font("Tahoma", Font.PLAIN,  textSize);
         Font newFont2 = new Font("Tahoma", Font.PLAIN,  (textSize + difference1));
         Font newFont3 = new Font("Tahoma", Font.PLAIN,  (textSize + difference2));
-        jLabel1.setFont(newFont2); //Faculty
-        jLabel2.setFont(newFont3); //Current Courses Loaded:
-        addCourseButton.setFont(newFont1);
-        removeCourseButton.setFont(newFont1);
+        prelimCoursesButton.setFont(newFont1);
         backButton.setFont(newFont1);
+        jLabel1.setFont(newFont2); //Registrar
+        jLabel2.setFont(newFont3); //Current Courses Loaded
     }
 
     public void setController(PanelController input)
@@ -63,8 +65,10 @@ public class FacultyPage extends javax.swing.JPanel {
     {
         currentCoursesTable.setModel(input);
     }
-    
-    public FacultyPage() {
+    /**
+     * Creates new form RegistrarPage
+     */
+    public RegistrarPage() {
         initComponents();
     }
 
@@ -81,12 +85,11 @@ public class FacultyPage extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         currentCoursesTable = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        addCourseButton = new javax.swing.JButton();
-        removeCourseButton = new javax.swing.JButton();
+        prelimCoursesButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Faculty");
+        jLabel1.setText("Registrar");
 
         currentCoursesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -124,19 +127,11 @@ public class FacultyPage extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Current Courses Loaded:");
 
-        addCourseButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        addCourseButton.setText("Add Course");
-        addCourseButton.addActionListener(new java.awt.event.ActionListener() {
+        prelimCoursesButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        prelimCoursesButton.setText("Prelimnary Courses");
+        prelimCoursesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addCourseButtonActionPerformed(evt);
-            }
-        });
-
-        removeCourseButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        removeCourseButton.setText("Remove Course");
-        removeCourseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeCourseButtonActionPerformed(evt);
+                prelimCoursesButtonActionPerformed(evt);
             }
         });
 
@@ -155,16 +150,13 @@ public class FacultyPage extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(prelimCoursesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(addCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(removeCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(backButton, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,9 +164,7 @@ public class FacultyPage extends javax.swing.JPanel {
                 .addGap(19, 19, 19)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(removeCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(prelimCoursesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -185,13 +175,9 @@ public class FacultyPage extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseButtonActionPerformed
-        //Add course button pressed
-    }//GEN-LAST:event_addCourseButtonActionPerformed
-
-    private void removeCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCourseButtonActionPerformed
-        //Remove course button pressed
-    }//GEN-LAST:event_removeCourseButtonActionPerformed
+    private void prelimCoursesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prelimCoursesButtonActionPerformed
+        //Prelimanary courses button pressed
+    }//GEN-LAST:event_prelimCoursesButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         //Back button pressed
@@ -199,12 +185,11 @@ public class FacultyPage extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addCourseButton;
     private javax.swing.JButton backButton;
     private javax.swing.JTable currentCoursesTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton removeCourseButton;
+    private javax.swing.JButton prelimCoursesButton;
     // End of variables declaration//GEN-END:variables
 }

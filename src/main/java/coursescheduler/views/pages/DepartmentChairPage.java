@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package coursescheduler;
+package coursescheduler.views.pages;
 import coursescheduler.managers.PanelController;
 import java.awt.Font;
 import javax.swing.table.DefaultTableModel;
@@ -15,6 +15,7 @@ public class DepartmentChairPage extends javax.swing.JPanel {
     String page = "DEPARTMENT_CHAIR";
     PanelController controller;
     InputMultipleCoursesTable tableController;
+
     
     
     int textSize = 12;
@@ -202,6 +203,7 @@ public class DepartmentChairPage extends javax.swing.JPanel {
 
     private void addCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseButtonActionPerformed
         //Add course button clicked
+        controller.createPopup("ADD_COURSE_DEPARTMENT_CHAIR");
     }//GEN-LAST:event_addCourseButtonActionPerformed
 
     private void editCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCourseButtonActionPerformed

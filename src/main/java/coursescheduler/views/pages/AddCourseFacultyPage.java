@@ -1,4 +1,4 @@
-package coursescheduler;
+package coursescheduler.views.pages;
 import coursescheduler.managers.PanelController;
 import java.awt.Font;
 import javax.swing.table.DefaultTableModel;
@@ -7,13 +7,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author evilc
  */
-public class RemoveCoursePage extends javax.swing.JPanel {
-    String page = "REMOVE_COURSE";
+public class AddCourseFacultyPage extends javax.swing.JPanel {
+    String page = "ADD_COURSE_FACULTY";
     PanelController controller;
     inputSingleCourseDataTable editor;
     boolean validSelection = false;
     int textSize = 12;
-  
+    
     public void setTextSize(int input)
     {
         textSize = input;
@@ -23,7 +23,7 @@ public class RemoveCoursePage extends javax.swing.JPanel {
     {
         return textSize;
     }
-
+    
     public void updateTextSize()
     {
         this.setTextSize(textSize);
@@ -31,19 +31,9 @@ public class RemoveCoursePage extends javax.swing.JPanel {
         int difference1 = size1 - textSize;
         Font newFont1 = new Font("Tahoma", Font.PLAIN,  textSize);
         Font newFont2 = new Font("Tahoma", Font.PLAIN,  (textSize + difference1));
-        jLabel1.setFont(newFont2); //Remove Course
-        selectCourseComboBox.setFont(newFont1);
+        jLabel1.setFont(newFont2); //Add Course
         cancelButton.setFont(newFont1);
-        removeButton.setFont(newFont1);
-    }
-    public void clearTable()
-    {
-        DefaultTableModel model = (DefaultTableModel) courseInfoTable.getModel();
-        for (int i = 0; i < model.getRowCount(); i++)
-        {
-            model.setValueAt("", i, 0);
-            model.setValueAt("", i, 1);
-        }
+        submitButton.setFont(newFont1);
     }
 
     public void setController(PanelController input)
@@ -55,9 +45,14 @@ public class RemoveCoursePage extends javax.swing.JPanel {
     {
         return page;
     }
-    public RemoveCoursePage() {
+    public AddCourseFacultyPage() {
         initComponents();
         editor = new inputSingleCourseDataTable();
+    }
+    
+    public DefaultTableModel getModel()
+    {
+        return (DefaultTableModel) courseInfoTable.getModel();
     }
     
     public void setTable(Object[] input)
@@ -131,12 +126,10 @@ public class RemoveCoursePage extends javax.swing.JPanel {
         selectCourseComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         courseInfoTable = new javax.swing.JTable();
-        removeButton = new javax.swing.JButton();
+        submitButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        selectCourseError = new javax.swing.JLabel();
 
-        selectCourseComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         selectCourseComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Course" }));
         selectCourseComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,15 +162,13 @@ public class RemoveCoursePage extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(courseInfoTable);
 
-        removeButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        removeButton.setText("Remove");
-        removeButton.addActionListener(new java.awt.event.ActionListener() {
+        submitButton.setText("Submit");
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeButtonActionPerformed(evt);
+                submitButtonActionPerformed(evt);
             }
         });
 
-        cancelButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,27 +177,28 @@ public class RemoveCoursePage extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Remove Course");
-
-        selectCourseError.setForeground(java.awt.Color.red);
+        jLabel1.setText("Add Course");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(selectCourseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(selectCourseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(cancelButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(removeButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(selectCourseError, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE))
+                        .addComponent(submitButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,14 +206,12 @@ public class RemoveCoursePage extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(selectCourseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(selectCourseError, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(selectCourseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(removeButton)
+                    .addComponent(submitButton)
                     .addComponent(cancelButton))
                 .addGap(4, 4, 4))
         );
@@ -232,10 +222,10 @@ public class RemoveCoursePage extends javax.swing.JPanel {
         
     }//GEN-LAST:event_selectCourseComboBoxActionPerformed
 
-    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
-        // Remove button
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        // Submit button
         
-    }//GEN-LAST:event_removeButtonActionPerformed
+    }//GEN-LAST:event_submitButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // Cancel button
@@ -248,8 +238,7 @@ public class RemoveCoursePage extends javax.swing.JPanel {
     private javax.swing.JTable courseInfoTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton removeButton;
     private javax.swing.JComboBox<String> selectCourseComboBox;
-    private javax.swing.JLabel selectCourseError;
+    private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
 }
