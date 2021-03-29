@@ -1,12 +1,6 @@
 package coursescheduler;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.event.KeyEvent;
 
 import coursescheduler.managers.PanelController;
 

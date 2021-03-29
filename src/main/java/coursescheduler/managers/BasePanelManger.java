@@ -18,7 +18,12 @@ public final class BasePanelManger extends PanelManager<JFrame, JPanel>
     }
 
     @Override
-    public void update(JPanel page) {
-        return;
+    public PanelController init(JPanel page) {
+        return null;
+    }
+
+    @Override
+    public void updatePage(JPanel page) {
+
     }
 }

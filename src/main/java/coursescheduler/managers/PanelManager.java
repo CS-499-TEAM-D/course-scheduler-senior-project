@@ -12,9 +12,4 @@ import javax.swing.JComponent;
  * @param <C> element to display the page.
  * @param <P> element to show as page.
  */
-abstract class PanelManager<C, P extends JComponent> implements PanelController<P> {
-    @Override
-    public void update(P page) {
-        // TODO(jth): Implement.
-    }
-}
+abstract class PanelManager<C, P extends JComponent> implements PanelController<P> {}

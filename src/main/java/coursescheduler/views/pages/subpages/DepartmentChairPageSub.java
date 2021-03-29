@@ -6,23 +6,31 @@
 package coursescheduler.views.pages.subpages;
 import coursescheduler.managers.PanelController;
 import coursescheduler.managers.PopupController;
+import coursescheduler.views.pages.SubPage;
+
 import java.awt.Font;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author evilc
  */
-public class DepartmentChairPageSub extends javax.swing.JPanel {
+public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPage<JPanel> {
     String page = "DEPARTMENT_CHAIR";
     PanelController controller;
     PopupController popupController;
     InputMultipleCoursesTable tableController;
-    
 
-    
-    
     int textSize = 12;
-  
+
+    @Override
+    public JPanel init() {
+        initComponents();
+        return this;
+    }
+
     public void setTextSize(int input)
     {
         textSize = input;
@@ -103,12 +111,13 @@ public class DepartmentChairPageSub extends javax.swing.JPanel {
 
         backButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        editCourseButton = new javax.swing.JButton();
         addCourseButton = new javax.swing.JButton();
         removeCourseButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         currentCoursesTable = new javax.swing.JTable();
+        editCourseButton = new javax.swing.JButton();
+        courseManagementTabbedPane = new javax.swing.JTabbedPane();
 
         backButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         backButton.setText("Back to Login");
@@ -120,14 +129,6 @@ public class DepartmentChairPageSub extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Department Chair");
-
-        editCourseButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        editCourseButton.setText("Edit Course");
-        editCourseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editCourseButtonActionPerformed(evt);
-            }
-        });
 
         addCourseButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         addCourseButton.setText("Add Course");
@@ -181,43 +182,61 @@ public class DepartmentChairPageSub extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(currentCoursesTable);
 
+        editCourseButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        editCourseButton.setText("Edit Course");
+        editCourseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editCourseButtonActionPerformed(evt);
+            }
+        });
+
+        courseManagementTabbedPane.addTab("Add Course", null, new AddCourseDepartmentChairPage(), "Tab 1 tooltip");
+        courseManagementTabbedPane.addTab("Edit Course", null, new EditCoursePage(), "Tab 1 tooltip");
+        courseManagementTabbedPane.addTab("Remove Course", null, new RemoveCoursePage(), "Tab 1 tooltip");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(addCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(editCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(removeCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(backButton, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                    .addComponent(backButton)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 657, Short.MAX_VALUE)
+                    .addComponent(courseManagementTabbedPane))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(addCourseButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(editCourseButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(removeCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(removeCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(70, 70, 70)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(removeCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(editCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(258, 258, 258))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(courseManagementTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(backButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -247,6 +266,7 @@ public class DepartmentChairPageSub extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addCourseButton;
     private javax.swing.JButton backButton;
+    private javax.swing.JTabbedPane courseManagementTabbedPane;
     private javax.swing.JTable currentCoursesTable;
     private javax.swing.JButton editCourseButton;
     private javax.swing.JLabel jLabel1;

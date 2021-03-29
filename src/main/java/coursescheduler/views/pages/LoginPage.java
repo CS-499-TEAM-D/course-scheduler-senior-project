@@ -4,6 +4,7 @@ import javax.swing.BorderFactory;
 import java.awt.event.KeyEvent;
 
 import coursescheduler.managers.PanelController;
+import coursescheduler.views.pages.containers.DepartmentChairPageContainer;
 
 /**
  * Presents to and allows the user to login provided with success email and password credentials.
@@ -128,7 +129,7 @@ public final class LoginPage extends javax.swing.JPanel {
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
-        controller.updatePage(new DepartmentChairPage());
+        controller.updatePage(new DepartmentChairPageContainer());
     }//GEN-LAST:event_submitButtonActionPerformed
 
   private void emailFieldEnterKeyPressed(
@@ -137,7 +138,7 @@ public final class LoginPage extends javax.swing.JPanel {
       // TODO: Use credentials service to retrieve user.
       // TODO: Use factory to generate user's page.
       System.out.println("emailFieldEnterKeyPressed");
-      controller.updatePage(new DepartmentChairPage()); // Default to Dean page for demo purpose.
+      controller.updatePage(new DepartmentChairPageContainer()); // Default to Dean page for demo purpose.
     }
   } // GEN-LAST:event_emailFieldEnterKeyPressed
 
@@ -147,7 +148,7 @@ public final class LoginPage extends javax.swing.JPanel {
       // TODO: Use credentials service to retrieve user.
       // TODO: Use factory to generate user's role page.
       System.out.println("passwordFieldEnterPressed");
-      controller.updatePage(new DepartmentChairPage()); // Default to Dean page for demo purpose.
+      controller.updatePage(new DepartmentChairPageContainer()); // Default to Dean page for demo purpose.
     }
   } // GEN-LAST:event_passwordFieldEnterPressed
 
