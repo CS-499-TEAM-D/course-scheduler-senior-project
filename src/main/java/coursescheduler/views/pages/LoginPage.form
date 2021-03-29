@@ -111,7 +111,7 @@
             <Property name="text" type="java.lang.String" value="Create an Account"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="createAnAccountLabelMouseClicked"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="createAnAccountLabelMousePressed"/>
           </Events>
         </Component>
       </SubComponents>
