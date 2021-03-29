@@ -1,6 +1,7 @@
 package coursescheduler.views.pages;
 
 import javax.swing.BorderFactory;
+import java.awt.event.KeyEvent;
 
 import coursescheduler.managers.PanelController;
 
@@ -36,6 +37,20 @@ public final class LoginPage extends javax.swing.JPanel {
     emailLabel.setText("email");
 
     passwordLabel.setText("password");
+
+    emailField.addKeyListener(
+        new java.awt.event.KeyAdapter() {
+          public void keyPressed(java.awt.event.KeyEvent evt) {
+            emailFieldEnterKeyPressed(evt);
+          }
+        });
+
+    passwordField.addKeyListener(
+        new java.awt.event.KeyAdapter() {
+          public void keyPressed(java.awt.event.KeyEvent evt) {
+            passwordFieldEnterPressed(evt);
+          }
+        });
 
     createAnAccountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     createAnAccountLabel.setText("Create an Account");
@@ -152,6 +167,26 @@ public final class LoginPage extends javax.swing.JPanel {
 
     getAccessibleContext().setAccessibleName("");
   } // </editor-fold>//GEN-END:initComponents
+
+  private void emailFieldEnterKeyPressed(
+      java.awt.event.KeyEvent evt) { // GEN-FIRST:event_emailFieldEnterKeyPressed
+    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+      // TODO: Use credentials service to retrieve user.
+      // TODO: Use factory to generate user's page.
+      System.out.println("emailFieldEnterKeyPressed");
+      controller.updatePage(new DeanPage()); // Default to Dean page for demo purpose.
+    }
+  } // GEN-LAST:event_emailFieldEnterKeyPressed
+
+  private void passwordFieldEnterPressed(
+      java.awt.event.KeyEvent evt) { // GEN-FIRST:event_passwordFieldEnterPressed
+    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+      // TODO: Use credentials service to retrieve user.
+      // TODO: Use factory to generate user's role page.
+      System.out.println("passwordFieldEnterPressed");
+      controller.updatePage(new DeanPage()); // Default to Dean page for demo purpose.
+    }
+  } // GEN-LAST:event_passwordFieldEnterPressed
 
   private void createAnAccountLabelMousePressed(
       java.awt.event.MouseEvent evt) { // GEN-FIRST:event_createAnAccountLabelMousePressed
