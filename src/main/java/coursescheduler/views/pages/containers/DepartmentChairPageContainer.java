@@ -12,26 +12,33 @@ import javax.swing.JTabbedPane;
 
 /** Example Role page. */
 public class DepartmentChairPageContainer extends JTabbedPane implements RolePage {
-  public DepartmentChairPageContainer() {
+  PageSettingsControl control;
+    
+    public DepartmentChairPageContainer() {
     super();
     init();
   }
 
   @Override
   public void init() {
-        JPanel subPageZero = new DepartmentChairPageSub();
-        addTab("Course Management", null, subPageZero, "Tab 1 tooltip");
+        control = new PageSettingsControl();
       
-        JPanel subPageOne = new GenerateSchedulePage();
+        DepartmentChairPageSub subPageZero = new DepartmentChairPageSub();
+        addTab("Course Management", null, subPageZero, "Tab 1 tooltip");
+        control.setDepartmentChairPage(subPageZero);
+      
+        GenerateSchedulePage subPageOne = new GenerateSchedulePage();
         addTab("Generate Schedule", null, subPageOne, "Tab 1 tooltip");
 
-        JPanel subPageTwo = new SaveLoadCSVFilePage();
+        SaveLoadCSVFilePage subPageTwo = new SaveLoadCSVFilePage();
         addTab("Save/Load CSV File", null, subPageTwo, "Tab 2 tooltip");
 
-        JPanel subPageThree = new SaveLoadSchedulePage();
+        SaveLoadSchedulePage subPageThree = new SaveLoadSchedulePage();
         addTab("Save/Load Schedule", null, subPageThree, "Tab 3 tooltip");
+        control.setMainPages(subPageOne, subPageTwo, subPageThree);
         
-        JPanel subPageFour = new SettingsPage();
+        SettingsPage subPageFour = new SettingsPage();
         addTab("Settings", null, subPageFour, "Tab 3 tooltip");  
+        subPageFour.setControl(control);
   }
 }

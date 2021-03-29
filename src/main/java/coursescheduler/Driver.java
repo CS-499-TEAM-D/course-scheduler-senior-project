@@ -9,8 +9,10 @@ import javax.swing.JPanel;
 
 /** Application entry point. */
 public class Driver {
-  public static void main(String... args) {
+    public static void main(String... args) {
     JFrame mainFrame = new CourseSchedulerFrame();
+    mainFrame.setSize(1150, 700);
+    mainFrame.setResizable(false);
     PanelController panelController = new BaseFrameManager(mainFrame);
     JPanel loginPage = new LoginPage(panelController);
     App app = new CourseScheduler(panelController, loginPage);

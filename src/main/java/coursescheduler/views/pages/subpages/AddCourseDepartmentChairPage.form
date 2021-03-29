@@ -19,66 +19,61 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
                       <Component id="submitButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Component id="jScrollPane1" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" alignment="0" pref="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabel7" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
+                          <Component id="jLabel6" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
+                          <Component id="jLabel5" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel7" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
-                                  <Component id="jLabel6" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
-                                  <Component id="jLabel5" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="nameInput" max="32767" attributes="0"/>
-                                          <Component id="professorInput" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="idInput" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="selectTimesComboBox" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="selectDaysComboBox" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="selectRoomComboBox" pref="178" max="32767" attributes="0"/>
-                                          <Component id="addCourseErrorDisplay1" max="32767" attributes="0"/>
-                                          <Component id="seatsInput" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                                      <Component id="selectCollegeComboBox" pref="176" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="nameInput" max="32767" attributes="0"/>
+                                  <Component id="professorInput" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="idInput" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="selectTimesComboBox" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="selectDaysComboBox" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="selectRoomComboBox" max="32767" attributes="0"/>
+                                  <Component id="addCourseErrorDisplay1" max="32767" attributes="0"/>
+                                  <Component id="seatsInput" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="addCourseError_College" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
-                              <Component id="addCourseError_Professor" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
-                              <Component id="addCourseError_ID" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
-                              <Component id="addCourseError_Name" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
-                              <Component id="addCourseError_Room" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                              <Component id="selectCollegeComboBox" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="addCourseError_Days" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
-                          <Component id="addCourseError_Seats" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
-                          <Component id="addCourseError_Times" min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="addCourseError_College" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="addCourseError_Professor" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="addCourseError_ID" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="addCourseError_Name" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="addCourseError_Room" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="addCourseError_Days" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
+                  <Component id="addCourseError_Seats" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
+                  <Component id="addCourseError_Times" min="-2" pref="22" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
