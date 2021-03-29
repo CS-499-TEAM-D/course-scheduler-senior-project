@@ -1,6 +1,12 @@
 package coursescheduler;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.KeyEvent;
 
 import coursescheduler.managers.PanelController;
 
@@ -16,6 +22,6 @@ final class CourseScheduler implements App {
 
   @Override
   public void run() {
-    controller.init(loginPage);
+    controller.init(loginPage); // start course scheduler application with loginPage
   }
 }

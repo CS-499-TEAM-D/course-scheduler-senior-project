@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package coursescheduler.views.pages;
+package coursescheduler.views.pages.subpages;
 
 import javax.swing.table.DefaultTableModel;
 import coursescheduler.managers.PanelController;
