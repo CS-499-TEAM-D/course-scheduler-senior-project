@@ -1,6 +1,7 @@
 package coursescheduler.managers;
 
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**

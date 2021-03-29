@@ -5,6 +5,7 @@
  */
 package coursescheduler.views.pages.subpages;
 import coursescheduler.managers.PanelController;
+import coursescheduler.managers.PopupController;
 import java.awt.Font;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -14,7 +15,9 @@ import javax.swing.table.DefaultTableModel;
 public class DepartmentChairPageSub extends javax.swing.JPanel {
     String page = "DEPARTMENT_CHAIR";
     PanelController controller;
+    PopupController popupController;
     InputMultipleCoursesTable tableController;
+    
 
     
     
@@ -59,6 +62,7 @@ public class DepartmentChairPageSub extends javax.swing.JPanel {
     }
     public DepartmentChairPageSub() {
         initComponents();
+        popupController = new PopupController();
         tableController = new InputMultipleCoursesTable();
     }
     
@@ -70,6 +74,22 @@ public class DepartmentChairPageSub extends javax.swing.JPanel {
     public void setTableModel(DefaultTableModel input)
     {
         currentCoursesTable.setModel(input);
+    }
+    
+    public void disableButtons()
+    {
+        addCourseButton.setEnabled(false);
+        editCourseButton.setEnabled(false);
+        removeCourseButton.setEnabled(false);
+        backButton.setEnabled(false);
+    }
+    
+    public void enableButtons()
+    {
+        addCourseButton.setEnabled(true);
+        editCourseButton.setEnabled(true);
+        removeCourseButton.setEnabled(true);
+        backButton.setEnabled(true);
     }
 
     /**
@@ -203,15 +223,20 @@ public class DepartmentChairPageSub extends javax.swing.JPanel {
 
     private void addCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseButtonActionPerformed
         //Add course button clicked
-        //controller.createPopup("ADD_COURSE_DEPARTMENT_CHAIR");
+        //disableButtons();
+        popupController.displayAddCourseDepartmentChair();
     }//GEN-LAST:event_addCourseButtonActionPerformed
 
     private void editCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCourseButtonActionPerformed
         //Edit course button clicked
+        //disableButtons();
+        popupController.displayEditCourse();
     }//GEN-LAST:event_editCourseButtonActionPerformed
 
     private void removeCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCourseButtonActionPerformed
         //Remove course button clicked
+        //disableButtons();
+        popupController.displayRemoveCourse();
     }//GEN-LAST:event_removeCourseButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed

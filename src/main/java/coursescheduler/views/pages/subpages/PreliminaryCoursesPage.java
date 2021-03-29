@@ -1,8 +1,10 @@
 package coursescheduler.views.pages.subpages;
 import coursescheduler.managers.PanelController;
+import coursescheduler.managers.PopupController;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
+import coursescheduler.managers.PopupController;
 
 /**
  *
@@ -12,9 +14,15 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
     String page = "PRELIMINARY_COURSES";
     PanelController controller;
     inputSingleCourseDataTable editor;
+    PopupController popupController;
     int textSize = 12; //Doesn't impact the text in tables; may change this in the future
     //TODO: will need access to the course object and its backend
     //TODO: add in control for resizing the window, like if it can be resized or not
+    
+    public void setPopupController(PopupController input)
+    {
+        popupController = input;
+    }
     
     public JComboBox addToComboBox(JComboBox inputCombo, String inputString)
     {
@@ -435,7 +443,7 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // Back button
-        
+        popupController.hidePreliminaryCourses();
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void selectCourseAddComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectCourseAddComboBoxActionPerformed

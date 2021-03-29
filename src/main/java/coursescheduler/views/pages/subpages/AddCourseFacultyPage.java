@@ -2,6 +2,7 @@ package coursescheduler.views.pages.subpages;
 import coursescheduler.managers.PanelController;
 import java.awt.Font;
 import javax.swing.table.DefaultTableModel;
+import coursescheduler.managers.PopupController;
 
 /**
  *
@@ -13,6 +14,12 @@ public class AddCourseFacultyPage extends javax.swing.JPanel {
     inputSingleCourseDataTable editor;
     boolean validSelection = false;
     int textSize = 12;
+    PopupController popupController;
+    
+    public void setPopupController(PopupController input)
+    {
+        popupController = input;
+    }
     
     public void setTextSize(int input)
     {
@@ -229,7 +236,7 @@ public class AddCourseFacultyPage extends javax.swing.JPanel {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // Cancel button
-        
+        popupController.hideAddCourseFaculty();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
 

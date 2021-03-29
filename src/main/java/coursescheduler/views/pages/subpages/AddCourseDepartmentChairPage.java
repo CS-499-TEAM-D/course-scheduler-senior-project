@@ -5,7 +5,9 @@
  */
 package coursescheduler.views.pages.subpages;
 import coursescheduler.managers.PanelController;
+import coursescheduler.managers.PopupController;
 import java.awt.Font;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
     String page = "ADD_COURSE_DEPARTMENT_CHAIR";
     PanelController controller;
+    PopupController popupController;
     inputSingleCourseDataTable editor;
     boolean validCollege = false;
     boolean validID = false;
@@ -27,6 +30,9 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
     boolean allInputsValid = false;
     int textSize = 12;
     
+    
+    
+    
     public void setTextSize(int input)
     {
         textSize = input;
@@ -35,6 +41,11 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
     public int getTextSize()
     {
         return textSize;
+    }
+    
+    public void setPopupController(PopupController input)
+    {
+        popupController = input;
     }
     
     public void updateTextSize()
@@ -208,6 +219,11 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
         });
 
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("College:");
@@ -460,6 +476,11 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
     private void selectDaysComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectDaysComboBoxActionPerformed
         //Combo box for selecting the room
     }//GEN-LAST:event_selectDaysComboBoxActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+        popupController.hideAddCourseDepartmentChair();
+    }//GEN-LAST:event_cancelButtonActionPerformed
     
     public void checkSeats()
     {

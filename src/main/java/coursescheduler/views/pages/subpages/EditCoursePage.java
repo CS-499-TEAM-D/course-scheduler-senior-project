@@ -7,6 +7,7 @@ package coursescheduler.views.pages.subpages;
 
 import javax.swing.table.DefaultTableModel;
 import coursescheduler.managers.PanelController;
+import coursescheduler.managers.PopupController;
 import java.awt.Font;
 
 /**
@@ -26,7 +27,13 @@ public class EditCoursePage extends javax.swing.JPanel {
     boolean validSeats = false;
     boolean allInputsValid = false;
     inputSingleCourseDataTable editor;
+    PopupController popupController;
     int textSize = 12;
+    
+    public void setPopupController(PopupController input)
+    {
+        popupController = input;
+    }
   
     public void setTextSize(int input)
     {
@@ -663,6 +670,7 @@ public class EditCoursePage extends javax.swing.JPanel {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
+        popupController.hideEditCourse();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
 

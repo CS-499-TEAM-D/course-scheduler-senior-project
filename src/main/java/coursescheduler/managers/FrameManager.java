@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.util.Optional;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
