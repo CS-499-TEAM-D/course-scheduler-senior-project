@@ -163,9 +163,9 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
         });
         jScrollPane1.setViewportView(currentCoursesTable);
 
-        courseManagementTabbedPane.addTab("Add Course", null, new AddCourseDepartmentChairPage(), "Tab 1 tooltip");
-        courseManagementTabbedPane.addTab("Edit Course", null, new EditCoursePage(), "Tab 1 tooltip");
-        courseManagementTabbedPane.addTab("Remove Course", null, new RemoveCoursePage(), "Tab 1 tooltip");
+        courseManagementTabbedPane.addTab("Add Course", null, new AddCourseDepartmentChairPage(), "Add Course");
+        courseManagementTabbedPane.addTab("Edit Course", null, new EditCoursePage(), "Edit Course");
+        courseManagementTabbedPane.addTab("Remove Course", null, new RemoveCoursePage(), "Remove Course");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

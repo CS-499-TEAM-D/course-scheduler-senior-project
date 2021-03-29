@@ -160,7 +160,7 @@
     </Container>
     <Container class="javax.swing.JTabbedPane" name="courseManagementTabbedPane">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="courseManagementTabbedPane.addTab(&quot;Add Course&quot;, null, new AddCourseDepartmentChairPage(), &quot;Tab 1 tooltip&quot;);&#xa;courseManagementTabbedPane.addTab(&quot;Edit Course&quot;, null, new EditCoursePage(), &quot;Tab 1 tooltip&quot;);&#xa;courseManagementTabbedPane.addTab(&quot;Remove Course&quot;, null, new RemoveCoursePage(), &quot;Tab 1 tooltip&quot;);"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="courseManagementTabbedPane.addTab(&quot;Add Course&quot;, null, new AddCourseDepartmentChairPage(), &quot;Add Course&quot;);&#xa;courseManagementTabbedPane.addTab(&quot;Edit Course&quot;, null, new EditCoursePage(), &quot;Edit Course&quot;);&#xa;courseManagementTabbedPane.addTab(&quot;Remove Course&quot;, null, new RemoveCoursePage(), &quot;Remove Course&quot;);"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
