@@ -1,5 +1,7 @@
 package coursescheduler.managers;
 
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -8,8 +10,8 @@ import javax.swing.JPanel;
  *
  * Manages pages within the main frame of the Course Scheduler application.
  */
-public final class BaseFrameManager extends FrameManager<JFrame, JPanel>
-    implements PanelController<JPanel> {
+public final class BaseFrameManager extends FrameManager<JFrame, JComponent>
+    implements PanelController<JComponent> {
 
   public BaseFrameManager(JFrame container) {
     super(container);

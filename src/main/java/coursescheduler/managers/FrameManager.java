@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.util.Optional;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 /**
@@ -12,7 +13,7 @@ import javax.swing.JPanel;
  * @param <C> element to display the page.
  * @param <P> element to show as page.
  */
-abstract class FrameManager<C extends Container, P extends JPanel> implements PanelController<P> {
+abstract class FrameManager<C extends Container, P extends JComponent> implements PanelController<P> {
 
   protected C container;
   protected P page;
