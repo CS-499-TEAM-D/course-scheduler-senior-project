@@ -2,10 +2,17 @@ package coursescheduler.views.pages;
 
 import javax.swing.BorderFactory;
 
-/** Presents to and allows the user to login provided with success email and password credentials. */
+import coursescheduler.managers.PanelController;
+
+/**
+ * Presents to and allows the user to login provided with success email and password credentials.
+ */
 public final class LoginPage extends javax.swing.JPanel {
 
-  public LoginPage() {
+  private PanelController controller;
+
+  public LoginPage(PanelController controller) {
+    this.controller = controller;
     initComponents();
   }
 
@@ -32,6 +39,12 @@ public final class LoginPage extends javax.swing.JPanel {
 
     createAnAccountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     createAnAccountLabel.setText("Create an Account");
+    createAnAccountLabel.addMouseListener(
+        new java.awt.event.MouseAdapter() {
+          public void mousePressed(java.awt.event.MouseEvent evt) {
+            createAnAccountLabelMousePressed(evt);
+          }
+        });
 
     javax.swing.GroupLayout loginInnerPanelLayout = new javax.swing.GroupLayout(loginInnerPanel);
     loginInnerPanel.setLayout(loginInnerPanelLayout);
@@ -139,6 +152,12 @@ public final class LoginPage extends javax.swing.JPanel {
 
     getAccessibleContext().setAccessibleName("");
   } // </editor-fold>//GEN-END:initComponents
+
+  private void createAnAccountLabelMousePressed(
+      java.awt.event.MouseEvent evt) { // GEN-FIRST:event_createAnAccountLabelMousePressed
+    System.out.println("createAnAccountLabel pressed."); // TODO: Remove this.
+    controller.updatePage(new AccountCreationPage(controller));
+  } // GEN-LAST:event_createAnAccountLabelMousePressed
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JLabel createAnAccountLabel;
