@@ -53,9 +53,9 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
         Font newFont3 = new Font("Tahoma", Font.PLAIN,  (textSize + difference2));
         jLabel1.setFont(newFont2); //Add Course
         jLabel2.setFont(newFont3); //College:
-        addCourseButton.setFont(newFont1);
-        editCourseButton.setFont(newFont1);
-        removeCourseButton.setFont(newFont1);
+//        addCourseButton.setFont(newFont1);
+//        editCourseButton.setFont(newFont1);
+//        removeCourseButton.setFont(newFont1);
         backButton.setFont(newFont1);
     }
 
@@ -86,17 +86,17 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
     
     public void disableButtons()
     {
-        addCourseButton.setEnabled(false);
-        editCourseButton.setEnabled(false);
-        removeCourseButton.setEnabled(false);
+//        addCourseButton.setEnabled(false);
+//        editCourseButton.setEnabled(false);
+//        removeCourseButton.setEnabled(false);
         backButton.setEnabled(false);
     }
     
     public void enableButtons()
     {
-        addCourseButton.setEnabled(true);
-        editCourseButton.setEnabled(true);
-        removeCourseButton.setEnabled(true);
+//        addCourseButton.setEnabled(true);
+//        editCourseButton.setEnabled(true);
+//        removeCourseButton.setEnabled(true);
         backButton.setEnabled(true);
     }
 
@@ -111,12 +111,9 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
 
         backButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        addCourseButton = new javax.swing.JButton();
-        removeCourseButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         currentCoursesTable = new javax.swing.JTable();
-        editCourseButton = new javax.swing.JButton();
         courseManagementTabbedPane = new javax.swing.JTabbedPane();
 
         backButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -129,22 +126,6 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Department Chair");
-
-        addCourseButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        addCourseButton.setText("Add Course");
-        addCourseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addCourseButtonActionPerformed(evt);
-            }
-        });
-
-        removeCourseButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        removeCourseButton.setText("Remove Course");
-        removeCourseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeCourseButtonActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Current Courses Loaded:");
@@ -182,14 +163,6 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
         });
         jScrollPane1.setViewportView(currentCoursesTable);
 
-        editCourseButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        editCourseButton.setText("Edit Course");
-        editCourseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editCourseButtonActionPerformed(evt);
-            }
-        });
-
         courseManagementTabbedPane.addTab("Add Course", null, new AddCourseDepartmentChairPage(), "Tab 1 tooltip");
         courseManagementTabbedPane.addTab("Edit Course", null, new EditCoursePage(), "Tab 1 tooltip");
         courseManagementTabbedPane.addTab("Remove Course", null, new RemoveCoursePage(), "Tab 1 tooltip");
@@ -200,63 +173,36 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(backButton)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 657, Short.MAX_VALUE)
-                    .addComponent(courseManagementTabbedPane))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(addCourseButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(editCourseButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(removeCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15))
+                    .addComponent(jLabel1)
+                    .addComponent(backButton)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(courseManagementTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(65, 65, 65)
+                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(removeCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(editCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(addCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(258, 258, 258))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(courseManagementTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(courseManagementTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(53, 53, 53)
                 .addComponent(backButton)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void addCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseButtonActionPerformed
-        //Add course button clicked
-        //disableButtons();
-        popupController.displayAddCourseDepartmentChair();
-    }//GEN-LAST:event_addCourseButtonActionPerformed
-
-    private void editCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCourseButtonActionPerformed
-        //Edit course button clicked
-        //disableButtons();
-        popupController.displayEditCourse();
-    }//GEN-LAST:event_editCourseButtonActionPerformed
-
-    private void removeCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCourseButtonActionPerformed
-        //Remove course button clicked
-        //disableButtons();
-        popupController.displayRemoveCourse();
-    }//GEN-LAST:event_removeCourseButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         //Back button clicked
@@ -264,14 +210,11 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addCourseButton;
     private javax.swing.JButton backButton;
     private javax.swing.JTabbedPane courseManagementTabbedPane;
     private javax.swing.JTable currentCoursesTable;
-    private javax.swing.JButton editCourseButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton removeCourseButton;
     // End of variables declaration//GEN-END:variables
 }
