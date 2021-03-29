@@ -1,6 +1,7 @@
 package coursescheduler;
 
 import coursescheduler.infrastructure.database.DatabaseClient;
+import coursescheduler.infrastructure.database.objects.User;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
