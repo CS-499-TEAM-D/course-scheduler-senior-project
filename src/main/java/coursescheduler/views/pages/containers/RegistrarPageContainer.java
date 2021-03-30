@@ -1,6 +1,7 @@
 package coursescheduler.views.pages.containers;
 
 import coursescheduler.views.pages.RolePage;
+import coursescheduler.views.pages.subpages.FacultyPageSub;
 import coursescheduler.views.pages.subpages.GenerateSchedulePage;
 import coursescheduler.views.pages.subpages.RegistrarPageSub;
 import coursescheduler.views.pages.subpages.SaveLoadCSVFilePage;
@@ -21,24 +22,32 @@ public class RegistrarPageContainer extends JTabbedPane implements RolePage {
 
   @Override
   public void init() {
-        control = new PageControl();
-      
+        PageControl control = new PageControl();
+        control.setType("REGISTRAR");
+
         RegistrarPageSub subPageZero = new RegistrarPageSub();
+        subPageZero.setPageSettingsControl(control);
         addTab("Course Management", null, subPageZero, "Tab 1 tooltip");
         control.setRegistrarPage(subPageZero);
+
       
         GenerateSchedulePage subPageOne = new GenerateSchedulePage();
+        subPageOne.setPageSettingsControl(control);
         addTab("Generate Schedule", null, subPageOne, "Tab 1 tooltip");
 
+
         SaveLoadCSVFilePage subPageTwo = new SaveLoadCSVFilePage();
+        subPageTwo.setPageSettingsControl(control);
         addTab("Save/Load CSV File", null, subPageTwo, "Tab 2 tooltip");
 
+
         SaveLoadSchedulePage subPageThree = new SaveLoadSchedulePage();
+        subPageThree.setPageSettingsControl(control);
         addTab("Save/Load Schedule", null, subPageThree, "Tab 3 tooltip");
         control.setMainPages(subPageOne, subPageTwo, subPageThree);
+
         
         SettingsPage subPageFour = new SettingsPage();
-        addTab("Settings", null, subPageFour, "Tab 3 tooltip");  
-        subPageFour.setControl(control);
+        addTab("Settings", null, subPageFour, "Tab 3 tooltip");
   }
 }

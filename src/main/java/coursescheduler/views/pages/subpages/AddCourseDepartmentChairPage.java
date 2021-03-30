@@ -512,7 +512,7 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
     public void checkTimes()
     {
         String Times = (String) selectTimesComboBox.getSelectedItem();
-        if ((Times.equals("")) || (Times.equals("Select Time")))
+        if ((Times.equals("")) || (Times.equals("Select Times")))
         {
             validTimes = false;
             addCourseError_Times.setText("*");

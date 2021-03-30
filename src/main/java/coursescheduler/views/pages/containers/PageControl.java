@@ -29,25 +29,17 @@ public class PageControl
     RegistrarPageSub registrar;
     FacultyPageSub faculty;
     List<dummyCourse> allCoursesDummy = new ArrayList<>();
+    String type;
     
     public PageControl()
     {
-        //System.out.println("TEST");
-        dummyCourse temp = new dummyCourse();
-        for (int i = 0; i < 10; i++)
-        {
-            /*
-            temp.setCollege("Science");
-            temp.setID(i);
-            temp.setDays("M, W");
-            temp.setSeats(30);
-            temp.setRoom("3C");
-            temp.setProfessor("Temp Professor");
-            temp.setName("Temp");
-            temp.setTimes("9:30am - 11:00am");
-            allCoursesDummy.add(temp);
-            */
-        }
+
+
+    }
+    
+    public void setType(String input)
+    {
+        type = input;
     }
     
     public List<dummyCourse> getAllCourses()
@@ -115,7 +107,15 @@ public class PageControl
     
     public void removeCourseByName(String name)
     {
-        departmentChair.removeCourse(returnDummyCourseByName(name).getID());
+        if (type.equals("DEPARTMENT_CHAIR"))
+        {
+            departmentChair.removeCourse(returnDummyCourseByName(name).getID());
+        }
+        else if (type.equals("FACULTY"))
+        {
+            faculty.removeCourse(returnDummyCourseByName(name).getID());
+        }
+
         for(int i = 0; i < allCoursesDummy.size(); i++)
         {
             if (allCoursesDummy.get(i).getName().equals(name))
@@ -127,13 +127,39 @@ public class PageControl
         
     }
     
+    public void editCourse(dummyCourse input)
+    {
+        for (int i = 0; i < allCoursesDummy.size(); i++)
+        {
+            if (allCoursesDummy.get(i).getID() == input.getID())
+            {
+                allCoursesDummy.get(i).setCollege(input.getCollege());
+                allCoursesDummy.get(i).setID(input.getID());
+                allCoursesDummy.get(i).setName(input.getName());
+                allCoursesDummy.get(i).setProfessor(input.getProfessor());
+                allCoursesDummy.get(i).setRoom(input.getRoom());
+                allCoursesDummy.get(i).setTimes(input.getTimes());
+                allCoursesDummy.get(i).setDays(input.getDays());
+                allCoursesDummy.get(i).setSeats(input.getSeats());
+                break;
+            }
+        }
+        
+        departmentChair.updateCourse(input);
+        
+    }
+    
     public void addCourseDepartmentChair(dummyCourse input)
     {
         allCoursesDummy.add(input);
         departmentChair.addCourse(input);
     }
     
-
+    public void addCourseDepartmentFaculty(dummyCourse input)
+    {
+        allCoursesDummy.add(input);
+        faculty.addCourse(input);
+    }
     
     public void setMainPages(GenerateSchedulePage generateScheduleInput, SaveLoadCSVFilePage saveLoadCSVFileInput, SaveLoadSchedulePage saveLoadScheduleInput)
     {

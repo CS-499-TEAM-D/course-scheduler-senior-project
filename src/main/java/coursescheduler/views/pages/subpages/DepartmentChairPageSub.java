@@ -112,6 +112,39 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
         return editCourse;
     }
     
+    public void updateCourse(dummyCourse input)
+    {
+        
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        Object[] temp = new Object[] 
+        { 
+            input.getCollege(),
+            input.getID(), 
+            input.getName(),
+            input.getProfessor(), 
+            input.getRoom(),
+            input.getTimes(),
+            input.getDays(),
+            input.getSeats()   
+        };
+        for (int i = 0; i < model.getRowCount(); i++)
+        {
+            if (model.getValueAt(i, 2).equals(input.getName()))
+            {
+                model.setValueAt(temp[0], i, 0);
+                model.setValueAt(temp[1], i, 1);
+                model.setValueAt(temp[2], i, 2);
+                model.setValueAt(temp[3], i, 3);
+                model.setValueAt(temp[4], i, 4);
+                model.setValueAt(temp[5], i, 5);
+                model.setValueAt(temp[6], i, 6);
+                model.setValueAt(temp[7], i, 7);
+                break;
+            }
+        }
+        model.fireTableDataChanged();
+    }
+    
     public void addCourse(dummyCourse input)
     {
         DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
@@ -153,6 +186,7 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
             model.addRow(temp);
         }
         
+        editCourse.addComboBoxCourse(input);
         removeCourse.addComboBoxCourse(input);
         model.fireTableDataChanged();
     }
@@ -167,6 +201,7 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
             {
                 //System.out.println("TEST");
                 index = i;
+                /*
                 model.setValueAt("", i, 0);
                 model.setValueAt("", i, 1);
                 model.setValueAt("", i, 2);
@@ -175,23 +210,39 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
                 model.setValueAt("", i, 5);
                 model.setValueAt("", i, 6);
                 model.setValueAt("", i, 7);
+                */
+                model.removeRow(i);
                 break;
             }
         }
         
-        if ((index + 1) == model.getRowCount())
+        if ((index + 1) != model.getRowCount())
         {
-            model.removeRow(index);
+            String one = "";
+            String two = "";
+            String three = "";
+            String four = "";
+            String five = "";
+            String six = "";
+            String seven = "";
+            Object[] temp = new Object[] 
+            {
+                one,
+                two,
+                three,
+                four,
+                five,
+                six,
+                seven
+            };
+   
+           model.addRow(temp);
         }
         
         //Move the rest of the rows that fall under the removed row up by 1
         if (index != -1)
         {
-            
-            if (index != model.getRowCount())
-            {
-                model.moveRow((index+1), (model.getRowCount() - 1), 1); //NEEDS TESTING!
-            }
+            model.moveRow((index + 1), (model.getRowCount() - 1), 1);
         }
         model.fireTableDataChanged();
     }

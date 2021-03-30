@@ -22,8 +22,6 @@ public class EditCoursePage extends javax.swing.JPanel {
     String page = "EDIT_COURSE";
     PanelController controller;
     boolean validCollege = false;
-    boolean validID = false;
-    boolean validName = false;
     boolean validProfessor = false;
     boolean validRoom = false;
     boolean validTimes = false;
@@ -63,22 +61,18 @@ public class EditCoursePage extends javax.swing.JPanel {
         Font newFont2 = new Font("Tahoma", Font.PLAIN,  (textSize + difference1));
         jLabel1.setFont(newFont2); //Edit Course
         jLabel2.setFont(newFont1); //College:
-        jLabel3.setFont(newFont1); //ID:
         jLabel4.setFont(newFont1); //Professor:
         jLabel5.setFont(newFont1); //Room:
         jLabel6.setFont(newFont1); //Times:
         jLabel7.setFont(newFont1); //Days:
         jLabel8.setFont(newFont1); //Course:
         jLabel9.setFont(newFont1); //Seats:
-        jLabel11.setFont(newFont1); //Name:
         selectCourseComboBox.setFont(newFont1);
         selectCollegeComboBox.setFont(newFont1);
         selectRoomComboBox.setFont(newFont1);
         selectTimesComboBox.setFont(newFont1);
         selectDaysComboBox.setFont(newFont1);
-        idInput.setFont(newFont1);
         professorInput.setFont(newFont1);
-        nameInput.setFont(newFont1);
         seatsInput.setFont(newFont1);
         submitButton.setFont(newFont1);
     }
@@ -147,36 +141,39 @@ public class EditCoursePage extends javax.swing.JPanel {
         courseInfoTable.setModel(editor.setSeats(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
+    public void addComboBoxCourse(dummyCourse input)
+    {
+        selectCourseComboBox.addItem(input.getName());
+        
+    }
+    
+    public void removeComboBoxCourse(String input)
+    {
+        selectCourseComboBox.removeItem(input);
+    }
+    
      public void checkSeats()
     {
         String Seats_string = seatsInput.getText();
-        int Seats;
+        int seats;
         if (!Seats_string.equals(""))
         {
-            try
+             try
             {
-                Seats = Integer.parseInt(Seats_string.trim());
+                seats = Integer.parseInt(Seats_string.trim());
                 editCourseError_Seats.setText("");
-                if(Seats > -1)
-                {
-                    validID = true;
-                }
-                else
-                {
-                    editCourseError_Seats.setText("*");
-                    validID = false;
-                }
+                validSeats = true;
             }
             catch (NumberFormatException nfe)
             {
                 editCourseError_Seats.setText("*");
-                validID = false;
-            }
+                validSeats = false;
+            }  
         }
         else
         {
             editCourseError_Seats.setText("*");
-            validID = false;
+            validSeats = false;
         }
     }
     
@@ -198,15 +195,15 @@ public class EditCoursePage extends javax.swing.JPanel {
     public void checkTimes()
     {
         String Times = (String) selectTimesComboBox.getSelectedItem();
-        if (!(Times.equals("")) && !(Times.equals("Select Time")))
+        if ((Times.equals("")) || (Times.equals("Select Times")))
         {
-            validTimes = true;
-            editCourseError_Times.setText("");
+            validTimes = false;
+            editCourseError_Times.setText("*");
         }
         else
         {
-            editCourseError_Times.setText("*");
-            validTimes = false;
+            editCourseError_Times.setText("");
+            validTimes = true;
         }
     }
     
@@ -228,58 +225,19 @@ public class EditCoursePage extends javax.swing.JPanel {
     public void checkCollege()
     {
         String College = (String) selectCollegeComboBox.getSelectedItem();
-        if (!(College.equals("") && !(College.equals("Select College"))))
+        if ((College.equals("") || (College.equals("Select College"))))
         {
-            editCourseError_College.setText("");
-            validCollege = true;
-        }
-        else
-        {
-            validCollege = false;
             editCourseError_College.setText("*");
-        }
-    }
-    
-    public void checkName()
-    {
-        String Name = nameInput.getText();
-        if (!(Name.equals("")))
-        {
-            validName = true;
-            editCourseError_Name.setText("");
+            validCollege = false;
         }
         else
         {
-            validName = false;
-            editCourseError_Name.setText("*");
+            validCollege = true;
+            editCourseError_College.setText("");
         }
     }
     
-    public void checkID()
-    {
-        String ID_string = idInput.getText();
-        int ID;
-        if (!ID_string.equals(""))
-        {
-             try
-            {
-                ID = Integer.parseInt(ID_string.trim());
-                editCourseError_ID.setText("");
-                validID = true;
-            }
-            catch (NumberFormatException nfe)
-            {
-                editCourseError_ID.setText("*");
-                validID = false;
-            }  
-        }
-        else
-        {
-            editCourseError_ID.setText("*");
-            validID = false;
-        }
-    }
-    
+
     public void checkProfessor()
     {
         String Professor = professorInput.getText();
@@ -298,20 +256,21 @@ public class EditCoursePage extends javax.swing.JPanel {
     public void checkAllInputs()
     {   
        checkCollege();
-       checkID();
-       checkName();
        checkProfessor();
+       checkRoom();
        checkTimes();
        checkDays();
        checkSeats();
        
-       if (validCollege && validID && validName && validProfessor && validTimes && validDays && validSeats)
+       if (validCollege && validProfessor && validTimes && validDays && validSeats)
        {
            allInputsValid = true;
+           //System.out.println("CORRECT");
        }
        else
        {
            allInputsValid = false;
+           
        }
     }
 
@@ -327,17 +286,7 @@ public class EditCoursePage extends javax.swing.JPanel {
         return seats;
     }
     
-    public int getID()
-    {
-        int ID = -1;
-        checkID();
-        if (validID)
-        {
-             String ID_string = seatsInput.getText();
-             ID = Integer.parseInt(ID_string.trim());
-        }
-        return ID;
-    }
+
     
     public String getCollege()
     {
@@ -394,15 +343,24 @@ public class EditCoursePage extends javax.swing.JPanel {
        return professor;
     }
     
-    public String getName()
+
+    
+    dummyCourse getCourse()
     {
-       String name = "INCORRECT_INPUT";
-       checkName();
-       if(validName)
-       {
-           name = nameInput.getText();
-       }
-       return name;
+        checkAllInputs();
+        dummyCourse temp = null;
+        String name = (String) selectCourseComboBox.getSelectedItem();
+        if (!name.equals("Select Course") && allInputsValid)
+        {
+             temp = control.returnDummyCourseByName(name);
+             temp.setCollege((String) selectCollegeComboBox.getSelectedItem());
+             temp.setRoom((String) selectRoomComboBox.getSelectedItem());
+             temp.setDays((String) selectDaysComboBox.getSelectedItem());
+             temp.setTimes((String) selectTimesComboBox.getSelectedItem());
+             temp.setProfessor(professorInput.getText());
+             temp.setSeats(Integer.valueOf(seatsInput.getText()));
+        }
+        return temp;
     }
 
     /**
@@ -419,13 +377,11 @@ public class EditCoursePage extends javax.swing.JPanel {
         courseInfoTable = new javax.swing.JTable();
         submitButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         professorInput = new javax.swing.JTextField();
-        idInput = new javax.swing.JTextField();
         selectTimesComboBox = new javax.swing.JComboBox<>();
         selectDaysComboBox = new javax.swing.JComboBox<>();
         selectCollegeComboBox = new javax.swing.JComboBox<>();
@@ -437,14 +393,10 @@ public class EditCoursePage extends javax.swing.JPanel {
         editCourseError_Course = new javax.swing.JLabel();
         editCourseError_College = new javax.swing.JLabel();
         editCourseError_Professor = new javax.swing.JLabel();
-        editCourseError_ID = new javax.swing.JLabel();
         editCourseError_Room = new javax.swing.JLabel();
         editCourseError_Times = new javax.swing.JLabel();
         editCourseError_Days = new javax.swing.JLabel();
         editCourseError_Seats = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        nameInput = new javax.swing.JTextField();
-        editCourseError_Name = new javax.swing.JLabel();
         selectRoomComboBox = new javax.swing.JComboBox<>();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -476,12 +428,14 @@ public class EditCoursePage extends javax.swing.JPanel {
         jScrollPane1.setViewportView(courseInfoTable);
 
         submitButton.setText("Submit");
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("College:");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setText("ID:");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Professor:");
@@ -497,19 +451,22 @@ public class EditCoursePage extends javax.swing.JPanel {
 
         professorInput.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        idInput.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
         selectTimesComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        selectTimesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Times" }));
+        selectTimesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Times", "9:30am - 11:00am", "11:40am - 12:15pm", "3:30am - 5:00am" }));
 
         selectDaysComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        selectDaysComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Days" }));
+        selectDaysComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Days", "M, W, F", "M, W", "T, TH" }));
 
         selectCollegeComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        selectCollegeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select College" }));
+        selectCollegeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select College", "Science", "History", "Engineering" }));
 
         selectCourseComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         selectCourseComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Course" }));
+        selectCourseComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectCourseComboBoxActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setText("Course:");
@@ -525,8 +482,6 @@ public class EditCoursePage extends javax.swing.JPanel {
 
         editCourseError_Professor.setForeground(java.awt.Color.red);
 
-        editCourseError_ID.setForeground(java.awt.Color.red);
-
         editCourseError_Room.setForeground(java.awt.Color.red);
 
         editCourseError_Times.setForeground(java.awt.Color.red);
@@ -535,15 +490,8 @@ public class EditCoursePage extends javax.swing.JPanel {
 
         editCourseError_Seats.setForeground(java.awt.Color.red);
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel11.setText("Name:");
-
-        nameInput.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        editCourseError_Name.setForeground(java.awt.Color.red);
-
         selectRoomComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        selectRoomComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Room" }));
+        selectRoomComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Room", "1A", "2B", "3C", " " }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -558,21 +506,17 @@ public class EditCoursePage extends javax.swing.JPanel {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(1, 1, 1))
                             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, 0)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(seatsInput, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(selectCourseComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, 176, Short.MAX_VALUE)
                             .addComponent(selectDaysComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(selectTimesComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, 176, Short.MAX_VALUE)
-                            .addComponent(idInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                            .addComponent(nameInput, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(professorInput, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(selectCollegeComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(selectRoomComboBox, 0, 176, Short.MAX_VALUE)))
@@ -591,12 +535,10 @@ public class EditCoursePage extends javax.swing.JPanel {
                     .addComponent(editCourseError_Course, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editCourseError_College, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editCourseError_Professor, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editCourseError_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editCourseError_Room, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editCourseError_Times, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editCourseError_Days, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editCourseError_Seats, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editCourseError_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(editCourseError_Seats, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -615,23 +557,9 @@ public class EditCoursePage extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(selectCollegeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
-                            .addComponent(editCourseError_College, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(idInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(editCourseError_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(editCourseError_College, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(addCourseErrorDisplay1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(editCourseError_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(nameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(editCourseError_Professor, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(professorInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -664,6 +592,39 @@ public class EditCoursePage extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        //Submit button:
+       dummyCourse temp = getCourse();
+       if (temp != null && allInputsValid)
+       {
+           control.editCourse(temp);
+           selectCourseComboBox.setSelectedItem("Select Course");
+           selectCollegeComboBox.setSelectedItem("Select College");
+           selectRoomComboBox.setSelectedItem("Select Room");
+           selectTimesComboBox.setSelectedItem("Select Times");;
+           selectDaysComboBox.setSelectedItem("Select Days");
+           professorInput.setText("");
+           seatsInput.setText("");
+       }
+    }//GEN-LAST:event_submitButtonActionPerformed
+
+    private void selectCourseComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectCourseComboBoxActionPerformed
+        // TODO add your handling code here:
+        dummyCourse temp = null;
+        String name = (String) selectCourseComboBox.getSelectedItem();
+        if (!name.equals("Select Course"))
+        {
+            temp = control.returnDummyCourseByName(name);
+            selectCollegeComboBox.setSelectedItem(temp.getCollege());
+            selectRoomComboBox.setSelectedItem(temp.getRoom());
+            selectTimesComboBox.setSelectedItem(temp.getTimes());;
+            selectDaysComboBox.setSelectedItem(temp.getDays());
+            professorInput.setText(temp.getProfessor());
+            seatsInput.setText(String.valueOf(temp.getSeats()));
+        }
+        
+    }//GEN-LAST:event_selectCourseComboBoxActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addCourseErrorDisplay1;
@@ -671,17 +632,12 @@ public class EditCoursePage extends javax.swing.JPanel {
     private javax.swing.JLabel editCourseError_College;
     private javax.swing.JLabel editCourseError_Course;
     private javax.swing.JLabel editCourseError_Days;
-    private javax.swing.JLabel editCourseError_ID;
-    private javax.swing.JLabel editCourseError_Name;
     private javax.swing.JLabel editCourseError_Professor;
     private javax.swing.JLabel editCourseError_Room;
     private javax.swing.JLabel editCourseError_Seats;
     private javax.swing.JLabel editCourseError_Times;
-    private javax.swing.JTextField idInput;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -689,7 +645,6 @@ public class EditCoursePage extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField nameInput;
     private javax.swing.JTextField professorInput;
     private javax.swing.JTextField seatsInput;
     private javax.swing.JComboBox<String> selectCollegeComboBox;

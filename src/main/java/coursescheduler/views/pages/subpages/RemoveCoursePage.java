@@ -77,6 +77,8 @@ public class RemoveCoursePage extends javax.swing.JPanel {
     {
         selectCourseComboBox.removeItem(input);
     }
+    
+    
 
     public void setController(PanelController input)
     {

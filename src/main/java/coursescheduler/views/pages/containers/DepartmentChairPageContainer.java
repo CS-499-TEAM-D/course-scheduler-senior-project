@@ -22,9 +22,8 @@ public class DepartmentChairPageContainer extends JTabbedPane implements RolePag
   @Override
   public void init() {
         PageControl control = new PageControl();
+        control.setType("DEPARTMENT_CHAIR");
 
-
-      
         DepartmentChairPageSub subPageZero = new DepartmentChairPageSub();
         subPageZero.setPageSettingsControl(control);
         addTab("Course Management", null, subPageZero, "Tab 1 tooltip");
@@ -49,7 +48,7 @@ public class DepartmentChairPageContainer extends JTabbedPane implements RolePag
         
         SettingsPage subPageFour = new SettingsPage();
         addTab("Settings", null, subPageFour, "Tab 3 tooltip");  
-        //subPageFour.setPageSettingsControl(control);
+
         
   }
 }
