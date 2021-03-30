@@ -68,7 +68,6 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
         selectRoomComboBox.setFont(newFont1);
         selectTimesComboBox.setFont(newFont1);
         selectDaysComboBox.setFont(newFont1);
-        cancelButton.setFont(newFont1);
         submitButton.setFont(newFont1);
         idInput.setFont(newFont1);
         nameInput.setFont(newFont1);
@@ -156,7 +155,6 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         courseInfoTable = new javax.swing.JTable();
         submitButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -215,13 +213,6 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
         submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submitButtonActionPerformed(evt);
-            }
-        });
-
-        cancelButton.setText("Cancel");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
             }
         });
 
@@ -327,8 +318,7 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cancelButton)
-                        .addGap(180, 180, 180)
+                        .addGap(243, 243, 243)
                         .addComponent(submitButton))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
@@ -408,9 +398,7 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(submitButton)
-                            .addComponent(cancelButton))
+                        .addComponent(submitButton)
                         .addGap(4, 4, 4))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -473,11 +461,6 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
     private void selectDaysComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectDaysComboBoxActionPerformed
         //Combo box for selecting the room
     }//GEN-LAST:event_selectDaysComboBoxActionPerformed
-
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        // TODO add your handling code here:
-        popupController.hideAddCourseDepartmentChair();
-    }//GEN-LAST:event_cancelButtonActionPerformed
     
     public void checkSeats()
     {
@@ -747,7 +730,6 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
     private javax.swing.JLabel addCourseError_Room;
     private javax.swing.JLabel addCourseError_Seats;
     private javax.swing.JLabel addCourseError_Times;
-    private javax.swing.JButton cancelButton;
     private javax.swing.JTable courseInfoTable;
     private javax.swing.JTextField idInput;
     private javax.swing.JLabel jLabel1;

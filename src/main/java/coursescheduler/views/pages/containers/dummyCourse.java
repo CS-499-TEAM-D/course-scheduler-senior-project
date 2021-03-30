@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package coursescheduler.views.pages.subpages;
+package coursescheduler.views.pages.containers;
 
 import java.util.ArrayList;
 import java.util.List;

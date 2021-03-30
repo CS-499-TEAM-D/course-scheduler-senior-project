@@ -53,13 +53,11 @@ public class PageSettingsControl
         registrar = input;
     }
     
-    public void updateTextSize(int size)
+    public void updateTextSizeMain(int size)
     {
         generateSchedule.setTextSize(size);
         generateSchedule.updateTextSize();
         
-        departmentChair.setTextSize(size);
-        departmentChair.updateTextSize();
         
         saveLoadCSVFile.setTextSize(size);
         saveLoadCSVFile.updateTextSize();
@@ -67,11 +65,41 @@ public class PageSettingsControl
         saveLoadSchedule.setTextSize(size);
         saveLoadSchedule.updateTextSize();
         
-        //registrar.setTextSize(size);
-        //registrar.updateTextSize();
+        if (departmentChair != null)
+        {
+            departmentChair.setTextSize(size);
+            departmentChair.updateTextSize();
+        }
         
-        //faculty.setTextSize(size);
-        //faculty.updateTextSize();
+        if (faculty != null)
+        {
+            faculty.setTextSize(size);
+            faculty.updateTextSize();
+        }
+        
+        if (registrar != null)
+        {
+            registrar.setTextSize(size);
+            registrar.updateTextSize();
+        }
+    }
+    
+    public void updateTextSizeDepartmentChair(int size)
+    {
+        departmentChair.setTextSize(size);
+        departmentChair.updateTextSize();
+    }
+    
+    public void updateTextSizeFaculty(int size)
+    {
+        faculty.setTextSize(size);
+        faculty.updateTextSize();
+    }
+    
+    public void udpateTextSizeRegistrar(int size)
+    {
+        registrar.setTextSize(size);
+        registrar.updateTextSize();
     }
 
     

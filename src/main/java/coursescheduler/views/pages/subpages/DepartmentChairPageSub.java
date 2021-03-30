@@ -70,6 +70,7 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
     {
         return page;
     }
+    
     public DepartmentChairPageSub() {
         initComponents();   
         popupController = new PopupController();

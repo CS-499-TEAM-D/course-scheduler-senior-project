@@ -5,18 +5,34 @@
  */
 package coursescheduler.views.pages.subpages;
 import coursescheduler.managers.PanelController;
+import coursescheduler.managers.PopupController;
+import coursescheduler.views.pages.SubPage;
+
 import java.awt.Font;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author evilc
  */
-public class FacultyPageSub extends javax.swing.JPanel {
-    String page = "FACULTY";
-    PanelController controller;
+public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel> {
+    String page = "DEPARTMENT_CHAIR";
+    PopupController popupController;
+    InputMultipleCoursesTable tableController;
+    AddCourseFacultyPage addCourse;
+    RemoveCoursePage removeCourse;
+
+
     int textSize = 12;
-  
+
+    @Override
+    public JPanel init() {
+        initComponents();
+        return this;
+    }
+
     public void setTextSize(int input)
     {
         textSize = input;
@@ -39,33 +55,56 @@ public class FacultyPageSub extends javax.swing.JPanel {
         Font newFont3 = new Font("Tahoma", Font.PLAIN,  (textSize + difference2));
         jLabel1.setFont(newFont2); //Faculty
         jLabel2.setFont(newFont3); //Current Courses Loaded:
-        addCourseButton.setFont(newFont1);
-        removeCourseButton.setFont(newFont1);
         backButton.setFont(newFont1);
+        
+        addCourse.setTextSize(textSize);
+        addCourse.updateTextSize();
+        removeCourse.setTextSize(textSize);
+        removeCourse.updateTextSize();
     }
 
-    public void setController(PanelController input)
-    {
-        controller = input;
-    }
     
     public String returnPage()
     {
         return page;
     }
+    public FacultyPageSub() {
+        courseManagementTabbedPane = new javax.swing.JTabbedPane();
+        addCourse = new AddCourseFacultyPage();
+        removeCourse = new RemoveCoursePage();
+	courseManagementTabbedPane.addTab("Add Course", null, addCourse, "Add Course");
+        courseManagementTabbedPane.addTab("Remove Course", null, removeCourse, "Remove Course");
+        initComponents();
+        popupController = new PopupController();
+        tableController = new InputMultipleCoursesTable();
+    }
     
-    public DefaultTableModel getModel()
+
+    
+    public DefaultTableModel getTableModel()
     {
         return (DefaultTableModel) currentCoursesTable.getModel();
     }
     
-    public void setModel(DefaultTableModel input)
+    public void setTableModel(DefaultTableModel input)
     {
         currentCoursesTable.setModel(input);
     }
     
-    public FacultyPageSub() {
-        initComponents();
+    public void disableButtons()
+    {
+//        addCourseButton.setEnabled(false);
+//        editCourseButton.setEnabled(false);
+//        removeCourseButton.setEnabled(false);
+        backButton.setEnabled(false);
+    }
+    
+    public void enableButtons()
+    {
+//        addCourseButton.setEnabled(true);
+//        editCourseButton.setEnabled(true);
+//        removeCourseButton.setEnabled(true);
+        backButton.setEnabled(true);
     }
 
     /**
@@ -77,16 +116,26 @@ public class FacultyPageSub extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        backButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         currentCoursesTable = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        addCourseButton = new javax.swing.JButton();
-        removeCourseButton = new javax.swing.JButton();
-        backButton = new javax.swing.JButton();
+        
+
+        backButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        backButton.setText("Back to Login");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Faculty");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Current Courses Loaded:");
 
         currentCoursesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,32 +170,7 @@ public class FacultyPageSub extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(currentCoursesTable);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Current Courses Loaded:");
-
-        addCourseButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        addCourseButton.setText("Add Course");
-        addCourseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addCourseButtonActionPerformed(evt);
-            }
-        });
-
-        removeCourseButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        removeCourseButton.setText("Remove Course");
-        removeCourseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeCourseButtonActionPerformed(evt);
-            }
-        });
-
-        backButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        backButton.setText("Back to Login");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
+        
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -156,55 +180,46 @@ public class FacultyPageSub extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(addCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(removeCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(backButton, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addComponent(courseManagementTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(backButton)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(removeCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(77, 77, 77)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(backButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(79, 79, 79)
+                        .addComponent(backButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(courseManagementTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseButtonActionPerformed
-        //Add course button pressed
-    }//GEN-LAST:event_addCourseButtonActionPerformed
-
-    private void removeCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCourseButtonActionPerformed
-        //Remove course button pressed
-    }//GEN-LAST:event_removeCourseButtonActionPerformed
-
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        //Back button pressed
+        //Back button clicked
     }//GEN-LAST:event_backButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addCourseButton;
     private javax.swing.JButton backButton;
+    private javax.swing.JTabbedPane courseManagementTabbedPane;
     private javax.swing.JTable currentCoursesTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton removeCourseButton;
     // End of variables declaration//GEN-END:variables
 }

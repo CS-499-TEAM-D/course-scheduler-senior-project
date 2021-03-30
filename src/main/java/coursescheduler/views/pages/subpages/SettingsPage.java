@@ -38,7 +38,7 @@ public class SettingsPage extends javax.swing.JPanel {
     
     public void updateTextSize()
     {
-        control.updateTextSize(textSize);
+        control.updateTextSizeMain(textSize);
         this.setTextSize(textSize);
         int size1 = jLabel1.getFont().getSize();
         int difference1 = size1 - textSize;
