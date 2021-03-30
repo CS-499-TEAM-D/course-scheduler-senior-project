@@ -6,6 +6,9 @@
 package coursescheduler.views.pages.subpages;
 import coursescheduler.managers.PopupController;
 import coursescheduler.views.pages.SubPage;
+import coursescheduler.views.pages.containers.PageControl;
+import coursescheduler.views.pages.containers.dummyCourse;
+import coursescheduler.views.pages.containers.dummyUser;
 
 import java.awt.Font;
 import javax.swing.JPanel;
@@ -17,6 +20,8 @@ import javax.swing.table.DefaultTableModel;
  * @author evilc
  */
 public class RegistrarPageSub extends javax.swing.JPanel implements SubPage<JPanel> {
+    PageControl control;
+    InputMultipleCoursesTable tableControl;
     String page = "DEPARTMENT_CHAIR";
     PopupController popupController;
     InputMultipleCoursesTable tableController;
@@ -32,9 +37,20 @@ public class RegistrarPageSub extends javax.swing.JPanel implements SubPage<JPan
         return this;
     }
 
+    public void setPageSettingsControl(PageControl input)
+    {
+        control = input;
+        preCourse.setPageSettingsControl(control);
+    }
+    
     public void setTextSize(int input)
     {
         textSize = input;
+    }
+    
+    public void addCourse(dummyCourse input)
+    {
+        setTableModel(tableController.addRow(tableController.createObjectFromDummy(input), (DefaultTableModel) currentCoursesTable.getModel()));
     }
     
     public int getTextSize()
@@ -74,6 +90,11 @@ public class RegistrarPageSub extends javax.swing.JPanel implements SubPage<JPan
         initComponents();
         popupController = new PopupController();
         tableController = new InputMultipleCoursesTable();
+    }
+    
+    public PreliminaryCoursesPage getPreCourse()
+    {
+        return preCourse;
     }
     
 

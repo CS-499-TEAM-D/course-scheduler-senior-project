@@ -12,7 +12,7 @@ import javax.swing.JTabbedPane;
 
 /** Example Role page. */
 public class DepartmentChairPageContainer extends JTabbedPane implements RolePage {
-  PageSettingsControl control;
+ 
     
     public DepartmentChairPageContainer() {
     super();
@@ -21,24 +21,35 @@ public class DepartmentChairPageContainer extends JTabbedPane implements RolePag
 
   @Override
   public void init() {
-        control = new PageSettingsControl();
+        PageControl control = new PageControl();
+
+
       
         DepartmentChairPageSub subPageZero = new DepartmentChairPageSub();
+        subPageZero.setPageSettingsControl(control);
         addTab("Course Management", null, subPageZero, "Tab 1 tooltip");
         control.setDepartmentChairPage(subPageZero);
+
       
         GenerateSchedulePage subPageOne = new GenerateSchedulePage();
+        subPageOne.setPageSettingsControl(control);
         addTab("Generate Schedule", null, subPageOne, "Tab 1 tooltip");
 
+
         SaveLoadCSVFilePage subPageTwo = new SaveLoadCSVFilePage();
+        subPageTwo.setPageSettingsControl(control);
         addTab("Save/Load CSV File", null, subPageTwo, "Tab 2 tooltip");
 
+
         SaveLoadSchedulePage subPageThree = new SaveLoadSchedulePage();
+        subPageThree.setPageSettingsControl(control);
         addTab("Save/Load Schedule", null, subPageThree, "Tab 3 tooltip");
         control.setMainPages(subPageOne, subPageTwo, subPageThree);
+
         
         SettingsPage subPageFour = new SettingsPage();
         addTab("Settings", null, subPageFour, "Tab 3 tooltip");  
-        subPageFour.setControl(control);
+        //subPageFour.setPageSettingsControl(control);
+        
   }
 }

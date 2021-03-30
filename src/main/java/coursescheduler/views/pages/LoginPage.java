@@ -7,6 +7,7 @@ import coursescheduler.managers.PanelController;
 import coursescheduler.views.pages.containers.DepartmentChairPageContainer;
 import coursescheduler.views.pages.containers.FacultyPageContainer;
 import coursescheduler.views.pages.containers.RegistrarPageContainer;
+import coursescheduler.views.pages.containers.PageControl;
 
 /**
  * Presents to and allows the user to login provided with success email and password credentials.
@@ -20,7 +21,8 @@ public final class LoginPage extends javax.swing.JPanel {
     initComponents();
   }
   
-  String chosenType = "REGISTRAR";
+  String chosenType = "DEPARTMENT_CHAIR";
+
   
   /**
    * This method is called from within the constructor to initialize the form. WARNING: Do NOT

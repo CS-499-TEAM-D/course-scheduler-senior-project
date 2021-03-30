@@ -271,8 +271,11 @@
     <Component class="javax.swing.JComboBox" name="selectTimesComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="1">
+          <StringArray count="4">
             <StringItem index="0" value="Select Times"/>
+            <StringItem index="1" value="9:30am - 11:00am"/>
+            <StringItem index="2" value="11:40am - 12:15pm"/>
+            <StringItem index="3" value="3:30am - 5:00am"/>
           </StringArray>
         </Property>
       </Properties>
@@ -286,8 +289,11 @@
     <Component class="javax.swing.JComboBox" name="selectDaysComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="1">
+          <StringArray count="4">
             <StringItem index="0" value="Select Days"/>
+            <StringItem index="1" value="M, W, F"/>
+            <StringItem index="2" value="M, W"/>
+            <StringItem index="3" value="T, TH"/>
           </StringArray>
         </Property>
       </Properties>
@@ -301,8 +307,11 @@
     <Component class="javax.swing.JComboBox" name="selectRoomComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="1">
+          <StringArray count="4">
             <StringItem index="0" value="Select Room"/>
+            <StringItem index="1" value="1A"/>
+            <StringItem index="2" value="2B"/>
+            <StringItem index="3" value="3C"/>
           </StringArray>
         </Property>
       </Properties>
@@ -405,8 +414,11 @@
     <Component class="javax.swing.JComboBox" name="selectCollegeComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="1">
+          <StringArray count="4">
             <StringItem index="0" value="Select College"/>
+            <StringItem index="1" value="Science"/>
+            <StringItem index="2" value="History"/>
+            <StringItem index="3" value="Engineering"/>
           </StringArray>
         </Property>
       </Properties>

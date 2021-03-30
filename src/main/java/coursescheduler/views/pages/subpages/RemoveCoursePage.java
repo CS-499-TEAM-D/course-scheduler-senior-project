@@ -3,22 +3,30 @@ import coursescheduler.managers.PanelController;
 import java.awt.Font;
 import javax.swing.table.DefaultTableModel;
 import coursescheduler.managers.PopupController;
+import coursescheduler.views.pages.containers.PageControl;
+import coursescheduler.views.pages.containers.dummyCourse;
+import coursescheduler.views.pages.containers.dummyUser;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author evilc
  */
 public class RemoveCoursePage extends javax.swing.JPanel {
+    PageControl control;
     String page = "REMOVE_COURSE";
     PanelController controller;
     PopupController popupController;
     inputSingleCourseDataTable editor;
     boolean validSelection = false;
     int textSize = 12;
+    List<String> allCourses = new ArrayList<>();
+ 
     
-    public void setPopupController(PopupController input)
+    public void setPageSettingsControl(PageControl input)
     {
-        popupController = input;
+        control = input;
     }
   
     public void setTextSize(int input)
@@ -42,6 +50,7 @@ public class RemoveCoursePage extends javax.swing.JPanel {
         selectCourseComboBox.setFont(newFont1);
         removeButton.setFont(newFont1);
     }
+    
     public void clearTable()
     {
         DefaultTableModel model = (DefaultTableModel) courseInfoTable.getModel();
@@ -50,6 +59,23 @@ public class RemoveCoursePage extends javax.swing.JPanel {
             model.setValueAt("", i, 0);
             model.setValueAt("", i, 1);
         }
+    }
+    
+    
+    public void addComboBoxCourse(dummyCourse input)
+    {
+        selectCourseComboBox.addItem(input.getName());
+        
+    }
+    
+    public String getCourse()
+    {
+        return (String) selectCourseComboBox.getSelectedItem();
+    }
+    
+    public void removeComboBoxCourse(String input)
+    {
+        selectCourseComboBox.removeItem(input);
     }
 
     public void setController(PanelController input)
@@ -226,7 +252,17 @@ public class RemoveCoursePage extends javax.swing.JPanel {
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
         // Remove button
-        
+        checkSelection();
+        if (validSelection)
+        {
+           String temp = (String) selectCourseComboBox.getSelectedItem();
+           if (!temp.equals("Select Course"))
+           {
+               selectCourseComboBox.removeItem(temp);
+               control.removeCourseByName(temp);
+           }
+           
+        }
     }//GEN-LAST:event_removeButtonActionPerformed
 
 

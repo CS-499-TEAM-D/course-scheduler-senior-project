@@ -3,18 +3,27 @@ import coursescheduler.managers.PanelController;
 import java.awt.Font;
 import javax.swing.table.DefaultTableModel;
 import coursescheduler.managers.PopupController;
+import coursescheduler.views.pages.containers.PageControl;
+import coursescheduler.views.pages.containers.dummyCourse;
+import coursescheduler.views.pages.containers.dummyUser;
 
 /**
  *
  * @author evilc
  */
 public class AddCourseFacultyPage extends javax.swing.JPanel {
+    PageControl control;
     String page = "ADD_COURSE_FACULTY";
     PanelController controller;
     inputSingleCourseDataTable editor;
     boolean validSelection = false;
     int textSize = 12;
     PopupController popupController;
+    
+    public void setPageSettingsControl(PageControl input)
+    {
+        control = input;
+    }
     
     public void setPopupController(PopupController input)
     {

@@ -5,15 +5,19 @@
  */
 package coursescheduler.views.pages.subpages;
 import coursescheduler.managers.PanelController;
+import coursescheduler.views.pages.containers.PageControl;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import coursescheduler.views.pages.containers.dummyCourse;
+import coursescheduler.views.pages.containers.dummyUser;
 /**
  *
  * @author evilc
  */
 public class GenerateSchedulePage extends javax.swing.JPanel {
+    PageControl control;
     String page = "GENERATE_SCHEDULE";
     PanelController controller;
     boolean validChoice = false;
@@ -22,6 +26,12 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
     //TODO: Implement backend "connections" and connect to InputMultipleCoursesPreview class
     int textSize = 12;
   
+    public void setPageSettingsControl(PageControl input)
+    {
+        control = input;
+    }
+    
+    
     public void setTextSize(int input)
     {
         textSize = input;

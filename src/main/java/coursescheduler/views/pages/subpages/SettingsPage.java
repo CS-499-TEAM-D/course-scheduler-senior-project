@@ -7,13 +7,15 @@ package coursescheduler.views.pages.subpages;
 import coursescheduler.managers.PanelController;
 import java.awt.Dimension;
 import java.awt.Font;
-import coursescheduler.views.pages.containers.PageSettingsControl;
+import coursescheduler.views.pages.containers.PageControl;
+import coursescheduler.views.pages.containers.dummyCourse;
+import coursescheduler.views.pages.containers.dummyUser;
 /**
  *
  * @author evilc
  */
 public class SettingsPage extends javax.swing.JPanel {
-    PageSettingsControl control;
+    PageControl control;
     String page = "SETTINGS";
     PanelController controller;
     String currentUsername;
@@ -30,7 +32,7 @@ public class SettingsPage extends javax.swing.JPanel {
     //List<data type for a full schedule> schedules = new ArrayList<>();
     //TODO: Implement backend "connections" and connect to InputMultipleCoursesPreview class
     
-    public void setControl(PageSettingsControl input)
+    public void setControl(PageControl input)
     {
         control = input;
     }

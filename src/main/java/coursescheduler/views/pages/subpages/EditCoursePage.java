@@ -8,6 +8,9 @@ package coursescheduler.views.pages.subpages;
 import javax.swing.table.DefaultTableModel;
 import coursescheduler.managers.PanelController;
 import coursescheduler.managers.PopupController;
+import coursescheduler.views.pages.containers.PageControl;
+import coursescheduler.views.pages.containers.dummyCourse;
+import coursescheduler.views.pages.containers.dummyUser;
 import java.awt.Font;
 
 /**
@@ -15,6 +18,7 @@ import java.awt.Font;
  * @author evilc
  */
 public class EditCoursePage extends javax.swing.JPanel {
+    PageControl control;
     String page = "EDIT_COURSE";
     PanelController controller;
     boolean validCollege = false;
@@ -29,6 +33,11 @@ public class EditCoursePage extends javax.swing.JPanel {
     inputSingleCourseDataTable editor;
     PopupController popupController;
     int textSize = 12;
+    
+    public void setPageSettingsControl(PageControl input)
+    {
+        control = input;
+    }
     
     public void setPopupController(PopupController input)
     {

@@ -5,16 +5,19 @@
  */
 package coursescheduler.views.pages.subpages;
 import coursescheduler.managers.PanelController;
+import coursescheduler.views.pages.containers.PageControl;
 import java.awt.Font;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import javax.swing.table.DefaultTableModel;
+import coursescheduler.views.pages.containers.dummyCourse;
+import coursescheduler.views.pages.containers.dummyUser;
 /**
  *
  * @author evilc
  */
 public class SaveLoadCSVFilePage extends javax.swing.JPanel {
+    PageControl control;
     String page = "SAVE_LOAD_CSV_FILE";
     PanelController controller;
     boolean validNameSave = false;
@@ -26,6 +29,11 @@ public class SaveLoadCSVFilePage extends javax.swing.JPanel {
     String filePathLoad;
     int textSize = 12;
   
+    public void setPageSettingsControl(PageControl input)
+    {
+        control = input;
+    }
+    
     public void setTextSize(int input)
     {
         textSize = input;

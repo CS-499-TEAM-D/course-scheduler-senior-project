@@ -12,7 +12,7 @@ import javax.swing.JTabbedPane;
 
 /** Example Role page. */
 public class FacultyPageContainer extends JTabbedPane implements RolePage {
-  PageSettingsControl control;
+  PageControl control;
     
     public FacultyPageContainer() {
     super();
@@ -21,7 +21,7 @@ public class FacultyPageContainer extends JTabbedPane implements RolePage {
 
   @Override
   public void init() {
-        control = new PageSettingsControl();
+        control = new PageControl();
       
         FacultyPageSub subPageZero = new FacultyPageSub();
         addTab("Course Management", null, subPageZero, "Tab 1 tooltip");

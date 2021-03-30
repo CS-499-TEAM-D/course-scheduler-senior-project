@@ -5,18 +5,22 @@
  */
 package coursescheduler.views.pages.subpages;
 import coursescheduler.managers.PanelController;
+import coursescheduler.views.pages.containers.PageControl;
 import java.awt.Font;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import coursescheduler.views.pages.containers.dummyCourse;
+import coursescheduler.views.pages.containers.dummyUser;
 
 /**
  *
  * @author evilc
  */
 public class SaveLoadSchedulePage extends javax.swing.JPanel {
+    PageControl control;
     String page = "DEPARTMENT_CHAIR";
     PanelController controller;
     int textSize = 12;
@@ -28,6 +32,12 @@ public class SaveLoadSchedulePage extends javax.swing.JPanel {
     String filePathSave;
     List<String> scheduleNames = new ArrayList<>();
     boolean validFileLoad = false;
+    
+    public void setPageSettingsControl(PageControl input)
+    {
+        control = input;
+    }
+    
     public void setTextSize(int input)
     {
         textSize = input;

@@ -7,6 +7,9 @@ package coursescheduler.views.pages.subpages;
 import coursescheduler.managers.PanelController;
 import coursescheduler.managers.PopupController;
 import coursescheduler.views.pages.SubPage;
+import coursescheduler.views.pages.containers.PageControl;
+import coursescheduler.views.pages.containers.dummyCourse;
+import coursescheduler.views.pages.containers.dummyUser;
 
 import java.awt.Font;
 import javax.swing.JPanel;
@@ -18,6 +21,8 @@ import javax.swing.table.DefaultTableModel;
  * @author evilc
  */
 public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel> {
+    PageControl control;
+    InputMultipleCoursesTable tableControl;
     String page = "DEPARTMENT_CHAIR";
     PopupController popupController;
     InputMultipleCoursesTable tableController;
@@ -33,6 +38,18 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
         return this;
     }
 
+    public void setPageSettingsControl(PageControl input)
+    {
+        control = input;
+        addCourse.setPageSettingsControl(control);
+        removeCourse.setPageSettingsControl(control);
+    }
+    
+    public void addCourse(dummyCourse input)
+    {
+        setTableModel(tableController.addRow(tableController.createObjectFromDummy(input), (DefaultTableModel) currentCoursesTable.getModel()));
+    }
+    
     public void setTextSize(int input)
     {
         textSize = input;
@@ -79,7 +96,15 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
         tableController = new InputMultipleCoursesTable();
     }
     
-
+    public AddCourseFacultyPage getAddCourse()
+    {
+        return addCourse;
+    }
+    
+    public RemoveCoursePage getRemoveCourse()
+    {
+        return removeCourse;
+    }
     
     public DefaultTableModel getTableModel()
     {

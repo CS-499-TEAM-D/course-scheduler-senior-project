@@ -29,13 +29,13 @@ public class PopupController
     public PopupController()
     {
         addCourseDepartmentChair = new AddCourseDepartmentChairPage();
-        addCourseDepartmentChair.setPopupController(this);
+        //addCourseDepartmentChair.setPopupController(this);
         
         addCourseFaculty = new AddCourseFacultyPage();
         addCourseFaculty.setPopupController(this);
         
         removeCourse = new RemoveCoursePage();
-        removeCourse.setPopupController(this);
+        //removeCourse.setPopupController(this);
         
         editCourse = new EditCoursePage();
         editCourse.setPopupController(this);

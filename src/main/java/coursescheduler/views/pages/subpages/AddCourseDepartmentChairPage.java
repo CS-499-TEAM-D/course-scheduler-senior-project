@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 package coursescheduler.views.pages.subpages;
-import coursescheduler.managers.PanelController;
-import coursescheduler.managers.PopupController;
+import coursescheduler.views.pages.containers.PageControl;
+import coursescheduler.views.pages.containers.dummyCourse;
+import coursescheduler.views.pages.containers.dummyUser;
 import java.awt.Font;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,9 +15,8 @@ import javax.swing.table.DefaultTableModel;
  * @author evilc
  */
 public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
+    PageControl control;
     String page = "ADD_COURSE_DEPARTMENT_CHAIR";
-    PanelController controller;
-    PopupController popupController;
     inputSingleCourseDataTable editor;
     boolean validCollege = false;
     boolean validID = false;
@@ -31,7 +30,10 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
     int textSize = 12;
     
     
-    
+    public void setPageSettingsControl(PageControl input)
+    {
+        control = input;
+    }
     
     public void setTextSize(int input)
     {
@@ -43,10 +45,6 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
         return textSize;
     }
     
-    public void setPopupController(PopupController input)
-    {
-        popupController = input;
-    }
     
     public void updateTextSize()
     {
@@ -76,10 +74,6 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
     }
     
     
-    public void setController(PanelController input)
-    {
-        controller = input;
-    }
     
     public String returnPage()
     {
@@ -246,21 +240,21 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
             }
         });
 
-        selectTimesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Times" }));
+        selectTimesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Times", "9:30am - 11:00am", "11:40am - 12:15pm", "3:30am - 5:00am" }));
         selectTimesComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectTimesComboBoxActionPerformed(evt);
             }
         });
 
-        selectDaysComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Days" }));
+        selectDaysComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Days", "M, W, F", "M, W", "T, TH" }));
         selectDaysComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectDaysComboBoxActionPerformed(evt);
             }
         });
 
-        selectRoomComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Room" }));
+        selectRoomComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Room", "1A", "2B", "3C" }));
         selectRoomComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectRoomComboBoxActionPerformed(evt);
@@ -303,7 +297,7 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
 
         addCourseError_Times.setForeground(java.awt.Color.red);
 
-        selectCollegeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select College" }));
+        selectCollegeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select College", "Science", "History", "Engineering" }));
         selectCollegeComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectCollegeComboBoxActionPerformed(evt);
@@ -432,7 +426,20 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
     
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // Submit button
-        
+       dummyCourse temp = getCourse();
+       if (temp != null && allInputsValid)
+       {
+           control.addCourseDepartmentChair(temp);
+           selectCollegeComboBox.setSelectedItem("Select College");
+           selectRoomComboBox.setSelectedItem("Select Room");
+           selectTimesComboBox.setSelectedItem("Select Times");;
+           selectDaysComboBox.setSelectedItem("Select Days");
+           idInput.setText("");
+           nameInput.setText("");
+           professorInput.setText("");
+           seatsInput.setText("");
+       }
+
     }//GEN-LAST:event_submitButtonActionPerformed
 
     private void selectCollegeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectCollegeComboBoxActionPerformed
@@ -465,33 +472,25 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
     public void checkSeats()
     {
         String Seats_string = seatsInput.getText();
-        int Seats;
+        int seats;
         if (!Seats_string.equals(""))
         {
-            try
+             try
             {
-                Seats = Integer.parseInt(Seats_string.trim());
+                seats = Integer.parseInt(Seats_string.trim());
                 addCourseError_Seats.setText("");
-                if(Seats > -1)
-                {
-                    validID = true;
-                }
-                else
-                {
-                    addCourseError_Seats.setText("*");
-                    validID = false;
-                }
+                validSeats = true;
             }
             catch (NumberFormatException nfe)
             {
                 addCourseError_Seats.setText("*");
-                validID = false;
-            }
+                validSeats = false;
+            }  
         }
         else
         {
             addCourseError_Seats.setText("*");
-            validID = false;
+            validSeats = false;
         }
     }
     
@@ -513,15 +512,15 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
     public void checkTimes()
     {
         String Times = (String) selectTimesComboBox.getSelectedItem();
-        if (!(Times.equals("")) && !(Times.equals("Select Time")))
+        if ((Times.equals("")) || (Times.equals("Select Time")))
         {
-            validTimes = true;
-            addCourseError_Times.setText("");
+            validTimes = false;
+            addCourseError_Times.setText("*");
         }
         else
         {
-            addCourseError_Times.setText("*");
-            validTimes = false;
+            addCourseError_Times.setText("");
+            validTimes = true;
         }
     }
     
@@ -543,31 +542,40 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
     public void checkCollege()
     {
         String College = (String) selectCollegeComboBox.getSelectedItem();
-        if (!(College.equals("") && !(College.equals("Select College"))))
+        if ((College.equals("") || (College.equals("Select College"))))
         {
-            addCourseError_College.setText("");
-            validCollege = true;
+            addCourseError_College.setText("*");
+            validCollege = false;
         }
         else
         {
-            validCollege = false;
-            addCourseError_College.setText("*");
+            validCollege = true;
+            addCourseError_College.setText("");
         }
     }
     
     public void checkName()
     {
         String Name = nameInput.getText();
-        if (!(Name.equals("")))
+        if (!control.checkSameName(Name))
         {
+            if (!(Name.equals("")))
+            {
             validName = true;
             addCourseError_Name.setText("");
+            }
+            else
+            {
+                validName = false;
+                addCourseError_Name.setText("*");
+            }
         }
         else
         {
-            validName = false;
             addCourseError_Name.setText("*");
+            validName = false;
         }
+       
     }
     
     public void checkID()
@@ -576,11 +584,19 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
         int ID;
         if (!ID_string.equals(""))
         {
-             try
+            try
             {
                 ID = Integer.parseInt(ID_string.trim());
-                addCourseError_ID.setText("");
-                validID = true;
+                if (!control.checkSameID(ID))
+                {
+                    addCourseError_ID.setText("");
+                    validID = true;
+                }
+                else
+                {
+                    addCourseError_ID.setText("*");
+                    validID = false;
+                }
             }
             catch (NumberFormatException nfe)
             {
@@ -616,6 +632,7 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
        checkID();
        checkName();
        checkProfessor();
+       checkRoom();
        checkTimes();
        checkDays();
        checkSeats();
@@ -623,10 +640,12 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
        if (validCollege && validID && validName && validProfessor && validTimes && validDays && validSeats)
        {
            allInputsValid = true;
+           //System.out.println("CORRECT");
        }
        else
        {
            allInputsValid = false;
+           
        }
     }
 
@@ -648,7 +667,7 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
         checkID();
         if (validID)
         {
-             String ID_string = seatsInput.getText();
+             String ID_string = idInput.getText();
              ID = Integer.parseInt(ID_string.trim());
         }
         return ID;
@@ -718,6 +737,25 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
            name = nameInput.getText();
        }
        return name;
+    }
+    
+    dummyCourse getCourse()
+    {
+        checkAllInputs();
+        dummyCourse temp = null;
+        if (allInputsValid)
+        {
+            temp = new dummyCourse();
+            temp.setCollege(getCollege());
+            temp.setID(getID());
+            temp.setName(getName());
+            temp.setProfessor(getProfessor());
+            temp.setTimes(getTimes());
+            temp.setDays(getDays());
+            temp.setRoom(getRoom());
+            temp.setSeats(getSeats());
+        }
+        return temp;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

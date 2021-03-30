@@ -1,16 +1,19 @@
 package coursescheduler.views.pages.subpages;
 import coursescheduler.managers.PanelController;
-import coursescheduler.managers.PopupController;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 import coursescheduler.managers.PopupController;
+import coursescheduler.views.pages.containers.PageControl;
+import coursescheduler.views.pages.containers.dummyCourse;
+import coursescheduler.views.pages.containers.dummyUser;
 
 /**
  *
  * @author evilc
  */
 public class PreliminaryCoursesPage extends javax.swing.JPanel {
+    PageControl control;
     String page = "PRELIMINARY_COURSES";
     PanelController controller;
     inputSingleCourseDataTable editor;
@@ -18,6 +21,12 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
     int textSize = 12; //Doesn't impact the text in tables; may change this in the future
     //TODO: will need access to the course object and its backend
     //TODO: add in control for resizing the window, like if it can be resized or not
+    
+    public void setPageSettingsControl(PageControl input)
+    {
+        control = input;
+    }
+    
     
     public void setPopupController(PopupController input)
     {

@@ -4,20 +4,26 @@
  * and open the template in the editor.
  */
 package coursescheduler.views.pages.subpages;
-import coursescheduler.managers.PanelController;
 import coursescheduler.managers.PopupController;
 import coursescheduler.views.pages.SubPage;
+import coursescheduler.views.pages.containers.PageControl;
+import coursescheduler.views.pages.containers.dummyCourse;
+import coursescheduler.views.pages.containers.dummyUser;
 
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
  * @author evilc
  */
 public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPage<JPanel> {
+    PageControl control;
+    InputMultipleCoursesTable tableControl;
     String page = "DEPARTMENT_CHAIR";
     PopupController popupController;
     InputMultipleCoursesTable tableController;
@@ -31,6 +37,14 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
     public JPanel init() {
         initComponents();
         return this;
+    }
+    
+    public void setPageSettingsControl(PageControl input)
+    {
+        control = input;
+        addCourse.setPageSettingsControl(control);
+        removeCourse.setPageSettingsControl(control);
+        editCourse.setPageSettingsControl(control);
     }
 
     public void setTextSize(int input)
@@ -72,9 +86,114 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
     }
     
     public DepartmentChairPageSub() {
-        initComponents();   
-        popupController = new PopupController();
-        tableController = new InputMultipleCoursesTable();
+        initComponents();
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        for (int i = 0; i < model.getRowCount(); i++)
+        {
+            model.setValueAt("", i, 0);
+        }
+        
+    }
+    
+
+    
+    public AddCourseDepartmentChairPage getAddCourse()
+    {
+        return addCourse;
+    }
+    
+    public RemoveCoursePage getRemoveCourse()
+    {
+        return removeCourse;
+    }
+    
+    public EditCoursePage getEditCourse()
+    {
+        return editCourse;
+    }
+    
+    public void addCourse(dummyCourse input)
+    {
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        Object[] temp = new Object[] 
+        { 
+            input.getCollege(),
+            input.getID(), 
+            input.getName(),
+            input.getProfessor(), 
+            input.getRoom(),
+            input.getTimes(),
+            input.getDays(),
+            input.getSeats()   
+        };
+        
+        int j = 0;
+        for (int i = 0; i < model.getRowCount(); i++)
+        {
+            j = i;
+            if (model.getValueAt(i, 0).equals(""))
+            {
+                model.setValueAt(temp[0], i, 0);
+                model.setValueAt(temp[1], i, 1);
+                model.setValueAt(temp[2], i, 2);
+                model.setValueAt(temp[3], i, 3);
+                model.setValueAt(temp[4], i, 4);
+                model.setValueAt(temp[5], i, 5);
+                model.setValueAt(temp[6], i, 6);
+                model.setValueAt(temp[7], i, 7);
+                break;
+            }
+        }
+        
+        
+        
+        if ((j + 1) == model.getRowCount())
+        {
+            
+            model.addRow(temp);
+        }
+        
+        removeCourse.addComboBoxCourse(input);
+        model.fireTableDataChanged();
+    }
+    
+    public void removeCourse(int IDInput)
+    {
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        int index = -1;
+        for (int i = 0; i < model.getRowCount(); i++)
+        {
+            if (model.getValueAt(i, 1).equals(IDInput))
+            {
+                //System.out.println("TEST");
+                index = i;
+                model.setValueAt("", i, 0);
+                model.setValueAt("", i, 1);
+                model.setValueAt("", i, 2);
+                model.setValueAt("", i, 3);
+                model.setValueAt("", i, 4);
+                model.setValueAt("", i, 5);
+                model.setValueAt("", i, 6);
+                model.setValueAt("", i, 7);
+                break;
+            }
+        }
+        
+        if ((index + 1) == model.getRowCount())
+        {
+            model.removeRow(index);
+        }
+        
+        //Move the rest of the rows that fall under the removed row up by 1
+        if (index != -1)
+        {
+            
+            if (index != model.getRowCount())
+            {
+                model.moveRow((index+1), (model.getRowCount() - 1), 1); //NEEDS TESTING!
+            }
+        }
+        model.fireTableDataChanged();
     }
     
     public DefaultTableModel getTableModel()

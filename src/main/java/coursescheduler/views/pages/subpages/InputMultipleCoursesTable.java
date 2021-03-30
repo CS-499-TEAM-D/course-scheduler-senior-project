@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package coursescheduler.views.pages.subpages;
+import coursescheduler.views.pages.containers.dummyCourse;
+import coursescheduler.views.pages.containers.dummyUser;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -38,7 +40,10 @@ import javax.swing.table.DefaultTableModel;
 //This is for the large table that can hold multiple courses and their respective data.
 public class InputMultipleCoursesTable 
 {
-    public InputMultipleCoursesTable () {}
+    public InputMultipleCoursesTable() 
+    {
+    
+    }
     
     public DefaultTableModel removeRow(int IDInput, DefaultTableModel modelInput) //NEEDS TESTING!
     {
@@ -175,4 +180,19 @@ public class InputMultipleCoursesTable
         return temp;
     }
 
+    Object[] createObjectFromDummy(dummyCourse input)
+    {
+        Object[] temp = new Object[] 
+        { 
+            input.getCollege(),
+            input.getID(), 
+            input.getName(),
+            input.getProfessor(), 
+            input.getRoom(),
+            input.getTimes(),
+            input.getDays(),
+            input.getSeats()   
+        };
+        return temp;
+    }
 }
