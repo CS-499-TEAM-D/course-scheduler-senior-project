@@ -152,6 +152,11 @@ public class EditCoursePage extends javax.swing.JPanel {
         selectCourseComboBox.removeItem(input);
     }
     
+    public void clearTable()
+    {
+        courseInfoTable.setModel(editor.clearTable((DefaultTableModel) courseInfoTable.getModel()));
+    }
+    
      public void checkSeats()
     {
         String Seats_string = seatsInput.getText();
@@ -352,7 +357,7 @@ public class EditCoursePage extends javax.swing.JPanel {
         String name = (String) selectCourseComboBox.getSelectedItem();
         if (!name.equals("Select Course") && allInputsValid)
         {
-             temp = control.returnDummyCourseByName(name);
+             temp = control.returnDummyCourseByNameLoaded(name);
              temp.setCollege((String) selectCollegeComboBox.getSelectedItem());
              temp.setRoom((String) selectRoomComboBox.getSelectedItem());
              temp.setDays((String) selectDaysComboBox.getSelectedItem());
@@ -605,6 +610,9 @@ public class EditCoursePage extends javax.swing.JPanel {
            selectDaysComboBox.setSelectedItem("Select Days");
            professorInput.setText("");
            seatsInput.setText("");
+           DefaultTableModel model = (DefaultTableModel) courseInfoTable.getModel();
+           clearTable();
+           model.fireTableStructureChanged();
        }
     }//GEN-LAST:event_submitButtonActionPerformed
 
@@ -614,13 +622,23 @@ public class EditCoursePage extends javax.swing.JPanel {
         String name = (String) selectCourseComboBox.getSelectedItem();
         if (!name.equals("Select Course"))
         {
-            temp = control.returnDummyCourseByName(name);
+            temp = control.returnDummyCourseByNameLoaded(name);
             selectCollegeComboBox.setSelectedItem(temp.getCollege());
             selectRoomComboBox.setSelectedItem(temp.getRoom());
             selectTimesComboBox.setSelectedItem(temp.getTimes());;
             selectDaysComboBox.setSelectedItem(temp.getDays());
             professorInput.setText(temp.getProfessor());
             seatsInput.setText(String.valueOf(temp.getSeats()));
+            setCollege(temp.getCollege());
+            setRoom(temp.getRoom());
+            setTimes(temp.getTimes());
+            setDays(temp.getDays());
+            setProfessor(temp.getProfessor());
+            setName(temp.getName());
+            setID(temp.getID());
+            setSeats(temp.getSeats());
+            DefaultTableModel model = (DefaultTableModel) courseInfoTable.getModel();
+            model.fireTableStructureChanged();
         }
         
     }//GEN-LAST:event_selectCourseComboBoxActionPerformed

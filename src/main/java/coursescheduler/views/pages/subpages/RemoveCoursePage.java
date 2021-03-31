@@ -56,7 +56,6 @@ public class RemoveCoursePage extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) courseInfoTable.getModel();
         for (int i = 0; i < model.getRowCount(); i++)
         {
-            model.setValueAt("", i, 0);
             model.setValueAt("", i, 1);
         }
     }
@@ -239,7 +238,7 @@ public class RemoveCoursePage extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(selectCourseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(selectCourseError, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addGap(19, 19, 19)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(removeButton)
@@ -249,7 +248,26 @@ public class RemoveCoursePage extends javax.swing.JPanel {
 
     private void selectCourseComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectCourseComboBoxActionPerformed
         // Combo box (when the user selects something from the combo box)
-        
+        checkSelection();
+        if (validSelection)
+        {
+           String temp = (String) selectCourseComboBox.getSelectedItem();
+           if (!temp.equals("Select Course"))
+           {
+               dummyCourse tempCourse = control.returnDummyCourseByNameLoaded(temp);
+               setCollege(tempCourse.getCollege());
+               setRoom(tempCourse.getRoom());
+               setTimes(tempCourse.getTimes());
+               setDays(tempCourse.getDays());
+               setProfessor(tempCourse.getProfessor());
+               setName(tempCourse.getName());
+               setID(tempCourse.getID());
+               setSeats(tempCourse.getSeats());
+               DefaultTableModel model = (DefaultTableModel) courseInfoTable.getModel();
+               model.fireTableStructureChanged();
+           }
+           
+        }
     }//GEN-LAST:event_selectCourseComboBoxActionPerformed
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
@@ -261,7 +279,11 @@ public class RemoveCoursePage extends javax.swing.JPanel {
            if (!temp.equals("Select Course"))
            {
                selectCourseComboBox.removeItem(temp);
+               selectCourseComboBox.setSelectedItem("Select Course");
                control.removeCourseByName(temp);
+               clearTable();
+               DefaultTableModel model = (DefaultTableModel) courseInfoTable.getModel();
+               model.fireTableStructureChanged();
            }
            
         }

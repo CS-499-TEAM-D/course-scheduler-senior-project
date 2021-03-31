@@ -33,21 +33,39 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
         popupController = input;
     }
     
-    public JComboBox addToComboBox(JComboBox inputCombo, String inputString)
+    
+    public void addToComboBox_AddPreReq(String input)
     {
-        JComboBox temp = new JComboBox();
-        temp = inputCombo;
-        temp.addItem(inputString);
-        return temp;
+        selectCourseAddComboBox.addItem(input); 
     }
     
-    public JComboBox removeFromComboBox(JComboBox inputCombo, String inputString)
+    public void addToComboBox_RemovePreReq(String input)
     {
-        JComboBox temp = new JComboBox();
-        temp = inputCombo;
-        temp.removeItem(inputString);
-        return temp;
+        selectCourseRemoveComboBox.addItem(input); 
     }
+    
+    public void removeFromComboBox_AddPreReq(String input)
+    {
+        selectCourseAddComboBox.removeItem(input); 
+    }
+    
+    public void removeFromComboBox_RemovePreReq(String input)
+    {
+        selectCourseRemoveComboBox.removeItem(input); 
+    }
+    
+    
+    public void addToComboBox_Course(String input)
+    {
+        selectCourseComboBox.addItem(input); 
+    }
+    
+    public void removeFromComboBox_Course(String input)
+    {
+        selectCourseComboBox.removeItem(input); 
+    }
+    
+    
     
     public void setTextSize(int input)
     {
@@ -94,138 +112,133 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
     
     public void setTable(Object[] input)
     {
-        Table1.setModel(editor.setTableData(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setTableData(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setCollege(String input)
     {
-        Table1.setModel(editor.setCollege(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setCollege(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setID(int input)
     {
-        Table1.setModel(editor.setID(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setID(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setName(String input)
     {
-        Table1.setModel(editor.setName(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setName(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setProfessor(String input)
     {
-        Table1.setModel(editor.setProfessor(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setProfessor(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setRoom(String input)
     {
-        Table1.setModel(editor.setRoom(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setRoom(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setTimes(String input)
     {
-        Table1.setModel(editor.setTimes(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setTimes(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setDays(String input)
     {
-        Table1.setModel(editor.setDays(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setDays(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     public void setSeats(int input)
     {
-        Table1.setModel(editor.setSeats(input, (DefaultTableModel) Table1.getModel()));
+        courseInfoTable.setModel(editor.setSeats(input, (DefaultTableModel) courseInfoTable.getModel()));
     }
     
     
-    public boolean checkIfPrelimTableIsFull()
+  
+    
+    public void addPrelminCourseToTable(String preName)
     {
-        int numFull = 0;
         DefaultTableModel model = (DefaultTableModel) prelimCoursesTable.getModel();
-        for (int i = 0; i < model.getRowCount(); i++)
+        dummyCourse tempCourse = control.returnDummyCourseByNameAll(preName);
+        
+        int j = 0;
+        Object[] temp = new Object[]
         {
-            if (!model.getValueAt(i, 1).equals(""))
+            tempCourse.getID(),
+            tempCourse.getName()
+        };
+        model.addRow(temp);
+
+    }
+    
+    
+    public void fillPreTable(String courseName)
+    {
+        DefaultTableModel model = (DefaultTableModel) prelimCoursesTable.getModel();
+        dummyCourse tempCourse = control.returnDummyCourseByNameAll(courseName);  
+        clearPreTable();
+        if (!tempCourse.returnPreReqs().isEmpty())
+        {
+            for (int i = 0; i < tempCourse.returnPreReqs().size(); i ++)
             {
-                numFull++;
+                Object[] temp = new Object[]
+                {
+                    tempCourse.returnPreReqs().get(i).getID(),
+                    tempCourse.returnPreReqs().get(i).getName()
+                };
+                model.addRow(temp);
+                
             }
+            model.fireTableDataChanged();
         }
         
-        if (numFull == model.getRowCount())
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    
-    public void addPrelminCourseToTable(int ID, String name)
-    {
-        DefaultTableModel model = (DefaultTableModel) prelimCoursesTable.getModel();
-        if (checkIfPrelimTableIsFull())
-        {
-            Object[] temp = new Object[] 
-            { 
-                ID, 
-                name, 
-            }; 
-            model.addRow(temp);
-        }
-        else
-        {
-            int index = returnNextEmptyIndex();
-            model.setValueAt(ID, index, 0);
-            model.setValueAt(name, index, 1);
-        }
+        
     }
    
-    public void removePrelminCourseToTable(int ID)
+    public void removePrelminCourseFromTable(String name)
     {
-        DefaultTableModel model = (DefaultTableModel) prelimCoursesTable.getModel();
-        int index = returnIndexOfID(ID);
-        if (index != -1)
-        {
-            if (model.getRowCount() > 5)
-            {
-                model.removeRow(index);
-            }
-            else
-            {
-                model.setValueAt("", index, 0);
-            }
-        }
-        
-    }
-    
-    public int returnNextEmptyIndex()
-    {
-        DefaultTableModel model = (DefaultTableModel) prelimCoursesTable.getModel();
-        int index = -1;
-        for (int i = 0; i < model.getRowCount(); i++)
-        {
-            if (model.getValueAt(i, 0).equals(""))
-            {
-                return index;
-            }
-        }
-        return index;
-    }
-    
-    public int returnIndexOfID(int ID)
-    {
-        int index = -1;
         DefaultTableModel model = (DefaultTableModel) prelimCoursesTable.getModel();
         for (int i = 0; i < model.getRowCount(); i++)
         {
-            if ((int)model.getValueAt(i, 0) == ID)
+            if (model.getValueAt(i, 1).equals(name))
             {
-                index = i;
+                model.removeRow(i);
                 break;
             }
         }
-        return index;
+        
+        model.fireTableDataChanged();
     }
+    
+    public void clearPreTable()
+    {
+        DefaultTableModel model = (DefaultTableModel) prelimCoursesTable.getModel();
+        int j = 0;
+        
+        if (model.getRowCount() > 0)
+        {
+            if (!model.getValueAt(0, 0).equals(""))
+            {
+                model.removeRow(0);
+            }
+        }
+        
+        
+        if (model.getRowCount() > 0)
+        {
+            for (int i = 0; i < model.getRowCount(); i++)
+            {
+                model.removeRow(i);
+            }
+
+            model.fireTableDataChanged();
+        }
+        
+    }
+    
+  
     
     public boolean checkSelection(JComboBox input)
     {
@@ -252,7 +265,7 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
 
         selectCourseComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Table1 = new javax.swing.JTable();
+        courseInfoTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         prelimCoursesTable = new javax.swing.JTable();
@@ -265,6 +278,8 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         error1 = new javax.swing.JLabel();
         errorDisplay = new javax.swing.JLabel();
+        addCourse_error = new javax.swing.JLabel();
+        removeCourse_error = new javax.swing.JLabel();
 
         selectCourseComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Course" }));
         selectCourseComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -273,7 +288,7 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
             }
         });
 
-        Table1.setModel(new javax.swing.table.DefaultTableModel(
+        courseInfoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"College:", null},
                 {"ID:", null},
@@ -296,18 +311,14 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(Table1);
+        jScrollPane1.setViewportView(courseInfoTable);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Add/Remove Preliminary Courses");
 
         prelimCoursesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "ID", "Name"
@@ -364,6 +375,10 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
 
         errorDisplay.setForeground(java.awt.Color.red);
 
+        addCourse_error.setForeground(java.awt.Color.red);
+
+        removeCourse_error.setForeground(java.awt.Color.red);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -373,10 +388,8 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(errorDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(16, 16, 16)
@@ -384,16 +397,24 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(error1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(selectCourseAddComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(selectCourseRemoveComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(removeButton, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(selectCourseAddComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, Short.MAX_VALUE)
+                                .addComponent(addCourse_error, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(selectCourseRemoveComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(removeButton, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(removeCourse_error, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -406,27 +427,30 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(selectCourseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(error1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addComponent(error1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(errorDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)))
+                        .addComponent(errorDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(selectCourseRemoveComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(selectCourseRemoveComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(removeCourse_error, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(removeButton))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(selectCourseAddComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(addCourse_error, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(selectCourseAddComboBox))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(addButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -437,7 +461,34 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
 
     private void selectCourseComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectCourseComboBoxActionPerformed
         // Combo box (when the user selects something from the combo box)
-        //TODO: Change everything (where applicable) to the course the user selects
+        
+        clearPreTable();
+        clearRemoveBox();
+        dummyCourse temp1 = null;
+        String name = (String) selectCourseComboBox.getSelectedItem();
+        if (!name.equals("Select Course"))
+        {
+            control.printPreReqs(name);
+            temp1 = control.returnDummyCourseByNameAll(name);
+            setCollege(temp1.getCollege());
+            setRoom(temp1.getRoom());
+            setTimes(temp1.getTimes());
+            setDays(temp1.getDays());
+            setProfessor(temp1.getProfessor());
+            setName(temp1.getName());
+            setID(temp1.getID());
+            setSeats(temp1.getSeats());
+            DefaultTableModel model = (DefaultTableModel) courseInfoTable.getModel();   
+            if (!temp1.returnPreReqs().isEmpty())
+            {
+                fillPreTable(temp1.getName());
+                for (int i = 0; i < temp1.returnPreReqs().size(); i++)
+                {
+                    addToComboBox_RemovePreReq(temp1.returnPreReqs().get(i).getName());
+                }
+            }
+            model.fireTableStructureChanged();
+        }
     }//GEN-LAST:event_selectCourseComboBoxActionPerformed
 
     private void selectCourseAddComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectCourseAddComboBoxActionPerformed
@@ -448,10 +499,39 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
         
     }//GEN-LAST:event_selectCourseRemoveComboBoxActionPerformed
 
+    public void clearRemoveBox()
+    {
+        if (selectCourseRemoveComboBox.getItemCount() > 1)
+        {
+            for (int i = 1; i < selectCourseRemoveComboBox.getItemCount(); i++)
+            {
+            selectCourseRemoveComboBox.removeItemAt(i);
+            }
+        }
+        
+    }
+    
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         if (checkSelection(selectCourseAddComboBox))
         {
-            //Add prelminary course to both the course object and the preliminary courses table
+            String name1 = (String) selectCourseComboBox.getSelectedItem();
+            String name2 = (String) selectCourseAddComboBox.getSelectedItem();
+            if (!name1.equals("Select Course") && !name2.equals("Select Course"))
+            {
+                if (!control.checkSameName_PreReq(name1, name2))
+                {
+                    addCourse_error.setText("");
+                    control.addPreReq(name1, name2);
+                    selectCourseRemoveComboBox.setSelectedItem("Select Course");
+                    selectCourseAddComboBox.setSelectedItem("Select Course");
+                    addToComboBox_RemovePreReq(name2);
+                    addPrelminCourseToTable(name2);
+                }
+                else
+                {
+                    addCourse_error.setText("*");
+                }
+            }
         }
     }//GEN-LAST:event_addButtonActionPerformed
 
@@ -459,13 +539,30 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
         if (checkSelection(selectCourseRemoveComboBox))
         {
             //Remove prelminary course for both the course object and the preliminary courses table
+            String name1 = (String) selectCourseComboBox.getSelectedItem();
+            String name2 = (String) selectCourseRemoveComboBox.getSelectedItem();
+            if (!name1.equals("Select Course") && !name2.equals("Select Course"))
+            {
+                removePrelminCourseFromTable(name2);
+                removeCourse_error.setText("");
+                control.removePreReq(name1, name2);
+                selectCourseRemoveComboBox.removeItem(name2);
+                selectCourseRemoveComboBox.setSelectedItem("Select Course");
+                selectCourseAddComboBox.setSelectedItem("Select Course");
+                removeFromComboBox_RemovePreReq(name2);
+            }
+            else
+            {
+                removeCourse_error.setText("*");
+            }
         }
     }//GEN-LAST:event_removeButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Table1;
     private javax.swing.JButton addButton;
+    private javax.swing.JLabel addCourse_error;
+    private javax.swing.JTable courseInfoTable;
     private javax.swing.JLabel error1;
     private javax.swing.JLabel errorDisplay;
     private javax.swing.JLabel jLabel1;
@@ -476,6 +573,7 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable prelimCoursesTable;
     private javax.swing.JButton removeButton;
+    private javax.swing.JLabel removeCourse_error;
     private javax.swing.JComboBox<String> selectCourseAddComboBox;
     private javax.swing.JComboBox<String> selectCourseComboBox;
     private javax.swing.JComboBox<String> selectCourseRemoveComboBox;

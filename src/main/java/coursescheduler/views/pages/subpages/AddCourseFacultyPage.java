@@ -25,6 +25,12 @@ public class AddCourseFacultyPage extends javax.swing.JPanel {
         control = input;
     }
     
+    public void addComboBoxCourse(dummyCourse input)
+    {
+        selectCourseComboBox.addItem(input.getName());
+        
+    }
+    
     public void setPopupController(PopupController input)
     {
         popupController = input;
@@ -226,9 +232,29 @@ public class AddCourseFacultyPage extends javax.swing.JPanel {
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // Submit button
-        
+       dummyCourse temp = getCourse();
+       String tempName = (String) selectCourseComboBox.getSelectedItem();
+       if (temp != null && !tempName.equals("Select Course"))
+       {
+           control.addCourseFaculty(temp);
+       }
     }//GEN-LAST:event_submitButtonActionPerformed
 
+    public dummyCourse getCourse()
+    {
+        dummyCourse temp = null;
+        String tempName = (String) selectCourseComboBox.getSelectedItem();
+        if (!tempName.equals("Select Course"))
+        {
+            if (!control.checkSameName(tempName))
+            {
+                temp = new dummyCourse();
+                temp = control.returnDummyCourseByNameAll(tempName);
+            }
+        }
+        return temp;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable courseInfoTable;

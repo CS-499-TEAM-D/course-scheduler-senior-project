@@ -117,4 +117,18 @@ public class inputSingleCourseDataTable
         model.setValueAt(input, 7, 1); //Seats
         return model;
     }
+    
+    public DefaultTableModel clearTable(DefaultTableModel modelInput)
+    {
+        DefaultTableModel model = modelInput;
+        model.setValueAt("", 0, 1);
+        model.setValueAt("", 1, 1);
+        model.setValueAt("", 2, 1);
+        model.setValueAt("", 3, 1);
+        model.setValueAt("", 4, 1);
+        model.setValueAt("", 5, 1);
+        model.setValueAt("", 6, 1);
+        model.setValueAt("", 7, 1);
+        return model;
+    }
 }

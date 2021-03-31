@@ -29,6 +29,7 @@ public class PageControl
     RegistrarPageSub registrar;
     FacultyPageSub faculty;
     List<dummyCourse> allCoursesDummy = new ArrayList<>();
+    List<dummyCourse> loadedCoursesDummy = new ArrayList<>();
     String type;
     
     public PageControl()
@@ -37,6 +38,132 @@ public class PageControl
 
     }
     
+    
+    public void setDebugAllCourses()
+    {
+        String college = "Science";
+        int ID = 1230981; //Random number for now
+        String name = "Senior Project";
+        String professor = "Dr. Delugach";
+        String room = "3C";
+        String times = "9:30am - 11:00am";
+        String days = "T, TH";
+        int seats = 30;
+        dummyCourse course1 = new dummyCourse();
+        course1.setCollege(college);
+        course1.setID(ID);
+        course1.setName(name);
+        course1.setProfessor(professor);
+        course1.setRoom(room);
+        course1.setTimes(times);
+        course1.setDays(days);
+        course1.setSeats(seats);
+        allCoursesDummy.add(course1);
+        loadedCoursesDummy.add(course1);
+        
+        
+        college = "Art";
+        ID = 1342343; //Random number for now
+        name = "Art 101";
+        professor = "Dr. History";
+        room = "1A";
+        times = "9:30am - 11:00am";
+        days = "T, TH";
+        seats = 30;
+        dummyCourse course2 = new dummyCourse();
+        course2.setCollege(college);
+        course2.setID(ID);
+        course2.setName(name);
+        course2.setProfessor(professor);
+        course2.setRoom(room);
+        course2.setTimes(times);
+        course2.setDays(days);
+        course2.setSeats(seats);
+        allCoursesDummy.add(course2);
+        loadedCoursesDummy.add(course2);
+        
+        college = "Engineering";
+        ID = 4564564; //Random number for now
+        name = "Engineering 101";
+        professor = "Dr. Engineer";
+        room = "2B";
+        times = "9:30am - 11:00am";
+        days = "M, W, F";
+        seats = 30;
+        dummyCourse course3 = new dummyCourse();
+        course3.setCollege(college);
+        course3.setID(ID);
+        course3.setName(name);
+        course3.setProfessor(professor);
+        course3.setRoom(room);
+        course3.setTimes(times);
+        course3.setDays(days);
+        course3.setSeats(seats);
+        allCoursesDummy.add(course3);
+        loadedCoursesDummy.add(course3);
+        
+        college = "History";
+        ID = 67867867; //Random number for now
+        name = "History 1900";
+        professor = "Dr. History";
+        room = "1A";
+        times = "9:30am - 11:00am";
+        days = "M, W, F";
+        seats = 30;
+        dummyCourse course4 = new dummyCourse();
+        course4.setCollege(college);
+        course4.setID(ID);
+        course4.setName(name);
+        course4.setProfessor(professor);
+        course4.setRoom(room);
+        course4.setTimes(times);
+        course4.setDays(days);
+        course4.setSeats(seats);
+        allCoursesDummy.add(course4);
+        loadedCoursesDummy.add(course4);
+        
+        college = "Science";
+        ID = 32423421; //Random number for now
+        name = "Computer Science 101";
+        professor = "Dr. Science";
+        room = "1A";
+        times = "9:30am - 11:00am";
+        days = "M, W, F";
+        seats = 30;
+        dummyCourse course5 = new dummyCourse();
+        course5.setCollege(college);
+        course5.setID(ID);
+        course5.setName(name);
+        course5.setProfessor(professor);
+        course5.setRoom(room);
+        course5.setTimes(times);
+        course5.setDays(days);
+        course5.setSeats(seats);
+        allCoursesDummy.add(course5);
+        loadedCoursesDummy.add(course5);
+        
+        college = "Science";
+        ID = 17309328; //Random number for now
+        name = "Intro to C++";
+        professor = "Dr. Science";
+        room = "2B";
+        times = "9:30am - 11:00am";
+        days = "M, W, F";
+        seats = 30;
+        dummyCourse course6 = new dummyCourse();
+        course6.setCollege(college);
+        course6.setID(ID);
+        course6.setName(name);
+        course6.setProfessor(professor);
+        course6.setRoom(room);
+        course6.setTimes(times);
+        course6.setDays(days);
+        course6.setSeats(seats);
+        allCoursesDummy.add(course6);
+        loadedCoursesDummy.add(course6);
+    }
+    
+
     public void setType(String input)
     {
         type = input;
@@ -46,6 +173,7 @@ public class PageControl
     {
         return allCoursesDummy;
     }
+    
     
     public dummyCourse returnDummyCourseByID(int ID)
     {
@@ -61,35 +189,124 @@ public class PageControl
         return temp;      
     }
     
-    public dummyCourse returnDummyCourseByName(String name)
+    public dummyCourse returnDummyCourseByNameAll(String name)
     {
-        int j = 0;
-        for (int i = 0; i < allCoursesDummy.size(); i++)
-        {
-            if (allCoursesDummy.get(i).getName().equals(name))
-            {
-                j = i;
-                break;
-            }
-        }
         if (!allCoursesDummy.isEmpty())
         {
-            return allCoursesDummy.get(j); 
+            for (int i = 0; i < allCoursesDummy.size(); i++)
+            {
+                if (allCoursesDummy.get(i).getName().equals(name))
+                {
+                    return allCoursesDummy.get(i);
+
+                }
+            }
         }
         
         return null;      
     }
     
-    public boolean checkSameName(String name)
+    
+    public dummyCourse returnDummyCourseByNameLoaded(String name)
     {
+        if (!loadedCoursesDummy.isEmpty())
+        {
+            for (int i = 0; i < loadedCoursesDummy.size(); i++)
+            {
+                if (loadedCoursesDummy.get(i).getName().equals(name))
+                {
+                    return loadedCoursesDummy.get(i);
+
+                }
+            }
+        }
+        
+        return null;      
+    }
+    
+    public dummyCourse returnDummyCourseByName_PreReq(String courseName, String preName)
+    {
+        int j = 0;
         for (int i = 0; i < allCoursesDummy.size(); i++)
         {
-            if (allCoursesDummy.get(i).getName().equals(name))
+            if (allCoursesDummy.get(i).getName().equals(courseName))
+            {
+                j = i;
+                break;
+            }
+        }
+        
+        
+        if (!allCoursesDummy.get(j).returnPreReqs().isEmpty())
+        {
+            for (int i = 0; i < allCoursesDummy.get(j).returnPreReqs().size(); i++)
+            {
+                if (allCoursesDummy.get(j).returnPreReqs().get(i).getName().equals(preName))
+                {
+                    return allCoursesDummy.get(j).returnPreReqs().get(i);
+                }
+            }
+        
+        }
+        
+        return null;      
+    }
+    
+    
+  
+    
+    public boolean checkSameName(String name)
+    {
+        for (int i = 0; i < loadedCoursesDummy.size(); i++)
+        {
+            if (loadedCoursesDummy.get(i).getName().equals(name))
             {
                 return true;
             }
         }
         return false;
+    }
+    
+    public boolean checkSameName_PreReq(String courseName, String preName)
+    {
+        if (!returnDummyCourseByNameAll(courseName).returnPreReqs().isEmpty())
+        {
+            for (int i = 0; i < returnDummyCourseByNameAll(courseName).returnPreReqs().size(); i++)
+            {
+                if (returnDummyCourseByNameAll(courseName).returnPreReqs().get(i).getName().equals(preName))
+                {  
+                    if (returnDummyCourseByNameAll(courseName).returnPreReqs().get(i).getName().equals(courseName))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        
+        return false;
+        
+    }
+    
+    public boolean checkSameID_PreReq(int courseID, int preID)
+    {
+        if (!returnDummyCourseByID(courseID).returnPreReqs().isEmpty())
+        {
+            for (int i = 0; i < returnDummyCourseByID(courseID).returnPreReqs().size(); i++)
+            {
+                if (returnDummyCourseByID(courseID).returnPreReqs().get(i).getID() == preID)
+                {  
+                    if (returnDummyCourseByID(courseID).returnPreReqs().get(i).getID() == preID)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        
+        return false;
+        
     }
     
     public boolean checkSameID(int ID)
@@ -103,24 +320,83 @@ public class PageControl
         }
         return false;
     }
+    
+    public void addPreReq(String courseName, String preName)
+    {
+        dummyCourse preCourse = new dummyCourse();
+        preCourse = returnDummyCourseByNameAll(preName);
+        int index = getIndexByName(courseName);
+        if (index != -1)
+        {
+            allCoursesDummy.get(index).addPreReq(preCourse);
+        }
+        
+        
+    }
+    
+    public void printPreReqs(String courseName)
+    {
+        dummyCourse temp = new dummyCourse();
+        temp = returnDummyCourseByNameAll(courseName);
+        System.out.println(courseName);
+        if (!temp.returnPreReqs().isEmpty())
+        {
+            for (int i = 0; i < temp.returnPreReqs().size(); i++)
+            {
+                System.out.println(temp.returnPreReqs().get(i).getName());
+            }
+        }
+        else
+        {
+            System.out.println("No pre-reqs.");
+        }
+        System.out.println("---------------");
+    }
+    
+    public void removePreReq(String courseName, String preName)
+    {
+        dummyCourse preCourse = new dummyCourse();
+        preCourse = returnDummyCourseByName_PreReq(courseName, preName);
+        int index = getIndexByName(courseName);
+        if (index != -1)
+        {
+            allCoursesDummy.get(index).removePreReq(preCourse);
+        }
+        
+        
+    }
+    
+    public int getIndexByName(String name)
+    {
+        int index = -1;
+        for (int i = 0; i < allCoursesDummy.size(); i++)
+        {
+            if (allCoursesDummy.get(i).getName().equals(name))
+            {
+                index = i;
+                return index;
+            }
+        }
+        return index;
+    }
 
     
     public void removeCourseByName(String name)
     {
         if (type.equals("DEPARTMENT_CHAIR"))
         {
-            departmentChair.removeCourse(returnDummyCourseByName(name).getID());
+            departmentChair.removeCourse(returnDummyCourseByNameLoaded(name).getID(), name);
         }
         else if (type.equals("FACULTY"))
         {
-            faculty.removeCourse(returnDummyCourseByName(name).getID());
+            faculty.removeCourse(returnDummyCourseByNameLoaded(name).getID(), name);
         }
 
-        for(int i = 0; i < allCoursesDummy.size(); i++)
+        for(int i = 0; i < loadedCoursesDummy.size(); i++)
         {
-            if (allCoursesDummy.get(i).getName().equals(name))
+            if (loadedCoursesDummy.get(i).getName().equals(name))
             {
-                allCoursesDummy.remove(allCoursesDummy.get(i));
+                loadedCoursesDummy.remove(loadedCoursesDummy.get(i));
                 break;
             }
         }
@@ -129,18 +405,18 @@ public class PageControl
     
     public void editCourse(dummyCourse input)
     {
-        for (int i = 0; i < allCoursesDummy.size(); i++)
+        for (int i = 0; i < loadedCoursesDummy.size(); i++)
         {
-            if (allCoursesDummy.get(i).getID() == input.getID())
+            if (loadedCoursesDummy.get(i).getID() == input.getID())
             {
-                allCoursesDummy.get(i).setCollege(input.getCollege());
-                allCoursesDummy.get(i).setID(input.getID());
-                allCoursesDummy.get(i).setName(input.getName());
-                allCoursesDummy.get(i).setProfessor(input.getProfessor());
-                allCoursesDummy.get(i).setRoom(input.getRoom());
-                allCoursesDummy.get(i).setTimes(input.getTimes());
-                allCoursesDummy.get(i).setDays(input.getDays());
-                allCoursesDummy.get(i).setSeats(input.getSeats());
+                loadedCoursesDummy.get(i).setCollege(input.getCollege());
+                loadedCoursesDummy.get(i).setID(input.getID());
+                loadedCoursesDummy.get(i).setName(input.getName());
+                loadedCoursesDummy.get(i).setProfessor(input.getProfessor());
+                loadedCoursesDummy.get(i).setRoom(input.getRoom());
+                loadedCoursesDummy.get(i).setTimes(input.getTimes());
+                loadedCoursesDummy.get(i).setDays(input.getDays());
+                loadedCoursesDummy.get(i).setSeats(input.getSeats());
                 break;
             }
         }
@@ -151,13 +427,13 @@ public class PageControl
     
     public void addCourseDepartmentChair(dummyCourse input)
     {
-        allCoursesDummy.add(input);
+        loadedCoursesDummy.add(input);
         departmentChair.addCourse(input);
     }
     
-    public void addCourseDepartmentFaculty(dummyCourse input)
+    public void addCourseFaculty(dummyCourse input)
     {
-        allCoursesDummy.add(input);
+        loadedCoursesDummy.add(input);
         faculty.addCourse(input);
     }
     

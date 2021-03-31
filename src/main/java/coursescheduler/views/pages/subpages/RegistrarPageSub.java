@@ -43,15 +43,25 @@ public class RegistrarPageSub extends javax.swing.JPanel implements SubPage<JPan
         preCourse.setPageSettingsControl(control);
     }
     
+    public void initTable()
+    {
+        for (int i = 0; i < control.getAllCourses().size(); i++)
+        {
+            addCourse(control.getAllCourses().get(i));
+            preCourse.addToComboBox_Course(control.getAllCourses().get(i).getName());
+        }
+        
+        for (int j = 0; j < control.getAllCourses().size(); j++)
+        {
+            preCourse.addToComboBox_AddPreReq(control.getAllCourses().get(j).getName());
+        }
+    }
+    
     public void setTextSize(int input)
     {
         textSize = input;
     }
     
-    public void addCourse(dummyCourse input)
-    {
-        setTableModel(tableController.addRow(tableController.createObjectFromDummy(input), (DefaultTableModel) currentCoursesTable.getModel()));
-    }
     
     public int getTextSize()
     {
@@ -124,6 +134,41 @@ public class RegistrarPageSub extends javax.swing.JPanel implements SubPage<JPan
 //        removeCourseButton.setEnabled(true);
         backButton.setEnabled(true);
     }
+    
+   public void addCourse(dummyCourse input)
+    {
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        Object[] temp = new Object[] 
+        { 
+            input.getCollege(),
+            input.getID(), 
+            input.getName(),
+            input.getProfessor(), 
+            input.getRoom(),
+            input.getTimes(),
+            input.getDays(),
+            input.getSeats()   
+        };
+        
+        model.addRow(temp);
+        model.fireTableDataChanged();
+    }
+    
+    public void removeCourse(int IDInput, String name)
+    {
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        for (int i = 0; i < model.getRowCount(); i++)
+        {
+            if (model.getValueAt(i, 1).equals(IDInput))
+            {
+                model.removeRow(i);
+                break;
+            }
+        }
+        
+      
+        model.fireTableDataChanged();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -140,6 +185,7 @@ public class RegistrarPageSub extends javax.swing.JPanel implements SubPage<JPan
         jScrollPane1 = new javax.swing.JScrollPane();
         currentCoursesTable = new javax.swing.JTable();
         courseManagementTabbedPane = new javax.swing.JTabbedPane();
+        jButton1 = new javax.swing.JButton();
 
         backButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         backButton.setText("Back to Login");
@@ -157,22 +203,7 @@ public class RegistrarPageSub extends javax.swing.JPanel implements SubPage<JPan
 
         currentCoursesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "College", "ID", "Name", "Professor", "Room", "Times", "Days", "Seats"
@@ -188,9 +219,16 @@ public class RegistrarPageSub extends javax.swing.JPanel implements SubPage<JPan
         });
         jScrollPane1.setViewportView(currentCoursesTable);
 
-        courseManagementTabbedPane.addTab("Prelimnary Courses", null, preCourse, "Prelimnary Courses");
+        jButton1.setText("DEBUG");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        //courseManagementTabbedPane.addTab("Add Course", null, new AddCourseDepartmentChairPage(), "Add Course");
         //courseManagementTabbedPane.addTab("Edit Course", null, new EditCoursePage(), "Edit Course");
-        //courseManagementTabbedPane.addTab("Remove Course", null, new RemoveCoursePage(), "Remove Course");
+        courseManagementTabbedPane.addTab("Preliminary Courses", null, preCourse, "Preliminary Courses");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -204,7 +242,10 @@ public class RegistrarPageSub extends javax.swing.JPanel implements SubPage<JPan
                         .addComponent(courseManagementTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(backButton)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(backButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -221,7 +262,9 @@ public class RegistrarPageSub extends javax.swing.JPanel implements SubPage<JPan
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(79, 79, 79)
-                        .addComponent(backButton))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(backButton)
+                            .addComponent(jButton1)))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(courseManagementTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -233,11 +276,18 @@ public class RegistrarPageSub extends javax.swing.JPanel implements SubPage<JPan
         //Back button clicked
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        initTable();
+        jButton1.setEnabled(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JTabbedPane courseManagementTabbedPane;
     private javax.swing.JTable currentCoursesTable;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

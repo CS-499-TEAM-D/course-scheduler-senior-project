@@ -45,6 +45,16 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
         removeCourse.setPageSettingsControl(control);
     }
     
+    public void initTable()
+    {
+        for (int i = 0; i < control.getAllCourses().size(); i++)
+        {
+            addCourse(control.getAllCourses().get(i));
+            addCourse.addComboBoxCourse(control.getAllCourses().get(i));
+            //removeCourse.addComboBoxCourse(control.getAllCourses().get(i));
+        }
+    }
+    
     public void addCourse(dummyCourse input)
     {
         DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
@@ -60,89 +70,24 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
             input.getSeats()   
         };
         
-        int j = 0;
-        for (int i = 0; i < model.getRowCount(); i++)
-        {
-            j = i;
-            if (model.getValueAt(i, 0).equals(""))
-            {
-                model.setValueAt(temp[0], i, 0);
-                model.setValueAt(temp[1], i, 1);
-                model.setValueAt(temp[2], i, 2);
-                model.setValueAt(temp[3], i, 3);
-                model.setValueAt(temp[4], i, 4);
-                model.setValueAt(temp[5], i, 5);
-                model.setValueAt(temp[6], i, 6);
-                model.setValueAt(temp[7], i, 7);
-                break;
-            }
-        }
-        
-        
-        
-        if ((j + 1) == model.getRowCount())
-        {
-            
-            model.addRow(temp);
-        }
-        
+        model.addRow(temp);
         removeCourse.addComboBoxCourse(input);
         model.fireTableDataChanged();
     }
     
-    public void removeCourse(int IDInput)
+    public void removeCourse(int IDInput, String name)
     {
         DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
-        int index = -1;
         for (int i = 0; i < model.getRowCount(); i++)
         {
             if (model.getValueAt(i, 1).equals(IDInput))
             {
-                //System.out.println("TEST");
-                index = i;
-                /*
-                model.setValueAt("", i, 0);
-                model.setValueAt("", i, 1);
-                model.setValueAt("", i, 2);
-                model.setValueAt("", i, 3);
-                model.setValueAt("", i, 4);
-                model.setValueAt("", i, 5);
-                model.setValueAt("", i, 6);
-                model.setValueAt("", i, 7);
-                */
                 model.removeRow(i);
                 break;
             }
         }
         
-        if ((index + 1) != model.getRowCount())
-        {
-            String one = "";
-            String two = "";
-            String three = "";
-            String four = "";
-            String five = "";
-            String six = "";
-            String seven = "";
-            Object[] temp = new Object[] 
-            {
-                one,
-                two,
-                three,
-                four,
-                five,
-                six,
-                seven
-            };
-   
-           model.addRow(temp);
-        }
-        
-        //Move the rest of the rows that fall under the removed row up by 1
-        if (index != -1)
-        {
-            model.moveRow((index + 1), (model.getRowCount() - 1), 1);
-        }
+      
         model.fireTableDataChanged();
     }
     
@@ -214,17 +159,11 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
     
     public void disableButtons()
     {
-//        addCourseButton.setEnabled(false);
-//        editCourseButton.setEnabled(false);
-//        removeCourseButton.setEnabled(false);
         backButton.setEnabled(false);
     }
     
     public void enableButtons()
     {
-//        addCourseButton.setEnabled(true);
-//        editCourseButton.setEnabled(true);
-//        removeCourseButton.setEnabled(true);
         backButton.setEnabled(true);
     }
 
@@ -242,7 +181,8 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         currentCoursesTable = new javax.swing.JTable();
-        
+        courseManagementTabbedPane = new javax.swing.JTabbedPane();
+        jButton1 = new javax.swing.JButton();
 
         backButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         backButton.setText("Back to Login");
@@ -260,22 +200,7 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
 
         currentCoursesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "College", "ID", "Name", "Professor", "Room", "Times", "Days", "Seats"
@@ -291,7 +216,16 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
         });
         jScrollPane1.setViewportView(currentCoursesTable);
 
-        
+        jButton1.setText("DEBUG");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        courseManagementTabbedPane.addTab("Add Course", null, addCourse, "Add Course");
+        //courseManagementTabbedPane.addTab("Edit Course", null, new EditCoursePage(), "Edit Course");
+        courseManagementTabbedPane.addTab("Remove Course", null, removeCourse, "Remove Course");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -305,7 +239,10 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
                         .addComponent(courseManagementTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(backButton)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(backButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -322,7 +259,9 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(79, 79, 79)
-                        .addComponent(backButton))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(backButton)
+                            .addComponent(jButton1)))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(courseManagementTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -334,11 +273,18 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
         //Back button clicked
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        initTable();
+        jButton1.setEnabled(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JTabbedPane courseManagementTabbedPane;
     private javax.swing.JTable currentCoursesTable;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

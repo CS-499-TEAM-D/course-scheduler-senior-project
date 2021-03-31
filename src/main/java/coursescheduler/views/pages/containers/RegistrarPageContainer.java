@@ -23,6 +23,8 @@ public class RegistrarPageContainer extends JTabbedPane implements RolePage {
   @Override
   public void init() {
         PageControl control = new PageControl();
+        control.setDebugAllCourses();
+        
         control.setType("REGISTRAR");
 
         RegistrarPageSub subPageZero = new RegistrarPageSub();

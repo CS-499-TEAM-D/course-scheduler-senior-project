@@ -23,6 +23,7 @@ public class FacultyPageContainer extends JTabbedPane implements RolePage {
   @Override
   public void init() {
         PageControl control = new PageControl();
+        control.setDebugAllCourses();
         control.setType("FACULTY");
 
         FacultyPageSub subPageZero = new FacultyPageSub();

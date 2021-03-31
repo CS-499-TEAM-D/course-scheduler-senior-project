@@ -8,7 +8,7 @@ import coursescheduler.views.pages.containers.PageControl;
 import coursescheduler.views.pages.containers.dummyCourse;
 import coursescheduler.views.pages.containers.dummyUser;
 import java.awt.Font;
-import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -86,55 +86,9 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
         editor = new inputSingleCourseDataTable();;
     }
     
-    public DefaultTableModel getModel()
-    {
-        return (DefaultTableModel) courseInfoTable.getModel();
-    }
+
     
-    public void setTable(Object[] input)
-    {
-        courseInfoTable.setModel(editor.setTableData(input, (DefaultTableModel) courseInfoTable.getModel()));
-    }
     
-    public void setCollege(String input)
-    {
-        courseInfoTable.setModel(editor.setCollege(input, (DefaultTableModel) courseInfoTable.getModel()));
-    }
-    
-    public void setID(int input)
-    {
-        courseInfoTable.setModel(editor.setID(input, (DefaultTableModel) courseInfoTable.getModel()));
-    }
-    
-    public void setName(String input)
-    {
-        courseInfoTable.setModel(editor.setName(input, (DefaultTableModel) courseInfoTable.getModel()));
-    }
-    
-    public void setProfessor(String input)
-    {
-        courseInfoTable.setModel(editor.setProfessor(input, (DefaultTableModel) courseInfoTable.getModel()));
-    }
-    
-    public void setRoom(String input)
-    {
-        courseInfoTable.setModel(editor.setRoom(input, (DefaultTableModel) courseInfoTable.getModel()));
-    }
-    
-    public void setTimes(String input)
-    {
-        courseInfoTable.setModel(editor.setTimes(input, (DefaultTableModel) courseInfoTable.getModel()));
-    }
-    
-    public void setDays(String input)
-    {
-        courseInfoTable.setModel(editor.setDays(input, (DefaultTableModel) courseInfoTable.getModel()));
-    }
-    
-    public void setSeats(int input)
-    {
-        courseInfoTable.setModel(editor.setSeats(input, (DefaultTableModel) courseInfoTable.getModel()));
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -146,8 +100,6 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        courseInfoTable = new javax.swing.JTable();
         submitButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -177,31 +129,6 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Add Course");
-
-        courseInfoTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"College:", null},
-                {"ID:", null},
-                {"Name:", null},
-                {"Professor:", null},
-                {"Room:", null},
-                {"Times:", null},
-                {"Days:", null},
-                {"Seats:", null}
-            },
-            new String [] {
-                "Course Info", ""
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(courseInfoTable);
 
         submitButton.setText("Submit");
         submitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -314,7 +241,6 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(243, 243, 243)
                         .addComponent(submitButton))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -389,9 +315,7 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
                     .addComponent(jLabel5))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(submitButton)
                         .addGap(4, 4, 4))
                     .addGroup(layout.createSequentialGroup()
@@ -410,7 +334,7 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
                             .addComponent(addCourseError_Seats, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(seatsInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(32, 32, 32))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -768,7 +692,6 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
     private javax.swing.JLabel addCourseError_Room;
     private javax.swing.JLabel addCourseError_Seats;
     private javax.swing.JLabel addCourseError_Times;
-    private javax.swing.JTable courseInfoTable;
     private javax.swing.JTextField idInput;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -779,7 +702,6 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nameInput;
     private javax.swing.JTextField professorInput;
     private javax.swing.JTextField seatsInput;

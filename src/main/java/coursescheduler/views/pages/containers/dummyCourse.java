@@ -26,14 +26,12 @@ public class dummyCourse
     
     public dummyCourse()
     {
-        college = "Science";
-        ID = 1230981; //Random number for now
-        name = "Senior Project";
-        professor = "Dr. Delugach";
-        room = "Online";
-        times = "9:40am - 11:00am";
-        days = "T, TH";
-        seats = 30;
+        
+    }
+    
+    public List<dummyCourse> returnPreReqs()
+    {
+        return preReqs;
     }
     
     public void addPreReq(dummyCourse input)
