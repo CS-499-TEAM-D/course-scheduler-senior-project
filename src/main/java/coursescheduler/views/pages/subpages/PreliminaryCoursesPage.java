@@ -547,12 +547,16 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
         String name2 = (String) selectCourseAddComboBox.getSelectedItem();
         if (!name1.equals("Select Course") && !name2.equals("Select Course")) 
         {
-            addCourse_error.setText("");
-            control.addPreReq(name1, name2);
-            selectCourseRemoveComboBox.setSelectedItem("Select Course");
-            selectCourseAddComboBox.setSelectedItem("Select Course");
-            addToComboBox_RemovePreReq(name2);
-            addPrelminCourseToTable(name2);
+            if (checkSelectionAdd())
+            {
+                addCourse_error.setText("");
+                control.addPreReq(name1, name2);
+                selectCourseRemoveComboBox.setSelectedItem("Select Course");
+                selectCourseAddComboBox.setSelectedItem("Select Course");
+                addToComboBox_RemovePreReq(name2);
+                addPrelminCourseToTable(name2);
+            }
+            
         }
         else
         {
