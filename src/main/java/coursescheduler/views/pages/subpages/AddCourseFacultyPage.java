@@ -227,7 +227,23 @@ public class AddCourseFacultyPage extends javax.swing.JPanel {
 
     private void selectCourseComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectCourseComboBoxActionPerformed
         // Combo box (when the user selects something from the combo box)
-        
+        dummyCourse temp = null;
+        temp = new dummyCourse();  
+        String tempName = (String) selectCourseComboBox.getSelectedItem();
+        temp = control.returnDummyCourseByNameAll(tempName);
+        if (temp != null && !tempName.equals("Select Course"))
+        {
+            DefaultTableModel model = (DefaultTableModel) courseInfoTable.getModel();
+            setCollege(temp.getCollege());
+            setRoom(temp.getRoom());
+            setTimes(temp.getTimes());
+            setDays(temp.getDays());
+            setProfessor(temp.getProfessor());
+            setName(temp.getName());
+            setID(temp.getID());
+            setSeats(temp.getSeats());
+            model.fireTableStructureChanged();
+        }
     }//GEN-LAST:event_selectCourseComboBoxActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
