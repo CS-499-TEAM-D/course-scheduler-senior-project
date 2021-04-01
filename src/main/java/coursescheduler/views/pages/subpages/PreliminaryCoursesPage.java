@@ -160,8 +160,11 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
     
     public void addPrelminCourseToTable(String preName)
     {
+        //System.out.println(preName);
         DefaultTableModel model = (DefaultTableModel) prelimCoursesTable.getModel();
         dummyCourse tempCourse = control.returnDummyCourseByNameAll(preName);
+        
+        
         
         int j = 0;
         Object[] temp = new Object[]
@@ -541,8 +544,8 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
     
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         String name1 = (String) selectCourseComboBox.getSelectedItem();
-        String name2 = (String) selectCourseRemoveComboBox.getSelectedItem();
-        if (checkSelectionAdd()) 
+        String name2 = (String) selectCourseAddComboBox.getSelectedItem();
+        if (!name1.equals("Select Course") && !name2.equals("Select Course")) 
         {
             addCourse_error.setText("");
             control.addPreReq(name1, name2);
