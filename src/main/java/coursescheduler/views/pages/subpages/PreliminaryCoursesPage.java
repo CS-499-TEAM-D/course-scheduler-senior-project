@@ -240,17 +240,45 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
     
   
     
-    public boolean checkSelection(JComboBox input)
+    public boolean checkSelectionAdd()
     {
-        String course = (String) input.getSelectedItem();
-        if (!(course.equals("") && !(course.equals("Select Course"))))
+        String name1 = (String) selectCourseComboBox.getSelectedItem();
+        String name2 = (String) selectCourseAddComboBox.getSelectedItem();
+        if (!name1.equals("Select Course") && !name2.equals("Select Course"))
         {
-            return true;
-        }
-        else
+            dummyCourse temp = getCourse();
+            if (!temp.returnPreReqs().isEmpty())
+            {
+                for (int i = 0; i < temp.returnPreReqs().size(); i++)
+                {
+                    if (temp.returnPreReqs().get(i).getName().equals(name1) || temp.returnPreReqs().get(i).getName().equals(name2))
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            else if (temp.returnPreReqs().isEmpty())
+            {
+                if (!name1.equals(name2))
+                {
+                    return true;
+                }
+            }
+        }  
+        return false;
+    }
+    
+    public dummyCourse getCourse()
+    {
+        dummyCourse temp = null;
+        String tempName = (String) selectCourseComboBox.getSelectedItem();
+        if (!tempName.equals("Select Course"))
         {
-            return false;
+            temp = new dummyCourse();
+            temp = control.returnDummyCourseByNameLoaded(tempName);
         }
+        return temp;
     }
 
 
@@ -512,50 +540,43 @@ public class PreliminaryCoursesPage extends javax.swing.JPanel {
     }
     
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        if (checkSelection(selectCourseAddComboBox))
+        String name1 = (String) selectCourseComboBox.getSelectedItem();
+        String name2 = (String) selectCourseRemoveComboBox.getSelectedItem();
+        if (checkSelectionAdd()) 
         {
-            String name1 = (String) selectCourseComboBox.getSelectedItem();
-            String name2 = (String) selectCourseAddComboBox.getSelectedItem();
-            if (!name1.equals("Select Course") && !name2.equals("Select Course"))
-            {
-                if (!control.checkSameName_PreReq(name1, name2))
-                {
-                    addCourse_error.setText("");
-                    control.addPreReq(name1, name2);
-                    selectCourseRemoveComboBox.setSelectedItem("Select Course");
-                    selectCourseAddComboBox.setSelectedItem("Select Course");
-                    addToComboBox_RemovePreReq(name2);
-                    addPrelminCourseToTable(name2);
-                }
-                else
-                {
-                    addCourse_error.setText("*");
-                }
-            }
+            addCourse_error.setText("");
+            control.addPreReq(name1, name2);
+            selectCourseRemoveComboBox.setSelectedItem("Select Course");
+            selectCourseAddComboBox.setSelectedItem("Select Course");
+            addToComboBox_RemovePreReq(name2);
+            addPrelminCourseToTable(name2);
         }
+        else
+        {
+            addCourse_error.setText("*");
+        }
+            
+        
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
-        if (checkSelection(selectCourseRemoveComboBox))
+        String name1 = (String) selectCourseComboBox.getSelectedItem();
+        String name2 = (String) selectCourseRemoveComboBox.getSelectedItem();
+        if (!name1.equals("Select Course") && !name2.equals("Select Course"))
         {
-            //Remove prelminary course for both the course object and the preliminary courses table
-            String name1 = (String) selectCourseComboBox.getSelectedItem();
-            String name2 = (String) selectCourseRemoveComboBox.getSelectedItem();
-            if (!name1.equals("Select Course") && !name2.equals("Select Course"))
-            {
-                removePrelminCourseFromTable(name2);
-                removeCourse_error.setText("");
-                control.removePreReq(name1, name2);
-                selectCourseRemoveComboBox.removeItem(name2);
-                selectCourseRemoveComboBox.setSelectedItem("Select Course");
-                selectCourseAddComboBox.setSelectedItem("Select Course");
-                removeFromComboBox_RemovePreReq(name2);
-            }
-            else
-            {
-                removeCourse_error.setText("*");
-            }
+            removePrelminCourseFromTable(name2);
+            removeCourse_error.setText("");
+            control.removePreReq(name1, name2);
+            selectCourseRemoveComboBox.removeItem(name2);
+            selectCourseRemoveComboBox.setSelectedItem("Select Course");
+            selectCourseAddComboBox.setSelectedItem("Select Course");
+            removeFromComboBox_RemovePreReq(name2);
         }
+        else
+        {
+            removeCourse_error.setText("*");
+        }
+        
     }//GEN-LAST:event_removeButtonActionPerformed
 
 

@@ -21,7 +21,7 @@ public final class LoginPage extends javax.swing.JPanel {
     initComponents();
   }
   
-  String chosenType = "FACULTY";
+  String chosenType = "REGISTRAR";
 
   
   /**
