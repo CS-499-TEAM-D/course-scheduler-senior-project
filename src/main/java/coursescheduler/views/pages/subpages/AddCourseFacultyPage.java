@@ -68,6 +68,7 @@ public class AddCourseFacultyPage extends javax.swing.JPanel {
     }
     public AddCourseFacultyPage() {
         initComponents();
+        selectCourseComboBox.setEnabled(false);
         editor = new inputSingleCourseDataTable();
     }
     
@@ -149,6 +150,7 @@ public class AddCourseFacultyPage extends javax.swing.JPanel {
         courseInfoTable = new javax.swing.JTable();
         submitButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        selectDepartmentComboBox = new javax.swing.JComboBox<>();
 
         selectCourseComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Course" }));
         selectCourseComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -192,6 +194,13 @@ public class AddCourseFacultyPage extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Add Course");
 
+        selectDepartmentComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Department", "Science", "Art", "History", "Literature", "Engineering" }));
+        selectDepartmentComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectDepartmentComboBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -201,10 +210,12 @@ public class AddCourseFacultyPage extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(selectCourseComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(submitButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(submitButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(selectDepartmentComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(selectCourseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(jLabel1)))
@@ -216,8 +227,10 @@ public class AddCourseFacultyPage extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(23, 23, 23)
-                .addComponent(selectCourseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(selectCourseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectDepartmentComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(submitButton)
@@ -256,6 +269,20 @@ public class AddCourseFacultyPage extends javax.swing.JPanel {
        }
     }//GEN-LAST:event_submitButtonActionPerformed
 
+    private void selectDepartmentComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectDepartmentComboBoxActionPerformed
+        // TODO add your handling code here:
+        String temp = (String) selectDepartmentComboBox.getSelectedItem();
+        if (!temp.equals("Select Department"))
+        {
+            selectCourseComboBox.setEnabled(true);
+        }
+        else
+        {
+            selectCourseComboBox.setEnabled(false);
+            selectCourseComboBox.setSelectedItem("Select Course");
+        }
+    }//GEN-LAST:event_selectDepartmentComboBoxActionPerformed
+
     public dummyCourse getCourse()
     {
         dummyCourse temp = null;
@@ -277,6 +304,7 @@ public class AddCourseFacultyPage extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> selectCourseComboBox;
+    private javax.swing.JComboBox<String> selectDepartmentComboBox;
     private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
 }

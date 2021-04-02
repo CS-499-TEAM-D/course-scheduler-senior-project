@@ -58,6 +58,7 @@ public class PageControl
         course1.setTimes(times);
         course1.setDays(days);
         course1.setSeats(seats);
+        course1.setSection(1);
         allCoursesDummy.add(course1);
         loadedCoursesDummy.add(course1);
         
@@ -79,6 +80,7 @@ public class PageControl
         course2.setTimes(times);
         course2.setDays(days);
         course2.setSeats(seats);
+        course2.setSection(2);
         allCoursesDummy.add(course2);
         loadedCoursesDummy.add(course2);
         
@@ -99,6 +101,7 @@ public class PageControl
         course3.setTimes(times);
         course3.setDays(days);
         course3.setSeats(seats);
+        course3.setSection(3);
         allCoursesDummy.add(course3);
         loadedCoursesDummy.add(course3);
         
@@ -119,6 +122,7 @@ public class PageControl
         course4.setTimes(times);
         course4.setDays(days);
         course4.setSeats(seats);
+        course4.setSection(1);
         allCoursesDummy.add(course4);
         loadedCoursesDummy.add(course4);
         
@@ -139,6 +143,7 @@ public class PageControl
         course5.setTimes(times);
         course5.setDays(days);
         course5.setSeats(seats);
+        course5.setSection(2);
         allCoursesDummy.add(course5);
         loadedCoursesDummy.add(course5);
         
@@ -159,6 +164,7 @@ public class PageControl
         course6.setTimes(times);
         course6.setDays(days);
         course6.setSeats(seats);
+        course6.setSection(2);
         allCoursesDummy.add(course6);
         loadedCoursesDummy.add(course6);
     }

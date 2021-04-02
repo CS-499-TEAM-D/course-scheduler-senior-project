@@ -23,6 +23,7 @@ public class dummyCourse
     String times;
     String days;
     int seats;
+    int section;
     
     public dummyCourse()
     {
@@ -32,6 +33,16 @@ public class dummyCourse
     public List<dummyCourse> returnPreReqs()
     {
         return preReqs;
+    }
+    
+    public void setSection(int input)
+    {
+        section = input;
+    }
+    
+    public int getSection()
+    {
+        return section;
     }
     
     public void addPreReq(dummyCourse input)
@@ -81,6 +92,7 @@ public class dummyCourse
         temp.setID(0);
         temp.setCollege("NULL");
         temp.setName("NULL");
+        temp.setSection(0);
         temp.setProfessor("NULL");
         temp.setRoom("NULL");
         temp.setDays("NULL");
@@ -110,6 +122,8 @@ public class dummyCourse
     {
         return ID;
     }
+    
+    
     
     public String getName()
     {

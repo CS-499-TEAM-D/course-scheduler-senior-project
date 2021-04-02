@@ -27,15 +27,19 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
     String page = "DEPARTMENT_CHAIR";
     PopupController popupController;
     InputMultipleCoursesTable tableController;
-    AddCourseDepartmentChairPage addCourse;
+    AddCourseDepartmentChairPage addCourseFull;
+    AddCourseFacultyPage addCourse;
     RemoveCoursePage removeCourse;
     EditCoursePage editCourse;
+    PreliminaryCoursesPage preCourse;
+    
 
     int textSize = 12;
 
     @Override
     public JPanel init() {
         initComponents();
+		
         return this;
     }
     
@@ -84,10 +88,14 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
         
         addCourse.setTextSize(textSize);
         addCourse.updateTextSize();
+        addCourseFull.setTextSize(textSize);
+        addCourseFull.updateTextSize();
         editCourse.setTextSize(textSize);
         editCourse.updateTextSize();
         removeCourse.setTextSize(textSize);
         removeCourse.updateTextSize();
+        preCourse.setTextSize(textSize);
+        preCourse.updateTextSize();
     }
 
     
@@ -97,7 +105,9 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
     }
     
     public DepartmentChairPageSub() {
-        addCourse = new AddCourseDepartmentChairPage();
+        addCourseFull = new AddCourseDepartmentChairPage();
+        addCourse = new AddCourseFacultyPage();
+        preCourse = new PreliminaryCoursesPage();
         editCourse = new EditCoursePage();
         removeCourse = new RemoveCoursePage();
         initComponents();
@@ -113,7 +123,7 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
     
     public AddCourseDepartmentChairPage getAddCourse()
     {
-        return addCourse;
+        return addCourseFull;
     }
     
     public RemoveCoursePage getRemoveCourse()
@@ -135,6 +145,7 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
             input.getCollege(),
             input.getID(), 
             input.getName(),
+            input.getSection(),
             input.getProfessor(), 
             input.getRoom(),
             input.getTimes(),
@@ -153,6 +164,7 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
                 model.setValueAt(temp[5], i, 5);
                 model.setValueAt(temp[6], i, 6);
                 model.setValueAt(temp[7], i, 7);
+                model.setValueAt(temp[8], i, 8);
                 break;
             }
         }
@@ -167,6 +179,7 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
             input.getCollege(),
             input.getID(), 
             input.getName(),
+            input.getSection(),
             input.getProfessor(), 
             input.getRoom(),
             input.getTimes(),
@@ -257,11 +270,11 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
 
             },
             new String [] {
-                "College", "ID", "Name", "Professor", "Room", "Times", "Days", "Seats"
+                "College", "ID", "Name", "Section", "Professor", "Room", "Times", "Days", "Seats"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -277,9 +290,11 @@ public class DepartmentChairPageSub extends javax.swing.JPanel implements SubPag
             }
         });
 
-        courseManagementTabbedPane.addTab("Add Course", null, addCourse, "Add Course");
+		courseManagementTabbedPane.addTab("New Course", null, addCourseFull, "New Course");
+		courseManagementTabbedPane.addTab("Add Course", null, addCourse, "Add Course");
         courseManagementTabbedPane.addTab("Edit Course", null, editCourse, "Edit Course");
         courseManagementTabbedPane.addTab("Remove Course", null, removeCourse, "Remove Course");
+		courseManagementTabbedPane.addTab("Preliminary Courses", null, preCourse, "Preliminary Courses");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
