@@ -9,7 +9,7 @@ package coursescheduler.views.pages.containers;
  *
  * @author evilc
  *
- * @author  password field was removed, we should not be storing the password on the machine when we do not need to,
+ * @author chris password field was removed, we should not be storing the password on the machine when we do not need to,
  */
 public class User
 {

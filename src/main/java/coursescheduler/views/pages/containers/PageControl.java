@@ -8,6 +8,7 @@ import coursescheduler.views.pages.subpages.GenerateSchedulePage;
 import coursescheduler.views.pages.subpages.MasterSchedulerPage;
 import coursescheduler.views.pages.subpages.SaveLoadFilePage;
 import coursescheduler.views.pages.subpages.StandardSchedulerPage;
+import coursescheduler.views.pages.subpages.StandardSchedulerPage;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
 package coursescheduler.views.pages;
 
 /** Interfacing functionality for role pages. */
-public interface RolePage {
+public interface IRolePage {
   /**
    * Allows the page to initialize itself.
    *

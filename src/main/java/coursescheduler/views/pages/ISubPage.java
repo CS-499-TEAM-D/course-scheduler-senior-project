@@ -2,7 +2,7 @@ package coursescheduler.views.pages;
 
 import javax.swing.JComponent;
 
-public interface  SubPage<S extends JComponent> {
+public interface ISubPage<S extends JComponent> {
     /**
      * Allows the page to initialize itself.
      *

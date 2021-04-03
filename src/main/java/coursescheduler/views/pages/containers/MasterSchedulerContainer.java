@@ -1,6 +1,6 @@
 package coursescheduler.views.pages.containers;
 
-import coursescheduler.views.pages.RolePage;
+import coursescheduler.views.pages.IRolePage;
 import coursescheduler.views.pages.subpages.GenerateSchedulePage;
 import coursescheduler.views.pages.subpages.MasterSchedulerPage;
 import coursescheduler.views.pages.subpages.SaveLoadFilePage;
@@ -8,7 +8,7 @@ import javax.swing.JTabbedPane;
 
 
 /** Example Role page. */
-public class MasterSchedulerContainer extends JTabbedPane implements RolePage {
+public class MasterSchedulerContainer extends JTabbedPane implements IRolePage {
  
     
     public MasterSchedulerContainer() {

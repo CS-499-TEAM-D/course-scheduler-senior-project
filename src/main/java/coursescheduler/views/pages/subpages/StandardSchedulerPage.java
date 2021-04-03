@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package coursescheduler.views.pages.subpages;
-import coursescheduler.views.pages.SubPage;
+import coursescheduler.views.pages.ISubPage;
 import coursescheduler.views.pages.containers.PageControl;
 import coursescheduler.views.pages.containers.dummyCourse;
 
@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author evilc
  */
-public class StandardSchedulerPage extends javax.swing.JPanel implements SubPage<JPanel> {
+public class StandardSchedulerPage extends javax.swing.JPanel implements ISubPage<JPanel> {
     PageControl control;
     String page = "MASTER";
 

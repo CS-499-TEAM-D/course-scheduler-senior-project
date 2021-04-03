@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package coursescheduler.views.pages.subpages;
-import coursescheduler.views.pages.SubPage;
+import coursescheduler.views.pages.ISubPage;
 import coursescheduler.views.pages.containers.PageControl;
 import coursescheduler.views.pages.containers.dummyCourse;
 
@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author evilc
  */
-public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<JPanel> {
+public class MasterSchedulerPage extends javax.swing.JPanel implements ISubPage<JPanel> {
     PageControl control;
     String page = "MASTER";
     int textSize = 12;
@@ -245,9 +245,11 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<J
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        //Back button clicked
+        // TODO add back button functionality, possibly inject controller and use controller.update(LoginPage)
+
     }//GEN-LAST:event_backButtonActionPerformed
 
+    // DEBUG BUTTON
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         initTable();
