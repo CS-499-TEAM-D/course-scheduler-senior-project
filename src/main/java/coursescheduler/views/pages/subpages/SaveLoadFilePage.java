@@ -10,8 +10,6 @@ import java.awt.Font;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import coursescheduler.views.pages.containers.dummyCourse;
-import coursescheduler.views.pages.containers.dummyUser;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 /**

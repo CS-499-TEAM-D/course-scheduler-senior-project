@@ -1,5 +1,7 @@
 package coursescheduler.managers;
 
+import coursescheduler.infrastructure.database.DatabaseClient;
+
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -13,7 +15,7 @@ import javax.swing.JPanel;
 public final class BaseFrameManager extends FrameManager<JFrame, JComponent>
     implements PanelController<JComponent> {
 
-  public BaseFrameManager(JFrame container) {
-    super(container);
+  public BaseFrameManager(JFrame container, DatabaseClient databaseClient) {
+    super(container, databaseClient);
   }
 }

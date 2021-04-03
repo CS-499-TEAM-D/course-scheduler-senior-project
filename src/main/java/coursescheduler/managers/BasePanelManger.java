@@ -4,6 +4,8 @@
 
 package coursescheduler.managers;
 
+import coursescheduler.infrastructure.database.DatabaseClient;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -25,5 +27,10 @@ public final class BasePanelManger extends PanelManager<JFrame, JPanel>
     @Override
     public void updatePage(JPanel page) {
 
+    }
+
+    @Override
+    public DatabaseClient getDatabaseClient() {
+        return null;
     }
 }

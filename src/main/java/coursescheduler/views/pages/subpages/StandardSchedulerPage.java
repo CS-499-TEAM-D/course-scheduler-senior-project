@@ -7,7 +7,6 @@ package coursescheduler.views.pages.subpages;
 import coursescheduler.views.pages.SubPage;
 import coursescheduler.views.pages.containers.PageControl;
 import coursescheduler.views.pages.containers.dummyCourse;
-import coursescheduler.views.pages.containers.dummyUser;
 
 import java.awt.Font;
 import javax.swing.JPanel;

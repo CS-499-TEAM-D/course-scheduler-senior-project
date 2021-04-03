@@ -2,6 +2,7 @@ package coursescheduler.views.pages;
 
 import javax.swing.BorderFactory;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 import coursescheduler.managers.PanelController;
 import coursescheduler.views.pages.containers.MasterSchedulerContainer;
@@ -18,8 +19,7 @@ public final class LoginPage extends javax.swing.JPanel {
     this.controller = controller;
     initComponents();
   }
-  
-  String chosenType = "MASTER";
+
 
   
   /**
@@ -118,31 +118,16 @@ public final class LoginPage extends javax.swing.JPanel {
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
-        if (chosenType.equals("MASTER"))
-        {
-            controller.updatePage(new MasterSchedulerContainer()); // Default to Dean page for demo purpose.
-        }
-        else if (chosenType.equals("STANDARD"))
-        {
-            controller.updatePage(new StandardSchedulerContainer());
-        }
+        verifyUserAndUpdatePage();
     }//GEN-LAST:event_submitButtonActionPerformed
 
   private void emailFieldEnterKeyPressed(
       java.awt.event.KeyEvent evt) { // GEN-FIRST:event_emailFieldEnterKeyPressed
     if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-      // TODO: Use credentials service to retrieve user.
-      // TODO: Use factory to generate user's page.
-      System.out.println("emailFieldEnterKeyPressed");
-      if (chosenType.equals("MASTER"))
-        {
-            controller.updatePage(new MasterSchedulerContainer()); // Default to Dean page for demo purpose.
-        }
-        else if (chosenType.equals("STANDARD"))
-        {
-            controller.updatePage(new StandardSchedulerContainer());
-        }
-      
+        // TODO: Use credentials service to retrieve user.
+        // TODO: Use factory to generate user's page.
+        System.out.println("emailFieldEnterKeyPressed");
+        verifyUserAndUpdatePage();
     }
   } // GEN-LAST:event_emailFieldEnterKeyPressed
 
@@ -152,16 +137,38 @@ public final class LoginPage extends javax.swing.JPanel {
       // TODO: Use credentials service to retrieve user.
       // TODO: Use factory to generate user's role page.
       System.out.println("passwordFieldEnterPressed");
-      if (chosenType.equals("MASTER"))
-        {
-            controller.updatePage(new MasterSchedulerContainer()); // Default to Dean page for demo purpose.
-        }
-        else if (chosenType.equals("STANDARD"))
-        {
-            controller.updatePage(new StandardSchedulerContainer());
-        }
+      verifyUserAndUpdatePage();
+
     }
   } // GEN-LAST:event_passwordFieldEnterPressed
+
+
+    private void verifyUserAndUpdatePage(){
+        try {
+            String userVerified = controller.getDatabaseClient().verifyUserLogin(emailField.getText(), passwordField.getPassword());
+
+            System.out.println(userVerified);
+
+            if (userVerified.equals("false")){
+                // failed log in attempt
+
+            }
+            else if (userVerified.equals("master"))
+            {
+                // master scheduler successful login
+                controller.updatePage(new MasterSchedulerContainer()); // Default to Master page for demo purpose.
+            }
+            else
+            {
+                // any other user successful login
+                controller.updatePage(new StandardSchedulerContainer());  // at this point we want to pass the user department tag so we know what department schedule we are modifying
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
   
 
