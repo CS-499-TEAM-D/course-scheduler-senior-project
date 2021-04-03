@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package coursescheduler.views.pages.subpages;
-import coursescheduler.managers.PanelController;
-import coursescheduler.managers.PopupController;
 import coursescheduler.views.pages.SubPage;
 import coursescheduler.views.pages.containers.PageControl;
 import coursescheduler.views.pages.containers.dummyCourse;
@@ -13,84 +11,41 @@ import coursescheduler.views.pages.containers.dummyUser;
 
 import java.awt.Font;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
  * @author evilc
  */
-public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel> {
+public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<JPanel> {
     PageControl control;
-    InputMultipleCoursesTable tableControl;
-    String page = "DEPARTMENT_CHAIR";
-    PopupController popupController;
-    InputMultipleCoursesTable tableController;
-    AddCourseFacultyPage addCourse;
-    RemoveCoursePage removeCourse;
-
-
+    String page = "MASTER";
     int textSize = 12;
 
     @Override
     public JPanel init() {
         initComponents();
+		
         return this;
-    }
-
-    public void setPageSettingsControl(PageControl input)
-    {
-        control = input;
-        addCourse.setPageSettingsControl(control);
-        removeCourse.setPageSettingsControl(control);
     }
     
     public void initTable()
     {
+        
         for (int i = 0; i < control.getAllCourses().size(); i++)
         {
             addCourse(control.getAllCourses().get(i));
-            addCourse.addComboBoxCourse(control.getAllCourses().get(i));
+            //editCourse.addComboBoxCourse(control.getAllCourses().get(i));
             //removeCourse.addComboBoxCourse(control.getAllCourses().get(i));
         }
     }
     
-    public void addCourse(dummyCourse input)
+    public void setPageSettingsControl(PageControl input)
     {
-        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
-        Object[] temp = new Object[] 
-        { 
-            input.getCollege(),
-            input.getID(), 
-            input.getName(),
-            input.getProfessor(), 
-            input.getRoom(),
-            input.getTimes(),
-            input.getDays(),
-            input.getSeats()   
-        };
-        
-        model.addRow(temp);
-        removeCourse.addComboBoxCourse(input);
-        model.fireTableDataChanged();
+        control = input;
     }
-    
-    public void removeCourse(int IDInput, String name)
-    {
-        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
-        for (int i = 0; i < model.getRowCount(); i++)
-        {
-            if (model.getValueAt(i, 1).equals(IDInput))
-            {
-                model.removeRow(i);
-                break;
-            }
-        }
-        
-      
-        model.fireTableDataChanged();
-    }
-    
+
     public void setTextSize(int input)
     {
         textSize = input;
@@ -111,14 +66,10 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
         Font newFont1 = new Font("Tahoma", Font.PLAIN,  textSize);
         Font newFont2 = new Font("Tahoma", Font.PLAIN,  (textSize + difference1));
         Font newFont3 = new Font("Tahoma", Font.PLAIN,  (textSize + difference2));
-        jLabel1.setFont(newFont2); //Faculty
-        jLabel2.setFont(newFont3); //Current Courses Loaded:
+        jLabel1.setFont(newFont2); //Add Course
+        jLabel2.setFont(newFont3); //College:
         backButton.setFont(newFont1);
         
-        addCourse.setTextSize(textSize);
-        addCourse.updateTextSize();
-        removeCourse.setTextSize(textSize);
-        removeCourse.updateTextSize();
     }
 
     
@@ -126,25 +77,48 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
     {
         return page;
     }
-    public FacultyPageSub() {
-        courseManagementTabbedPane = new javax.swing.JTabbedPane();
-        addCourse = new AddCourseFacultyPage();
-        removeCourse = new RemoveCoursePage();
-	courseManagementTabbedPane.addTab("Add Course", null, addCourse, "Add Course");
-        courseManagementTabbedPane.addTab("Remove Course", null, removeCourse, "Remove Course");
+    
+    public MasterSchedulerPage() {
         initComponents();
-        popupController = new PopupController();
-        tableController = new InputMultipleCoursesTable();
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        for (int i = 0; i < model.getRowCount(); i++)
+        {
+            model.setValueAt("", i, 0);
+        }
+        
     }
     
-    public AddCourseFacultyPage getAddCourse()
+    
+    public void addCourse(dummyCourse input)
     {
-        return addCourse;
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        Object[] temp = new Object[] 
+        { 
+            input.getID(), 
+            input.getSection(),
+            input.getProfessor(), 
+            input.getRoom(),
+            input.getTimes(), 
+        };
+        
+        model.addRow(temp);
+        model.fireTableDataChanged();
     }
     
-    public RemoveCoursePage getRemoveCourse()
+    public void removeCourse(int IDInput, String name)
     {
-        return removeCourse;
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        for (int i = 0; i < model.getRowCount(); i++)
+        {
+            if (model.getValueAt(i, 1).equals(IDInput))
+            {
+                model.removeRow(i);
+                break;
+            }
+        }
+        
+      
+        model.fireTableDataChanged();
     }
     
     public DefaultTableModel getTableModel()
@@ -159,11 +133,17 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
     
     public void disableButtons()
     {
+//        addCourseButton.setEnabled(false);
+//        editCourseButton.setEnabled(false);
+//        removeCourseButton.setEnabled(false);
         backButton.setEnabled(false);
     }
     
     public void enableButtons()
     {
+//        addCourseButton.setEnabled(true);
+//        editCourseButton.setEnabled(true);
+//        removeCourseButton.setEnabled(true);
         backButton.setEnabled(true);
     }
 
@@ -181,7 +161,6 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         currentCoursesTable = new javax.swing.JTable();
-        courseManagementTabbedPane = new javax.swing.JTabbedPane();
         jButton1 = new javax.swing.JButton();
 
         backButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -193,7 +172,7 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Faculty");
+        jLabel1.setText("Master");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Current Courses Loaded:");
@@ -203,12 +182,19 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
 
             },
             new String [] {
-                "College", "ID", "Name", "Professor", "Room", "Times", "Days", "Seats"
+                "Course", "Section", "Professor", "Room", "Times", "Only One"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -223,10 +209,6 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
             }
         });
 
-        courseManagementTabbedPane.addTab("Add Course", null, addCourse, "Add Course");
-        //courseManagementTabbedPane.addTab("Edit Course", null, new EditCoursePage(), "Edit Course");
-        courseManagementTabbedPane.addTab("Remove Course", null, removeCourse, "Remove Course");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -236,8 +218,7 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(courseManagementTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(backButton)
@@ -245,27 +226,22 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
                                 .addComponent(jButton1))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jLabel1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(79, 79, 79)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(backButton)
-                            .addComponent(jButton1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(courseManagementTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addGap(5, 5, 5)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(backButton)
+                    .addComponent(jButton1))
+                .addGap(14, 14, 14))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -282,7 +258,6 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
-    private javax.swing.JTabbedPane courseManagementTabbedPane;
     private javax.swing.JTable currentCoursesTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

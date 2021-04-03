@@ -5,11 +5,9 @@
  */
 package coursescheduler.views.pages.containers;
 import coursescheduler.views.pages.subpages.GenerateSchedulePage;
-import coursescheduler.views.pages.subpages.DepartmentChairPageSub;
-import coursescheduler.views.pages.subpages.SaveLoadCSVFilePage;
-import coursescheduler.views.pages.subpages.SaveLoadSchedulePage;
-import coursescheduler.views.pages.subpages.RegistrarPageSub;
-import coursescheduler.views.pages.subpages.FacultyPageSub;
+import coursescheduler.views.pages.subpages.MasterSchedulerPage;
+import coursescheduler.views.pages.subpages.SaveLoadFilePage;
+import coursescheduler.views.pages.subpages.StandardSchedulerPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +21,9 @@ import java.util.List;
 public class PageControl 
 {
     GenerateSchedulePage generateSchedule;
-    DepartmentChairPageSub departmentChair;
-    SaveLoadCSVFilePage saveLoadCSVFile;
-    SaveLoadSchedulePage saveLoadSchedule;
-    RegistrarPageSub registrar;
-    FacultyPageSub faculty;
+    MasterSchedulerPage master;
+    SaveLoadFilePage saveLoadFile;
+    StandardSchedulerPage standard;
     List<dummyCourse> allCoursesDummy = new ArrayList<>();
     List<dummyCourse> loadedCoursesDummy = new ArrayList<>();
     String type;
@@ -391,11 +387,11 @@ public class PageControl
     {
         if (type.equals("DEPARTMENT_CHAIR"))
         {
-            departmentChair.removeCourse(returnDummyCourseByNameLoaded(name).getID(), name);
+            //departmentChair.removeCourse(returnDummyCourseByNameLoaded(name).getID(), name);
         }
         else if (type.equals("FACULTY"))
         {
-            faculty.removeCourse(returnDummyCourseByNameLoaded(name).getID(), name);
+            //faculty.removeCourse(returnDummyCourseByNameLoaded(name).getID(), name);
         }
 
         for(int i = 0; i < loadedCoursesDummy.size(); i++)
@@ -427,51 +423,50 @@ public class PageControl
             }
         }
         
-        departmentChair.updateCourse(input);
+        //departmentChair.updateCourse(input);
         
     }
     
     public void addCourseDepartmentChair(dummyCourse input)
     {
         loadedCoursesDummy.add(input);
-        departmentChair.addCourse(input);
+        //departmentChair.addCourse(input);
     }
     
     public void addCourseFaculty(dummyCourse input)
     {
         loadedCoursesDummy.add(input);
-        faculty.addCourse(input);
+        //faculty.addCourse(input);
     }
     
-    public void setMainPages(GenerateSchedulePage generateScheduleInput, SaveLoadCSVFilePage saveLoadCSVFileInput, SaveLoadSchedulePage saveLoadScheduleInput)
+    public void setMainPages(GenerateSchedulePage generateScheduleInput, SaveLoadFilePage saveLoadFileInput)
     {
         generateSchedule = generateScheduleInput;
         generateSchedule.setPageSettingsControl(this);
         
-        saveLoadCSVFile = saveLoadCSVFileInput;
-        saveLoadCSVFile.setPageSettingsControl(this);
-          
-        saveLoadSchedule = saveLoadScheduleInput;
-        saveLoadSchedule.setPageSettingsControl(this);
+        saveLoadFile = saveLoadFileInput;
+        saveLoadFile.setPageSettingsControl(this);
     }
     
-    public void setDepartmentChairPage(DepartmentChairPageSub input)
+    public void setMasterPage(MasterSchedulerPage input)
     {
-        departmentChair = input;
-        departmentChair.setPageSettingsControl(this);
+        master = input;
+        //departmentChair.setPageSettingsControl(this);
     }
     
-    public void setFacultyPage(FacultyPageSub input)
+    public void setStandardPage(StandardSchedulerPage input)
     {
-        faculty = input;
-        faculty.setPageSettingsControl(this);
+        standard = input;
+        standard.setPageSettingsControl(this);
     }
     
+    /*
     public void setRegistrarPage(RegistrarPageSub input)
     {
         registrar = input;
         registrar.setPageSettingsControl(this);
     }
+    */
     
     public void updateTextSizeMain(int size)
     {
@@ -479,48 +474,30 @@ public class PageControl
         generateSchedule.updateTextSize();
         
         
-        saveLoadCSVFile.setTextSize(size);
-        saveLoadCSVFile.updateTextSize();
+        saveLoadFile.setTextSize(size);
+        saveLoadFile.updateTextSize();
         
-        saveLoadSchedule.setTextSize(size);
-        saveLoadSchedule.updateTextSize();
+        //saveLoadSchedule.setTextSize(size);
+        //saveLoadSchedule.updateTextSize();
         
-        if (departmentChair != null)
+        if (master != null)
         {
-            departmentChair.setTextSize(size);
-            departmentChair.updateTextSize();
+            master.setTextSize(size);
+            master.updateTextSize();
         }
         
-        if (faculty != null)
+        if (standard != null)
         {
-            faculty.setTextSize(size);
-            faculty.updateTextSize();
+            standard.setTextSize(size);
+            standard.updateTextSize();
         }
         
-        if (registrar != null)
-        {
-            registrar.setTextSize(size);
-            registrar.updateTextSize();
-        }
+
     }
     
-    public void updateTextSizeDepartmentChair(int size)
-    {
-        departmentChair.setTextSize(size);
-        departmentChair.updateTextSize();
-    }
+
     
-    public void updateTextSizeFaculty(int size)
-    {
-        faculty.setTextSize(size);
-        faculty.updateTextSize();
-    }
-    
-    public void udpateTextSizeRegistrar(int size)
-    {
-        registrar.setTextSize(size);
-        registrar.updateTextSize();
-    }
+
 
     
 }

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package coursescheduler.views.pages.subpages;
-import coursescheduler.managers.PopupController;
 import coursescheduler.views.pages.SubPage;
 import coursescheduler.views.pages.containers.PageControl;
 import coursescheduler.views.pages.containers.dummyCourse;
@@ -12,20 +11,16 @@ import coursescheduler.views.pages.containers.dummyUser;
 
 import java.awt.Font;
 import javax.swing.JPanel;
-//import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author evilc
  */
-public class RegistrarPageSub extends javax.swing.JPanel implements SubPage<JPanel> {
+public class StandardSchedulerPage extends javax.swing.JPanel implements SubPage<JPanel> {
     PageControl control;
-    InputMultipleCoursesTable tableControl;
-    String page = "DEPARTMENT_CHAIR";
-    PopupController popupController;
-    InputMultipleCoursesTable tableController;
-    PreliminaryCoursesPage preCourse;
+    String page = "MASTER";
+
 
 
 
@@ -40,7 +35,7 @@ public class RegistrarPageSub extends javax.swing.JPanel implements SubPage<JPan
     public void setPageSettingsControl(PageControl input)
     {
         control = input;
-        preCourse.setPageSettingsControl(control);
+
     }
     
     public void initTable()
@@ -48,106 +43,19 @@ public class RegistrarPageSub extends javax.swing.JPanel implements SubPage<JPan
         for (int i = 0; i < control.getAllCourses().size(); i++)
         {
             addCourse(control.getAllCourses().get(i));
-            preCourse.addToComboBox_Course(control.getAllCourses().get(i).getName());
-        }
-        
-        for (int j = 0; j < control.getAllCourses().size(); j++)
-        {
-            preCourse.addToComboBox_AddPreReq(control.getAllCourses().get(j).getName());
         }
     }
     
-    public void setTextSize(int input)
-    {
-        textSize = input;
-    }
-    
-    
-    public int getTextSize()
-    {
-        return textSize;
-    }
-
-    public void updateTextSize()
-    {
-        this.setTextSize(textSize);
-        int size1 = jLabel1.getFont().getSize();
-        int difference1 = size1 - textSize;
-        int size2 = jLabel2.getFont().getSize();
-        int difference2 = size2 - textSize;
-        Font newFont1 = new Font("Tahoma", Font.PLAIN,  textSize);
-        Font newFont2 = new Font("Tahoma", Font.PLAIN,  (textSize + difference1));
-        Font newFont3 = new Font("Tahoma", Font.PLAIN,  (textSize + difference2));
-        jLabel1.setFont(newFont2); //Registrar
-        jLabel2.setFont(newFont3); //Current Courses Loaded:
-        backButton.setFont(newFont1);
-        
-        preCourse.setTextSize(textSize);
-        preCourse.updateTextSize();
-    }
-
-    
-    public String returnPage()
-    {
-        return page;
-    }
-    public RegistrarPageSub() {
-        //JScrollPane scroll = new JScrollPane();
-        //scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-	//scroll.setBounds(50, 30, 300, 50);
-        courseManagementTabbedPane = new javax.swing.JTabbedPane();
-        preCourse = new PreliminaryCoursesPage();
-        initComponents();
-        popupController = new PopupController();
-        tableController = new InputMultipleCoursesTable();
-    }
-    
-    public PreliminaryCoursesPage getPreCourse()
-    {
-        return preCourse;
-    }
-    
-
-    
-    public DefaultTableModel getTableModel()
-    {
-        return (DefaultTableModel) currentCoursesTable.getModel();
-    }
-    
-    public void setTableModel(DefaultTableModel input)
-    {
-        currentCoursesTable.setModel(input);
-    }
-    
-    public void disableButtons()
-    {
-//        addCourseButton.setEnabled(false);
-//        editCourseButton.setEnabled(false);
-//        removeCourseButton.setEnabled(false);
-        backButton.setEnabled(false);
-    }
-    
-    public void enableButtons()
-    {
-//        addCourseButton.setEnabled(true);
-//        editCourseButton.setEnabled(true);
-//        removeCourseButton.setEnabled(true);
-        backButton.setEnabled(true);
-    }
-    
-   public void addCourse(dummyCourse input)
+    public void addCourse(dummyCourse input)
     {
         DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
         Object[] temp = new Object[] 
         { 
-            input.getCollege(),
             input.getID(), 
-            input.getName(),
+            input.getSection(),
             input.getProfessor(), 
             input.getRoom(),
-            input.getTimes(),
-            input.getDays(),
-            input.getSeats()   
+            input.getTimes(), 
         };
         
         model.addRow(temp);
@@ -169,6 +77,61 @@ public class RegistrarPageSub extends javax.swing.JPanel implements SubPage<JPan
       
         model.fireTableDataChanged();
     }
+    
+    public void setTextSize(int input)
+    {
+        textSize = input;
+    }
+    
+    public int getTextSize()
+    {
+        return textSize;
+    }
+
+    public void updateTextSize()
+    {
+        this.setTextSize(textSize);
+        int size1 = jLabel1.getFont().getSize();
+        int difference1 = size1 - textSize;
+        int size2 = jLabel2.getFont().getSize();
+        int difference2 = size2 - textSize;
+        Font newFont1 = new Font("Tahoma", Font.PLAIN,  textSize);
+        Font newFont2 = new Font("Tahoma", Font.PLAIN,  (textSize + difference1));
+        Font newFont3 = new Font("Tahoma", Font.PLAIN,  (textSize + difference2));
+        jLabel1.setFont(newFont2); //Faculty
+        jLabel2.setFont(newFont3); //Current Courses Loaded:
+        backButton.setFont(newFont1);
+    }
+
+    
+    public String returnPage()
+    {
+        return page;
+    }
+    public StandardSchedulerPage() {
+        initComponents();
+    }
+    
+    
+    public DefaultTableModel getTableModel()
+    {
+        return (DefaultTableModel) currentCoursesTable.getModel();
+    }
+    
+    public void setTableModel(DefaultTableModel input)
+    {
+        currentCoursesTable.setModel(input);
+    }
+    
+    public void disableButtons()
+    {
+        backButton.setEnabled(false);
+    }
+    
+    public void enableButtons()
+    {
+        backButton.setEnabled(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -184,7 +147,6 @@ public class RegistrarPageSub extends javax.swing.JPanel implements SubPage<JPan
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         currentCoursesTable = new javax.swing.JTable();
-        courseManagementTabbedPane = new javax.swing.JTabbedPane();
         jButton1 = new javax.swing.JButton();
 
         backButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -196,7 +158,7 @@ public class RegistrarPageSub extends javax.swing.JPanel implements SubPage<JPan
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Registrar");
+        jLabel1.setText("Standard");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Current Courses Loaded:");
@@ -206,11 +168,11 @@ public class RegistrarPageSub extends javax.swing.JPanel implements SubPage<JPan
 
             },
             new String [] {
-                "College", "ID", "Name", "Professor", "Room", "Times", "Days", "Seats"
+                "Course", "Section", "Professor", "Room", "Times"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -226,10 +188,6 @@ public class RegistrarPageSub extends javax.swing.JPanel implements SubPage<JPan
             }
         });
 
-        //courseManagementTabbedPane.addTab("Add Course", null, new AddCourseDepartmentChairPage(), "Add Course");
-        //courseManagementTabbedPane.addTab("Edit Course", null, new EditCoursePage(), "Edit Course");
-        courseManagementTabbedPane.addTab("Preliminary Courses", null, preCourse, "Preliminary Courses");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -239,36 +197,30 @@ public class RegistrarPageSub extends javax.swing.JPanel implements SubPage<JPan
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(courseManagementTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(1, 1, 1)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(backButton)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton1))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jLabel1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(79, 79, 79)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(backButton)
-                            .addComponent(jButton1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(courseManagementTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addGap(5, 5, 5)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(backButton)
+                    .addComponent(jButton1))
+                .addGap(14, 14, 14))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -285,7 +237,6 @@ public class RegistrarPageSub extends javax.swing.JPanel implements SubPage<JPan
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
-    private javax.swing.JTabbedPane courseManagementTabbedPane;
     private javax.swing.JTable currentCoursesTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
