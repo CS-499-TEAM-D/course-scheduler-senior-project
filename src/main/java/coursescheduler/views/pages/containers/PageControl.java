@@ -5,11 +5,9 @@
  */
 package coursescheduler.views.pages.containers;
 import coursescheduler.views.pages.subpages.GenerateSchedulePage;
-import coursescheduler.views.pages.subpages.DepartmentChairPageSub;
-import coursescheduler.views.pages.subpages.SaveLoadCSVFilePage;
-import coursescheduler.views.pages.subpages.SaveLoadSchedulePage;
-import coursescheduler.views.pages.subpages.RegistrarPageSub;
-import coursescheduler.views.pages.subpages.FacultyPageSub;
+import coursescheduler.views.pages.subpages.DepartmentCoordinatorPage;
+import coursescheduler.views.pages.subpages.SaveLoadFilePage;
+import coursescheduler.views.pages.subpages.CampusViewPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,19 +21,29 @@ import java.util.List;
 public class PageControl 
 {
     GenerateSchedulePage generateSchedule;
-    DepartmentChairPageSub departmentChair;
-    SaveLoadCSVFilePage saveLoadCSVFile;
-    SaveLoadSchedulePage saveLoadSchedule;
-    RegistrarPageSub registrar;
-    FacultyPageSub faculty;
+    DepartmentCoordinatorPage departmentCoordinator;
+    CampusViewPage campusView;
+    SaveLoadFilePage saveLoadFile;
     List<dummyCourse> allCoursesDummy = new ArrayList<>();
     List<dummyCourse> loadedCoursesDummy = new ArrayList<>();
+    List<dummyRoom> allRoomsDummy = new ArrayList<>();
     String type;
     
     public PageControl()
     {
 
 
+    }
+    
+    public void setDebugAllRooms()
+    {
+        String building = "Building 1";
+        String number = "1A";
+        int seats = 30;
+        dummyRoom room1 = new dummyRoom();
+        room1.setBuilding(building);
+        room1.setNumber(number);
+        room1.setSeats(seats);
     }
     
     
@@ -180,6 +188,10 @@ public class PageControl
         return allCoursesDummy;
     }
     
+    public List<dummyRoom> getAllRooms()
+    {
+        return allRoomsDummy;
+    }
     
     public dummyCourse returnDummyCourseByID(int ID)
     {
@@ -229,6 +241,25 @@ public class PageControl
         
         return null;      
     }
+    
+    public dummyRoom returnDummyRoomByNumber(String number)
+    {
+        if (!allRoomsDummy.isEmpty())
+        {
+            for (int i = 0; i < allRoomsDummy.size(); i++)
+            {
+                if (allRoomsDummy.get(i).getNumber().equals(number))
+                {
+                    return allRoomsDummy.get(i);
+
+                }
+            }
+        }
+        
+        return null;      
+    }
+    
+    
     
     public dummyCourse returnDummyCourseByName_PreReq(String courseName, String preName)
     {
@@ -389,14 +420,11 @@ public class PageControl
     
     public void removeCourseByName(String name)
     {
-        if (type.equals("DEPARTMENT_CHAIR"))
+        if (type.equals("DEPARTMENT_COORDINATOR"))
         {
-            departmentChair.removeCourse(returnDummyCourseByNameLoaded(name).getID(), name);
+            departmentCoordinator.removeCourse(returnDummyCourseByNameLoaded(name).getID(), name);
         }
-        else if (type.equals("FACULTY"))
-        {
-            faculty.removeCourse(returnDummyCourseByNameLoaded(name).getID(), name);
-        }
+
 
         for(int i = 0; i < loadedCoursesDummy.size(); i++)
         {
@@ -407,6 +435,18 @@ public class PageControl
             }
         }
         
+    }
+    
+     public void removeRoomByNumber(String number)
+    {
+        for(int i = 0; i < allRoomsDummy.size(); i++)
+        {
+            if (allRoomsDummy.get(i).getNumber().equals(number))
+            {
+                allRoomsDummy.remove(allRoomsDummy.get(i));
+                break;
+            }
+        }  
     }
     
     public void editCourse(dummyCourse input)
@@ -427,51 +467,54 @@ public class PageControl
             }
         }
         
-        departmentChair.updateCourse(input);
+        departmentCoordinator.updateCourse(input);
         
     }
     
-    public void addCourseDepartmentChair(dummyCourse input)
+    
+     public void editRoom(dummyRoom input)
     {
-        loadedCoursesDummy.add(input);
-        departmentChair.addCourse(input);
+        for (int i = 0; i < allRoomsDummy.size(); i++)
+        {
+            if (allRoomsDummy.get(i).getNumber() == input.getNumber())
+            {
+                allRoomsDummy.get(i).setBuilding(input.getBuilding());
+                allRoomsDummy.get(i).setSeats(input.getSeats());
+                break;
+            }
+        }
+        
+        campusView.updateRoom(input);
+        
     }
     
-    public void addCourseFaculty(dummyCourse input)
+    public void addCourse(dummyCourse input)
     {
         loadedCoursesDummy.add(input);
-        faculty.addCourse(input);
+        departmentCoordinator.addCourse(input);
     }
     
-    public void setMainPages(GenerateSchedulePage generateScheduleInput, SaveLoadCSVFilePage saveLoadCSVFileInput, SaveLoadSchedulePage saveLoadScheduleInput)
+
+    
+    public void setMainPages(GenerateSchedulePage generateScheduleInput, SaveLoadFilePage saveLoadFileInput, CampusViewPage campusViewInput)
     {
         generateSchedule = generateScheduleInput;
         generateSchedule.setPageSettingsControl(this);
         
-        saveLoadCSVFile = saveLoadCSVFileInput;
-        saveLoadCSVFile.setPageSettingsControl(this);
-          
-        saveLoadSchedule = saveLoadScheduleInput;
-        saveLoadSchedule.setPageSettingsControl(this);
+        saveLoadFile = saveLoadFileInput;
+        saveLoadFile.setPageSettingsControl(this);
+        
+        campusView = campusViewInput;
+        campusView.setPageSettingsControl(this);
     }
     
-    public void setDepartmentChairPage(DepartmentChairPageSub input)
+    public void setDepartmentCoordinatorPage(DepartmentCoordinatorPage input)
     {
-        departmentChair = input;
-        departmentChair.setPageSettingsControl(this);
+        departmentCoordinator = input;
+        departmentCoordinator.setPageSettingsControl(this);
     }
     
-    public void setFacultyPage(FacultyPageSub input)
-    {
-        faculty = input;
-        faculty.setPageSettingsControl(this);
-    }
-    
-    public void setRegistrarPage(RegistrarPageSub input)
-    {
-        registrar = input;
-        registrar.setPageSettingsControl(this);
-    }
+
     
     public void updateTextSizeMain(int size)
     {
@@ -479,48 +522,25 @@ public class PageControl
         generateSchedule.updateTextSize();
         
         
-        saveLoadCSVFile.setTextSize(size);
-        saveLoadCSVFile.updateTextSize();
+        saveLoadFile.setTextSize(size);
+        saveLoadFile.updateTextSize();
         
-        saveLoadSchedule.setTextSize(size);
-        saveLoadSchedule.updateTextSize();
         
-        if (departmentChair != null)
+        if (departmentCoordinator != null)
         {
-            departmentChair.setTextSize(size);
-            departmentChair.updateTextSize();
+            departmentCoordinator.setTextSize(size);
+            departmentCoordinator.updateTextSize();
         }
         
-        if (faculty != null)
-        {
-            faculty.setTextSize(size);
-            faculty.updateTextSize();
-        }
-        
-        if (registrar != null)
-        {
-            registrar.setTextSize(size);
-            registrar.updateTextSize();
-        }
     }
     
     public void updateTextSizeDepartmentChair(int size)
     {
-        departmentChair.setTextSize(size);
-        departmentChair.updateTextSize();
+        departmentCoordinator.setTextSize(size);
+        departmentCoordinator.updateTextSize();
     }
     
-    public void updateTextSizeFaculty(int size)
-    {
-        faculty.setTextSize(size);
-        faculty.updateTextSize();
-    }
-    
-    public void udpateTextSizeRegistrar(int size)
-    {
-        registrar.setTextSize(size);
-        registrar.updateTextSize();
-    }
+
 
     
 }

@@ -5,9 +5,7 @@ import java.awt.event.KeyEvent;
 
 import coursescheduler.managers.PanelController;
 import coursescheduler.views.pages.containers.DepartmentChairPageContainer;
-import coursescheduler.views.pages.containers.FacultyPageContainer;
-import coursescheduler.views.pages.containers.RegistrarPageContainer;
-import coursescheduler.views.pages.containers.PageControl;
+
 
 /**
  * Presents to and allows the user to login provided with success email and password credentials.
@@ -135,18 +133,11 @@ public final class LoginPage extends javax.swing.JPanel {
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
-        if (chosenType.equals("DEPARTMENT_CHAIR"))
+        if (chosenType.equals("DEPARTMENT_COORDINATOR"))
         {
             controller.updatePage(new DepartmentChairPageContainer()); // Default to Dean page for demo purpose.
         }
-        else if (chosenType.equals("FACULTY"))
-        {
-            controller.updatePage(new FacultyPageContainer());
-        }
-        else if (chosenType.equals("REGISTRAR"))
-        {
-            controller.updatePage(new RegistrarPageContainer());
-        }
+
     }//GEN-LAST:event_submitButtonActionPerformed
 
   private void emailFieldEnterKeyPressed(
@@ -155,18 +146,11 @@ public final class LoginPage extends javax.swing.JPanel {
       // TODO: Use credentials service to retrieve user.
       // TODO: Use factory to generate user's page.
       System.out.println("emailFieldEnterKeyPressed");
-      if (chosenType.equals("DEPARTMENT_CHAIR"))
+      if (chosenType.equals("DEPARTMENT_COORDINATOR"))
       {
           controller.updatePage(new DepartmentChairPageContainer()); // Default to Dean page for demo purpose.
       }
-      else if (chosenType.equals("FACULTY"))
-      {
-          controller.updatePage(new FacultyPageContainer());
-      }
-      else if (chosenType.equals("REGISTRAR"))
-      {
-          controller.updatePage(new RegistrarPageContainer());
-      }
+
       
     }
   } // GEN-LAST:event_emailFieldEnterKeyPressed
@@ -177,25 +161,18 @@ public final class LoginPage extends javax.swing.JPanel {
       // TODO: Use credentials service to retrieve user.
       // TODO: Use factory to generate user's role page.
       System.out.println("passwordFieldEnterPressed");
-      if (chosenType.equals("DEPARTMENT_CHAIR"))
+      if (chosenType.equals("DEPARTMENT_COORDINATOR"))
       {
           controller.updatePage(new DepartmentChairPageContainer()); // Default to Dean page for demo purpose.
       }
-      else if (chosenType.equals("FACULTY"))
-      {
-          controller.updatePage(new FacultyPageContainer());
-      }
-      else if (chosenType.equals("REGISTRAR"))
-      {
-          controller.updatePage(new RegistrarPageContainer());
-      }
+
     }
   } // GEN-LAST:event_passwordFieldEnterPressed
 
   private void createAnAccountLabelMousePressed(
       java.awt.event.MouseEvent evt) { // GEN-FIRST:event_createAnAccountLabelMousePressed
     System.out.println("createAnAccountLabel pressed."); // TODO: Remove this.
-    controller.updatePage(new AccountCreationPage(controller));
+    controller.updatePage(new CreateAccountPage());
   } // GEN-LAST:event_createAnAccountLabelMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

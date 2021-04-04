@@ -4,93 +4,57 @@
  * and open the template in the editor.
  */
 package coursescheduler.views.pages.subpages;
-import coursescheduler.managers.PanelController;
 import coursescheduler.managers.PopupController;
 import coursescheduler.views.pages.SubPage;
 import coursescheduler.views.pages.containers.PageControl;
-import coursescheduler.views.pages.containers.dummyCourse;
+import coursescheduler.views.pages.containers.dummyRoom;
 import coursescheduler.views.pages.containers.dummyUser;
 
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
  * @author evilc
  */
-public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel> {
+public class CampusViewPage extends javax.swing.JPanel implements SubPage<JPanel> {
     PageControl control;
-    InputMultipleCoursesTable tableControl;
-    String page = "DEPARTMENT_CHAIR";
+    String page = "CAMPUS_VIEW";
     PopupController popupController;
-    InputMultipleCoursesTable tableController;
-    AddCourseFacultyPage addCourse;
-    RemoveCoursePage removeCourse;
+    EditRoomPage editRoom;
 
+    
 
     int textSize = 12;
 
     @Override
     public JPanel init() {
         initComponents();
+		
         return this;
-    }
-
-    public void setPageSettingsControl(PageControl input)
-    {
-        control = input;
-        addCourse.setPageSettingsControl(control);
-        removeCourse.setPageSettingsControl(control);
     }
     
     public void initTable()
     {
+        
         for (int i = 0; i < control.getAllCourses().size(); i++)
         {
-            addCourse(control.getAllCourses().get(i));
-            addCourse.addComboBoxCourse(control.getAllCourses().get(i));
+            addRoom(control.getAllRooms().get(i));
+            //editCourse.addComboBoxCourse(control.getAllCourses().get(i));
             //removeCourse.addComboBoxCourse(control.getAllCourses().get(i));
         }
     }
     
-    public void addCourse(dummyCourse input)
+    public void setPageSettingsControl(PageControl input)
     {
-        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
-        Object[] temp = new Object[] 
-        { 
-            input.getCollege(),
-            input.getID(), 
-            input.getName(),
-            input.getProfessor(), 
-            input.getRoom(),
-            input.getTimes(),
-            input.getDays(),
-            input.getSeats()   
-        };
-        
-        model.addRow(temp);
-        removeCourse.addComboBoxCourse(input);
-        model.fireTableDataChanged();
+        control = input;
+        editRoom.setPageSettingsControl(control);
     }
-    
-    public void removeCourse(int IDInput, String name)
-    {
-        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
-        for (int i = 0; i < model.getRowCount(); i++)
-        {
-            if (model.getValueAt(i, 1).equals(IDInput))
-            {
-                model.removeRow(i);
-                break;
-            }
-        }
-        
-      
-        model.fireTableDataChanged();
-    }
-    
+
     public void setTextSize(int input)
     {
         textSize = input;
@@ -111,14 +75,12 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
         Font newFont1 = new Font("Tahoma", Font.PLAIN,  textSize);
         Font newFont2 = new Font("Tahoma", Font.PLAIN,  (textSize + difference1));
         Font newFont3 = new Font("Tahoma", Font.PLAIN,  (textSize + difference2));
-        jLabel1.setFont(newFont2); //Faculty
-        jLabel2.setFont(newFont3); //Current Courses Loaded:
+        jLabel1.setFont(newFont2); //Add Course
+        jLabel2.setFont(newFont3); //College:
         backButton.setFont(newFont1);
         
-        addCourse.setTextSize(textSize);
-        addCourse.updateTextSize();
-        removeCourse.setTextSize(textSize);
-        removeCourse.updateTextSize();
+        editRoom.setTextSize(textSize);
+        editRoom.updateTextSize();
     }
 
     
@@ -126,25 +88,70 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
     {
         return page;
     }
-    public FacultyPageSub() {
-        courseManagementTabbedPane = new javax.swing.JTabbedPane();
-        addCourse = new AddCourseFacultyPage();
-        removeCourse = new RemoveCoursePage();
-	courseManagementTabbedPane.addTab("Add Course", null, addCourse, "Add Course");
-        courseManagementTabbedPane.addTab("Remove Course", null, removeCourse, "Remove Course");
+    
+    public CampusViewPage() {
+        editRoom = new EditRoomPage();
         initComponents();
-        popupController = new PopupController();
-        tableController = new InputMultipleCoursesTable();
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        for (int i = 0; i < model.getRowCount(); i++)
+        {
+            model.setValueAt("", i, 0);
+        }
+        
     }
     
-    public AddCourseFacultyPage getAddCourse()
+
+    public void updateRoom(dummyRoom input)
     {
-        return addCourse;
+        
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        Object[] temp = new Object[] 
+        { 
+            input.getBuilding(),
+            input.getNumber(),
+            input.getSeats()
+        };
+        for (int i = 0; i < model.getRowCount(); i++)
+        {
+            if (model.getValueAt(i, 2).equals(input.getNumber()))
+            {
+                model.setValueAt(temp[0], i, 0);
+                model.setValueAt(temp[1], i, 1);
+                model.setValueAt(temp[2], i, 2);
+                break;
+            }
+        }
+        model.fireTableDataChanged();
     }
     
-    public RemoveCoursePage getRemoveCourse()
+    public void addRoom(dummyRoom input)
     {
-        return removeCourse;
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        Object[] temp = new Object[] 
+        { 
+            input.getBuilding(),
+            input.getNumber(),
+            input.getSeats()
+        };
+        
+        model.addRow(temp);
+        editRoom.addComboBoxRoom(input);
+        model.fireTableDataChanged();
+    }
+    
+    public void removeCourse(int IDInput, String name)
+    {
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        for (int i = 0; i < model.getRowCount(); i++)
+        {
+            if (model.getValueAt(i, 1).equals(IDInput))
+            {
+                model.removeRow(i);
+                break;
+            }
+        }
+        editRoom.removeComboBoxRoom(name);
+        model.fireTableDataChanged();
     }
     
     public DefaultTableModel getTableModel()
@@ -159,11 +166,17 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
     
     public void disableButtons()
     {
+//        addCourseButton.setEnabled(false);
+//        editCourseButton.setEnabled(false);
+//        removeCourseButton.setEnabled(false);
         backButton.setEnabled(false);
     }
     
     public void enableButtons()
     {
+//        addCourseButton.setEnabled(true);
+//        editCourseButton.setEnabled(true);
+//        removeCourseButton.setEnabled(true);
         backButton.setEnabled(true);
     }
 
@@ -193,21 +206,21 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Faculty");
+        jLabel1.setText("Department Chair");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Current Courses Loaded:");
+        jLabel2.setText("Rooms:");
 
         currentCoursesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "College", "ID", "Name", "Professor", "Room", "Times", "Days", "Seats"
+                "Building", "Room", "Seats"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -223,9 +236,8 @@ public class FacultyPageSub extends javax.swing.JPanel implements SubPage<JPanel
             }
         });
 
-        courseManagementTabbedPane.addTab("Add Course", null, addCourse, "Add Course");
-        //courseManagementTabbedPane.addTab("Edit Course", null, new EditCoursePage(), "Edit Course");
-        courseManagementTabbedPane.addTab("Remove Course", null, removeCourse, "Remove Course");
+        courseManagementTabbedPane.addTab("Edit Room", null, editRoom, "Edit Room");
+
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

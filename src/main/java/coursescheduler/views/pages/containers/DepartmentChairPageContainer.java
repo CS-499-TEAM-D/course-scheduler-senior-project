@@ -2,10 +2,10 @@ package coursescheduler.views.pages.containers;
 
 import coursescheduler.views.pages.RolePage;
 import coursescheduler.views.pages.subpages.GenerateSchedulePage;
-import coursescheduler.views.pages.subpages.DepartmentChairPageSub;
-import coursescheduler.views.pages.subpages.SaveLoadCSVFilePage;
-import coursescheduler.views.pages.subpages.SaveLoadSchedulePage;
+import coursescheduler.views.pages.subpages.DepartmentCoordinatorPage;
+import coursescheduler.views.pages.subpages.SaveLoadFilePage;
 import coursescheduler.views.pages.subpages.SettingsPage;
+import coursescheduler.views.pages.subpages.CampusViewPage;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
@@ -23,32 +23,28 @@ public class DepartmentChairPageContainer extends JTabbedPane implements RolePag
   public void init() {
         PageControl control = new PageControl();
         control.setDebugAllCourses();
-        control.setType("DEPARTMENT_CHAIR");
+        control.setType("DEPARTMENT_COORDINATOR");
 
-        DepartmentChairPageSub subPageZero = new DepartmentChairPageSub();
+        DepartmentCoordinatorPage subPageZero = new DepartmentCoordinatorPage();
         subPageZero.setPageSettingsControl(control);
-        addTab("Course Management", null, subPageZero, "Tab 1 tooltip");
-        control.setDepartmentChairPage(subPageZero);
-
-      
+        addTab("Course Management", null, subPageZero, "Course Management");
+        control.setDepartmentCoordinatorPage(subPageZero);
+        
+        SaveLoadFilePage subPageTwo = new SaveLoadFilePage();
+        subPageTwo.setUserType("MASTER");
+        subPageTwo.setPageSettingsControl(control);
+        addTab("Save/Load File", null, subPageTwo, "Save/Load File");
+        
+        CampusViewPage campusView = new CampusViewPage();
+        campusView.setPageSettingsControl(control);
+        addTab("Campus View", null, campusView, "Campus View");
+        
         GenerateSchedulePage subPageOne = new GenerateSchedulePage();
         subPageOne.setPageSettingsControl(control);
-        addTab("Generate Schedule", null, subPageOne, "Tab 1 tooltip");
+        addTab("Generate Schedule", null, subPageOne, "Generate Schedule");
 
-
-        SaveLoadCSVFilePage subPageTwo = new SaveLoadCSVFilePage();
-        subPageTwo.setPageSettingsControl(control);
-        addTab("Save/Load CSV File", null, subPageTwo, "Tab 2 tooltip");
-
-
-        SaveLoadSchedulePage subPageThree = new SaveLoadSchedulePage();
-        subPageThree.setPageSettingsControl(control);
-        addTab("Save/Load Schedule", null, subPageThree, "Tab 3 tooltip");
-        control.setMainPages(subPageOne, subPageTwo, subPageThree);
-
-        
         SettingsPage subPageFour = new SettingsPage();
-        addTab("Settings", null, subPageFour, "Tab 3 tooltip");  
+        addTab("Settings", null, subPageFour, "Settings");  
 
         
   }

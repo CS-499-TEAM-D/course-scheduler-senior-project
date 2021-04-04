@@ -11,9 +11,9 @@ import coursescheduler.views.pages.containers.dummyUser;
  *
  * @author evilc
  */
-public class AddCourseFacultyPage extends javax.swing.JPanel {
+public class AddCourse extends javax.swing.JPanel {
     PageControl control;
-    String page = "ADD_COURSE_FACULTY";
+    String page = "ADD_COURSE";
     PanelController controller;
     inputSingleCourseDataTable editor;
     boolean validSelection = false;
@@ -66,7 +66,7 @@ public class AddCourseFacultyPage extends javax.swing.JPanel {
     {
         return page;
     }
-    public AddCourseFacultyPage() {
+    public AddCourse() {
         initComponents();
         selectCourseComboBox.setEnabled(false);
         editor = new inputSingleCourseDataTable();
@@ -265,7 +265,7 @@ public class AddCourseFacultyPage extends javax.swing.JPanel {
        String tempName = (String) selectCourseComboBox.getSelectedItem();
        if (temp != null && !tempName.equals("Select Course"))
        {
-           control.addCourseFaculty(temp);
+           control.addCourse(temp);
        }
     }//GEN-LAST:event_submitButtonActionPerformed
 

@@ -14,7 +14,7 @@ import java.awt.Font;
  *
  * @author evilc
  */
-public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
+public class NewCoursePage extends javax.swing.JPanel {
     PageControl control;
     String page = "ADD_COURSE_DEPARTMENT_CHAIR";
     inputSingleCourseDataTable editor;
@@ -80,7 +80,7 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
         return page;
     }
     
-    public AddCourseDepartmentChairPage() 
+    public NewCoursePage() 
     {
         initComponents();
         editor = new inputSingleCourseDataTable();;
@@ -383,7 +383,7 @@ public class AddCourseDepartmentChairPage extends javax.swing.JPanel {
        dummyCourse temp = getCourse();
        if (temp != null && allInputsValid)
        {
-           control.addCourseDepartmentChair(temp);
+           control.addCourse(temp);
            selectCollegeComboBox.setSelectedItem("Select College");
            selectRoomComboBox.setSelectedItem("Select Room");
            selectTimesComboBox.setSelectedItem("Select Times");;
