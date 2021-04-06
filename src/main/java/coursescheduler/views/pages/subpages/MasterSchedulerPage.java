@@ -30,33 +30,31 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<J
         return this;
     }
     
-    public void initTable()
+    public void initTable() //DUMMY
     {
         
         for (int i = 0; i < control.getAllCourses().size(); i++)
         {
-            addCourse(control.getAllCourses().get(i));
-            //editCourse.addComboBoxCourse(control.getAllCourses().get(i));
-            //removeCourse.addComboBoxCourse(control.getAllCourses().get(i));
+            addCourse_DUMMY(control.getAllCourses().get(i));
         }
     }
     
-    public void setPageSettingsControl(PageControl input)
+    public void setPageSettingsControl(PageControl input) //REQUIRED
     {
         control = input;
     }
 
-    public void setTextSize(int input)
+    public void setTextSize(int input) //SETTINGS ONLY
     {
         textSize = input;
     }
     
-    public int getTextSize()
+    public int getTextSize() //SETTINGS ONLY
     {
         return textSize;
     }
 
-    public void updateTextSize()
+    public void updateTextSize() //SETTINGS ONLY
     {
         this.setTextSize(textSize);
         int size1 = jLabel1.getFont().getSize();
@@ -78,7 +76,8 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<J
         return page;
     }
     
-    public MasterSchedulerPage() {
+    public MasterSchedulerPage() 
+    {
         initComponents();
         DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
         for (int i = 0; i < model.getRowCount(); i++)
@@ -88,8 +87,45 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<J
         
     }
     
+    /*
+    //FOR CHRIS:
+    public void addCourse(Course input)
+    {
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        Object[] temp = new Object[] 
+        { 
+            input.getID(), 
+            input.getSection(),
+            input.getProfessor(), 
+            input.getRoom(),
+            input.getTimes(), 
+            input.getOnlyOne() //True or false boolean
+        };
+        
+        model.addRow(temp);
+        model.fireTableDataChanged();
+    }
+    */
     
-    public void addCourse(dummyCourse input)
+    /*
+    //FOR CHRIS:
+    public void removeCourse(int ID)
+    {
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        for (int i = 0; i < model.getRowCount(); i++)
+        {
+            if (model.getValueAt(i, 1).equals(ID))
+            {
+                model.removeRow(i);
+                break;
+            }
+        }  
+        model.fireTableDataChanged();
+    }
+    */
+    
+    
+    public void addCourse_DUMMY(dummyCourse input) //DUMMY
     {
         DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
         Object[] temp = new Object[] 
@@ -105,7 +141,8 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<J
         model.fireTableDataChanged();
     }
     
-    public void removeCourse(int IDInput)
+    
+    public void removeCourse_DUMMY(int IDInput) //DUMMY
     {
         DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
         for (int i = 0; i < model.getRowCount(); i++)
@@ -121,29 +158,23 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<J
         model.fireTableDataChanged();
     }
     
-    public DefaultTableModel getTableModel()
+    public DefaultTableModel getTableModel() //UNUSED
     {
         return (DefaultTableModel) currentCoursesTable.getModel();
     }
     
-    public void setTableModel(DefaultTableModel input)
+    public void setTableModel(DefaultTableModel input) //UNUSED
     {
         currentCoursesTable.setModel(input);
     }
     
-    public void disableButtons()
+    public void disableButtons() //UNUSED
     {
-//        addCourseButton.setEnabled(false);
-//        editCourseButton.setEnabled(false);
-//        removeCourseButton.setEnabled(false);
         backButton.setEnabled(false);
     }
     
-    public void enableButtons()
+    public void enableButtons() //UNUSED
     {
-//        addCourseButton.setEnabled(true);
-//        editCourseButton.setEnabled(true);
-//        removeCourseButton.setEnabled(true);
         backButton.setEnabled(true);
     }
 

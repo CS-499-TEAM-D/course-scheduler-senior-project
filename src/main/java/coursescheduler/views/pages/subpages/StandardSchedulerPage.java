@@ -19,34 +19,112 @@ import javax.swing.table.DefaultTableModel;
  */
 public class StandardSchedulerPage extends javax.swing.JPanel implements SubPage<JPanel> {
     PageControl control;
-    String page = "MASTER";
-
-
-
-
+    String page = "STANDARD";
     int textSize = 12;
 
     @Override
     public JPanel init() {
         initComponents();
+		
         return this;
     }
-
-    public void setPageSettingsControl(PageControl input)
-    {
-        control = input;
-
-    }
     
-    public void initTable()
+    public void initTable() //DUMMY
     {
+        
         for (int i = 0; i < control.getAllCourses().size(); i++)
         {
-            addCourse(control.getAllCourses().get(i));
+            addCourse_DUMMY(control.getAllCourses().get(i));
         }
     }
     
-    public void addCourse(dummyCourse input)
+    public void setPageSettingsControl(PageControl input) //REQUIRED
+    {
+        control = input;
+    }
+
+    public void setTextSize(int input) //SETTINGS ONLY
+    {
+        textSize = input;
+    }
+    
+    public int getTextSize() //SETTINGS ONLY
+    {
+        return textSize;
+    }
+
+    public void updateTextSize() //SETTINGS ONLY
+    {
+        this.setTextSize(textSize);
+        int size1 = jLabel1.getFont().getSize();
+        int difference1 = size1 - textSize;
+        int size2 = jLabel2.getFont().getSize();
+        int difference2 = size2 - textSize;
+        Font newFont1 = new Font("Tahoma", Font.PLAIN,  textSize);
+        Font newFont2 = new Font("Tahoma", Font.PLAIN,  (textSize + difference1));
+        Font newFont3 = new Font("Tahoma", Font.PLAIN,  (textSize + difference2));
+        jLabel1.setFont(newFont2); //Add Course
+        jLabel2.setFont(newFont3); //College:
+        backButton.setFont(newFont1);
+        
+    }
+
+    
+    public String returnPage()
+    {
+        return page;
+    }
+    
+    public StandardSchedulerPage() 
+    {
+        initComponents();
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        for (int i = 0; i < model.getRowCount(); i++)
+        {
+            model.setValueAt("", i, 0);
+        }
+        
+    }
+    
+    /*
+    //FOR CHRIS:
+    public void addCourse(Course input)
+    {
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        Object[] temp = new Object[] 
+        { 
+            input.getID(), 
+            input.getSection(),
+            input.getProfessor(), 
+            input.getRoom(),
+            input.getTimes(), 
+            input.getOnlyOne() //True or false boolean
+        };
+        
+        model.addRow(temp);
+        model.fireTableDataChanged();
+    }
+    */
+    
+    /*
+    //FOR CHRIS:
+    public void removeCourse(int ID)
+    {
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        for (int i = 0; i < model.getRowCount(); i++)
+        {
+            if (model.getValueAt(i, 1).equals(ID))
+            {
+                model.removeRow(i);
+                break;
+            }
+        }  
+        model.fireTableDataChanged();
+    }
+    */
+    
+    
+    public void addCourse_DUMMY(dummyCourse input) //DUMMY
     {
         DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
         Object[] temp = new Object[] 
@@ -62,7 +140,8 @@ public class StandardSchedulerPage extends javax.swing.JPanel implements SubPage
         model.fireTableDataChanged();
     }
     
-    public void removeCourse(int IDInput)
+    
+    public void removeCourse_DUMMY(int IDInput) //DUMMY
     {
         DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
         for (int i = 0; i < model.getRowCount(); i++)
@@ -78,60 +157,26 @@ public class StandardSchedulerPage extends javax.swing.JPanel implements SubPage
         model.fireTableDataChanged();
     }
     
-    public void setTextSize(int input)
-    {
-        textSize = input;
-    }
-    
-    public int getTextSize()
-    {
-        return textSize;
-    }
-
-    public void updateTextSize()
-    {
-        this.setTextSize(textSize);
-        int size1 = jLabel1.getFont().getSize();
-        int difference1 = size1 - textSize;
-        int size2 = jLabel2.getFont().getSize();
-        int difference2 = size2 - textSize;
-        Font newFont1 = new Font("Tahoma", Font.PLAIN,  textSize);
-        Font newFont2 = new Font("Tahoma", Font.PLAIN,  (textSize + difference1));
-        Font newFont3 = new Font("Tahoma", Font.PLAIN,  (textSize + difference2));
-        jLabel1.setFont(newFont2); //Faculty
-        jLabel2.setFont(newFont3); //Current Courses Loaded:
-        backButton.setFont(newFont1);
-    }
-
-    
-    public String returnPage()
-    {
-        return page;
-    }
-    public StandardSchedulerPage() {
-        initComponents();
-    }
-    
-    
-    public DefaultTableModel getTableModel()
+    public DefaultTableModel getTableModel() //UNUSED
     {
         return (DefaultTableModel) currentCoursesTable.getModel();
     }
     
-    public void setTableModel(DefaultTableModel input)
+    public void setTableModel(DefaultTableModel input) //UNUSED
     {
         currentCoursesTable.setModel(input);
     }
     
-    public void disableButtons()
+    public void disableButtons() //UNUSED
     {
         backButton.setEnabled(false);
     }
     
-    public void enableButtons()
+    public void enableButtons() //UNUSED
     {
         backButton.setEnabled(true);
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

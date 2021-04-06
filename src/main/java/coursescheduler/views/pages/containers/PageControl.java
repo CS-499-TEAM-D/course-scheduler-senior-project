@@ -27,6 +27,8 @@ public class PageControl
     List<dummyCourse> allCoursesDummy = new ArrayList<>();
     List<dummyCourse> loadedCoursesDummy = new ArrayList<>();
     String type;
+    //FOR CHRIS:
+    //Database data;
     
     public PageControl()
     {
@@ -36,8 +38,7 @@ public class PageControl
     
     
     
-    
-    public void setDebugAllCourses()
+    public void setDebugAllCourses() //DUMMY
     {
         String college = "Science";
         int ID = 1230981; //Random number for now
@@ -168,280 +169,86 @@ public class PageControl
     }
     
 
-    public void setType(String input)
-    {
-        type = input;
-    }
-    
-    public List<dummyCourse> getAllCourses()
+  
+    public List<dummyCourse> getAllCourses() //DUMMY
     {
         return allCoursesDummy;
     }
     
-    
-    public dummyCourse returnDummyCourseByID(int ID)
+    public void setType(String input) //REQUIRED (options are "MASTER" and "STANDARD")
     {
-        dummyCourse temp = null;
-        for (int i = 0; i < allCoursesDummy.size(); i++)
-        {
-            if (allCoursesDummy.get(i).getID() == ID)
-            {
-                temp = allCoursesDummy.get(i);
-                break;
-            }
-        }
-        return temp;      
+        type = input;
     }
     
-    public dummyCourse returnDummyCourseByNameAll(String name)
+    public void removeCourse(int ID) //DUMMY
     {
-        if (!allCoursesDummy.isEmpty())
+        if (type.equals("MASTER"))
         {
-            for (int i = 0; i < allCoursesDummy.size(); i++)
-            {
-                if (allCoursesDummy.get(i).getName().equals(name))
-                {
-                    return allCoursesDummy.get(i);
-
-                }
-            }
+            master.removeCourse_DUMMY(ID);
         }
-        
-        return null;      
-    }
-    
-    
-    public dummyCourse returnDummyCourseByNameLoaded(String name)
-    {
-        if (!loadedCoursesDummy.isEmpty())
+        else if (type.equals("STANDARD"))
         {
-            for (int i = 0; i < loadedCoursesDummy.size(); i++)
-            {
-                if (loadedCoursesDummy.get(i).getName().equals(name))
-                {
-                    return loadedCoursesDummy.get(i);
-
-                }
-            }
+            standard.removeCourse_DUMMY(ID);
         }
-        
-        return null;      
-    }
-    
-    public dummyCourse returnDummyCourseByName_PreReq(String courseName, String preName)
-    {
-        int j = 0;
-        for (int i = 0; i < allCoursesDummy.size(); i++)
-        {
-            if (allCoursesDummy.get(i).getName().equals(courseName))
-            {
-                j = i;
-                break;
-            }
-        }
-        
-        
-        if (!allCoursesDummy.get(j).returnPreReqs().isEmpty())
-        {
-            for (int i = 0; i < allCoursesDummy.get(j).returnPreReqs().size(); i++)
-            {
-                if (allCoursesDummy.get(j).returnPreReqs().get(i).getName().equals(preName))
-                {
-                    return allCoursesDummy.get(j).returnPreReqs().get(i);
-                }
-            }
-        
-        }
-        
-        return null;      
-    }
-    
-    
-  
-    
-    public boolean checkSameName(String name)
-    {
-        for (int i = 0; i < loadedCoursesDummy.size(); i++)
-        {
-            if (loadedCoursesDummy.get(i).getName().equals(name))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    public boolean checkSameName_PreReq(String courseName, String preName)
-    {
-        if (!returnDummyCourseByNameAll(courseName).returnPreReqs().isEmpty())
-        {
-            for (int i = 0; i < returnDummyCourseByNameAll(courseName).returnPreReqs().size(); i++)
-            {
-                if (returnDummyCourseByNameAll(courseName).returnPreReqs().get(i).getName().equals(preName))
-                {  
-                    if (returnDummyCourseByNameAll(courseName).returnPreReqs().get(i).getName().equals(courseName))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-        
-        return false;
-        
-    }
-    
-    public boolean checkSameID_PreReq(int courseID, int preID)
-    {
-        if (!returnDummyCourseByID(courseID).returnPreReqs().isEmpty())
-        {
-            for (int i = 0; i < returnDummyCourseByID(courseID).returnPreReqs().size(); i++)
-            {
-                if (returnDummyCourseByID(courseID).returnPreReqs().get(i).getID() == preID)
-                {  
-                    if (returnDummyCourseByID(courseID).returnPreReqs().get(i).getID() == preID)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-        
-        return false;
-        
-    }
-    
-    public boolean checkSameID(int ID)
-    {
-        for (int i = 0; i < allCoursesDummy.size(); i++)
-        {
-            if (allCoursesDummy.get(i).getID() == ID)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    public void addPreReq(String courseName, String preName)
-    {
-        dummyCourse preCourse = new dummyCourse();
-        preCourse = returnDummyCourseByNameAll(preName);
-        int index = getIndexByName(courseName);
-        if (index != -1)
-        {
-            allCoursesDummy.get(index).addPreReq(preCourse);
-        }
-        
-        
-    }
-    
-    public void printPreReqs(String courseName)
-    {
-        dummyCourse temp = new dummyCourse();
-        temp = returnDummyCourseByNameAll(courseName);
-        System.out.println(courseName);
-        if (!temp.returnPreReqs().isEmpty())
-        {
-            for (int i = 0; i < temp.returnPreReqs().size(); i++)
-            {
-                System.out.println(temp.returnPreReqs().get(i).getName());
-            }
-        }
-        else
-        {
-            System.out.println("No pre-reqs.");
-        }
-        System.out.println("---------------");
-    }
-    
-    public void removePreReq(String courseName, String preName)
-    {
-        dummyCourse preCourse = new dummyCourse();
-        preCourse = returnDummyCourseByName_PreReq(courseName, preName);
-        int index = getIndexByName(courseName);
-        if (index != -1)
-        {
-            allCoursesDummy.get(index).removePreReq(preCourse);
-        }
-        
-        
-    }
-    
-    public int getIndexByName(String name)
-    {
-        int index = -1;
-        for (int i = 0; i < allCoursesDummy.size(); i++)
-        {
-            if (allCoursesDummy.get(i).getName().equals(name))
-            {
-                index = i;
-                return index;
-            }
-        }
-        return index;
     }
 
-    
-    public void removeCourseByName(String name)
-    {
-        if (type.equals("DEPARTMENT_CHAIR"))
-        {
-            master.removeCourse(returnDummyCourseByNameAll(name).getID());
-        }
-        else if (type.equals("FACULTY"))
-        {
-            standard.removeCourse(returnDummyCourseByNameAll(name).getID());;
-        }
 
-        for(int i = 0; i < loadedCoursesDummy.size(); i++)
+    
+    /*
+    //FOR CHRIS:
+    public void removeCourse(int ID) //Remove a course from the table from the "view courses" page (REQUIRED)
+    {
+        if (type.equals("MASTER"))
         {
-            if (loadedCoursesDummy.get(i).getName().equals(name))
-            {
-                loadedCoursesDummy.remove(loadedCoursesDummy.get(i));
-                break;
-            }
+            master.removeCourse(ID);
         }
-        
-    }
-    
-    public void editCourse(dummyCourse input)
-    {
-        for (int i = 0; i < loadedCoursesDummy.size(); i++)
+        else if (type.equals("STANDARD"))
         {
-            if (loadedCoursesDummy.get(i).getID() == input.getID())
-            {
-                loadedCoursesDummy.get(i).setCollege(input.getCollege());
-                loadedCoursesDummy.get(i).setID(input.getID());
-                loadedCoursesDummy.get(i).setName(input.getName());
-                loadedCoursesDummy.get(i).setProfessor(input.getProfessor());
-                loadedCoursesDummy.get(i).setRoom(input.getRoom());
-                loadedCoursesDummy.get(i).setTimes(input.getTimes());
-                loadedCoursesDummy.get(i).setDays(input.getDays());
-                loadedCoursesDummy.get(i).setSeats(input.getSeats());
-                break;
-            }
+            standard.removeCourse(ID);
         }
-        
-        //departmentChair.updateCourse(input);
-        
     }
+    */
     
-    public void addCourseMaster(dummyCourse input)
+    
+    /*
+    //FOR CHIRS:
+    public void setDatabase(Database input)
     {
-        loadedCoursesDummy.add(input);
-        master.addCourse(input);
+        data = input;
     }
-    
-    public void addCourseStandard(dummyCourse input)
+    */
+   
+    /*
+    //FOR CHRIS:
+    public void addCourse(Course input) //Add a course to the table from the "view courses" page (RQUIRED)
     {
-        loadedCoursesDummy.add(input);
-        standard.addCourse(input);
+        if (type.equals("MASTER"))
+        {
+            master.addCourse(input);
+        }
+        else if (type.equals("STANDARD"))
+        {
+            standard.addCourse(ID);
+        }
     }
     
-    public void setMainPages(GenerateSchedulePage generateScheduleInput, SaveLoadFilePage saveLoadFileInput)
+    FOR CHRIS:
+    public Object[] returnObjectFromCourse(Course input)
+    {
+        Object[] temp = new Object[] 
+        { 
+            input.getID(), 
+            input.getSection(),
+            input.getProfessor(), 
+            input.getRoom(),
+            input.getTimes(), 
+            input.getOnlyOne() //True or false boolean
+        };
+        return temp;
+    }
+    */
+    
+    public void setMainPages(GenerateSchedulePage generateScheduleInput, SaveLoadFilePage saveLoadFileInput) //REQUIRED
     {
         generateSchedule = generateScheduleInput;
         generateSchedule.setPageSettingsControl(this);
@@ -450,27 +257,21 @@ public class PageControl
         saveLoadFile.setPageSettingsControl(this);
     }
     
-    public void setMasterPage(MasterSchedulerPage input)
+    public void setMasterPage(MasterSchedulerPage input) //REQUIRED
     {
         master = input;
-        //departmentChair.setPageSettingsControl(this);
+        master.setPageSettingsControl(this);
     }
     
-    public void setStandardPage(StandardSchedulerPage input)
+    public void setStandardPage(StandardSchedulerPage input) //REQUIRED
     {
         standard = input;
         standard.setPageSettingsControl(this);
     }
     
-    /*
-    public void setRegistrarPage(RegistrarPageSub input)
-    {
-        registrar = input;
-        registrar.setPageSettingsControl(this);
-    }
-    */
+
     
-    public void updateTextSizeMain(int size)
+    public void updateTextSizeMain(int size) //WILL ONLY BE USED IF WE RE-ADD THE SETTINGS PAGE
     {
         generateSchedule.setTextSize(size);
         generateSchedule.updateTextSize();
@@ -479,8 +280,6 @@ public class PageControl
         saveLoadFile.setTextSize(size);
         saveLoadFile.updateTextSize();
         
-        //saveLoadSchedule.setTextSize(size);
-        //saveLoadSchedule.updateTextSize();
         
         if (master != null)
         {
@@ -493,13 +292,6 @@ public class PageControl
             standard.setTextSize(size);
             standard.updateTextSize();
         }
-        
 
-    }
-    
-
-    
-
-
-    
+    }  
 }
