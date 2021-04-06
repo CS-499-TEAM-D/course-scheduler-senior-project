@@ -62,7 +62,7 @@ public class StandardSchedulerPage extends javax.swing.JPanel implements SubPage
         model.fireTableDataChanged();
     }
     
-    public void removeCourse(int IDInput, String name)
+    public void removeCourse(int IDInput)
     {
         DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
         for (int i = 0; i < model.getRowCount(); i++)

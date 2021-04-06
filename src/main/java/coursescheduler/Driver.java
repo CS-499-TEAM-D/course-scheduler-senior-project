@@ -11,8 +11,8 @@ import javax.swing.JPanel;
 public class Driver {
     public static void main(String... args) {
     JFrame mainFrame = new CourseSchedulerFrame();
-    mainFrame.setSize(1150, 700);
-    mainFrame.setResizable(false);
+    mainFrame.setSize(851, 633);
+    mainFrame.setResizable(true);
     PanelController panelController = new BaseFrameManager(mainFrame);
     JPanel loginPage = new LoginPage(panelController);
     App app = new CourseScheduler(panelController, loginPage);

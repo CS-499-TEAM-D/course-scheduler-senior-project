@@ -35,6 +35,8 @@ public class PageControl
     }
     
     
+    
+    
     public void setDebugAllCourses()
     {
         String college = "Science";
@@ -387,11 +389,11 @@ public class PageControl
     {
         if (type.equals("DEPARTMENT_CHAIR"))
         {
-            //departmentChair.removeCourse(returnDummyCourseByNameLoaded(name).getID(), name);
+            master.removeCourse(returnDummyCourseByNameAll(name).getID());
         }
         else if (type.equals("FACULTY"))
         {
-            //faculty.removeCourse(returnDummyCourseByNameLoaded(name).getID(), name);
+            standard.removeCourse(returnDummyCourseByNameAll(name).getID());;
         }
 
         for(int i = 0; i < loadedCoursesDummy.size(); i++)
@@ -427,16 +429,16 @@ public class PageControl
         
     }
     
-    public void addCourseDepartmentChair(dummyCourse input)
+    public void addCourseMaster(dummyCourse input)
     {
         loadedCoursesDummy.add(input);
-        //departmentChair.addCourse(input);
+        master.addCourse(input);
     }
     
-    public void addCourseFaculty(dummyCourse input)
+    public void addCourseStandard(dummyCourse input)
     {
         loadedCoursesDummy.add(input);
-        //faculty.addCourse(input);
+        standard.addCourse(input);
     }
     
     public void setMainPages(GenerateSchedulePage generateScheduleInput, SaveLoadFilePage saveLoadFileInput)
