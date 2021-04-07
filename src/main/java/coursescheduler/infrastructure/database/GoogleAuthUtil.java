@@ -19,6 +19,9 @@ import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * @author CSODOM
+ */
 
 public class GoogleAuthUtil {
 

@@ -2,14 +2,17 @@ package coursescheduler;
 
 import coursescheduler.infrastructure.database.ExcelImportUtil;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+
 /**
  * @author Kyle Nishimuta
  * Date: 4/7/21
  */
 
 public class ExcelImportTest {
-    public static void main(String... args){
-        ExcelImportUtil newExcelData = new ExcelImportUtil();
+    public static void main(String... args) {
+        ExcelImportUtil newExcelData = ExcelImportUtil.getInstance();
 
         String testfilename1 = "facultypreference.xlsx";
         newExcelData.importFile(testfilename1);

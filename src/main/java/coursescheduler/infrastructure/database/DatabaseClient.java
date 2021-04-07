@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.*;
 
-
+/**
+ * @author CSODOM
+ */
 public final class DatabaseClient {
 
     private static DatabaseClient dataBaseClientInstance = null;

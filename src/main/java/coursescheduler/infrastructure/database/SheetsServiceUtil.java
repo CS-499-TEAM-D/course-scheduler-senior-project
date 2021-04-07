@@ -9,6 +9,11 @@ import com.google.api.services.sheets.v4.Sheets;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
+
+/**
+ * @author CSODOM
+ */
+
 public class SheetsServiceUtil {
 
     private static final String APPLICATION_NAME = "Course Scheduler";
