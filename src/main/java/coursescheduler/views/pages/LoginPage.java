@@ -1,11 +1,20 @@
 package coursescheduler.views.pages;
 
 import javax.swing.BorderFactory;
+import javax.swing.JPanel;
 
-/** Presents to and allows the user to login provided with success email and password credentials. */
+import java.awt.Color;
+
+import coursescheduler.managers.PanelController;
+
+/**
+ * Presents to and allows the user to login provided with success email and password credentials.
+ */
 public final class LoginPage extends javax.swing.JPanel {
+  private final PanelController controller;
 
-  public LoginPage() {
+  public LoginPage(PanelController controller) {
+    this.controller = controller;
     initComponents();
   }
 
@@ -32,6 +41,12 @@ public final class LoginPage extends javax.swing.JPanel {
 
     createAnAccountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     createAnAccountLabel.setText("Create an Account");
+    createAnAccountLabel.addMouseListener(
+        new java.awt.event.MouseAdapter() {
+          public void mouseClicked(java.awt.event.MouseEvent evt) {
+            createAnAccountLabelMouseClicked(evt);
+          }
+        });
 
     javax.swing.GroupLayout loginInnerPanelLayout = new javax.swing.GroupLayout(loginInnerPanel);
     loginInnerPanel.setLayout(loginInnerPanelLayout);
@@ -139,6 +154,11 @@ public final class LoginPage extends javax.swing.JPanel {
 
     getAccessibleContext().setAccessibleName("");
   } // </editor-fold>//GEN-END:initComponents
+
+  private void createAnAccountLabelMouseClicked(
+      java.awt.event.MouseEvent evt) { // GEN-FIRST:event_createAnAccountLabelMouseClicked
+      // TODO(Juwuan): Use controller to navigate to AccountCreation page.
+  } // GEN-LAST:event_createAnAccountLabelMouseClicked
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JLabel createAnAccountLabel;
