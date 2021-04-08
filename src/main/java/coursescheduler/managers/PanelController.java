@@ -1,5 +1,6 @@
 package coursescheduler.managers;
 
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 /**
@@ -7,7 +8,7 @@ import javax.swing.JPanel;
  *
  * @param <P> element to show as page.
  */
-public interface PanelController<P extends JPanel> {
+public interface PanelController<P extends JComponent> {
   /**
    * Initializes {@link PanelController}, showing the first page.
    *

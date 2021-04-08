@@ -110,6 +110,9 @@
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Create an Account"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="createAnAccountLabelMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
