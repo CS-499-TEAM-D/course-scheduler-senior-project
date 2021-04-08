@@ -1,7 +1,9 @@
 package coursescheduler.views.pages;
 
 import javax.swing.BorderFactory;
-import java.awt.event.KeyEvent;
+import javax.swing.JPanel;
+
+import java.awt.Color;
 
 import coursescheduler.managers.PanelController;
 
@@ -9,8 +11,7 @@ import coursescheduler.managers.PanelController;
  * Presents to and allows the user to login provided with success email and password credentials.
  */
 public final class LoginPage extends javax.swing.JPanel {
-
-  private PanelController controller;
+  private final PanelController controller;
 
   public LoginPage(PanelController controller) {
     this.controller = controller;
@@ -38,26 +39,12 @@ public final class LoginPage extends javax.swing.JPanel {
 
     passwordLabel.setText("password");
 
-    emailField.addKeyListener(
-        new java.awt.event.KeyAdapter() {
-          public void keyPressed(java.awt.event.KeyEvent evt) {
-            emailFieldEnterKeyPressed(evt);
-          }
-        });
-
-    passwordField.addKeyListener(
-        new java.awt.event.KeyAdapter() {
-          public void keyPressed(java.awt.event.KeyEvent evt) {
-            passwordFieldEnterPressed(evt);
-          }
-        });
-
     createAnAccountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     createAnAccountLabel.setText("Create an Account");
     createAnAccountLabel.addMouseListener(
         new java.awt.event.MouseAdapter() {
-          public void mousePressed(java.awt.event.MouseEvent evt) {
-            createAnAccountLabelMousePressed(evt);
+          public void mouseClicked(java.awt.event.MouseEvent evt) {
+            createAnAccountLabelMouseClicked(evt);
           }
         });
 
@@ -168,31 +155,10 @@ public final class LoginPage extends javax.swing.JPanel {
     getAccessibleContext().setAccessibleName("");
   } // </editor-fold>//GEN-END:initComponents
 
-  private void emailFieldEnterKeyPressed(
-      java.awt.event.KeyEvent evt) { // GEN-FIRST:event_emailFieldEnterKeyPressed
-    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-      // TODO: Use credentials service to retrieve user.
-      // TODO: Use factory to generate user's page.
-      System.out.println("emailFieldEnterKeyPressed");
-      controller.updatePage(new DeanPage()); // Default to Dean page for demo purpose.
-    }
-  } // GEN-LAST:event_emailFieldEnterKeyPressed
-
-  private void passwordFieldEnterPressed(
-      java.awt.event.KeyEvent evt) { // GEN-FIRST:event_passwordFieldEnterPressed
-    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-      // TODO: Use credentials service to retrieve user.
-      // TODO: Use factory to generate user's role page.
-      System.out.println("passwordFieldEnterPressed");
-      controller.updatePage(new DeanPage()); // Default to Dean page for demo purpose.
-    }
-  } // GEN-LAST:event_passwordFieldEnterPressed
-
-  private void createAnAccountLabelMousePressed(
-      java.awt.event.MouseEvent evt) { // GEN-FIRST:event_createAnAccountLabelMousePressed
-    System.out.println("createAnAccountLabel pressed."); // TODO: Remove this.
-    controller.updatePage(new AccountCreationPage(controller));
-  } // GEN-LAST:event_createAnAccountLabelMousePressed
+  private void createAnAccountLabelMouseClicked(
+      java.awt.event.MouseEvent evt) { // GEN-FIRST:event_createAnAccountLabelMouseClicked
+      // TODO(Juwuan): Use controller to navigate to AccountCreation page.
+  } // GEN-LAST:event_createAnAccountLabelMouseClicked
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JLabel createAnAccountLabel;

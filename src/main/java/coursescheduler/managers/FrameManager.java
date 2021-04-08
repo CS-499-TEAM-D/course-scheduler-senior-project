@@ -25,7 +25,7 @@ abstract class FrameManager<C extends Container, P extends JComponent> implement
   }
 
   @Override
-  public PanelController<P> init(P page) {
+  public PanelController<P> initializeStartPage(P page) {
     Dimension parentSize = container.getSize();
     panelWrapper.setSize(parentSize);
     panelWrapper.setPreferredSize(parentSize);

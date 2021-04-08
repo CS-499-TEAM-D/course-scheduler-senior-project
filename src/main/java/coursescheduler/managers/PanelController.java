@@ -14,7 +14,7 @@ public interface PanelController<P extends JComponent> {
    *
    * @return
    */
-  PanelController init(P page);
+  PanelController initializeStartPage(P page);
 
   /**
    * Updates the current displayed page.

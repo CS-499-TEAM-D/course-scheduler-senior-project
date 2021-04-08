@@ -8,7 +8,7 @@ import javax.swing.WindowConstants;
 class CourseSchedulerFrame extends javax.swing.JFrame {
 
   public CourseSchedulerFrame() {
-    super("Course Scheduler");
+    super(/*title=*/"Course Scheduler");
     initComponents();
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // closes on exit
     setLocationRelativeTo(null); // centers on open

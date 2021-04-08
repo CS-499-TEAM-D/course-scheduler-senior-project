@@ -1,9 +1,7 @@
 package coursescheduler.managers;
 
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  * Default {@link FrameManager} object for the Course Scheduler application.

@@ -102,14 +102,8 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="emailField">
-          <Events>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="emailFieldEnterKeyPressed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JPasswordField" name="passwordField">
-          <Events>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="passwordFieldEnterPressed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="createAnAccountLabel">
           <Properties>
@@ -117,7 +111,7 @@
             <Property name="text" type="java.lang.String" value="Create an Account"/>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="createAnAccountLabelMousePressed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="createAnAccountLabelMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
