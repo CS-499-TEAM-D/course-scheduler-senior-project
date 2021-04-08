@@ -213,7 +213,7 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<J
 
             },
             new String [] {
-                "Course", "Section", "Professor", "Room", "Times", "Only One"
+                "Course", "Section", "Professor", "Room", "Times", "Update Selection"
             }
         ) {
             Class[] types = new Class [] {

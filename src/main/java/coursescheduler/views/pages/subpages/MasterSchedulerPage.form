@@ -100,7 +100,7 @@
                 <Column editable="false" title="Professor" type="java.lang.Object"/>
                 <Column editable="false" title="Room" type="java.lang.Object"/>
                 <Column editable="false" title="Times" type="java.lang.Object"/>
-                <Column editable="true" title="Only One" type="java.lang.Boolean"/>
+                <Column editable="true" title="Update Selection" type="java.lang.Boolean"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

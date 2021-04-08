@@ -31,7 +31,7 @@ public class StandardSchedulerContainer extends JTabbedPane implements RolePage 
         SaveLoadFilePage subPageTwo = new SaveLoadFilePage();
         subPageTwo.setPageSettingsControl(control);
         subPageTwo.setUserType("STANDARD");
-        addTab("Save/Load File", null, subPageTwo, "Save/Load File");
+        addTab("Load File", null, subPageTwo, "Load File");
       
         GenerateSchedulePage subPageOne = new GenerateSchedulePage();
         subPageOne.setPageSettingsControl(control);
