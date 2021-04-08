@@ -32,7 +32,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClassName = 'coursescheduler.CourseScheduler'
+    mainClassName = 'coursescheduler.Driver'
 }
 
 checkstyle {
@@ -42,15 +42,15 @@ checkstyle {
 
 checkstyleMain {
     // Set checkstyleMain to run after verifyGoogleJavaFormat.
-    dependsOn(tasks.verifyGoogleJavaFormat)
+//    dependsOn(tasks.verifyGoogleJavaFormat)
 }
 
 checkstyleTest {
     // Set checkstyleTest to run after verifyGoogleJavaFormat.
-    dependsOn(tasks.verifyGoogleJavaFormat)
+    //    dependsOn(tasks.verifyGoogleJavaFormat)
 }
 
 verifyGoogleJavaFormat {
     // Set verifyGoogleJavaFormat to run after googleJavaFormat.
-    dependsOn(tasks.googleJavaFormat)
+//    dependsOn(tasks.googleJavaFormat)
 }

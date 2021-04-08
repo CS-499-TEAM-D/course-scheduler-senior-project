@@ -1,19 +1,24 @@
-/**
- * @author(s) juwuanturnerhoward
- */
-
 package coursescheduler.managers;
 
-import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 /**
- * Updates container with page element.
+ * Handles management of shown pages.
  *
  * @param <P> element to show as page.
  */
-public interface PanelController<P extends JComponent> {
-    /**
-     * @param page element to display.
-     */
-    void update(P page);
+public interface PanelController<P extends JPanel> {
+  /**
+   * Initializes {@link PanelController}, showing the first page.
+   *
+   * @return
+   */
+  PanelController init(P page);
+
+  /**
+   * Updates the current displayed page.
+   *
+   * @param page element to display.
+   */
+  void updatePage(P page);
 }
