@@ -8,7 +8,6 @@ import coursescheduler.managers.PanelController;
  * Presents to and allows the user to login provided with success email and password credentials.
  */
 public final class LoginPage extends javax.swing.JPanel {
-
   private PanelController controller;
 
   public LoginPage(PanelController controller) {
@@ -155,7 +154,6 @@ public final class LoginPage extends javax.swing.JPanel {
 
   private void createAnAccountLabelMousePressed(
       java.awt.event.MouseEvent evt) { // GEN-FIRST:event_createAnAccountLabelMousePressed
-    System.out.println("createAnAccountLabel pressed."); // TODO: Remove this.
     controller.updatePage(new AccountCreationPage(controller));
   } // GEN-LAST:event_createAnAccountLabelMousePressed
 
