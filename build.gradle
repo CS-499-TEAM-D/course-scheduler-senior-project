@@ -22,6 +22,7 @@ dependencies {
     // Application Dependencies
     implementation(
             'com.google.guava:guava:29.0-jre', // Extended powerful general purpose library
+            'com.google.inject:guice:5.0.0-BETA-1'
     )
 
     // Test Dependencies
@@ -36,7 +37,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClassName = 'coursescheduler.CourseScheduler'
+    mainClassName = 'coursescheduler.BaseCourseScheduler'
 }
 
 checkstyle {

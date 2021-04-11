@@ -1,7 +1,11 @@
 package coursescheduler.views.pages;
 
+import javax.swing.JComponent;
+
+import coursescheduler.User;
+
 /** Interfacing functionality for role pages. */
-public interface RolePage {
+public interface RolePage extends Page {
   /**
    * Allows the page to initialize itself.
    *
@@ -9,5 +13,5 @@ public interface RolePage {
    *
    * <p>Similar to Swing's initComponents method.
    */
-  void init();
+  JComponent init(User user);
 }

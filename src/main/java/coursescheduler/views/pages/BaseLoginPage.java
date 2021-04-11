@@ -1,18 +1,47 @@
 package coursescheduler.views.pages;
 
-import javax.swing.BorderFactory;
+import client.daos.UserDao;
 
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import java.awt.event.KeyEvent;
+
+import coursescheduler.User;
 import coursescheduler.managers.PanelController;
+import coursescheduler.security.CredentialsVerifier;
 
 /**
  * Presents to and allows the user to login provided with success email and password credentials.
  */
-public final class LoginPage extends javax.swing.JPanel {
-  private PanelController controller;
+public final class BaseLoginPage extends javax.swing.JPanel implements Page {
+  private final PanelController controller;
+  private final CredentialsVerifier verifier;
+  private final AbstractPageFactory pageFactory;
+  private final UserDao userDao;
 
-  public LoginPage(PanelController controller) {
+  public BaseLoginPage(
+      PanelController controller,
+      CredentialsVerifier verifier,
+      AbstractPageFactory pageFactory,
+      UserDao userDao) {
     this.controller = controller;
+    this.verifier = verifier;
+    this.pageFactory = pageFactory;
+    this.userDao = userDao;
     initComponents();
+  }
+
+  @Override
+  public JComponent init() {
+    return this;
+  }
+
+  private void login(String email, char[] password) {
+    if (!verifier.validUserCredentials(email, password)) {
+      // TODO: Update GUI to show error.
+    }
+    User user = userDao.getUserByEmail(email);
+    controller.updatePage(pageFactory.buildUserPage(user));
   }
 
   /**
@@ -35,6 +64,20 @@ public final class LoginPage extends javax.swing.JPanel {
     emailLabel.setText("email");
 
     passwordLabel.setText("password");
+
+    emailField.addKeyListener(
+        new java.awt.event.KeyAdapter() {
+          public void keyPressed(java.awt.event.KeyEvent evt) {
+            emailFieldKeyPressed(evt);
+          }
+        });
+
+    passwordField.addKeyListener(
+        new java.awt.event.KeyAdapter() {
+          public void keyPressed(java.awt.event.KeyEvent evt) {
+            passwordFieldEnterKeyPressed(evt);
+          }
+        });
 
     createAnAccountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     createAnAccountLabel.setText("Create an Account");
@@ -152,9 +195,23 @@ public final class LoginPage extends javax.swing.JPanel {
     getAccessibleContext().setAccessibleName("");
   } // </editor-fold>//GEN-END:initComponents
 
+  private void emailFieldKeyPressed(
+      java.awt.event.KeyEvent evt) { // GEN-FIRST:event_emailFieldKeyPressed
+    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+      login(emailField.getText(), passwordField.getPassword());
+    }
+  } // GEN-LAST:event_emailFieldKeyPressed
+
+  private void passwordFieldEnterKeyPressed(
+      java.awt.event.KeyEvent evt) { // GEN-FIRST:event_passwordFieldEnterKeyPressed
+    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+      login(emailField.getText(), passwordField.getPassword());
+    }
+  } // GEN-LAST:event_passwordFieldEnterKeyPressed
+
   private void createAnAccountLabelMousePressed(
       java.awt.event.MouseEvent evt) { // GEN-FIRST:event_createAnAccountLabelMousePressed
-    controller.updatePage(new AccountCreationPage(controller));
+    controller.updatePage(pageFactory.buildAccountCreationPage());
   } // GEN-LAST:event_createAnAccountLabelMousePressed
 
   // Variables declaration - do not modify//GEN-BEGIN:variables

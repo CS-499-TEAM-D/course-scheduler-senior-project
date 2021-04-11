@@ -5,14 +5,16 @@ package coursescheduler;
  */
 public class User {
     private final String email;
-    private final char[] password;
     private final String role;
     private final String department;
 
-    public User(String email, char[] password, String role, String department) {
+    public User(String email, String role, String department) {
         this.email = email;
-        this.password = password;
         this.role = role;
         this.department = department;
+    }
+
+    public String getRole() {
+        return role;
     }
 }
