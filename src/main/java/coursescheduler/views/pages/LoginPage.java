@@ -3,6 +3,7 @@ package coursescheduler.views.pages;
 import javax.swing.BorderFactory;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 import coursescheduler.managers.PanelController;
 import coursescheduler.views.pages.containers.MasterSchedulerContainer;
@@ -165,7 +166,7 @@ public final class LoginPage extends javax.swing.JPanel {
             }
 
 
-        } catch (IOException e) {
+        } catch (IOException | GeneralSecurityException e) {
             e.printStackTrace();
         }
     }

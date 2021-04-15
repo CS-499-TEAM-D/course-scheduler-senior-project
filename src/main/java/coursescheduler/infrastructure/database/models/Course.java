@@ -15,7 +15,7 @@ public class Course {
      * @param prelimEnroll
      * @param maxEnroll
      */
-    Course(int courseIndex, int courseId, int sectionId, int prelimEnroll, int maxEnroll){
+    public Course(int courseIndex, int courseId, int sectionId, int prelimEnroll, int maxEnroll){
 
         this.courseIndex = courseIndex;
         this.courseId = courseId;

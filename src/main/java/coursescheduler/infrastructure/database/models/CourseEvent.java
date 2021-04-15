@@ -2,10 +2,10 @@ package coursescheduler.infrastructure.database.models;
 
 public final class CourseEvent{
 
-    private final String professorEmail;
-    private final int coursePreferenceId;
-    private final String roomId;
-    private final int periodId;
+    public final String professorEmail;
+    public final int coursePreferenceId;
+    public final String roomId;
+    public final int periodId;
 
     public CourseEvent(String professorEmail, int coursePreferenceId, String roomId, int periodId) {
 

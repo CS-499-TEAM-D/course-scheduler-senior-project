@@ -29,6 +29,7 @@ dependencies {
 
     // These are used for the Apache POI Excel File Parser
     implementation group: 'org.apache.poi', name: 'poi', version: '3.9'
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '3.9'
 
     // Test Dependencies
     testImplementation(

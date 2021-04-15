@@ -6,19 +6,21 @@ import coursescheduler.views.pages.subpages.GenerateSchedulePage;
 import coursescheduler.views.pages.subpages.StandardSchedulerPage;
 import coursescheduler.views.pages.subpages.SaveLoadFilePage;
 import javax.swing.JTabbedPane;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 
 /** Example Role page. */
 public class StandardSchedulerContainer extends JTabbedPane implements IRolePage {
   PageControl control;
     
-    public StandardSchedulerContainer() {
+    public StandardSchedulerContainer() throws IOException, GeneralSecurityException {
     super();
     init();
   }
 
   @Override
-  public void init() {
+  public void init() throws IOException, GeneralSecurityException {
         PageControl control = new PageControl();
         control.setDebugAllCourses();
         control.setType("STANDARD");

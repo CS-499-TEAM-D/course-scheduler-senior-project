@@ -5,19 +5,21 @@ import coursescheduler.views.pages.subpages.GenerateSchedulePage;
 import coursescheduler.views.pages.subpages.MasterSchedulerPage;
 import coursescheduler.views.pages.subpages.SaveLoadFilePage;
 import javax.swing.JTabbedPane;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 
 /** Example Role page. */
 public class MasterSchedulerContainer extends JTabbedPane implements IRolePage {
  
     
-    public MasterSchedulerContainer() {
+    public MasterSchedulerContainer() throws IOException, GeneralSecurityException {
     super();
     init();
   }
 
   @Override
-  public void init() {
+  public void init() throws IOException, GeneralSecurityException {
         PageControl control = new PageControl();
         control.setDebugAllCourses();
         control.setType("MASTER");

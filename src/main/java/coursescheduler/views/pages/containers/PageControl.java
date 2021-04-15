@@ -4,12 +4,16 @@
  * and open the template in the editor.
  */
 package coursescheduler.views.pages.containers;
+import coursescheduler.infrastructure.database.DatabaseClient;
+import coursescheduler.infrastructure.database.ExcelImportUtil;
 import coursescheduler.views.pages.subpages.GenerateSchedulePage;
 import coursescheduler.views.pages.subpages.MasterSchedulerPage;
 import coursescheduler.views.pages.subpages.SaveLoadFilePage;
 import coursescheduler.views.pages.subpages.StandardSchedulerPage;
 import coursescheduler.views.pages.subpages.StandardSchedulerPage;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,11 +32,15 @@ public class PageControl
     List<dummyCourse> allCoursesDummy = new ArrayList<>();
     List<dummyCourse> loadedCoursesDummy = new ArrayList<>();
     String type;
-    
-    public PageControl()
-    {
+
+    public final DatabaseClient db;
+    public final ExcelImportUtil eiu;
+
+    public PageControl() throws IOException, GeneralSecurityException {
 
 
+        db = DatabaseClient.getInstance(10);
+        eiu = ExcelImportUtil.getInstance();
     }
     
     

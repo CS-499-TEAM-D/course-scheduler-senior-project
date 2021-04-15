@@ -5,6 +5,7 @@ import coursescheduler.infrastructure.database.models.CourseEvent;
 import coursescheduler.infrastructure.database.models.Room;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,34 +21,43 @@ import java.util.Vector;
 public class ExcelImportUtil {
     // Variable declarations
     private boolean DEBUG;
-    private String filename;
-    private FileType fileType;
+    private String path;
     private static ExcelImportUtil instance = null;
     private Workbook currentWorkbook = null;
 
 
-    private final int PROFESSOR_EMAIL = 0;
-    private final int COURSE_PREFERENCE = 1;
-    private final int ROOM_ID = 2;
-    private final int PERIOD_ID = 3;
+    static final String FACULTY_SHEET = "FACULTY";
+    static final int PROFESSOR_EMAIL = 0;
+    static final int COURSE_PREFERENCE = 1;
+    static final int ROOM_ID = 2;
+    static final int PERIOD_ID = 3;
 
-    private final String FACULTY_SHEET = "FACULTY";
+    static final String COURSES_SHEET = "COURSES";
+    static final int COURSE_LISTING_ID = 0;
+    static final int COURSE_ID = 1;
+    static final int SECTION_ID = 2;
+    static final int PRELIM_ENR = 3;
+    static final int MAX_ENR = 4;
 
-    /**
-     * A listing of the four possible file types that the excel import utility will handle
-     */
-    enum FileType{
-        FACULTY,
-        COURSES,
-        ROOMS,
-        PERIODS
-    }
+    static final String ROOMS_SHEET = "ROOMS";
+    static final int CLASSROOM_LOCATION = 0;
+    static final int CAPACITY = 1;
+
 
     /**
      * Builds singleton object of the excel import utility
      */
-    private ExcelImportUtil(){
+    private ExcelImportUtil() {
+
         this.DEBUG = true;
+
+        if (this.DEBUG) {
+            try {
+                setCurrentWorkbook("C:/Users/Chris/Desktop/Software/Java/CS499SeniorProject/course-scheduler-senior-project/src/main/resources/test.xlsx");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -60,73 +70,125 @@ public class ExcelImportUtil {
 
     /**
      * @param path sets the new workbook that the utility will work on from the given path
-     * @param fileType sets the filetype of the current workbook that the utility is working on
      */
-    public void setCurrentWorkbook(String path, FileType fileType) throws IOException {
-        this.fileType = fileType;
-        this.currentWorkbook = new HSSFWorkbook(new FileInputStream(new File(path)));
+    public void setCurrentWorkbook(String path) throws IOException {
+        this.path = path;
+        this.currentWorkbook = new XSSFWorkbook(new FileInputStream(new File(path)));
     }
 
     /**
-     * @return returns the current workbook that the utlity is working on
+     * @param index the index of the faculty preference in the excel file, where 2 is the first entry, as to skip the header in (1-based)
+     * @return a faculty preference object containing data of the course at that index
      */
-    public Workbook getCurrentWorkbook(){
-        return this.currentWorkbook;
-    }
-
-    /**
-     * @return returns the enum value for the current file
-     */
-    public FileType getFileType(){
-        return this.fileType;
-    }
-
-    /**
-     * @param index get the course event from the faculty sheet
-     *              the index needs to be in 2th notation, where
-     *              the first index value is 2 to skip the header
-     *              located in the first row
-     * @return course event object from faculty preference sheet
-     */
-    public List<CourseEvent> getFacultyPreferences(){
-        List<CourseEvent> listOfCourseEvents = new ArrayList<>();
+    public CourseEvent getFacultyPreferenceAt(int index) {
         Sheet sheet = currentWorkbook.getSheet(FACULTY_SHEET);
-        if(sheet == null){
+        if (sheet == null) {
             return null;
         }
-        for( Row row : sheet ) {
-            CourseEvent courseEvent = new CourseEvent(
-                    row.getCell(PROFESSOR_EMAIL).toString(),
-                    row.getCell(COURSE_PREFERENCE),
-                    row.getCell(ROOM_ID).toString(),
-                    row.getCell(PERIOD_ID)
-            );
-            listOfCourseEvents.add(courseEvent);
+        Row row = sheet.getRow(index);
+        return new CourseEvent(row.getCell(PROFESSOR_EMAIL).getStringCellValue(),
+                (int) row.getCell(COURSE_PREFERENCE).getNumericCellValue(),
+                row.getCell(ROOM_ID).getStringCellValue(),
+                (int) row.getCell(PERIOD_ID).getNumericCellValue()
+        );
+    }
+
+    /**
+     * @param index the index of the course in the excel file, where 2 is the first entry, as to skip the header in (1-based)
+     * @return a course object containing data of the course at that index
+     */
+    public Course getCourseAt(int index) {
+        Sheet sheet = currentWorkbook.getSheet(COURSES_SHEET);
+        if (sheet == null) {
+            return null;
         }
-        return listOfCourseEvents;
+        Row row = sheet.getRow(index);
+        return new Course((int) row.getCell(COURSE_LISTING_ID).getNumericCellValue(),
+                (int) row.getCell(COURSE_ID).getNumericCellValue(),
+                (int) row.getCell(SECTION_ID).getNumericCellValue(),
+                (int) row.getCell(PRELIM_ENR).getNumericCellValue(),
+                (int) row.getCell(MAX_ENR).getNumericCellValue()
+        );
     }
 
-    public Course getCourseAtIndex(){
-        return null;
+    /**
+     * @param index the index of the room in the excel file, where 2 is the first entry, as to skip the header in (1-based)
+     * @return a room object containing data of the room at that index
+     */
+    public Room getRoomAt(int index) {
+        Sheet sheet = currentWorkbook.getSheet(ROOMS_SHEET);
+        if (sheet == null) {
+            return null;
+        }
+        Row row = sheet.getRow(index);
+        return new Room(row.getCell(CLASSROOM_LOCATION).getStringCellValue(),
+                (int) row.getCell(CAPACITY).getNumericCellValue()
+        );
     }
 
-    public Room getRoomAtIndex(){
-        return null;
+
+    /**
+     * @return returns all the faculty preferences from the excel file
+     */
+    public Vector<CourseEvent> getFacultyPreferenceDataTable() {
+        Vector<CourseEvent> facultyPreferenceTable = new Vector<>();
+        Sheet sheet = currentWorkbook.getSheet(FACULTY_SHEET);
+        if (sheet == null) {
+            return null;
+        }
+        for (Row row : sheet) {
+            if (row.getRowNum() != 0) { // skip header
+                facultyPreferenceTable.add(new CourseEvent(row.getCell(PROFESSOR_EMAIL).getStringCellValue(),
+                        (int) row.getCell(COURSE_PREFERENCE).getNumericCellValue(),
+                        row.getCell(ROOM_ID).getStringCellValue(),
+                        (int) row.getCell(PERIOD_ID).getNumericCellValue()
+                ));
+            }
+        }
+        return facultyPreferenceTable;
     }
 
-
-    public Vector<Object> getFacultyPreferenceDataTable(){
-        return null;
+    /**
+     * @return returns all the offered courses from the excel file
+     */
+    public Vector<Course> getCourseListingDataTable() {
+        Vector<Course> courseListingTable = new Vector<>();
+        Sheet sheet = currentWorkbook.getSheet(COURSES_SHEET);
+        if (sheet == null) {
+            return null;
+        }
+        for (Row row : sheet) {
+            if (row.getRowNum() != 0) { // skip header
+                courseListingTable.add(new Course((int) row.getCell(COURSE_LISTING_ID).getNumericCellValue(),
+                        (int) row.getCell(COURSE_ID).getNumericCellValue(),
+                        (int) row.getCell(SECTION_ID).getNumericCellValue(),
+                        (int) row.getCell(PRELIM_ENR).getNumericCellValue(),
+                        (int) row.getCell(MAX_ENR).getNumericCellValue()
+                ));
+            }
+        }
+        return courseListingTable;
     }
 
-    public Vector<Object> getCourseListingDataTable(){
-        return null;
+    /**
+     * @return returns all the room objects from the excel file
+     */
+    public Vector<Room> getRoomInformationDataTable() {
+        Vector<Room> roomInformationTable = new Vector<>();
+        Sheet sheet = currentWorkbook.getSheet(ROOMS_SHEET);
+        if (sheet == null) {
+            return null;
+        }
+        for (Row row : sheet) {
+            if (row.getRowNum() != 0) { // skip header
+                roomInformationTable.add(new Room(row.getCell(CLASSROOM_LOCATION).getStringCellValue(),
+                        (int) row.getCell(CAPACITY).getNumericCellValue()
+                ));
+            }
+        }
+        return roomInformationTable;
     }
-
-    public Vector<Object> getRoomInformationDataTable(){
-        return null;
-    }
-
+/*
 
     // Clear old data (if applicable), run class processes
     public void importFile(String filenameToImportFrom){
@@ -146,7 +208,7 @@ public class ExcelImportUtil {
          * 1 -> Course offering
          * 2 -> Physical room
          * 3 -> Time period
-         */
+         <asterisk>/
         ;
         return 0;
     }
@@ -159,4 +221,7 @@ public class ExcelImportUtil {
     public void printData(){
         ;
     }
+
+*/
+
 }

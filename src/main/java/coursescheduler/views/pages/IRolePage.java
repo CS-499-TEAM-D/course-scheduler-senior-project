@@ -1,5 +1,8 @@
 package coursescheduler.views.pages;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+
 /** Interfacing functionality for role pages. */
 public interface IRolePage {
   /**
@@ -9,5 +12,5 @@ public interface IRolePage {
    *
    * <p>Similar to Swing's initComponents method.
    */
-  void init();
+  void init() throws IOException, GeneralSecurityException;
 }
