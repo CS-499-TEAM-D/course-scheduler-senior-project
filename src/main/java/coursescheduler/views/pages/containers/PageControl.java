@@ -42,10 +42,10 @@ public class PageControl
     {
         String college = "Science";
         int ID = 1230981; //Random number for now
-        String name = "Senior Project";
+        String name = "CS 499";
         String professor = "Dr. Delugach";
         String room = "3C";
-        String times = "9:30am - 11:00am";
+        String times = "8:00am - 9:30am";
         String days = "T, TH";
         int seats = 30;
         dummyCourse course1 = new dummyCourse();
@@ -64,10 +64,10 @@ public class PageControl
         
         college = "Art";
         ID = 1342343; //Random number for now
-        name = "Art 101";
+        name = "ART 201";
         professor = "Dr. History";
         room = "1A";
-        times = "9:30am - 11:00am";
+        times = "9:40am - 11:00am";
         days = "T, TH";
         seats = 30;
         dummyCourse course2 = new dummyCourse();
@@ -85,10 +85,10 @@ public class PageControl
         
         college = "Engineering";
         ID = 4564564; //Random number for now
-        name = "Engineering 101";
+        name = "ENG 301";
         professor = "Dr. Engineer";
         room = "2B";
-        times = "9:30am - 11:00am";
+        times = "9:40am - 11:00am";
         days = "M, W, F";
         seats = 30;
         dummyCourse course3 = new dummyCourse();
@@ -106,10 +106,10 @@ public class PageControl
         
         college = "History";
         ID = 67867867; //Random number for now
-        name = "History 1900";
+        name = "HIST 102";
         professor = "Dr. History";
         room = "1A";
-        times = "9:30am - 11:00am";
+        times = "9:40am - 11:00am";
         days = "M, W, F";
         seats = 30;
         dummyCourse course4 = new dummyCourse();
@@ -127,10 +127,10 @@ public class PageControl
         
         college = "Science";
         ID = 32423421; //Random number for now
-        name = "Computer Science 101";
+        name = "CS 100";
         professor = "Dr. Science";
         room = "1A";
-        times = "9:30am - 11:00am";
+        times = "3:00pm - 4:20pm";
         days = "M, W, F";
         seats = 30;
         dummyCourse course5 = new dummyCourse();
@@ -148,10 +148,10 @@ public class PageControl
         
         college = "Science";
         ID = 17309328; //Random number for now
-        name = "Intro to C++";
+        name = "CS 101";
         professor = "Dr. Science";
         room = "2B";
-        times = "9:30am - 11:00am";
+        times = "5:00pm - 6:20pm";
         days = "M, W, F";
         seats = 30;
         dummyCourse course6 = new dummyCourse();
