@@ -10,6 +10,7 @@ import coursescheduler.views.pages.containers.dummyCourse;
 import coursescheduler.views.pages.containers.dummyUser;
 
 import java.awt.Font;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,12 +23,92 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<J
     PageControl control;
     String page = "MASTER";
     int textSize = 12;
+    boolean tableIsEditable = true;
 
     @Override
     public JPanel init() {
         initComponents();
-		
         return this;
+    }
+    
+    public ArrayList<ArrayList<String>> getDataFromTable()
+    {
+        ArrayList<ArrayList<String>> tableData = new ArrayList<ArrayList<String>>();
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        if (model.getRowCount() > 0)
+        {
+            for (int i = 0; i < model.getRowCount(); i++)
+            {
+                ArrayList<String> temp = new ArrayList<>();
+                for (int j = 0; j < (model.getColumnCount() - 1); j++)
+                {
+                    temp.add(String.valueOf(model.getValueAt(i, j)));
+                }
+                tableData.add(temp);
+            }
+        }
+        return tableData;
+    }
+    
+    
+    public boolean getUpdateSelection_byRow(int row)
+    {
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        String temp = String.valueOf(model.getValueAt(row, 5));
+        if (temp.equals("true"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    public boolean getUpdateSelection_byCourse(String course)
+    {
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        int index = -1;
+        if (model.getRowCount() > 0)
+        {
+            for (int i = 0; i < model.getRowCount(); i++)
+            {
+                String tempName = (String) model.getValueAt(i, 0);
+                if (tempName.equals(course))
+                {
+                    index = i;
+                    break;
+                }
+            }
+        }
+        
+        if (index != -1)
+        {
+            String temp = String.valueOf(model.getValueAt(index, 5));
+            if (temp.equals("true"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
+        return false;
+    }
+    
+    public void setTableEditable(boolean input)
+    {
+        tableIsEditable = input;
+        if (tableIsEditable)
+        {
+            currentCoursesTable.setEnabled(true);
+        }
+        else
+        {
+            currentCoursesTable.setEnabled(false);
+        }
     }
     
     public void initTable() //DUMMY
@@ -84,6 +165,7 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<J
         {
             model.setValueAt("", i, 0);
         }
+        setTableEditable(true);
         
     }
     
@@ -134,7 +216,8 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<J
             input.getSection(),
             input.getProfessor(), 
             input.getRoom(),
-            input.getTimes(), 
+            input.getTimes(),
+            true
         };
         
         model.addRow(temp);
@@ -177,6 +260,23 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<J
     {
         backButton.setEnabled(true);
     }
+    
+    public void clearTable()
+    {
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        if (model.getRowCount() > 0)
+        {
+            int rowCount = model.getRowCount();
+            int index = (rowCount - 1);
+            while (index != -1)
+            {
+               model.removeRow(index);
+               index--;
+            }
+            model.fireTableDataChanged();
+        }
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -193,6 +293,7 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<J
         jScrollPane1 = new javax.swing.JScrollPane();
         currentCoursesTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        clearTable = new javax.swing.JButton();
 
         backButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         backButton.setText("Back to Login");
@@ -213,22 +314,15 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<J
 
             },
             new String [] {
-                "Course", "Section", "Professor", "Room", "Times", "Update Selection"
+                "Course", "Section", "Professor", "Preferred Room", "Preferred Times", "Update Selection"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true
-            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(currentCoursesTable);
@@ -237,6 +331,13 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<J
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        clearTable.setText("Clear");
+        clearTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearTableActionPerformed(evt);
             }
         });
 
@@ -251,12 +352,15 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<J
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(backButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))))
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(backButton)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jButton1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(clearTable))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
@@ -271,7 +375,8 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<J
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backButton)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(clearTable))
                 .addGap(14, 14, 14))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -286,9 +391,14 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<J
         jButton1.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void clearTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearTableActionPerformed
+        clearTable();
+    }//GEN-LAST:event_clearTableActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
+    private javax.swing.JButton clearTable;
     private javax.swing.JTable currentCoursesTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

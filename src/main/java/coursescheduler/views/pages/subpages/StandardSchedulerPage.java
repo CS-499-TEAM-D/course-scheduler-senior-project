@@ -10,6 +10,7 @@ import coursescheduler.views.pages.containers.dummyCourse;
 import coursescheduler.views.pages.containers.dummyUser;
 
 import java.awt.Font;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,12 +22,45 @@ public class StandardSchedulerPage extends javax.swing.JPanel implements SubPage
     PageControl control;
     String page = "STANDARD";
     int textSize = 12;
+    boolean tableIsEditable = true;
 
     @Override
     public JPanel init() {
         initComponents();
 		
         return this;
+    }
+    
+    public ArrayList<ArrayList<String>> getDataFromTable()
+    {
+        ArrayList<ArrayList<String>> tableData = new ArrayList<ArrayList<String>>();
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        if (model.getRowCount() > 0)
+        {
+            for (int i = 0; i < model.getRowCount(); i++)
+            {
+                ArrayList<String> temp = new ArrayList<>();
+                for (int j = 0; j < (model.getColumnCount() - 1); j++)
+                {
+                    temp.add(String.valueOf(model.getValueAt(i, j)));
+                }
+                tableData.add(temp);
+            }
+        }
+        return tableData;
+    }
+    
+    public void setTableEditable(boolean input)
+    {
+        tableIsEditable = input;
+        if (tableIsEditable)
+        {
+            currentCoursesTable.setEnabled(true);
+        }
+        else
+        {
+            currentCoursesTable.setEnabled(false);
+        }
     }
     
     public void initTable() //DUMMY
@@ -82,6 +116,24 @@ public class StandardSchedulerPage extends javax.swing.JPanel implements SubPage
         for (int i = 0; i < model.getRowCount(); i++)
         {
             model.setValueAt("", i, 0);
+        }
+        setTableEditable(false);
+        
+    }
+    
+    public void clearTable()
+    {
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        if (model.getRowCount() > 0)
+        {
+            int rowCount = model.getRowCount();
+            int index = (rowCount - 1);
+            while (index != -1)
+            {
+               model.removeRow(index);
+               index--;
+            }
+            model.fireTableDataChanged();
         }
         
     }
@@ -193,6 +245,7 @@ public class StandardSchedulerPage extends javax.swing.JPanel implements SubPage
         jScrollPane1 = new javax.swing.JScrollPane();
         currentCoursesTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        clearButton = new javax.swing.JButton();
 
         backButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         backButton.setText("Back to Login");
@@ -233,6 +286,13 @@ public class StandardSchedulerPage extends javax.swing.JPanel implements SubPage
             }
         });
 
+        clearButton.setText("Clear");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -244,13 +304,16 @@ public class StandardSchedulerPage extends javax.swing.JPanel implements SubPage
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(backButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(backButton)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jButton1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(clearButton))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,7 +327,8 @@ public class StandardSchedulerPage extends javax.swing.JPanel implements SubPage
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backButton)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(clearButton))
                 .addGap(14, 14, 14))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -279,9 +343,14 @@ public class StandardSchedulerPage extends javax.swing.JPanel implements SubPage
         jButton1.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        clearTable();
+    }//GEN-LAST:event_clearButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
+    private javax.swing.JButton clearButton;
     private javax.swing.JTable currentCoursesTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

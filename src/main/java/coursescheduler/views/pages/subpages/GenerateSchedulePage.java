@@ -12,6 +12,8 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import coursescheduler.views.pages.containers.dummyCourse;
 import coursescheduler.views.pages.containers.dummyUser;
+import java.awt.Color;
+import java.awt.Component;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -31,29 +33,90 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
     boolean validChoice = false;
     boolean validNameSave = false;
     boolean validFileSave = false;
-    List<String> scheduleNames = new ArrayList<>();
-    //List<data type for a full schedule> schedules = new ArrayList<>();
-    //TODO: Implement backend "connections" and connect to InputMultipleCoursesPreview class
+    boolean tableIsEditable = true;
+    List<String> scheduleNames = new ArrayList<>();  
     int textSize = 12;
+    
+    public ArrayList<ArrayList<String>> getDataFromTable()
+    {
+        ArrayList<ArrayList<String>> tableData = new ArrayList<ArrayList<String>>();
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        if (model.getRowCount() > 0)
+        {
+            for (int i = 0; i < model.getRowCount(); i++)
+            {
+                ArrayList<String> temp = new ArrayList<>();
+                for (int j = 0; j < (model.getColumnCount() - 1); j++)
+                {
+                    temp.add(String.valueOf(model.getValueAt(i, j)));
+                }
+                tableData.add(temp);
+            }
+        }
+        return tableData;
+    }
+    
+    public void markConflictByRow(int index, boolean conflict)
+    {
+        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
+        if (conflict)
+        {
+            model.setValueAt("*", index, 5);
+        }
+        else
+        {
+            model.setValueAt("", index, 5);
+        }
+    }
+    
+    public void updateConflictDisplay(boolean conflict, int numOfConflicts)
+    {
+        if (conflict)
+        {
+            courseConflictsTitle.setText("Course conflicts: " + String.valueOf(numOfConflicts));
+            String setOne = "The following courses generated conflicts: ";
+            String setTwo = "";
+            for (int i = 0; i < control.getAllCourses().size(); i++)
+            {
+                //Each iteration in the for loop adds a new line of text that, using backend data, lists a course that has a conflict.
+                setTwo += "text here for a course with a conflict\n";
+            }
+            setOne += setTwo;
+            conflictDisplay.setText(setOne);
+
+        }
+        else
+        {
+            courseConflictsTitle.setText("Course conflicts: none");
+        }
+    }
+    
+    public void setTableEditable(boolean input)
+    {
+        tableIsEditable = input;
+        if (tableIsEditable)
+        {
+            currentCoursesTable.setEnabled(true);
+        }
+        else
+        {
+            currentCoursesTable.setEnabled(false);
+        }
+    }
   
     public void setPageSettingsControl(PageControl input)
     {
-    
         control = input;
         saveButton.setEnabled(false);
+        setTableEditable(true);
+        courseConflictsTitle.setText("Course conflicts: none");
     }
     
     public void debugTable()
     {
-        //DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
-        //addValueString("9:30 am - 11:00am", 0, 0);
-        //addValueString("12:00 pm - 1:30pm", 1, 0);
-        //addValueString("2:30pm - 4:00pm", 2, 0);
         for (int i = 0; i < control.getAllCourses().size(); i++)
         {
-
            addToSchedule(control.getAllCourses().get(i));
-  
         }
     }
     
@@ -226,19 +289,25 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
         currentCoursesTable.setModel(input);
     }
     
+    
+    
     //=================================================================
     //Table functions:
     public void clearTable()
     {
         DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
-        for (int i = 0; i < model.getRowCount(); i++)
+        if (model.getRowCount() > 0)
         {
-            for (int j = 0; j < model.getColumnCount(); j++)
+            int rowCount = model.getRowCount();
+            int index = (rowCount - 1);
+            while (index != -1)
             {
-                model.removeRow(i);
+               model.removeRow(index);
+               index--;
             }
+            model.fireTableDataChanged();
         }
-        model.fireTableDataChanged();
+        
     }
     
     public void addColumn(String input)
@@ -398,6 +467,9 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         currentCoursesTable = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        conflictDisplay = new javax.swing.JTextPane();
+        courseConflictsTitle = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Schedule Generator");
@@ -454,6 +526,10 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
             }
         });
 
+        savePath_error.setForeground(java.awt.Color.red);
+
+        fileName_error.setForeground(java.awt.Color.red);
+
         fileName_input.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fileName_inputActionPerformed(evt);
@@ -469,6 +545,8 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Save Schedule as Spreadsheet");
 
+        selectScheduleSave_error.setForeground(java.awt.Color.red);
+
         jButton1.setText("Debug");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -481,18 +559,31 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Name", "Section", "Days", "Times", "Room", "Conflict"
+                "Name", "Section", "Days", "Times", "Room", ""
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                true, true, true, true, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        currentCoursesTable.setShowGrid(true);
+        currentCoursesTable.setSurrendersFocusOnKeystroke(true);
+        currentCoursesTable.setVerifyInputWhenFocusTarget(false);
         jScrollPane1.setViewportView(currentCoursesTable);
+        if (currentCoursesTable.getColumnModel().getColumnCount() > 0) {
+            currentCoursesTable.getColumnModel().getColumn(5).setResizable(false);
+            currentCoursesTable.getColumnModel().getColumn(5).setPreferredWidth(5);
+        }
+
+        conflictDisplay.setEditable(false);
+        conflictDisplay.setForeground(java.awt.Color.red);
+        jScrollPane2.setViewportView(conflictDisplay);
+
+        courseConflictsTitle.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -508,7 +599,10 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1)
-                            .addComponent(errorBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(errorBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(72, 72, 72)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -516,7 +610,15 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
                             .addComponent(jLabel4)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, 0)
+                                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                                    .addComponent(courseConflictsTitle)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(81, 81, 81)
@@ -528,11 +630,7 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
                                     .addComponent(selectScheduleComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(savePath_input, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(fileName_input, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(selectScheduleSaveComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(selectScheduleSaveComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -582,7 +680,12 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(numberOfSchedulesGeneratedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(courseConflictsTitle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -592,9 +695,7 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
     }//GEN-LAST:event_generateScheduleButtonActionPerformed
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
-        //Clear button pressed
-        //clearComboBox_VIEW();
-        //clearComboBox_SAVE();
+
         clearTable();
     }//GEN-LAST:event_clearButtonActionPerformed
 
@@ -632,6 +733,8 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearButton;
+    private javax.swing.JTextPane conflictDisplay;
+    private javax.swing.JTextField courseConflictsTitle;
     private javax.swing.JTable currentCoursesTable;
     private javax.swing.JLabel errorBox;
     private javax.swing.JLabel fileName_error;
@@ -645,6 +748,7 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField numberOfSchedulesGeneratedTextField;
     private javax.swing.JButton saveButton;
     private javax.swing.JLabel savePath_error;
