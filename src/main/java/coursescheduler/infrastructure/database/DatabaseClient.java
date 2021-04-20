@@ -2,7 +2,7 @@ package coursescheduler.infrastructure.database;
 
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.model.*;
-import coursescheduler.views.pages.containers.User;
+import coursescheduler.User;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;

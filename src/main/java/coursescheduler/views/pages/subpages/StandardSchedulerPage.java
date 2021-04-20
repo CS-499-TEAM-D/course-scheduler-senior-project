@@ -18,11 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class StandardSchedulerPage extends javax.swing.JPanel implements ISubPage<JPanel> {
     PageControl control;
-    String page = "MASTER";
-
-
-
-
+    String page = "STANDARD";
     int textSize = 12;
 
     @Override

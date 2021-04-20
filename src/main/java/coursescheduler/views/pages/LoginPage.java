@@ -166,7 +166,7 @@ public final class LoginPage extends javax.swing.JPanel {
             }
 
 
-        } catch (IOException | GeneralSecurityException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

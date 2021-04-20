@@ -5,6 +5,7 @@
  */
 package coursescheduler.views.pages.subpages;
 import coursescheduler.infrastructure.database.models.CourseEvent;
+import coursescheduler.managers.PanelController;
 import coursescheduler.views.pages.ISubPage;
 import coursescheduler.views.pages.containers.PageControl;
 import coursescheduler.views.pages.containers.dummyCourse;
@@ -21,25 +22,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MasterSchedulerPage extends javax.swing.JPanel implements ISubPage<JPanel> {
     PageControl control;
-    String page = "MASTER";
-    int textSize = 12;
-
+    private final PanelController controller;
+    private final AbstractPageFactory pageFactory;
     @Override
     public JPanel init() {
         initComponents();
-		
         return this;
-    }
-    
-    public void initTable()
-    {
-        
-        for (int i = 0; i < control.getAllCourses().size(); i++)
-        {
-            addCourse(control.getAllCourses().get(i));
-            //editCourse.addComboBoxCourse(control.getAllCourses().get(i));
-            //removeCourse.addComboBoxCourse(control.getAllCourses().get(i));
-        }
     }
     
     public void setPageSettingsControl(PageControl input)
@@ -47,38 +35,6 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements ISubPage<
         control = input;
     }
 
-    public void setTextSize(int input)
-    {
-        textSize = input;
-    }
-    
-    public int getTextSize()
-    {
-        return textSize;
-    }
-
-    public void updateTextSize()
-    {
-        this.setTextSize(textSize);
-        int size1 = jLabel1.getFont().getSize();
-        int difference1 = size1 - textSize;
-        int size2 = jLabel2.getFont().getSize();
-        int difference2 = size2 - textSize;
-        Font newFont1 = new Font("Tahoma", Font.PLAIN,  textSize);
-        Font newFont2 = new Font("Tahoma", Font.PLAIN,  (textSize + difference1));
-        Font newFont3 = new Font("Tahoma", Font.PLAIN,  (textSize + difference2));
-        jLabel1.setFont(newFont2); //Add Course
-        jLabel2.setFont(newFont3); //College:
-        backButton.setFont(newFont1);
-        
-    }
-
-    
-    public String returnPage()
-    {
-        return page;
-    }
-    
     public MasterSchedulerPage() {
         initComponents();
         DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
@@ -86,66 +42,6 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements ISubPage<
         {
             model.setValueAt("", i, 0);
         }
-        
-    }
-    
-    
-    public void addCourse(dummyCourse input)
-    {
-        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
-        Object[] temp = new Object[] 
-        { 
-            input.getID(), 
-            input.getSection(),
-            input.getProfessor(), 
-            input.getRoom(),
-            input.getTimes(), 
-        };
-        
-        model.addRow(temp);
-        model.fireTableDataChanged();
-    }
-    
-    public void removeCourse(int IDInput, String name)
-    {
-        DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
-        for (int i = 0; i < model.getRowCount(); i++)
-        {
-            if (model.getValueAt(i, 1).equals(IDInput))
-            {
-                model.removeRow(i);
-                break;
-            }
-        }
-        
-      
-        model.fireTableDataChanged();
-    }
-    
-    public DefaultTableModel getTableModel()
-    {
-        return (DefaultTableModel) currentCoursesTable.getModel();
-    }
-    
-    public void setTableModel(DefaultTableModel input)
-    {
-        currentCoursesTable.setModel(input);
-    }
-    
-    public void disableButtons()
-    {
-//        addCourseButton.setEnabled(false);
-//        editCourseButton.setEnabled(false);
-//        removeCourseButton.setEnabled(false);
-        backButton.setEnabled(false);
-    }
-    
-    public void enableButtons()
-    {
-//        addCourseButton.setEnabled(true);
-//        editCourseButton.setEnabled(true);
-//        removeCourseButton.setEnabled(true);
-        backButton.setEnabled(true);
     }
 
     /**
