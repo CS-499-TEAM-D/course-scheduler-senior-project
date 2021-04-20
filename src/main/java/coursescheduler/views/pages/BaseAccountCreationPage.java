@@ -12,7 +12,7 @@ import coursescheduler.User;
 import coursescheduler.managers.PanelController;
 
 /** TODO: Fill JavaDoc. */
-public class BaseAccountCreationPage extends javax.swing.JPanel implements AccountCreationPage {
+public class BaseAccountCreationPage extends javax.swing.JPanel implements Page {
   private final PanelController controller;
   private final AbstractPageFactory pageFactory;
   private final UserDao userDao;
