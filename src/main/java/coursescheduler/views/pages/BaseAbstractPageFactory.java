@@ -1,11 +1,10 @@
 package coursescheduler.views.pages;
 
-import client.daos.UserDao;
-
 import javax.swing.JComponent;
 
 import coursescheduler.Role;
 import coursescheduler.User;
+import coursescheduler.client.daos.UserDao;
 import coursescheduler.managers.PanelController;
 import coursescheduler.security.CredentialsVerifier;
 

@@ -1,7 +1,5 @@
 package coursescheduler.views.pages;
 
-import client.daos.UserDao;
-
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import java.awt.Color;
@@ -9,6 +7,7 @@ import java.util.Arrays;
 
 import coursescheduler.Role;
 import coursescheduler.User;
+import coursescheduler.client.daos.UserDao;
 import coursescheduler.managers.PanelController;
 
 /** TODO: Fill JavaDoc. */

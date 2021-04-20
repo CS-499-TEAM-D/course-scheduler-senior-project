@@ -1,7 +1,7 @@
 package coursescheduler;
 
-import client.daos.BaseUserDao;
-import client.daos.UserDao;
+import coursescheduler.client.daos.BaseUserDao;
+import coursescheduler.client.daos.UserDao;
 import org.junit.Test;
 
 import coursescheduler.managers.BaseFrameManager;

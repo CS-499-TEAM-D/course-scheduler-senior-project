@@ -1,4 +1,4 @@
-package client.daos;
+package coursescheduler.client.daos;
 
 import coursescheduler.User;
 
