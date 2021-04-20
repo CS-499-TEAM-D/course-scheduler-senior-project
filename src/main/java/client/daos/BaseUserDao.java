@@ -5,7 +5,7 @@ import coursescheduler.User;
 /**
  * TODO: Javadoc.
  */
-public class BaseUserDao implements UserDao {
+public final class BaseUserDao implements UserDao {
     @Override
     public boolean addUser(User user) {
         // TODO: Add functionality to write new user to database.
