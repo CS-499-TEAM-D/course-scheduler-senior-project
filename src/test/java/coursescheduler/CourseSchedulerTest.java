@@ -1,30 +1,25 @@
 package coursescheduler;
 
-import coursescheduler.infrastructure.database.DatabaseClient;
-import org.junit.Before;
+import coursescheduler.client.daos.BaseUserDao;
+import coursescheduler.client.daos.UserDao;
 import org.junit.Test;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import coursescheduler.managers.BaseFrameManager;
 import coursescheduler.managers.PanelController;
-
-import java.io.IOException;
-import java.security.GeneralSecurityException;
+import coursescheduler.security.BaseCredentialsVerifier;
+import coursescheduler.security.CredentialsVerifier;
+import coursescheduler.views.pages.AbstractPageFactory;
+import coursescheduler.views.pages.BaseAbstractPageFactory;
+import coursescheduler.views.pages.BaseLoginPage;
 
 public class CourseSchedulerTest {
-  private CourseScheduler courseScheduler;
-  private PanelController panelController;
-  private DatabaseClient databaseClient;
-  private JPanel startPage;
-  private JFrame mainFrame;
-
-  @Before
-  public void setUp() throws IOException, GeneralSecurityException {
-    panelController = new BaseFrameManager(mainFrame, databaseClient);
-    courseScheduler = new CourseScheduler(panelController, startPage);
-  }
+  private final CourseSchedulerFrame courseSchedulerFrame = new CourseSchedulerFrame();
+  private final PanelController controller = new BaseFrameManager(courseSchedulerFrame);
+  private final CredentialsVerifier verifier = new BaseCredentialsVerifier();
+  private final UserDao userDao = new BaseUserDao();
+  private final AbstractPageFactory factory = new BaseAbstractPageFactory(controller, verifier, userDao);
+  private final BaseLoginPage loginPage = new BaseLoginPage(controller, verifier, factory, userDao);
+  private final CourseScheduler courseScheduler = new BaseCourseScheduler(controller, loginPage);
 
   @Test
   public void main_defaultState_shouldNotFail() {

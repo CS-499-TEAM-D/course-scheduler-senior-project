@@ -1,9 +1,6 @@
 package coursescheduler.managers;
 
-import coursescheduler.infrastructure.database.DatabaseClient;
-
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -17,7 +14,7 @@ public interface PanelController<P extends JComponent> {
    *
    * @return
    */
-  PanelController init(P page);
+  PanelController initializeStartPage(P page);
 
   /**
    * Updates the current displayed page.
@@ -25,9 +22,4 @@ public interface PanelController<P extends JComponent> {
    * @param page element to display.
    */
   void updatePage(P page);
-
-  /**
-   * Provides access to the database client
-   */
-  DatabaseClient getDatabaseClient();
 }

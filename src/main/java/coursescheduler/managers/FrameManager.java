@@ -1,13 +1,10 @@
 package coursescheduler.managers;
 
-import coursescheduler.infrastructure.database.DatabaseClient;
-
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.util.Optional;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -21,16 +18,14 @@ abstract class FrameManager<C extends Container, P extends JComponent> implement
   protected C container;
   protected P page;
   private final JPanel panelWrapper; // helps non-programmatic pages show up
-  private final DatabaseClient databaseClient; // allows pages to make calls to the remote database
 
-  public FrameManager(C container, DatabaseClient databaseClient) {
+  public FrameManager(C container) {
     this.container = container;
     this.panelWrapper = new JPanel();
-    this.databaseClient = databaseClient;
   }
 
   @Override
-  public PanelController<P> init(P page) {
+  public PanelController<P> initializeStartPage(P page) {
     Dimension parentSize = container.getSize();
     panelWrapper.setSize(parentSize);
     panelWrapper.setPreferredSize(parentSize);
@@ -52,10 +47,5 @@ abstract class FrameManager<C extends Container, P extends JComponent> implement
     page.setVisible(false);
     Optional.ofNullable(page).ifPresent(panelWrapper::remove);
     page = newPage;
-  }
-
-  @Override
-  public DatabaseClient getDatabaseClient() {
-    return databaseClient;
   }
 }

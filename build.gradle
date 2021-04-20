@@ -20,46 +20,21 @@ repositories {
 
 dependencies {
     // Application Dependencies
-    implementation 'com.google.guava:guava:29.0-jre'
-
-    // These are used for the Google Sheets API connection
-    implementation 'com.google.api-client:google-api-client:1.30.4'
-    implementation 'com.google.oauth-client:google-oauth-client-jetty:1.30.6'
-    implementation 'com.google.apis:google-api-services-sheets:v4-rev581-1.25.0'
-
-    // These are used for the Apache POI Excel File Parser
-    implementation group: 'org.apache.poi', name: 'poi', version: '3.9'
-    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '3.9'
+    implementation(
+            'com.google.guava:guava:29.0-jre', // Extended powerful general purpose library
+    )
 
     // Test Dependencies
     testImplementation(
-            'junit:junit:4.13', // JUnit test framework
+            'org.junit.jupiter:junit-jupiter:5.4.2', // JUnit5 Testing framework
+            'junit:junit:4.13', // JUnit4 test framework
             'org.mockito:mockito-core:2.+', // Mockito mocking framework
-            'org.assertj:assertj-core:3.19.0' // AssertJ assertion framework
+            'org.assertj:assertj-core:3.19.0' // Asserting Framework
+
     )
 }
 
 application {
     // Define the main class for the application.
-    mainClassName = 'coursescheduler.Driver'
-}
-
-checkstyle {
-    // Set checkstyle version.
-    toolVersion '8.40';
-}
-
-checkstyleMain {
-    // Set checkstyleMain to run after verifyGoogleJavaFormat.
-    dependsOn(tasks.verifyGoogleJavaFormat)
-}
-
-checkstyleTest {
-    // Set checkstyleTest to run after verifyGoogleJavaFormat.
-    dependsOn(tasks.verifyGoogleJavaFormat)
-}
-
-verifyGoogleJavaFormat {
-    // Set verifyGoogleJavaFormat to run after googleJavaFormat.
-    dependsOn(tasks.googleJavaFormat)
+    mainClassName = 'coursescheduler.BaseCourseScheduler'
 }

@@ -1,0 +1,57 @@
+package coursescheduler;
+
+import java.util.List;
+import java.util.Map;
+
+import coursescheduler.client.daos.DayPeriodDao;
+import coursescheduler.client.daos.RoomDao;
+import coursescheduler.client.daos.TimePeriodDao;
+import coursescheduler.views.pages.CourseEvent;
+import coursescheduler.views.pages.CourseEventParent;
+import coursescheduler.views.pages.Department;
+
+/** TODO: Javadoc. */
+public class University implements CourseEventParent, Queryable {
+
+  private final Map<String, Department> departments;
+  private final List<CourseEvent> schedule;
+  private final TimePeriodDao timePeriodDao; //
+  private final DayPeriodDao dayPeriodDao;
+  private final RoomDao roomDao;
+  private final List<List<CourseEvent>> schedules;
+
+  University(
+      Map<String, Department> departments,
+      List<CourseEvent> schedule,
+      TimePeriodDao timePeriodDao,
+      DayPeriodDao dayPeriodDao,
+      RoomDao roomDao,
+      List<List<CourseEvent>> schedules) {
+    this.departments = departments;
+    this.schedule = schedule;
+    this.timePeriodDao = timePeriodDao;
+    this.dayPeriodDao = dayPeriodDao;
+    this.roomDao = roomDao;
+    this.schedules = schedules;
+  }
+
+  @Override
+  public List<Integer> getConflicts() {
+    return null;
+  }
+
+  @Override
+  public List<String> findByDepartment(String department) {
+    return null;
+  }
+
+  @Override
+  public List<String> findByFaculty(String email) {
+    return null;
+  }
+
+  @Override
+  public List<String> findByRoom(String roomId) {
+    return null;
+  }
+}
