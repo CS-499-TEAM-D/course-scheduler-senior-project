@@ -73,7 +73,7 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
             times,
             room
         };
-        System.out.println(name);
+        //System.out.println(name);
         model.addRow(temp);
         
     }
@@ -235,7 +235,7 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
         {
             for (int j = 0; j < model.getColumnCount(); j++)
             {
-                model.setValueAt("", i, j);
+                model.removeRow(i);
             }
         }
         model.fireTableDataChanged();
