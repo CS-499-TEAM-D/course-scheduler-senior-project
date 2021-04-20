@@ -88,6 +88,7 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
         else
         {
             courseConflictsTitle.setText("Course conflicts: none");
+            conflictDisplay.setText("");
         }
     }
     
