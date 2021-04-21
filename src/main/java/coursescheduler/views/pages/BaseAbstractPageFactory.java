@@ -1,6 +1,6 @@
 package coursescheduler.views.pages;
 
-import client.daos.UserDao;
+import coursescheduler.client.daos.UserDao;
 
 import javax.swing.JComponent;
 
