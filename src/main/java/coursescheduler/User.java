@@ -17,4 +17,12 @@ public class User {
     public String getRole() {
         return role;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
 }

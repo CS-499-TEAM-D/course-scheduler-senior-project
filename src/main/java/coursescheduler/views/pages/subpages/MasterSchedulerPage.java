@@ -6,6 +6,7 @@
 package coursescheduler.views.pages.subpages;
 import coursescheduler.infrastructure.database.models.CourseEvent;
 import coursescheduler.managers.PanelController;
+import coursescheduler.views.pages.AbstractPageFactory;
 import coursescheduler.views.pages.ISubPage;
 import coursescheduler.views.pages.containers.PageControl;
 import coursescheduler.views.pages.containers.dummyCourse;
@@ -42,6 +43,8 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements ISubPage<
         {
             model.setValueAt("", i, 0);
         }
+        controller = null;
+        pageFactory  = null;
     }
 
     /**

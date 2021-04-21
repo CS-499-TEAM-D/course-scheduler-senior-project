@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package coursescheduler.views.pages.containers;
+import coursescheduler.client.daos.BaseUserDao;
+import coursescheduler.client.daos.UserDao;
 import coursescheduler.infrastructure.database.DatabaseClient;
 import coursescheduler.infrastructure.database.ExcelImportUtil;
 import coursescheduler.views.pages.subpages.GenerateSchedulePage;
@@ -33,14 +35,11 @@ public class PageControl
     List<dummyCourse> loadedCoursesDummy = new ArrayList<>();
     String type;
 
-    public final DatabaseClient db;
-    public final ExcelImportUtil eiu;
+    public final UserDao userDao;
 
     public PageControl() throws IOException, GeneralSecurityException {
+        this.userDao = new BaseUserDao();
 
-
-        db = DatabaseClient.getInstance(10);
-        eiu = ExcelImportUtil.getInstance();
     }
     
     

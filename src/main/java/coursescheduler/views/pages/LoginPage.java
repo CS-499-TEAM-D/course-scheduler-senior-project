@@ -5,6 +5,8 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
+import coursescheduler.client.daos.BaseUserDao;
+import coursescheduler.client.daos.UserDao;
 import coursescheduler.managers.PanelController;
 import coursescheduler.views.pages.containers.MasterSchedulerContainer;
 import coursescheduler.views.pages.containers.StandardSchedulerContainer;
@@ -146,11 +148,11 @@ public final class LoginPage extends javax.swing.JPanel {
 
     private void verifyUserAndUpdatePage(){
         try {
-            String userVerified = controller.getDatabaseClient().verifyUserLogin(emailField.getText(), passwordField.getPassword());
+            Boolean userVerified = BaseUserDao.verifyUserLogin(emailField.getText(), passwordField.getPassword());
 
             System.out.println(userVerified);
 
-            if (userVerified.equals("false")){
+            if (!userVerified){
                 // failed log in attempt
 
             }

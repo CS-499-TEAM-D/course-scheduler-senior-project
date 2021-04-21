@@ -378,7 +378,11 @@ public class BaseAccountCreationPage extends javax.swing.JPanel implements Page 
             emailTextField.getText(),
             roleComboBox.getSelectedItem().toString(),
             departmentComboBox.getSelectedItem().toString());
-    userDao.addUser(user);
+    try {
+      userDao.addUser(user, passwordField.getPassword());
+    }catch (Exception e){
+      System.out.println("IOException, could not add user to remote database");
+    }
     controller.updatePage(pageFactory.buildLoginPage());
   } // GEN-LAST:event_submitButtonMouseClicked
 

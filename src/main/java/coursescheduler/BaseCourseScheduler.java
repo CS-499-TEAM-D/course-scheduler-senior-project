@@ -15,6 +15,9 @@ import coursescheduler.views.pages.BaseAbstractPageFactory;
 import coursescheduler.views.pages.BaseLoginPage;
 import coursescheduler.views.pages.Page;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+
 /** Sets up and starts the CourseScheduler application. */
 final class BaseCourseScheduler implements CourseScheduler {
   private final PanelController controller;
@@ -30,13 +33,13 @@ final class BaseCourseScheduler implements CourseScheduler {
     controller.initializeStartPage(loginPage);
   }
 
-  public static void main(String... args) {
+  public static void main(String... args) throws IOException, GeneralSecurityException {
     JFrame mainFrame = new CourseSchedulerFrame();
     PanelController panelController = new BaseFrameManager(mainFrame);
 
-    CredentialsVerifier credentialsVerifier = new BaseCredentialsVerifier();
-
     UserDao userDao = new BaseUserDao();
+
+    CredentialsVerifier credentialsVerifier = new BaseCredentialsVerifier(userDao);
 
     AbstractPageFactory factory = new BaseAbstractPageFactory(panelController, credentialsVerifier, userDao);
 

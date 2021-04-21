@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 
 /** Application entry point. */
+/*
 public class Driver {
     public static void main(String... args) throws IOException, GeneralSecurityException {
 
@@ -24,3 +25,5 @@ public class Driver {
     app.run();
   }
 }
+
+*/
