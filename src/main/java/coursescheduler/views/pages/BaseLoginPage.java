@@ -68,7 +68,7 @@ public final class BaseLoginPage extends javax.swing.JPanel implements Page {
     emailField.addKeyListener(
         new java.awt.event.KeyAdapter() {
           public void keyPressed(java.awt.event.KeyEvent evt) {
-            emailFieldKeyPressed(evt);
+            emailFieldEnterKeyPressed(evt);
           }
         });
 
@@ -195,7 +195,7 @@ public final class BaseLoginPage extends javax.swing.JPanel implements Page {
     getAccessibleContext().setAccessibleName("");
   } // </editor-fold>//GEN-END:initComponents
 
-  private void emailFieldKeyPressed(
+  private void emailFieldEnterKeyPressed(
       java.awt.event.KeyEvent evt) { // GEN-FIRST:event_emailFieldKeyPressed
     if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
       login(emailField.getText(), passwordField.getPassword());
