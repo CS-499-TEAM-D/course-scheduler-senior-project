@@ -36,5 +36,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClassName = 'coursescheduler.BaseCourseScheduler'
+    mainClassName = 'coursescheduler.CourseScheduler'
 }
