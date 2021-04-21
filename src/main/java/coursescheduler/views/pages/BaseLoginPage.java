@@ -1,12 +1,12 @@
 package coursescheduler.views.pages;
 
-import coursescheduler.client.daos.UserDao;
-
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 
 import coursescheduler.User;
+import coursescheduler.client.daos.UserDao;
 import coursescheduler.managers.PanelController;
 import coursescheduler.security.CredentialsVerifier;
 
@@ -38,8 +38,14 @@ public final class BaseLoginPage extends javax.swing.JPanel implements Page {
 
   private void login(String email, char[] password) {
     if (!verifier.validUserCredentials(email, password)) {
-      // TODO: Update GUI to show error.
+      passwordLabel.setForeground(Color.RED);
+      emailLabel.setForeground(Color.RED);
+      return;
     }
+
+    passwordLabel.setForeground(Color.BLACK);
+    emailLabel.setForeground(Color.BLACK);
+
     User user = userDao.getUserByEmail(email);
     controller.updatePage(pageFactory.buildUserPage(user));
   }
@@ -65,6 +71,12 @@ public final class BaseLoginPage extends javax.swing.JPanel implements Page {
 
     passwordLabel.setText("password");
 
+    emailField.addMouseListener(
+        new java.awt.event.MouseAdapter() {
+          public void mousePressed(java.awt.event.MouseEvent evt) {
+            emailFieldMousePressed(evt);
+          }
+        });
     emailField.addKeyListener(
         new java.awt.event.KeyAdapter() {
           public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -72,6 +84,12 @@ public final class BaseLoginPage extends javax.swing.JPanel implements Page {
           }
         });
 
+    passwordField.addMouseListener(
+        new java.awt.event.MouseAdapter() {
+          public void mousePressed(java.awt.event.MouseEvent evt) {
+            passwordFieldMousePressed(evt);
+          }
+        });
     passwordField.addKeyListener(
         new java.awt.event.KeyAdapter() {
           public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -194,6 +212,16 @@ public final class BaseLoginPage extends javax.swing.JPanel implements Page {
 
     getAccessibleContext().setAccessibleName("");
   } // </editor-fold>//GEN-END:initComponents
+
+  private void emailFieldMousePressed(
+      java.awt.event.MouseEvent evt) { // GEN-FIRST:event_emailFieldMousePressed
+    emailField.setForeground(Color.BLACK);
+  } // GEN-LAST:event_emailFieldMousePressed
+
+  private void passwordFieldMousePressed(
+      java.awt.event.MouseEvent evt) { // GEN-FIRST:event_passwordFieldMousePressed
+    passwordField.setForeground(Color.BLACK);
+  } // GEN-LAST:event_passwordFieldMousePressed
 
   private void emailFieldEnterKeyPressed(
       java.awt.event.KeyEvent evt) { // GEN-FIRST:event_emailFieldKeyPressed

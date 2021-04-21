@@ -6,6 +6,6 @@ package coursescheduler.security;
 public class BaseCredentialsVerifier implements CredentialsVerifier {
     @Override
     public boolean validUserCredentials(String email, char[] password) {
-        return false;
+        return true;
     }
 }
