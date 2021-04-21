@@ -57,7 +57,7 @@ public class BaseAccountCreationPage extends javax.swing.JPanel implements Page 
     "World Languages and Cultures"
   };
 
-  private static final String[] ROLES = {Role.DEAN, Role.COORDINATOR};
+  private static final String[] ROLES = {Role.MANAGER, Role.COORDINATOR};
 
   /** Creates new form AccountCreationPage */
   public BaseAccountCreationPage(

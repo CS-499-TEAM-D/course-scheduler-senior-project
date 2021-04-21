@@ -37,11 +37,11 @@ public class BaseAbstractPageFactory implements AbstractPageFactory {
   public JComponent buildUserPage(User user) {
     String role = user.getRole();
     switch (role) {
-      case Role.DEAN:
-        // TODO: return Dean page.
+      case Role.MANAGER:
+        // TODO: return main manager page.
         break;
       case Role.COORDINATOR:
-        // TODO: return Coordinator page.
+        // TODO: return coordinator page.
         break;
       default:
         throw new RuntimeException("No page found for user's role.");
