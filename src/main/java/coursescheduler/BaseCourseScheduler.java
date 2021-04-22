@@ -6,6 +6,7 @@ import coursescheduler.client.daos.UserDao;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
+import coursescheduler.infrastructure.database.SheetsServiceUtil;
 import coursescheduler.managers.BaseFrameManager;
 import coursescheduler.managers.PanelController;
 import coursescheduler.security.BaseCredentialsVerifier;
@@ -14,9 +15,12 @@ import coursescheduler.views.pages.AbstractPageFactory;
 import coursescheduler.views.pages.BaseAbstractPageFactory;
 import coursescheduler.views.pages.BaseLoginPage;
 import coursescheduler.views.pages.Page;
+import org.apache.poi.ss.usermodel.Sheet;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+
+import static coursescheduler.DatabaseSheetIDs.TEST;
 
 /** Sets up and starts the CourseScheduler application. */
 final class BaseCourseScheduler implements CourseScheduler {
@@ -37,9 +41,9 @@ final class BaseCourseScheduler implements CourseScheduler {
     JFrame mainFrame = new CourseSchedulerFrame();
     PanelController panelController = new BaseFrameManager(mainFrame);
 
-    UserDao userDao = new BaseUserDao();
+    UserDao userDao = new BaseUserDao(SheetsServiceUtil.getSheetsService(), TEST);
 
-    CredentialsVerifier credentialsVerifier = new BaseCredentialsVerifier(userDao);
+    CredentialsVerifier credentialsVerifier = new BaseCredentialsVerifier(userDao, SheetsServiceUtil.getSheetsService(), TEST);
 
     AbstractPageFactory factory = new BaseAbstractPageFactory(panelController, credentialsVerifier, userDao);
 

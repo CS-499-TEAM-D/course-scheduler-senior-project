@@ -1,5 +1,6 @@
 package coursescheduler.client.daos;
 
+import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.model.ValueRange;
 import coursescheduler.User;
 import coursescheduler.infrastructure.database.DatabaseClient;
@@ -13,11 +14,14 @@ import java.util.List;
  * TODO: Javadoc.
  */
 public final class BaseUserDao implements UserDao {
-    private final DatabaseClient dB = DatabaseClient.getInstance(10);
-    private String spreadsheetId = dB.getSpreadsheetId();
+    private final Sheets service;
+    private String spreadsheetId;
 
 
-    public BaseUserDao() throws IOException, GeneralSecurityException {
+
+    public BaseUserDao(Sheets service, String spreadsheetId) throws IOException, GeneralSecurityException {
+        this.service = service;
+        this.spreadsheetId = spreadsheetId;
     }
 
     /**
@@ -62,7 +66,7 @@ public final class BaseUserDao implements UserDao {
      */
     public List<List<Object>> getColumn(String sheet, char columnCharStart, char columnCharFinal) throws IOException {
         String userColumn = sheet+"!"+columnCharStart+"2:"+columnCharFinal; // 2 to end of column, skip header
-        ValueRange userRange = dB.getSheetsService().spreadsheets().values().get(spreadsheetId, userColumn).execute();
+        ValueRange userRange = service.spreadsheets().values().get(spreadsheetId, userColumn).execute();
         return userRange.getValues();
     }
 
@@ -77,7 +81,7 @@ public final class BaseUserDao implements UserDao {
         return indexOfColumn(users, email);
     }
 
-    public static boolean verifyUserLogin(String email, char[] password) throws IOException {
+    public boolean verifyUserLogin(String email, char[] password) throws IOException {
         int index = findUserIndex(email);
         if (index == -1) {
             return false;
@@ -87,14 +91,14 @@ public final class BaseUserDao implements UserDao {
         ValueRange valueRange = new ValueRange().setValues(Arrays.asList(
                 Arrays.asList(String.valueOf(password))
         ));
-        dB.getSheetsService().spreadsheets().values().update(spreadsheetId, "CREDS!D" + index, valueRange).setValueInputOption("RAW").execute();
+        service.spreadsheets().values().update(spreadsheetId, "CREDS!D" + index, valueRange).setValueInputOption("RAW").execute();
 
         // read column e boolean verify that compares password attempt and password saved
-        boolean verified = Boolean.parseBoolean(dB.getSheetsService().spreadsheets().values().get(spreadsheetId, "CREDS!E" + index).execute().getValues().get(0).get(0).toString());
+        boolean verified = Boolean.parseBoolean(service.spreadsheets().values().get(spreadsheetId, "CREDS!E" + index).execute().getValues().get(0).get(0).toString());
 
         // reset column d so previous attempts are not saved
         valueRange.getValues().get(0).set(0, "");
-        dB.getSheetsService().spreadsheets().values().update(spreadsheetId, "CREDS!D" + index, valueRange).setValueInputOption("RAW").execute();
+        service.spreadsheets().values().update(spreadsheetId, "CREDS!D" + index, valueRange).setValueInputOption("RAW").execute();
 
         return verified;
     }
@@ -118,7 +122,7 @@ public final class BaseUserDao implements UserDao {
         ));
 
         // adds user to next empty row
-        dB.getSheetsService().spreadsheets().values().append(spreadsheetId, "CREDS!A1", userValueRange).setValueInputOption("USER_ENTERED").setInsertDataOption("INSERT_ROWS").execute();
+        service.spreadsheets().values().append(spreadsheetId, "CREDS!A1", userValueRange).setValueInputOption("USER_ENTERED").setInsertDataOption("INSERT_ROWS").execute();
         return true;
     }
 
@@ -131,18 +135,11 @@ public final class BaseUserDao implements UserDao {
         }
         // if user found, fetch information on the user and create a user object to return
         String userToGet = "CREDS!A"+index+":C"+index;
-        ValueRange userRange  = dB.getSheetsService().spreadsheets().values().get(spreadsheetId, userToGet).execute();
+        ValueRange userRange  = service.spreadsheets().values().get(spreadsheetId, userToGet).execute();
         List<List<Object>> users = userRange.getValues();
 
         User user = new User( String.valueOf(users.get(0).get(0)), String.valueOf(users.get(0).get(2)), String.valueOf(users.get(0).get(0)));
         System.out.println(users+"\n\n\n"+user);
         return user;
     }
-
-    @Override
-    public DatabaseClient getDatabaseClient() {
-        return this.dB;
-    }
-
-
 }

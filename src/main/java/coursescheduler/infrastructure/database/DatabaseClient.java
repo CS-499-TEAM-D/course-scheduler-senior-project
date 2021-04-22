@@ -16,7 +16,6 @@ public final class DatabaseClient {
     private static DatabaseClient dataBaseClientInstance = null;
     private final Sheets service;
     private final String spreadsheetId;
-    private final int sectionLimit;
     private HashMap<String, Integer> sheetIDMap;
 
     /**
@@ -26,24 +25,22 @@ public final class DatabaseClient {
      * @throws IOException
      * @throws GeneralSecurityException
      */
-    private DatabaseClient(int sectionLimit) throws IOException, GeneralSecurityException {
+    private DatabaseClient() throws IOException, GeneralSecurityException {
         // Build a new authorized API client service.
         // final String spreadsheetId = "1NNZsNlZRHzTG1w977LBTz_wVJ8YTYgJfLMPCSYWpE6Y"; // <-- LIVE DATA
-        final String spreadsheetId = "17hrTlcbE9zvMlg8eH2Q7wsZjzXcCEqYfv_oVBqe4GKc"; // <-- TEST DATA
+        // final String spreadsheetId = "17hrTlcbE9zvMlg8eH2Q7wsZjzXcCEqYfv_oVBqe4GKc"; // <-- TEST DATA
+        this.spreadsheetId = "17hrTlcbE9zvMlg8eH2Q7wsZjzXcCEqYfv_oVBqe4GKc";
         this.service = SheetsServiceUtil.getSheetsService();
-        this.spreadsheetId = spreadsheetId;
-        this.sectionLimit = sectionLimit;
         updateSheetsIDList();
     }
 
     /**
-     * @param sectionLimit limit the number of sections of a course that can be made
      * @return a singleton instance of the database client
      * @throws IOException
      * @throws GeneralSecurityException
      */
-    public static DatabaseClient getInstance(int sectionLimit) throws IOException, GeneralSecurityException {
-        return (dataBaseClientInstance == null) ? dataBaseClientInstance = new DatabaseClient(sectionLimit) : dataBaseClientInstance;
+    public static DatabaseClient getInstance() throws IOException, GeneralSecurityException {
+        return (dataBaseClientInstance == null) ? dataBaseClientInstance = new DatabaseClient() : dataBaseClientInstance;
     }
 
     /**
