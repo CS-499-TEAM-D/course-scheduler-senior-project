@@ -1,7 +1,5 @@
 package coursescheduler.views.pages;
 
-import coursescheduler.client.daos.UserDao;
-
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import java.awt.Color;
@@ -9,9 +7,10 @@ import java.util.Arrays;
 
 import coursescheduler.Role;
 import coursescheduler.User;
+import coursescheduler.client.daos.UserDao;
 import coursescheduler.managers.PanelController;
 
-/** TODO: Fill JavaDoc. */
+/** Allows the user to create an account to use the Course Scheduler application. */
 public class BaseAccountCreationPage extends javax.swing.JPanel implements Page {
   private final PanelController controller;
   private final AbstractPageFactory pageFactory;

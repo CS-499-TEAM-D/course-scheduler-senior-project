@@ -4,9 +4,11 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 /**
- * Default {@link FrameManager} object for the Course Scheduler application.
+ * Allows for the swapping of {@link JComponent} pages inside of a {@link JFrame} container.
  *
- * Manages pages within the main frame of the Course Scheduler application.
+ * <p>Manages pages within the main frame of the Course Scheduler application. This allows for the
+ * swapping of the {@linkplain JComponent pages}. Note that pages are assumed to be {@link
+ * JComponent} objects for flexibility.
  */
 public final class BaseFrameManager extends FrameManager<JFrame, JComponent>
     implements PanelController<JComponent> {

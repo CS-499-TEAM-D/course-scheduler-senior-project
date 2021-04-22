@@ -1,8 +1,6 @@
 package coursescheduler.security;
 
-/**
- * TODO: Javadoc.
- */
+/** Verifies credentials across the Course Scheduler application. */
 public interface CredentialsVerifier {
-    boolean validUserCredentials(String email, char[] password);
+  boolean validUserCredentials(String email, char[] password);
 }

@@ -1,11 +1,10 @@
 package coursescheduler;
 
-import coursescheduler.client.daos.BaseUserDao;
-import coursescheduler.client.daos.UserDao;
-
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
+import coursescheduler.client.daos.BaseUserDao;
+import coursescheduler.client.daos.UserDao;
 import coursescheduler.managers.BaseFrameManager;
 import coursescheduler.managers.PanelController;
 import coursescheduler.security.BaseCredentialsVerifier;

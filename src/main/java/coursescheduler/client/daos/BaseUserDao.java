@@ -2,7 +2,7 @@ package coursescheduler.client.daos;
 
 import coursescheduler.User;
 
-/** TODO: Javadoc. */
+/** Default operations for the {@link UserDao} for the CourseScheduler application. */
 public final class BaseUserDao implements UserDao {
   @Override
   public User addUser(User user) {

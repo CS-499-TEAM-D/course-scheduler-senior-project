@@ -1,11 +1,9 @@
 package coursescheduler.security;
 
-/**
- * TODO: Javadoc.
- */
+/** {@inheritDoc} */
 public class BaseCredentialsVerifier implements CredentialsVerifier {
-    @Override
-    public boolean validUserCredentials(String email, char[] password) {
-        return true;
-    }
+  @Override
+  public boolean validUserCredentials(String email, char[] password) {
+    return true;
+  }
 }
