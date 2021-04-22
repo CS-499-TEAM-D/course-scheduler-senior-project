@@ -132,10 +132,20 @@ public class PreferenceSolver {
         }
     }
 
+    /**
+     * @param room room to check
+     * @param period period to check
+     * @return returns true if both the room and period combination are available, else returns false
+     */
     public boolean roomAndTimeIsAvailable(Room room, Period period){
         return roomPeriodAvailabilityMap.get(room).get(period) == null;
     }
 
+    /**
+     * @param room room to check
+     * @param course course to check
+     * @return returns true if the room is large enough to hold the course, else returns false
+     */
     public boolean courseFitsRoomPreferred(Room room, Course course){
         return room.getCapacity()>course.getMaxEnroll();
     }
