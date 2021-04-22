@@ -38,23 +38,3 @@ application {
     // Define the main class for the application.
     mainClassName = 'coursescheduler.CourseScheduler'
 }
-
-checkstyle {
-    // Set checkstyle version.
-    toolVersion '8.40';
-}
-
-checkstyleMain {
-    // Set checkstyleMain to run after verifyGoogleJavaFormat.
-//    dependsOn(tasks.verifyGoogleJavaFormat)
-}
-
-checkstyleTest {
-    // Set checkstyleTest to run after verifyGoogleJavaFormat.
-    //    dependsOn(tasks.verifyGoogleJavaFormat)
-}
-
-verifyGoogleJavaFormat {
-    // Set verifyGoogleJavaFormat to run after googleJavaFormat.
-//    dependsOn(tasks.googleJavaFormat)
-}
