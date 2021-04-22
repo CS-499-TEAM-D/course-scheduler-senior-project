@@ -35,10 +35,8 @@ public class PageControl
     List<dummyCourse> loadedCoursesDummy = new ArrayList<>();
     String type;
 
-    public final UserDao userDao;
 
     public PageControl() throws IOException, GeneralSecurityException {
-        this.userDao = new BaseUserDao();
 
     }
     

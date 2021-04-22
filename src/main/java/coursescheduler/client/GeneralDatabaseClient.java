@@ -1,5 +1,6 @@
 package coursescheduler.client;
 
+import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.model.ValueRange;
 
 import java.io.IOException;
@@ -7,10 +8,11 @@ import java.util.List;
 
 public abstract class GeneralDatabaseClient {
     protected final String spreadsheetId;
+    protected final Sheets service;
 
-
-    protected GeneralDatabaseClient(String spreadsheetId) {
+    protected GeneralDatabaseClient(Sheets service, String spreadsheetId) {
         this.spreadsheetId = spreadsheetId;
+        this.service = service;
     }
 
     /**

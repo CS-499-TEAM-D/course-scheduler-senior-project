@@ -2,11 +2,11 @@ package coursescheduler.infrastructure.database.models;
 
 public class Course {
 
-    protected final int courseIndex;
-    protected final int courseId;
-    protected final int sectionId;
-    protected final int prelimEnroll;
-    protected final int maxEnroll;
+    private final int courseIndex;
+    private final int courseId;
+    private final int sectionId;
+    private final int prelimEnroll;
+    private final int maxEnroll;
 
     /**
      * @param courseIndex
@@ -24,5 +24,25 @@ public class Course {
         this.maxEnroll = maxEnroll;
 
     }
+
+    public int getCourseIndex() {
+        return courseIndex;
+    }
+    public int getSectionId() {
+        return sectionId;
+    }
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public int getPrelimEnroll() {
+        return prelimEnroll;
+    }
+
+    public int getMaxEnroll() {
+        return maxEnroll;
+    }
+
 
 }

@@ -383,7 +383,7 @@ public class BaseAccountCreationPage extends javax.swing.JPanel implements Page 
             roleComboBox.getSelectedItem().toString(),
             departmentComboBox.getSelectedItem().toString());
 
-    userDao.addUser(user);
+    userDao.addUser(user, passwordField.getPassword());
 
     controller.updatePage(pageFactory.buildLoginPage());
   } // GEN-LAST:event_submitButtonMouseClicked

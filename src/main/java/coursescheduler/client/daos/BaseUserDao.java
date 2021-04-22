@@ -76,9 +76,14 @@ public final class BaseUserDao implements UserDao {
      * @return returns the numerical index of that user as it appears in the remote google sheet
      * @throws IOException
      */
-    public int findUserIndex(String email) throws IOException {
+    public int findUserIndex(String email){
         // get a list of all the users and find the index of the email passed
-        List<List<Object>> users = getColumn("CREDS", 'A', 'A');
+        List<List<Object>> users = null;
+        try {
+            users = getColumn("CREDS", 'A', 'A');
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return indexOfColumn(users, email);
     }
 
@@ -105,16 +110,19 @@ public final class BaseUserDao implements UserDao {
     }
 
     @Override
-    public boolean addUser(User user, char[] password) throws IOException {
+    public User addUser(User user, char[] password){
 
         if(user.getEmail() == null || password == null || user.getRole() == null || user.getEmail().equals("") || String.valueOf(password).equals("") || user.getRole().equals("")){
-            return false;
+            return null;
         }
 
         // verify that the user being added does not already exist
-        int index = findUserIndex(user.getEmail());
+        int index = 0;
+
+        index = findUserIndex(user.getEmail());
+
         if(index == -1){
-            return false;
+            return null;
         }
 
         // format for adding user to remote sheet
@@ -123,20 +131,32 @@ public final class BaseUserDao implements UserDao {
         ));
 
         // adds user to next empty row
-        service.spreadsheets().values().append(spreadsheetId, "CREDS!A1", userValueRange).setValueInputOption("USER_ENTERED").setInsertDataOption("INSERT_ROWS").execute();
-        return true;
+        try {
+            service.spreadsheets().values().append(spreadsheetId, "CREDS!A1", userValueRange).setValueInputOption("USER_ENTERED").setInsertDataOption("INSERT_ROWS").execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 
     @Override
-    public User getUserByEmail(String email) throws IOException {
+    public User getUserByEmail(String email){
         // find user
-        int index = findUserIndex(email);
+        int index = 0;
+
+        index = findUserIndex(email);
+
         if(index == -1){
             return null;
         }
         // if user found, fetch information on the user and create a user object to return
         String userToGet = "CREDS!A"+index+":C"+index;
-        ValueRange userRange  = service.spreadsheets().values().get(spreadsheetId, userToGet).execute();
+        ValueRange userRange  = null;
+        try {
+            userRange = service.spreadsheets().values().get(spreadsheetId, userToGet).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         List<List<Object>> users = userRange.getValues();
 
         User user = new User( String.valueOf(users.get(0).get(0)), String.valueOf(users.get(0).get(2)), String.valueOf(users.get(0).get(0)));

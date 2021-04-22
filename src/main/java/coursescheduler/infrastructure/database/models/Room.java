@@ -9,4 +9,11 @@ public final class Room {
         this.roomId = roomId;
     }
 
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public String getRoomId() {
+        return roomId;
+    }
 }

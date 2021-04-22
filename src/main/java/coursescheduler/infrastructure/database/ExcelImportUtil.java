@@ -1,9 +1,8 @@
 package coursescheduler.infrastructure.database;
 
 import coursescheduler.infrastructure.database.models.Course;
-import coursescheduler.infrastructure.database.models.CourseEvent;
+import coursescheduler.infrastructure.database.models.FacultyPreference;
 import coursescheduler.infrastructure.database.models.Room;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -80,13 +79,13 @@ public class ExcelImportUtil {
      * @param index the index of the faculty preference in the excel file, where 2 is the first entry, as to skip the header in (1-based)
      * @return a faculty preference object containing data of the course at that index
      */
-    public CourseEvent getFacultyPreferenceAt(int index) {
+    public FacultyPreference getFacultyPreferenceAt(int index) {
         Sheet sheet = currentWorkbook.getSheet(FACULTY_SHEET);
         if (sheet == null) {
             return null;
         }
         Row row = sheet.getRow(index);
-        return new CourseEvent(row.getCell(PROFESSOR_EMAIL).getStringCellValue(),
+        return new FacultyPreference(row.getCell(PROFESSOR_EMAIL).getStringCellValue(),
                 (int) row.getCell(COURSE_PREFERENCE).getNumericCellValue(),
                 row.getCell(ROOM_ID).getStringCellValue(),
                 (int) row.getCell(PERIOD_ID).getNumericCellValue()
@@ -130,15 +129,15 @@ public class ExcelImportUtil {
     /**
      * @return returns all the faculty preferences from the excel file
      */
-    public Vector<CourseEvent> getFacultyPreferenceDataTable() {
-        Vector<CourseEvent> facultyPreferenceTable = new Vector<>();
+    public List<FacultyPreference> getFacultyPreferenceDataTable() {
+        List<FacultyPreference> facultyPreferenceTable = new ArrayList<>();
         Sheet sheet = currentWorkbook.getSheet(FACULTY_SHEET);
         if (sheet == null) {
             return null;
         }
         for (Row row : sheet) {
             if (row.getRowNum() != 0) { // skip header
-                facultyPreferenceTable.add(new CourseEvent(row.getCell(PROFESSOR_EMAIL).getStringCellValue(),
+                facultyPreferenceTable.add(new FacultyPreference(row.getCell(PROFESSOR_EMAIL).getStringCellValue(),
                         (int) row.getCell(COURSE_PREFERENCE).getNumericCellValue(),
                         row.getCell(ROOM_ID).getStringCellValue(),
                         (int) row.getCell(PERIOD_ID).getNumericCellValue()
@@ -151,8 +150,8 @@ public class ExcelImportUtil {
     /**
      * @return returns all the offered courses from the excel file
      */
-    public Vector<Course> getCourseListingDataTable() {
-        Vector<Course> courseListingTable = new Vector<>();
+    public List<Course> getCourseListingDataTable() {
+        List<Course> courseListingTable = new ArrayList<>();
         Sheet sheet = currentWorkbook.getSheet(COURSES_SHEET);
         if (sheet == null) {
             return null;
@@ -173,8 +172,8 @@ public class ExcelImportUtil {
     /**
      * @return returns all the room objects from the excel file
      */
-    public Vector<Room> getRoomInformationDataTable() {
-        Vector<Room> roomInformationTable = new Vector<>();
+    public List<Room> getRoomInformationDataTable() {
+        List<Room> roomInformationTable = new ArrayList<>();
         Sheet sheet = currentWorkbook.getSheet(ROOMS_SHEET);
         if (sheet == null) {
             return null;
@@ -188,40 +187,4 @@ public class ExcelImportUtil {
         }
         return roomInformationTable;
     }
-/*
-
-    // Clear old data (if applicable), run class processes
-    public void importFile(String filenameToImportFrom){
-        this.filename = filenameToImportFrom;
-    }
-
-    // Open file for reading
-    private void openFile(String filename){
-        ;
-    }
-
-    // Check header for information type
-    private int getFileDataType(){
-        /**
-         * Retval based on Schema:
-         * 0 -> Faculty preference
-         * 1 -> Course offering
-         * 2 -> Physical room
-         * 3 -> Time period
-         <asterisk>/
-        ;
-        return 0;
-    }
-
-    // Parse data based on header line
-
-    // Return info as relevant object
-
-    // Print data for debugging
-    public void printData(){
-        ;
-    }
-
-*/
-
 }

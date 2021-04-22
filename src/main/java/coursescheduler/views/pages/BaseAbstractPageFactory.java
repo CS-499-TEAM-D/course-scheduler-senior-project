@@ -37,12 +37,15 @@ public class BaseAbstractPageFactory implements AbstractPageFactory {
   @Override
   public JComponent buildUserPage(User user) {
     String role = user.getRole();
+    System.out.println("we are getting here      "+role+" == "+Role.MANAGER);
     switch (role) {
 
       case Role.MANAGER:
         // TODO: return main manager page.
+        System.out.println("Switching to master page");
         break;
       case Role.COORDINATOR:
+        System.out.println("Switching to standard page");
         // TODO: return coordinator page.
 
         break;
