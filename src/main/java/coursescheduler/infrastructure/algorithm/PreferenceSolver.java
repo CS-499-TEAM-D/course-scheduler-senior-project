@@ -17,10 +17,11 @@ public class PreferenceSolver {
     private final List<Period> periods;
     private final List<Room> rooms;
     private final List<Course> courses;
-    private HashMap<Room, HashMap<Period, Boolean>> roomPeriodAvailabilityMap;
-    private List<Integer> courseAvailability;
-    private List<FacultyPreference> facultyPreferencesNotHonored;
-    private List<CourseEvent> courseEvents;
+    private final HashMap<Room, HashMap<Period, Boolean>> roomPeriodAvailabilityMap;
+    private final List<Integer> courseAvailability;
+    private final List<FacultyPreference> facultyPreferencesNotHonored;
+    private final List<CourseEvent> courseEvents;
+    private boolean scheduleIsGenerated;
 
 
     class SortRoomByCapacityDescending implements Comparator<Room> {
@@ -47,6 +48,7 @@ public class PreferenceSolver {
         this.courseAvailability = new ArrayList<>();
         this.facultyPreferencesNotHonored = new ArrayList<>();
         this.courseEvents = new ArrayList<>();
+        this.scheduleIsGenerated = false;
 
     }
 
@@ -83,29 +85,39 @@ public class PreferenceSolver {
             }
 
         }
+        // update so getGeneratedSchedule() will return the list of CourseEvent s
+        this.scheduleIsGenerated = true;
         return SUCCESSFUL_SCHEDULE_GENERATED;
     }
+
+    /**
+     * @return if the schedule is generated, returns it as a list of course events
+     */
+    public List<CourseEvent> getGeneratedSchedule(){
+        if(this.scheduleIsGenerated){
+            return this.courseEvents;
+        }else{
+            return null;
+        }
+    }
+
 
     /**
      * @param facultyPreference object containing the preference of a faculty member
      * @param room the preferred room, or if recursively called, the next available room
      * @param period the preferred period, or if recursively called, the next available period
-     * @param course the preferred course
+     * @param coursePreferred the preferred course
      * @return
      */
-    public int attemptToSchedule(FacultyPreference facultyPreference, Room room, Period period, Course course){
+    public int attemptToSchedule(FacultyPreference facultyPreference, Room room, Period period, Course coursePreferred){
         if(courseAvailability.contains(facultyPreference.coursePreferenceId)){
             return COURSE_NOT_AVAILABLE;
         }
         if(roomAndTimeIsAvailable(room, period)){
             // this runs if the preference can be honored
             // first check and make sure the room can fit the course
-            if(courseFitsRoomPreferred(room, course)){
-                roomPeriodAvailabilityMap.get(room).put(period, true);
-                // create a course event out of the faculty preference, then add it to course event list
-                courseEvents.add(new CourseEvent(facultyPreference.professorEmail, facultyPreference.coursePreferenceId, facultyPreference.roomId, facultyPreference.periodId));
-                courseAvailability.add(facultyPreference.coursePreferenceId);
-                return SUCCESSFULLY_COURSE_ADDED_TO_SCHEDULE;
+            if(courseFitsRoomPreferred(room, coursePreferred)){
+                return addCourseToSchedule(facultyPreference, room, period);
             }else{
                 // we need to find a bigger room
                 // if NOT at largest room (0th room) then try next largest room, else return not enough rooms
@@ -113,13 +125,13 @@ public class PreferenceSolver {
                     return NOT_ENOUGH_ROOMS;
                 }
                 Room nextBigRoom = rooms.get(rooms.indexOf(room)-1);
-                return attemptToSchedule(facultyPreference, nextBigRoom, period, course);
+                return attemptToSchedule(facultyPreference, nextBigRoom, period, coursePreferred);
             }
         }else{
             // we need to see if another time in the same room would work
             for(Period possiblePeriod : periods){
                 if(roomAndTimeIsAvailable(room, possiblePeriod)){
-                    return attemptToSchedule(facultyPreference, room, possiblePeriod, course);
+                    return attemptToSchedule(facultyPreference, room, possiblePeriod, coursePreferred);
                 }
             }
             // if no other time would work, we need to iterate to the next largest room
@@ -128,8 +140,27 @@ public class PreferenceSolver {
                 return NOT_ENOUGH_ROOMS;
             }
             Room nextBigRoom = rooms.get(rooms.indexOf(room)-1);
-            return attemptToSchedule(facultyPreference, nextBigRoom, period, course);
+            return attemptToSchedule(facultyPreference, nextBigRoom, period, coursePreferred);
         }
+    }
+
+    /**
+     * @param facultyPreference faculty preference object containing professor email and course id
+     * @param room room that the professor and course are being assigned to
+     * @param period time that the professor and course are being assigned to
+     * @return will always return code 100 SUCCESSFULLY_COURSE_ADDED_TO_SCHEDULE
+     */
+    public int addCourseToSchedule(FacultyPreference facultyPreference, Room room, Period period){
+        // update the room and time availability
+        roomPeriodAvailabilityMap.get(room).put(period, true);
+        // check to see if room and period match preference, if not add to preference not honored list
+        if(facultyPreference.periodId != period.getPeriodIndex() || facultyPreference.roomId != room.getRoomId()){
+            facultyPreferencesNotHonored.add(facultyPreference);
+        }
+        // create a course event then add it to course event list
+        courseEvents.add(new CourseEvent(facultyPreference.professorEmail, facultyPreference.coursePreferenceId, room.getRoomId(), period.getPeriodIndex()));
+        courseAvailability.add(facultyPreference.coursePreferenceId);
+        return SUCCESSFULLY_COURSE_ADDED_TO_SCHEDULE;
     }
 
     /**
