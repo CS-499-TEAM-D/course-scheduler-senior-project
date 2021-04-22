@@ -9,7 +9,9 @@ import org.checkerframework.checker.units.qual.A;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author https://www.csodom.com
+ */
 public class BasePeriodDao implements PeriodDao {
 
     private static final int PERIOD_ID = 0;

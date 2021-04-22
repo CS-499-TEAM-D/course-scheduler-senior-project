@@ -20,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author CSODOM
+ * @author https://www.csodom.com
  */
 
 public class GoogleAuthUtil {

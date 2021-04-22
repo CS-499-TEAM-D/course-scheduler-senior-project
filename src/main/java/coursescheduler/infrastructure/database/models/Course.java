@@ -1,5 +1,7 @@
 package coursescheduler.infrastructure.database.models;
-
+/**
+ * @author https://www.csodom.com
+ */
 public class Course {
 
     private final int courseIndex;

@@ -9,7 +9,7 @@ import java.security.GeneralSecurityException;
 import java.util.*;
 
 /**
- * @author CSODOM
+ * @author https://www.csodom.com
  */
 public final class DatabaseClient {
 

@@ -1,7 +1,3 @@
-/**
- * @author https://www.csodom.com
- */
-
 
 package coursescheduler.infrastructure.algorithm;
 
@@ -10,7 +6,9 @@ import coursescheduler.infrastructure.database.ExcelImportUtil;
 import coursescheduler.infrastructure.database.models.*;
 
 import java.util.*;
-
+/**
+ * @author https://www.csodom.com
+ */
 public class PreferenceSolver {
 
     private final List<FacultyPreference> facultyPreferences;
