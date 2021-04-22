@@ -1,6 +1,7 @@
 package coursescheduler.views.pages;
 
-import coursescheduler.Room;
+
+import coursescheduler.infrastructure.database.models.Room;
 
 /** TODO: Javadoc. */
 public class CourseEvent {

@@ -1,10 +1,13 @@
 package coursescheduler.managers;
 
+
 import javax.swing.JComponent;
-import javax.swing.JPanel;
 
 /**
- * Handles management of shown pages.
+ * Logic for managing pages.
+ *
+ * <p>Allows for starting page initialization and page swapping.
+
  *
  * @param <P> element to show as page.
  */

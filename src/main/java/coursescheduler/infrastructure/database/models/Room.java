@@ -1,5 +1,7 @@
 package coursescheduler.infrastructure.database.models;
-
+/**
+ * @author https://www.csodom.com
+ */
 public final class Room {
     private final int capacity;
     private final String roomId;
@@ -9,4 +11,11 @@ public final class Room {
         this.roomId = roomId;
     }
 
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public String getRoomId() {
+        return roomId;
+    }
 }

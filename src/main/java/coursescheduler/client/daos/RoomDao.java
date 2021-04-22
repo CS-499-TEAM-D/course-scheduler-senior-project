@@ -2,7 +2,7 @@ package coursescheduler.client.daos;
 
 import java.util.List;
 
-import coursescheduler.Room;
+import coursescheduler.infrastructure.database.models.Room;
 
 /** TODO: javadoc. */
 public interface RoomDao {

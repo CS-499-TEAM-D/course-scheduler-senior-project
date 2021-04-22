@@ -3,9 +3,10 @@ package coursescheduler.views.pages;
 import java.util.List;
 import java.util.Map;
 
-import coursescheduler.Room;
+
 import coursescheduler.client.daos.DepartmentDao;
 import coursescheduler.client.daos.RoomDao;
+import coursescheduler.infrastructure.database.models.Room;
 
 /** TODO: Javadoc. */
 public class Department implements CourseEventParent {

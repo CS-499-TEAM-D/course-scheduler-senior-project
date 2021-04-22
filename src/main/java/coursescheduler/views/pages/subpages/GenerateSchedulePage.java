@@ -4,12 +4,20 @@
  * and open the template in the editor.
  */
 package coursescheduler.views.pages.subpages;
+import coursescheduler.client.daos.BasePeriodDao;
+import coursescheduler.infrastructure.algorithm.PreferenceSolver;
+import coursescheduler.infrastructure.database.SheetsServiceUtil;
+import coursescheduler.infrastructure.database.models.CourseEvent;
 import coursescheduler.managers.PanelController;
 import coursescheduler.views.pages.containers.PageControl;
 import java.awt.Font;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+
+import static coursescheduler.DatabaseSheetIDs.TEST;
 
 /**
  *
@@ -24,7 +32,9 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
     //List<data type for a full schedule> schedules = new ArrayList<>();
     //TODO: Implement backend "connections" and connect to InputMultipleCoursesPreview class
     int textSize = 12;
-  
+
+    private final PreferenceSolver scheduler = new PreferenceSolver(new BasePeriodDao(SheetsServiceUtil.getSheetsService(), TEST));
+
     public void setPageSettingsControl(PageControl input)
     {
         control = input;
@@ -70,7 +80,7 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
         return page;
     }
     
-    public GenerateSchedulePage() {
+    public GenerateSchedulePage() throws IOException, GeneralSecurityException {
         initComponents();
     }
     
@@ -301,6 +311,11 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
 
     private void generateScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateScheduleButtonActionPerformed
         //Generate schedule button pressed
+
+        int schedulerCode = scheduler.generateSchedule();
+        List<CourseEvent> theSchedule = scheduler.getGeneratedSchedule();
+
+
     }//GEN-LAST:event_generateScheduleButtonActionPerformed
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed

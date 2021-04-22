@@ -4,14 +4,11 @@
  * and open the template in the editor.
  */
 package coursescheduler.views.pages.subpages;
-import coursescheduler.infrastructure.database.models.CourseEvent;
 import coursescheduler.managers.PanelController;
+import coursescheduler.views.pages.AbstractPageFactory;
 import coursescheduler.views.pages.ISubPage;
 import coursescheduler.views.pages.containers.PageControl;
-import coursescheduler.views.pages.containers.dummyCourse;
 
-import java.awt.Font;
-import java.util.Vector;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -42,6 +39,8 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements ISubPage<
         {
             model.setValueAt("", i, 0);
         }
+        controller = null;
+        pageFactory  = null;
     }
 
     /**
@@ -151,11 +150,7 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements ISubPage<
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-        // debug print test code for the excel utility
-        Vector<CourseEvent> fpv = control.eiu.getFacultyPreferenceDataTable();
-        for (CourseEvent ce : fpv){
-            System.out.println(ce.professorEmail + ce.coursePreferenceId + ce.roomId + ce.periodId);
-        }
+
 
         //initTable();
         jButton1.setEnabled(false);
