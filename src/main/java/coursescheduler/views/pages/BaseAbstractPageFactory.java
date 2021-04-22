@@ -8,7 +8,9 @@ import coursescheduler.client.daos.UserDao;
 import coursescheduler.managers.PanelController;
 import coursescheduler.security.CredentialsVerifier;
 
-/** Factory for retrieving instances of pages. */
+
+/** Factory for retrieving instances of pages for the Course Scheduler application. */
+
 public class BaseAbstractPageFactory implements AbstractPageFactory {
 
   private final PanelController panelController;
@@ -36,11 +38,13 @@ public class BaseAbstractPageFactory implements AbstractPageFactory {
   public JComponent buildUserPage(User user) {
     String role = user.getRole();
     switch (role) {
-      case Role.DEAN:
-        // TODO: return Dean page.
+
+      case Role.MANAGER:
+        // TODO: return main manager page.
         break;
       case Role.COORDINATOR:
-        // TODO: return Coordinator page.
+        // TODO: return coordinator page.
+
         break;
       default:
         throw new RuntimeException("No page found for user's role.");

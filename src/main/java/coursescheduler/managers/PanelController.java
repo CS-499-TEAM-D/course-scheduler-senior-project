@@ -1,12 +1,13 @@
 package coursescheduler.managers;
 
-import coursescheduler.infrastructure.database.DatabaseClient;
 
 import javax.swing.JComponent;
-import javax.swing.JPanel;
 
 /**
- * Handles management of shown pages.
+ * Logic for managing pages.
+ *
+ * <p>Allows for starting page initialization and page swapping.
+
  *
  * @param <P> element to show as page.
  */
@@ -24,5 +25,4 @@ public interface PanelController<P extends JComponent> {
    * @param page element to display.
    */
   void updatePage(P page);
-
 }

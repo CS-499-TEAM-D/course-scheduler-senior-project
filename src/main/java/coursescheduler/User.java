@@ -1,8 +1,7 @@
 package coursescheduler;
 
-/**
- * TODO: Javadoc.
- */
+
+/** User model for the Course Scheduler application. */
 public class User {
     private final String email;
     private final String role;

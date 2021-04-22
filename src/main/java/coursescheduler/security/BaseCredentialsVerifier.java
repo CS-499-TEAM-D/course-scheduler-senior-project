@@ -1,5 +1,6 @@
 package coursescheduler.security;
 
+
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.model.ValueRange;
 import coursescheduler.client.daos.UserDao;
@@ -9,9 +10,7 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Arrays;
 
-/**
- * TODO: Javadoc.
- */
+/** {@inheritDoc} */
 public class BaseCredentialsVerifier implements CredentialsVerifier {
 
     private final UserDao userDao;
@@ -57,4 +56,5 @@ public class BaseCredentialsVerifier implements CredentialsVerifier {
 
         return verified;
     }
+
 }

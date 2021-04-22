@@ -10,7 +10,9 @@ import coursescheduler.User;
 import coursescheduler.client.daos.UserDao;
 import coursescheduler.managers.PanelController;
 
-/** TODO: Fill JavaDoc. */
+
+/** Allows the user to create an account to use the Course Scheduler application. */
+
 public class BaseAccountCreationPage extends javax.swing.JPanel implements Page {
   private final PanelController controller;
   private final AbstractPageFactory pageFactory;
@@ -56,7 +58,9 @@ public class BaseAccountCreationPage extends javax.swing.JPanel implements Page 
     "World Languages and Cultures"
   };
 
-  private static final String[] ROLES = {Role.DEAN, Role.COORDINATOR};
+
+  private static final String[] ROLES = {Role.MANAGER, Role.COORDINATOR};
+
 
   /** Creates new form AccountCreationPage */
   public BaseAccountCreationPage(
@@ -378,11 +382,9 @@ public class BaseAccountCreationPage extends javax.swing.JPanel implements Page 
             emailTextField.getText(),
             roleComboBox.getSelectedItem().toString(),
             departmentComboBox.getSelectedItem().toString());
-    try {
-      userDao.addUser(user, passwordField.getPassword());
-    }catch (Exception e){
-      System.out.println("IOException, could not add user to remote database");
-    }
+
+    userDao.addUser(user);
+
     controller.updatePage(pageFactory.buildLoginPage());
   } // GEN-LAST:event_submitButtonMouseClicked
 
