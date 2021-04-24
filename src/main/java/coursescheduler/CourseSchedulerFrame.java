@@ -1,14 +1,14 @@
 package coursescheduler;
 
+import javax.swing.WindowConstants;
 import java.awt.BorderLayout;
 import java.awt.Container;
-import javax.swing.WindowConstants;
 
 /** Main {@link Container} for Course Scheduler application. */
 class CourseSchedulerFrame extends javax.swing.JFrame {
 
   public CourseSchedulerFrame() {
-    super(/*title=*/"Course Scheduler");
+    super(/*title=*/ "Course Scheduler");
     initComponents();
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // closes on exit
     setLocationRelativeTo(null); // centers on open

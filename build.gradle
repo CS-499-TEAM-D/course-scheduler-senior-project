@@ -5,9 +5,6 @@ plugins {
     // plugin to add support for building a CLI application.
     id 'application'
 
-    // plugin to add support for quality checks on Java source files.
-    id 'checkstyle'
-
     // plugin to add support for automatic formatting.
     id 'com.github.sherter.google-java-format' version '0.9'
 }
@@ -22,6 +19,9 @@ dependencies {
     // Application Dependencies
     implementation(
             'com.google.guava:guava:29.0-jre', // Extended powerful general purpose library
+            'org.mongodb:mongodb-driver-sync:4.2.3',
+            'com.azure:azure-security-keyvault-secrets:4.2.7',
+            'com.azure:azure-identity:1.2.5',
     )
 
     // Test Dependencies
@@ -36,5 +36,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClassName = 'coursescheduler.BaseCourseScheduler'
+    mainClassName = 'coursescheduler.CourseScheduler'
 }

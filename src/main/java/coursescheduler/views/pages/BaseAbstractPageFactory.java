@@ -3,12 +3,14 @@ package coursescheduler.views.pages;
 import javax.swing.JComponent;
 
 import coursescheduler.Role;
-import coursescheduler.User;
 import coursescheduler.client.daos.UserDao;
+import coursescheduler.client.models.User;
 import coursescheduler.managers.PanelController;
 import coursescheduler.security.CredentialsVerifier;
+import coursescheduler.views.pages.containers.CoordinatorTabbedPane;
+import coursescheduler.views.pages.containers.ManagerTabbedPane;
 
-/** Factory for retrieving instances of pages. */
+/** Factory for retrieving instances of pages for the Course Scheduler application. */
 public class BaseAbstractPageFactory implements AbstractPageFactory {
 
   private final PanelController panelController;
@@ -36,15 +38,12 @@ public class BaseAbstractPageFactory implements AbstractPageFactory {
   public JComponent buildUserPage(User user) {
     String role = user.getRole();
     switch (role) {
-      case Role.DEAN:
-        // TODO: return Dean page.
-        break;
+      case Role.MANAGER:
+        return new ManagerTabbedPane();
       case Role.COORDINATOR:
-        // TODO: return Coordinator page.
-        break;
+        return new CoordinatorTabbedPane();
       default:
         throw new RuntimeException("No page found for user's role.");
     }
-    return null;
   }
 }
