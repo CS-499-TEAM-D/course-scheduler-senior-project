@@ -10,13 +10,13 @@ import coursescheduler.client.daos.RoomDao;
 /** Represents a university department used for Course Scheduling. */
 public class Department implements CourseEventParent {
   private final String abbrev;
-  private final Map<String, Map<String, Map<Room, List<CourseEvent>>>> mutableSchedule;
+  private final List<CourseEvent> mutableSchedule;
   private final RoomDao roomDao;
   private final DepartmentDao departmentDao;
 
   Department(
       String abbrev,
-      Map<String, Map<String, Map<Room, List<CourseEvent>>>> mutableSchedule,
+      List<CourseEvent> mutableSchedule,
       RoomDao roomDao,
       DepartmentDao departmentDao) {
     this.abbrev = abbrev;

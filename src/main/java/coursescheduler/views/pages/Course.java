@@ -1,16 +1,16 @@
 package coursescheduler.views.pages;
 
-/**
- * TODO: Javadoc.
- */
+import org.bson.types.ObjectId;
+
+/** TODO: Javadoc. */
 public class Course {
-  String uuid;
+  ObjectId _id;
   String deptAbbrev;
   String id;
   String section;
 
-  Course(String uuid, String deptAbbrev, String id, String section) {
-    this.uuid = uuid;
+  Course(ObjectId _id, String deptAbbrev, String id, String section) {
+    this._id = _id;
     this.deptAbbrev = deptAbbrev;
     this.id = id;
     this.section = section;

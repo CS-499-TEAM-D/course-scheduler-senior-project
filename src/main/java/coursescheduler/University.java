@@ -11,7 +11,7 @@ import coursescheduler.views.pages.CourseEventParent;
 import coursescheduler.views.pages.CourseSchedulerConflict;
 import coursescheduler.views.pages.Department;
 
-/** TODO: Javadoc. */
+/** Holds and managers scheduling information for all University departments. */
 public class University implements CourseEventParent, Queryable {
 
   private final Map<String, Department> departments;

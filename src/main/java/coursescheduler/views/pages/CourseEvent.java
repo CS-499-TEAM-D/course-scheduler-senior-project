@@ -4,13 +4,14 @@ import coursescheduler.Room;
 
 /** Represents a faculty preference to be handled by the scheduling algorithm. */
 public class CourseEvent {
-  private final String professorId;
+  private final String facultyEmail;
   private final Room room;
   private final Course course;
   private boolean conflict;
+  private CourseSchedulerConflict conflictDesc;
 
-  CourseEvent(String professorId, Room room, Course course, boolean conflict) {
-    this.professorId = professorId;
+  CourseEvent(String facultyEmail, Room room, Course course, boolean conflict) {
+    this.facultyEmail = facultyEmail;
     this.room = room;
     this.course = course;
     this.conflict = conflict;
