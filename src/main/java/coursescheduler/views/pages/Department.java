@@ -7,7 +7,7 @@ import coursescheduler.Room;
 import coursescheduler.client.daos.DepartmentDao;
 import coursescheduler.client.daos.RoomDao;
 
-/** TODO: Javadoc. */
+/** Represents a university department used for Course Scheduling. */
 public class Department implements CourseEventParent {
   private final String abbrev;
   private final Map<String, Map<String, Map<Room, List<CourseEvent>>>> mutableSchedule;

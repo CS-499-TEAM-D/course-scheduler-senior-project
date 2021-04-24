@@ -2,7 +2,7 @@ package coursescheduler.views.pages;
 
 import coursescheduler.Room;
 
-/** TODO: Javadoc. */
+/** Represents a faculty preference to be handled by the scheduling algorithm. */
 public class CourseEvent {
   private final String professorId;
   private final Room room;
