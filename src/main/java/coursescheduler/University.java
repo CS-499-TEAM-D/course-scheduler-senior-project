@@ -8,6 +8,7 @@ import coursescheduler.client.daos.RoomDao;
 import coursescheduler.client.daos.TimePeriodDao;
 import coursescheduler.views.pages.CourseEvent;
 import coursescheduler.views.pages.CourseEventParent;
+import coursescheduler.views.pages.CourseSchedulerConflict;
 import coursescheduler.views.pages.Department;
 
 /** TODO: Javadoc. */
@@ -36,22 +37,22 @@ public class University implements CourseEventParent, Queryable {
   }
 
   @Override
-  public List<Integer> getConflicts() {
+  public List<CourseSchedulerConflict> getConflicts() {
     return null;
   }
 
   @Override
-  public List<String> findByDepartment(String department) {
+  public List<CourseEvent> findByDepartment(String department) {
     return null;
   }
 
   @Override
-  public List<String> findByFaculty(String email) {
+  public List<CourseEvent> findByFaculty(String email) {
     return null;
   }
 
   @Override
-  public List<String> findByRoom(String roomId) {
+  public List<CourseEvent> findByRoom(String roomId) {
     return null;
   }
 }

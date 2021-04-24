@@ -2,11 +2,13 @@ package coursescheduler;
 
 import java.util.List;
 
+import coursescheduler.views.pages.CourseEvent;
+
 /** Allows for querying of structures that support course scheduling. */
 public interface Queryable {
-  List<String> findByDepartment(String department);
+  List<CourseEvent> findByDepartment(String department);
 
-  List<String> findByFaculty(String email);
+  List<CourseEvent> findByFaculty(String email);
 
-  List<String> findByRoom(String roomId);
+  List<CourseEvent> findByRoom(String roomId);
 }

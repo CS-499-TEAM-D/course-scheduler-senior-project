@@ -26,7 +26,7 @@ public class Department implements CourseEventParent {
   }
 
   @Override
-  public List<Integer> getConflicts() {
+  public List<CourseSchedulerConflict> getConflicts() {
     return null;
   }
 }
