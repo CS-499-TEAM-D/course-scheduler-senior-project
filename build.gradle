@@ -20,6 +20,8 @@ dependencies {
     implementation(
             'com.google.guava:guava:29.0-jre', // Extended powerful general purpose library
             'org.mongodb:mongodb-driver-sync:4.2.3',
+            'com.azure:azure-security-keyvault-secrets:4.2.7',
+            'com.azure:azure-identity:1.2.5',
     )
 
     // Test Dependencies

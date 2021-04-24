@@ -7,6 +7,8 @@ import coursescheduler.client.daos.UserDao;
 import coursescheduler.client.models.User;
 import coursescheduler.managers.PanelController;
 import coursescheduler.security.CredentialsVerifier;
+import coursescheduler.views.pages.containers.CoordinatorTabbedPane;
+import coursescheduler.views.pages.containers.ManagerTabbedPane;
 
 /** Factory for retrieving instances of pages for the Course Scheduler application. */
 public class BaseAbstractPageFactory implements AbstractPageFactory {
@@ -37,14 +39,11 @@ public class BaseAbstractPageFactory implements AbstractPageFactory {
     String role = user.getRole();
     switch (role) {
       case Role.MANAGER:
-        // TODO: return main manager page.
-        break;
+        return new ManagerTabbedPane();
       case Role.COORDINATOR:
-        // TODO: return coordinator page.
-        break;
+        return new CoordinatorTabbedPane();
       default:
         throw new RuntimeException("No page found for user's role.");
     }
-    return null;
   }
 }
