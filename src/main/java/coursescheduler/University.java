@@ -14,11 +14,12 @@ import coursescheduler.views.pages.Department;
 /** Holds and managers scheduling information for all University departments. */
 public class University implements CourseEventParent, Queryable {
 
-  private final Map<String, Department> departments;
-  private final List<CourseEvent> schedule;
-  private final TimePeriodDao timePeriodDao; //
-  private final DayPeriodDao dayPeriodDao;
-  private final RoomDao roomDao;
+  private final Map<String, Department>
+      departments; // represents the schedule of all departments separately
+  private final List<CourseEvent> schedule; // represents the schedule of all departments together
+  private final TimePeriodDao timePeriodDao; // accesses time periods across the university
+  private final DayPeriodDao dayPeriodDao; // accesses day periods across the university
+  private final RoomDao roomDao; // accesses rooms across the university
   private final List<List<CourseEvent>> schedules;
 
   University(
