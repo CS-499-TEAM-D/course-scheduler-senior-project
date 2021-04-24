@@ -2,10 +2,10 @@ package coursescheduler.client.daos;
 
 import java.util.Set;
 
-/** TODO: Javadoc. */
+/** {@inheritDoc} */
 public class BaseTimeDao implements TimePeriodDao {
   @Override
-  public Set<String> getDayPeriods() {
+  public Set<String> getTimePeriods() {
     return null;
   }
 }

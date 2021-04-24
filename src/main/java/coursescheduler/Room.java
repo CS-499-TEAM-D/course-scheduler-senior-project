@@ -1,6 +1,6 @@
 package coursescheduler;
 
-/** TOOO: Javadoc. */
+/** Holds information for a physical university room. */
 public class Room {
   private final String id;
   private final Integer seatCount;

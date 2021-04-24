@@ -2,7 +2,7 @@ package coursescheduler.client.daos;
 
 import java.util.Set;
 
-/** TODO: Javadoc. */
+/** Retrieves time periods. */
 public interface TimePeriodDao {
-  Set<String> getDayPeriods();
+  Set<String> getTimePeriods();
 }
