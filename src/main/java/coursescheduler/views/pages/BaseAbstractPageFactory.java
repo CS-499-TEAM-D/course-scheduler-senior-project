@@ -3,8 +3,8 @@ package coursescheduler.views.pages;
 import javax.swing.JComponent;
 
 import coursescheduler.Role;
-import coursescheduler.User;
 import coursescheduler.client.daos.UserDao;
+import coursescheduler.client.models.User;
 import coursescheduler.managers.PanelController;
 import coursescheduler.security.CredentialsVerifier;
 

@@ -1,8 +1,12 @@
 package coursescheduler;
 
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoDatabase;
+
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
+import coursescheduler.client.MongoDbClient;
 import coursescheduler.client.daos.BaseUserDao;
 import coursescheduler.client.daos.UserDao;
 import coursescheduler.managers.BaseFrameManager;
@@ -24,18 +28,18 @@ final class CourseScheduler implements CourseSchedulerApplication {
     this.loginPage = loginPage.init();
   }
 
-  @Override
-  public void run() {
-    controller.initializeStartPage(loginPage);
-  }
-
   public static void main(String... args) {
+
+    MongoClient mongoClient = MongoDbClient.getInstance();
+
+    MongoDatabase database = mongoClient.getDatabase("prod");
+
+    UserDao userDao = new BaseUserDao(database);
+
     JFrame mainFrame = new CourseSchedulerFrame();
     PanelController panelController = new BaseFrameManager(mainFrame);
 
     CredentialsVerifier credentialsVerifier = new BaseCredentialsVerifier();
-
-    UserDao userDao = new BaseUserDao();
 
     AbstractPageFactory factory =
         new BaseAbstractPageFactory(panelController, credentialsVerifier, userDao);
@@ -44,5 +48,10 @@ final class CourseScheduler implements CourseSchedulerApplication {
 
     CourseSchedulerApplication app = new CourseScheduler(panelController, loginPage);
     app.run();
+  }
+
+  @Override
+  public void run() {
+    controller.initializeStartPage(loginPage);
   }
 }

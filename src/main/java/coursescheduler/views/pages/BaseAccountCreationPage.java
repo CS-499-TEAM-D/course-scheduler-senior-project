@@ -1,13 +1,15 @@
 package coursescheduler.views.pages;
 
+import org.bson.types.ObjectId;
+
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import java.awt.Color;
 import java.util.Arrays;
 
 import coursescheduler.Role;
-import coursescheduler.User;
 import coursescheduler.client.daos.UserDao;
+import coursescheduler.client.models.User;
 import coursescheduler.managers.PanelController;
 
 /** Allows the user to create an account to use the Course Scheduler application. */
@@ -375,6 +377,7 @@ public class BaseAccountCreationPage extends javax.swing.JPanel implements Page 
     }
     User user =
         new User(
+            new ObjectId(),
             emailTextField.getText(),
             roleComboBox.getSelectedItem().toString(),
             departmentComboBox.getSelectedItem().toString());

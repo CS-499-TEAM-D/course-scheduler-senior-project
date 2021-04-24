@@ -1,10 +1,17 @@
 package coursescheduler.client.daos;
 
-import coursescheduler.User;
+import com.google.common.collect.ImmutableList;
+
+import java.util.Optional;
+
+import coursescheduler.client.models.User;
 
 /** Data access object for a {@link User} object. */
 public interface UserDao {
-  User addUser(User user);
 
-  User getUserByEmail(String email);
+  boolean addUser(User user);
+
+  Optional<User> getUserByEmail(String email);
+
+  ImmutableList<User> getUsers();
 }

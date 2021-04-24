@@ -2,7 +2,8 @@ package coursescheduler.views.pages;
 
 import javax.swing.JComponent;
 
-import coursescheduler.User;
+import coursescheduler.client.models.User;
+
 
 /** Builds and retrieves pages for the Course Scheduler application. */
 public interface AbstractPageFactory {
