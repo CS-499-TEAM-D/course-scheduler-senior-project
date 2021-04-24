@@ -10,7 +10,7 @@ public class CourseEvent {
   private boolean conflict;
   private CourseSchedulerConflict conflictDesc;
 
-  CourseEvent(String facultyEmail, Room room, Course course, boolean conflict) {
+  public CourseEvent(String facultyEmail, Room room, Course course, boolean conflict) {
     this.facultyEmail = facultyEmail;
     this.room = room;
     this.course = course;

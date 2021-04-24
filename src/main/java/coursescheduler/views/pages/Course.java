@@ -10,7 +10,7 @@ public final class Course {
   String section;
   int preliminaryEnrollment;
 
-  Course(ObjectId _id, String deptAbbrev, String id, String section, int preliminaryEnrollment) {
+  public Course(ObjectId _id, String deptAbbrev, String id, String section, int preliminaryEnrollment) {
     this._id = _id;
     this.deptAbbrev = deptAbbrev;
     this.id = id;

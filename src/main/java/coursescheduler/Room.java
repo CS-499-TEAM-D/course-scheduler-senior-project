@@ -5,7 +5,7 @@ public class Room {
   private final String id;
   private final Integer seatCount;
 
-  Room(String id, Integer seatCount) {
+  public Room(String id, Integer seatCount) {
     this.id = id;
     this.seatCount = seatCount;
   }
