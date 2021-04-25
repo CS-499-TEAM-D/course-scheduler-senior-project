@@ -3,7 +3,6 @@ package coursescheduler.client.importer;
 import coursescheduler.Room;
 import coursescheduler.views.pages.Course;
 import coursescheduler.views.pages.CourseEvent;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.bson.types.ObjectId;
@@ -13,7 +12,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class ExcelService {
 
@@ -82,7 +80,7 @@ public class ExcelService {
         for (Row row : sheet) {
             if (row.getRowNum() != 0) { // skip header
                 // TODO add course fetcher below
-                Course course = fetchCourseByLocalID((int) row.getCell(COURSE_LISTING_ID).getNumericCellValue(), allCourses);
+                Course course = fetchCourseByLocalID((int) row.getCell(COURSE_PREFERENCE).getNumericCellValue(), allCourses);
                 Room room = fetchRoomByLocalID(row.getCell(ROOM_ID).getStringCellValue(), allRooms);
                 facultyPreferenceTable.add(new CourseEvent(
                         row.getCell(PROFESSOR_EMAIL).getStringCellValue(),
