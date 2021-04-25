@@ -1,8 +1,11 @@
 package coursescheduler.managers;
 
 import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
+
  * Logic for managing pages.
  *
  * <p>Allows for starting page initialization and page swapping.
@@ -15,8 +18,7 @@ public interface PanelController<P extends JComponent> {
    *
    * @return
    */
-  PanelController initializeStartPage(P page);
-
+  PanelController init(P page);
   /**
    * Updates the current displayed page.
    *

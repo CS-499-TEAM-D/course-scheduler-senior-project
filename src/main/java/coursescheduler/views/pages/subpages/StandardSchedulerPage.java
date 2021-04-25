@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package coursescheduler.views.pages.subpages;
+import coursescheduler.views.pages.SubPage;
 import coursescheduler.views.pages.containers.PageControl;
 import coursescheduler.views.pages.containers.dummyCourse;
 import coursescheduler.views.pages.containers.dummyUser;
@@ -17,12 +18,19 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author evilc
  */
-public class StandardSchedulerPage extends javax.swing.JPanel {
+public class StandardSchedulerPage extends javax.swing.JPanel implements SubPage<JPanel> {
     PageControl control;
     String page = "STANDARD";
     int textSize = 12;
     boolean tableIsEditable = true;
 
+    @Override
+    public JPanel init() {
+        initComponents();
+		
+        return this;
+    }
+    
     public ArrayList<ArrayList<String>> getDataFromTable()
     {
         ArrayList<ArrayList<String>> tableData = new ArrayList<ArrayList<String>>();

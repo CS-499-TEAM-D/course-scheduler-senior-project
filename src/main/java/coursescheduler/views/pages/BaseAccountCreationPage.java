@@ -1,7 +1,7 @@
 package coursescheduler.views.pages;
 
-import org.bson.types.ObjectId;
 
+import org.bson.types.ObjectId;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import java.awt.Color;

@@ -10,6 +10,7 @@ import coursescheduler.security.CredentialsVerifier;
 import coursescheduler.views.pages.containers.CoordinatorTabbedPane;
 import coursescheduler.views.pages.containers.ManagerTabbedPane;
 
+
 /** Factory for retrieving instances of pages for the Course Scheduler application. */
 public class BaseAbstractPageFactory implements AbstractPageFactory {
 
@@ -39,11 +40,15 @@ public class BaseAbstractPageFactory implements AbstractPageFactory {
     String role = user.getRole();
     switch (role) {
       case Role.MANAGER:
-        return new ManagerTabbedPane();
+
+        // TODO: return main manager page.
+        break;
       case Role.COORDINATOR:
-        return new CoordinatorTabbedPane();
+        // TODO: return coordinator page.
+        break;
       default:
         throw new RuntimeException("No page found for user's role.");
     }
+    return null;
   }
 }
