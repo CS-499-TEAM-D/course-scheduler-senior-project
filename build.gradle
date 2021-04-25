@@ -29,12 +29,34 @@ dependencies {
             'org.junit.jupiter:junit-jupiter:5.4.2', // JUnit5 Testing framework
             'junit:junit:4.13', // JUnit4 test framework
             'org.mockito:mockito-core:2.+', // Mockito mocking framework
-            'org.assertj:assertj-core:3.19.0' // Asserting Framework
+            'org.assertj:assertj-core:3.19.0' // AssertJ assertion framework
 
     )
 }
 
 application {
     // Define the main class for the application.
-    mainClassName = 'coursescheduler.CourseScheduler'
+
+    mainClassName = 'coursescheduler.Driver'
 }
+
+checkstyle {
+    // Set checkstyle version.
+    toolVersion '8.40';
+}
+
+checkstyleMain {
+    // Set checkstyleMain to run after verifyGoogleJavaFormat.
+    dependsOn(tasks.verifyGoogleJavaFormat)
+}
+
+checkstyleTest {
+    // Set checkstyleTest to run after verifyGoogleJavaFormat.
+    dependsOn(tasks.verifyGoogleJavaFormat)
+}
+
+verifyGoogleJavaFormat {
+    // Set verifyGoogleJavaFormat to run after googleJavaFormat.
+    dependsOn(tasks.googleJavaFormat)
+}
+
