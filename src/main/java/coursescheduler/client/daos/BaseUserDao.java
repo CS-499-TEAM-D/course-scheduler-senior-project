@@ -1,6 +1,5 @@
 package coursescheduler.client.daos;
 
-
 import com.google.common.collect.ImmutableList;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -46,6 +45,5 @@ public final class BaseUserDao implements UserDao {
     MongoCollection<User> usersCollection =
         database.getCollection(MongoCollectionNames.USER, User.class);
     return ImmutableList.copyOf(usersCollection.find());
-
   }
 }

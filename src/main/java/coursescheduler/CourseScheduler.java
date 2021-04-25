@@ -1,6 +1,5 @@
 package coursescheduler;
 
-
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoDatabase;
 
@@ -49,15 +48,10 @@ final class CourseScheduler implements CourseSchedulerApplication {
 
     CourseSchedulerApplication app = new CourseScheduler(panelController, loginPage);
     app.run();
-
   }
 
   @Override
   public void run() {
-
-
-    controller.init(loginPage); // start course scheduler application with loginPage
-
-
+    controller.initializeStartPage(loginPage);
   }
 }

@@ -1,6 +1,5 @@
 package coursescheduler.client.daos;
 
-
 import com.google.common.collect.ImmutableList;
 
 import java.util.Optional;
@@ -32,5 +31,4 @@ public interface UserDao {
    * @return ImmutableList of users.
    */
   ImmutableList<User> getUsers();
-
 }
