@@ -7,19 +7,14 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.util.Optional;
 
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 /**
- * Handles the updating the page inside of a container and state of main container.
+ * Handles the updating or swapping of the page inside of a container and state of main container.
  *
  * @param <C> element to display the page.
  * @param <P> element to show as page.
  */
-
-abstract class FrameManager<C extends Container, P extends JComponent> implements PanelController<P> {
-
+abstract class FrameManager<C extends Container, P extends JComponent>
+    implements PanelController<P> {
 
   protected C container;
   protected P page;
@@ -31,9 +26,7 @@ abstract class FrameManager<C extends Container, P extends JComponent> implement
   }
 
   @Override
-
-  public PanelController<P> init(P page) {
-
+  public PanelController<P> initializeStartPage(P page) {
     Dimension parentSize = container.getSize();
     panelWrapper.setSize(parentSize);
     panelWrapper.setPreferredSize(parentSize);
