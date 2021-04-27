@@ -40,12 +40,21 @@ public class PageControl
     
     public void setDebugAllCourses() //DUMMY
     {
+        ArrayList<String> timesList = new ArrayList();
+        timesList.add("0800 - 0920");
+        timesList.add("0940 - 1100");
+        timesList.add("1120 - 1240");
+        timesList.add("1300 - 1420");
+        timesList.add("1440 - 1600");
+        timesList.add("1620 - 1740");
+        timesList.add("1800 - 1920");
+        
         String college = "Science";
         int ID = 1230981; //Random number for now
         String name = "CS 499";
         String professor = "Dr. Delugach";
-        String room = "3C";
-        String times = "8:00am - 9:30am";
+        String room = "SST101";
+        String times = timesList.get(0);
         String days = "T, TH";
         int seats = 30;
         dummyCourse course1 = new dummyCourse();
@@ -66,8 +75,8 @@ public class PageControl
         ID = 1342343; //Random number for now
         name = "ART 201";
         professor = "Dr. History";
-        room = "1A";
-        times = "9:40am - 11:00am";
+        room = "SST101";
+        times = timesList.get(1);
         days = "T, TH";
         seats = 30;
         dummyCourse course2 = new dummyCourse();
@@ -87,8 +96,8 @@ public class PageControl
         ID = 4564564; //Random number for now
         name = "ENG 301";
         professor = "Dr. Engineer";
-        room = "2B";
-        times = "9:40am - 11:00am";
+        room = "SST101";
+        times = timesList.get(2);
         days = "M, W, F";
         seats = 30;
         dummyCourse course3 = new dummyCourse();
@@ -108,8 +117,8 @@ public class PageControl
         ID = 67867867; //Random number for now
         name = "HIST 102";
         professor = "Dr. History";
-        room = "1A";
-        times = "9:40am - 11:00am";
+        room = "SST101";
+        times = timesList.get(3);
         days = "M, W, F";
         seats = 30;
         dummyCourse course4 = new dummyCourse();
@@ -129,8 +138,8 @@ public class PageControl
         ID = 32423421; //Random number for now
         name = "CS 100";
         professor = "Dr. Science";
-        room = "1A";
-        times = "3:00pm - 4:20pm";
+        room = "SST101";
+        times = timesList.get(4);
         days = "M, W, F";
         seats = 30;
         dummyCourse course5 = new dummyCourse();
@@ -150,8 +159,8 @@ public class PageControl
         ID = 17309328; //Random number for now
         name = "CS 101";
         professor = "Dr. Science";
-        room = "2B";
-        times = "5:00pm - 6:20pm";
+        room = "SST101";
+        times = timesList.get(5);
         days = "M, W, F";
         seats = 30;
         dummyCourse course6 = new dummyCourse();
