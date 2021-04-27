@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package coursescheduler.views.pages.subpages;
+import coursescheduler.client.importer.ExcelService;
+import coursescheduler.client.importer.ImportedData;
 import coursescheduler.managers.PanelController;
 import coursescheduler.views.pages.containers.PageControl;
 import java.awt.Font;
@@ -438,12 +440,12 @@ public class SaveLoadFilePage extends javax.swing.JPanel {
         int returnVal = fc.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) 
         {
-            String text;
             try 
             {
                 File file = fc.getSelectedFile();
-                BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-                debugText.read(input, "READING FILE :-)");
+                //TODO here is where the file is selected and needs to be imported
+                ImportedData importedData = ImportedData.getInstance();
+                importedData.update(file.getPath());
             }
             catch(Exception e)
             {

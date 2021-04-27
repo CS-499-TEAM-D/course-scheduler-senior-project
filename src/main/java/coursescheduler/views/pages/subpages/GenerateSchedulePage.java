@@ -4,26 +4,26 @@
  * and open the template in the editor.
  */
 package coursescheduler.views.pages.subpages;
+import coursescheduler.client.algorithm.PreferenceSolver;
+import coursescheduler.client.daos.BasePeriodDao;
+import coursescheduler.client.daos.PeriodDao;
 import coursescheduler.managers.PanelController;
+import coursescheduler.security.utilties.SheetsService;
 import coursescheduler.views.pages.containers.PageControl;
 import java.awt.Font;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import coursescheduler.views.pages.containers.dummyCourse;
-import coursescheduler.views.pages.containers.dummyUser;
-import java.awt.Color;
-import java.awt.Component;
+
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Vector;
 import javax.swing.JFileChooser;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import static coursescheduler.security.utilties.SheetsConstants.TIME_PERIODS_SPREADSHEET;
+
 /**
  *
  * @author evilc
@@ -676,6 +676,18 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
 
     private void generateScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateScheduleButtonActionPerformed
         //Generate schedule button pressed
+        try {
+            PeriodDao periodDao = new BasePeriodDao(SheetsService.getSheetsService(), TIME_PERIODS_SPREADSHEET);
+            PreferenceSolver departmentScheduler = new PreferenceSolver(periodDao);
+            int schedulerCode = departmentScheduler.generateSchedule();
+            System.out.print(schedulerCode);
+            if(schedulerCode == 101){
+                departmentScheduler.printScheduleToConsole();
+            }
+
+        } catch (IOException | GeneralSecurityException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_generateScheduleButtonActionPerformed
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed

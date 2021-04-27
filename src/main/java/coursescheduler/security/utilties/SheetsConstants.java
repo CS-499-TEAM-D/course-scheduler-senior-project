@@ -1,8 +1,8 @@
 package coursescheduler.security.utilties;
 
-public final class SecurityConstants {
+public final class SheetsConstants {
 
-    private SecurityConstants() {
+    private SheetsConstants() {
     }
 
     public static final String CREDENTIALS_SPREADSHEET = "17hrTlcbE9zvMlg8eH2Q7wsZjzXcCEqYfv_oVBqe4GKc";
@@ -13,5 +13,12 @@ public final class SecurityConstants {
     public static final String PASSWORD_UPLOAD_COLUMN = "D";
     public static final String VERIFICATION_COLUMN = "E";
     public static final String DEPARTMENT_COLUMN = "F";
+
+
+    public static final String TIME_PERIODS_SPREADSHEET = "1IyQDY7mXKaO-AKGKWKFuTOa7Getq5VM2ScW58SKyMio";
+    public static final String TIME_PERIODS_SHEET = "TIMES!";
+    public static final String PERIOD_ID_COLUMN = "A";
+    public static final String DAY_COLUMN = "B";
+    public static final String TIME_COLUMN = "C";
 
 }

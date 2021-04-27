@@ -2,9 +2,14 @@ package coursescheduler.views.pages;
 
 import javax.swing.BorderFactory;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
+import coursescheduler.Role;
+import coursescheduler.client.daos.BaseUserDao;
+import coursescheduler.client.daos.UserDao;
 import coursescheduler.managers.PanelController;
+import coursescheduler.security.BaseCredentialsVerifier;
 import coursescheduler.views.pages.containers.MasterSchedulerContainer;
 import coursescheduler.views.pages.containers.StandardSchedulerContainer;
 
@@ -124,14 +129,7 @@ public final class LoginPage extends javax.swing.JPanel {
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
-        if (chosenType.equals("MASTER"))
-        {
-            controller.updatePage(new MasterSchedulerContainer()); // Default to Dean page for demo purpose.
-        }
-        else if (chosenType.equals("STANDARD"))
-        {
-            controller.updatePage(new StandardSchedulerContainer());
-        }
+        login(emailField.getText(), passwordField.getPassword());
     }//GEN-LAST:event_submitButtonActionPerformed
 
   private void emailFieldEnterKeyPressed(
@@ -139,16 +137,7 @@ public final class LoginPage extends javax.swing.JPanel {
     if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
       // TODO: Use credentials service to retrieve user.
       // TODO: Use factory to generate user's page.
-      System.out.println("emailFieldEnterKeyPressed");
-      if (chosenType.equals("MASTER"))
-        {
-            controller.updatePage(new MasterSchedulerContainer()); // Default to Dean page for demo purpose.
-        }
-        else if (chosenType.equals("STANDARD"))
-        {
-            controller.updatePage(new StandardSchedulerContainer());
-        }
-      
+        login(emailField.getText(), passwordField.getPassword());
     }
   } // GEN-LAST:event_emailFieldEnterKeyPressed
 
@@ -157,19 +146,23 @@ public final class LoginPage extends javax.swing.JPanel {
     if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
       // TODO: Use credentials service to retrieve user.
       // TODO: Use factory to generate user's role page.
-      System.out.println("passwordFieldEnterPressed");
-      if (chosenType.equals("MASTER"))
-        {
-            controller.updatePage(new MasterSchedulerContainer()); // Default to Dean page for demo purpose.
-        }
-        else if (chosenType.equals("STANDARD"))
-        {
-            controller.updatePage(new StandardSchedulerContainer());
-        }
+      login(emailField.getText(), passwordField.getPassword());
     }
   } // GEN-LAST:event_passwordFieldEnterPressed
 
-  
+    private void login(String email, char[] password){
+      BaseCredentialsVerifier verifier = new BaseCredentialsVerifier();
+      UserDao userDao = new BaseUserDao();
+      if(verifier.validUserCredentials(email, password)){
+          if(userDao.getUserByEmail(email).getRole().equals(Role.MANAGER)){
+              controller.updatePage(new MasterSchedulerContainer());
+          }
+          controller.updatePage(new StandardSchedulerContainer());
+      }
+      System.out.println("Wrong password");
+      loginInnerPanel.setForeground(Color.RED);
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField emailField;

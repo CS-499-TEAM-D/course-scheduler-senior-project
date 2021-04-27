@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-import static coursescheduler.security.utilties.SecurityConstants.*;
+import static coursescheduler.security.utilties.SheetsConstants.*;
 
 /**
  * {@inheritDoc}
@@ -58,17 +58,19 @@ public class BaseCredentialsVerifier implements CredentialsVerifier {
         }
     }
 
-    private int findIndexOfStringInSheetColumn(Sheets service, String spreadsheetID, String sheetTitle, String column, String stringToFind) {
+    public static int findIndexOfStringInSheetColumn(Sheets service, String spreadsheetID, String sheetTitle, String column, String stringToFind) {
         try {
+            String userColumn = (new StringBuilder()).append(sheetTitle).append(column).append(":").append(column).toString();
             List<List<Object>> stringsInColumn = service.spreadsheets().values().get(
                     spreadsheetID,
-                    sheetTitle+column)
+                    userColumn
+                    )
                     .execute()
                     .getValues();
             int index = 0;
             for (List string : stringsInColumn){
                 if(string.get(0).toString().equals(stringToFind)){
-                    return index;
+                    return (index+1);
                 }
                 index++;
             }
