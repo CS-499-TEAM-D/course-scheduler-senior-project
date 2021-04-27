@@ -60,14 +60,16 @@ public class BaseCredentialsVerifier implements CredentialsVerifier {
 
     private int findIndexOfStringInSheetColumn(Sheets service, String spreadsheetID, String sheetTitle, String column, String stringToFind) {
         try {
+            String columnToGet = (new StringBuilder()).append(sheetTitle).append(column).append(":").append(column).toString();
             List<List<Object>> stringsInColumn = service.spreadsheets().values().get(
                     spreadsheetID,
-                    sheetTitle+column)
+                    columnToGet)
                     .execute()
                     .getValues();
             int index = 0;
             for (List string : stringsInColumn){
                 if(string.get(0).toString().equals(stringToFind)){
+                    index++; // add one because the row calls are 1th based
                     return index;
                 }
                 index++;
