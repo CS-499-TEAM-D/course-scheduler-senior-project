@@ -20,4 +20,20 @@ public class CourseEvent {
         System.out.print("\nProfessor Email: "+facultyEmail+"\tCourse Assigned UUID: "+courseUUID+"\tRoom ID: "+room.getRoomId()+"\tPeriod: "+period.getDaySection()+" "+period.getTimeSection());
     }
 
+    public String getFacultyEmail(){
+        return this.facultyEmail;
+    }
+
+    public Room getRoom(){
+        return this.room;
+    }
+
+    public int getCourseUUID(){
+        return this.courseUUID;
+    }
+
+    public Period getPeriod(){
+        return this.period;
+    }
+
 }

@@ -26,4 +26,16 @@ public final class Course {
     public int getMaxEnroll() {
         return this.maxEnrollment;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getSection() {
+        return section;
+    }
+
+    public void setSection(int section) {
+        this.section = section;
+    }
 }

@@ -1,14 +1,13 @@
 package coursescheduler.client.algorithm;
 
 import coursescheduler.client.daos.PeriodDao;
-import coursescheduler.client.objects.Course;
-import coursescheduler.client.objects.CourseEvent;
-import coursescheduler.client.objects.Room;
-import coursescheduler.client.objects.Period;
-import coursescheduler.client.objects.FacultyPreference;
-import coursescheduler.client.importer.*;
+import coursescheduler.client.importer.ImportedData;
+import coursescheduler.client.objects.*;
 
 import java.util.*;
+
+import static coursescheduler.client.algorithm.SchedulerConstants.*;
+
 /**
  * @author https://www.csodom.com
  */
@@ -23,7 +22,7 @@ public class PreferenceSolver {
     private final List<FacultyPreference> facultyPreferencesNotHonored;
     private final List<CourseEvent> courseEvents;
     private boolean scheduleIsGenerated;
-
+    private int preferenceRow;
 
     class SortRoomByCapacityDescending implements Comparator<Room> {
         @Override
@@ -31,13 +30,6 @@ public class PreferenceSolver {
             return b.getCapacity() - a.getCapacity();
         }
     }
-    static final int SUCCESSFULLY_COURSE_ADDED_TO_SCHEDULE = 100;
-    static final int SUCCESSFUL_SCHEDULE_GENERATED = 101;
-    static final int NOT_ENOUGH_ROOMS = 1;
-    static final int COURSE_NOT_AVAILABLE = 2;
-    static final int INVALID_ROOM_IN_PREFERENCE = 3;
-    static final int INVALID_PERIOD_IN_PREFERENCE = 4;
-    static final int INVALID_COURSE_IN_PREFERENCE = 5;
 
     public PreferenceSolver(PeriodDao periodDao){
         this.facultyPreferences = ImportedData.getInstance().getFacultyPreferences();
@@ -53,6 +45,11 @@ public class PreferenceSolver {
 
     }
 
+    public void clearSchedule(){
+        this.scheduleIsGenerated = false;
+        this.courseEvents.clear();
+    }
+
     /**
      * this generates a schedule with data provided to the PreferenceSolver, and returns a int code
      * @return returns a scheduler code
@@ -65,7 +62,7 @@ public class PreferenceSolver {
      */
     public int generateSchedule(){
         int schedulerCode;
-        int preferenceRow = 2; /** this is for debug purposes */
+        this.preferenceRow = 2;
         for (FacultyPreference facultyPreference : facultyPreferences){
             // verify faculty preference data complies with course data, room data, and period data
             Room roomPreferred = rooms.stream().filter(room -> facultyPreference.roomId.equals(room.getRoomId())).findAny().orElse(null);
@@ -82,12 +79,10 @@ public class PreferenceSolver {
             }
             // if all is in compliance, attempt to schedule the faculty preference, or find alternatives
             schedulerCode = attemptToSchedule(facultyPreference, roomPreferred, periodPreferred, coursePreferred);
-            System.out.println("Preference Row: "+preferenceRow+"    Code: "+schedulerCode);
-            preferenceRow++;
             if(schedulerCode != SUCCESSFULLY_COURSE_ADDED_TO_SCHEDULE){
                 return schedulerCode;
             }
-
+            preferenceRow++;
         }
         // update so getGeneratedSchedule() will return the list of CourseEvent s
         this.scheduleIsGenerated = true;
@@ -205,5 +200,8 @@ public class PreferenceSolver {
         }
     }
 
+    public int getCurrentFacultyPreferenceRow() {
+        return preferenceRow;
+    }
 
 }

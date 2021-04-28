@@ -7,6 +7,7 @@ package coursescheduler.views.pages.subpages;
 import coursescheduler.client.algorithm.PreferenceSolver;
 import coursescheduler.client.daos.BasePeriodDao;
 import coursescheduler.client.daos.PeriodDao;
+import coursescheduler.client.objects.CourseEvent;
 import coursescheduler.managers.PanelController;
 import coursescheduler.security.utilties.SheetsService;
 import coursescheduler.views.pages.containers.PageControl;
@@ -22,7 +23,8 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import static coursescheduler.security.utilties.SheetsConstants.TIME_PERIODS_SPREADSHEET;
+import static coursescheduler.client.algorithm.SchedulerConstants.*;
+import static coursescheduler.security.utilties.SheetsConstants.*;
 
 /**
  *
@@ -39,7 +41,8 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
     List<String> scheduleNames = new ArrayList<>();  
     JFileChooser fc;
     int textSize = 12;
-    
+    List<CourseEvent> currentSchedule;
+
     public ArrayList<ArrayList<String>> getDataFromTable()
     {
         ArrayList<ArrayList<String>> tableData = new ArrayList<ArrayList<String>>();
@@ -334,14 +337,18 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
         }
     }
     
-    public void addRow()
+    public void addRow(CourseEvent courseEvent)
     {
         DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
         if (model.getColumnCount() > 0)
         {
             Object[] temp = new Object[]
             {
-                ""
+                courseEvent.getFacultyEmail(),
+                courseEvent.getCourseUUID(),
+                courseEvent.getPeriod().getDaySection(),
+                courseEvent.getPeriod().getTimeSection(),
+                courseEvent.getRoom().getRoomId().toUpperCase()
             };
             model.addRow(temp);
             model.fireTableDataChanged();
@@ -681,17 +688,40 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
             PreferenceSolver departmentScheduler = new PreferenceSolver(periodDao);
             int schedulerCode = departmentScheduler.generateSchedule();
             System.out.print(schedulerCode);
-            if(schedulerCode == 101){
-                departmentScheduler.printScheduleToConsole();
+            switch(schedulerCode){
+                case SUCCESSFUL_SCHEDULE_GENERATED:
+                    conflictDisplay.setText("");
+                    this.currentSchedule = departmentScheduler.getGeneratedSchedule();
+                    departmentScheduler.printScheduleToConsole();
+                    for(CourseEvent courseEvent: currentSchedule){
+                        addRow(courseEvent);
+                    }
+                    break;
+                case NOT_ENOUGH_ROOMS:
+                    conflictDisplay.setText(NOT_ENOUGH_ROOMS_WARNING);
+                    break;
+                case COURSE_NOT_AVAILABLE:
+                    conflictDisplay.setText(COURSE_NOT_AVAILABLE_WARNING+departmentScheduler.getCurrentFacultyPreferenceRow());
+                    break;
+                case INVALID_ROOM_IN_PREFERENCE:
+                    conflictDisplay.setText(INVALID_ROOM_IN_PREFERENCE_WARNING+departmentScheduler.getCurrentFacultyPreferenceRow());
+                    break;
+                case INVALID_PERIOD_IN_PREFERENCE:
+                    conflictDisplay.setText(INVALID_PERIOD_IN_PREFERENCE_WARNING+departmentScheduler.getCurrentFacultyPreferenceRow());
+                    break;
+                case INVALID_COURSE_IN_PREFERENCE:
+                    conflictDisplay.setText(INVALID_COURSE_IN_PREFERENCE_WARNING+departmentScheduler.getCurrentFacultyPreferenceRow());
+                    break;
             }
-
         } catch (IOException | GeneralSecurityException e) {
             e.printStackTrace();
         }
+
+
+
     }//GEN-LAST:event_generateScheduleButtonActionPerformed
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
-
         clearTable();
     }//GEN-LAST:event_clearButtonActionPerformed
 

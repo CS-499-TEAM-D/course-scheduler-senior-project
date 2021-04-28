@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package coursescheduler.views.pages.subpages;
+import coursescheduler.client.objects.Course;
 import coursescheduler.views.pages.SubPage;
 import coursescheduler.views.pages.containers.PageControl;
 import coursescheduler.views.pages.containers.dummyCourse;
@@ -138,27 +139,22 @@ public class StandardSchedulerPage extends javax.swing.JPanel implements SubPage
         
     }
     
-    /*
+
     //FOR CHRIS:
     public void addCourse(Course input)
     {
         DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
         Object[] temp = new Object[] 
-        { 
-            input.getID(), 
-            input.getSection(),
-            input.getProfessor(), 
-            input.getRoom(),
-            input.getTimes(), 
-            input.getOnlyOne() //True or false boolean
+        {
+
         };
         
         model.addRow(temp);
         model.fireTableDataChanged();
     }
-    */
+
     
-    /*
+
     //FOR CHRIS:
     public void removeCourse(int ID)
     {
@@ -173,7 +169,7 @@ public class StandardSchedulerPage extends javax.swing.JPanel implements SubPage
         }  
         model.fireTableDataChanged();
     }
-    */
+
     
     
     public void addCourse_DUMMY(dummyCourse input) //DUMMY
