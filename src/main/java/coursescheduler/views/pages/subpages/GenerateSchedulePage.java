@@ -690,6 +690,7 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
             System.out.print(schedulerCode);
             switch(schedulerCode){
                 case SUCCESSFUL_SCHEDULE_GENERATED:
+                    courseConflictsTitle.setText("Conflict Free!");
                     conflictDisplay.setText("");
                     this.currentSchedule = departmentScheduler.getGeneratedSchedule();
                     departmentScheduler.printScheduleToConsole();
@@ -698,23 +699,29 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
                     }
                     break;
                 case NOT_ENOUGH_ROOMS:
+                    courseConflictsTitle.setText(NOT_ENOUGH_ROOMS_TITLE);
                     conflictDisplay.setText(NOT_ENOUGH_ROOMS_WARNING);
                     break;
                 case COURSE_NOT_AVAILABLE:
+                    courseConflictsTitle.setText(COURSE_NOT_AVAILABLE_TITLE);
                     conflictDisplay.setText(COURSE_NOT_AVAILABLE_WARNING+departmentScheduler.getCurrentFacultyPreferenceRow());
                     break;
                 case INVALID_ROOM_IN_PREFERENCE:
+                    courseConflictsTitle.setText(INVALID_ROOM_IN_PREFERENCE_TITLE);
                     conflictDisplay.setText(INVALID_ROOM_IN_PREFERENCE_WARNING+departmentScheduler.getCurrentFacultyPreferenceRow());
                     break;
                 case INVALID_PERIOD_IN_PREFERENCE:
+                    courseConflictsTitle.setText(INVALID_PERIOD_IN_PREFERENCE_TITLE);
                     conflictDisplay.setText(INVALID_PERIOD_IN_PREFERENCE_WARNING+departmentScheduler.getCurrentFacultyPreferenceRow());
                     break;
                 case INVALID_COURSE_IN_PREFERENCE:
+                    courseConflictsTitle.setText(INVALID_COURSE_IN_PREFERENCE_TITLE);
                     conflictDisplay.setText(INVALID_COURSE_IN_PREFERENCE_WARNING+departmentScheduler.getCurrentFacultyPreferenceRow());
                     break;
             }
         } catch (IOException | GeneralSecurityException e) {
-            e.printStackTrace();
+            courseConflictsTitle.setText(BAD_DATA_TITLE);
+            conflictDisplay.setText(BAD_DATA_WARNING);
         }
 
 
