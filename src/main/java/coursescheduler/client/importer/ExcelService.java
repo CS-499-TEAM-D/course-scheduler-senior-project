@@ -2,11 +2,13 @@ package coursescheduler.client.importer;
 
 import coursescheduler.client.objects.*;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +16,7 @@ public class ExcelService {
 
     private String departmentAbr;
     private String path;
+    private FileInputStream currentWorkbookFile;
     private static ExcelService instance = null;
     private Workbook currentWorkbook = null;
 
@@ -33,6 +36,13 @@ public class ExcelService {
     static final int CLASSROOM_LOCATION = 0;
     static final int CAPACITY = 1;
 
+    static final int SCHEDULE_FACULTY = 0;
+    static final int SCHEDULE_COURSE = 1;
+    static final int SCHEDULE_DAY = 2;
+    static final int SCHEDULE_TIME = 3;
+    static final int SCHEDULE_ROOM = 4;
+
+
     private ExcelService() {
     }
 
@@ -43,7 +53,8 @@ public class ExcelService {
     public void setCurrentWorkbook(String path) {
         this.path = path;
         try {
-            this.currentWorkbook = new XSSFWorkbook(new FileInputStream(new File(path)));
+            this.currentWorkbookFile = new FileInputStream(new File(path));
+            this.currentWorkbook = new XSSFWorkbook(this.currentWorkbookFile);
         } catch (IOException e) {
             this.currentWorkbook = null;
             e.printStackTrace();
@@ -123,5 +134,38 @@ public class ExcelService {
             }
         }
         return roomInformationTable;
+    }
+
+    public void saveScheduleToNewSheet(List<CourseEvent> schedule){
+        Workbook excelFileToWrite = new XSSFWorkbook();
+        excelFileToWrite = currentWorkbook;
+        String sheetScheduleTitle = "schedule @"+ LocalDate.now().getMonthValue()+"_"+LocalDate.now().getDayOfMonth()+"_"+LocalTime.now().getHour()+LocalTime.now().getMinute();
+        Sheet scheduleSheet = excelFileToWrite.createSheet(sheetScheduleTitle);
+        scheduleSheet.setDefaultColumnWidth(20);
+        Row header = scheduleSheet.createRow(0);
+        header.createCell(SCHEDULE_FACULTY).setCellValue("professor");
+        header.createCell(SCHEDULE_COURSE).setCellValue("course");
+        header.createCell(SCHEDULE_DAY).setCellValue("day");
+        header.createCell(SCHEDULE_TIME).setCellValue("time");
+        header.createCell(SCHEDULE_ROOM).setCellValue("room");
+        for (CourseEvent courseEvent : schedule){
+            Row newRow = scheduleSheet.createRow(scheduleSheet.getPhysicalNumberOfRows());
+            newRow.createCell(SCHEDULE_FACULTY).setCellValue(courseEvent.getFacultyEmail());
+            newRow.createCell(SCHEDULE_COURSE).setCellValue(courseEvent.getCourseUUID());
+            newRow.createCell(SCHEDULE_DAY).setCellValue(courseEvent.getPeriod().getDaySection());
+            newRow.createCell(SCHEDULE_TIME).setCellValue(courseEvent.getPeriod().getTimeSection());
+            newRow.createCell(SCHEDULE_ROOM).setCellValue(courseEvent.getRoom().getRoomId().toUpperCase());
+        }
+        try {
+            // have to first close input stream before saving to output stream
+            currentWorkbookFile.close();
+            FileOutputStream output = new FileOutputStream(path);
+            excelFileToWrite.write(output);
+            // close the output stream and reopen the input stream
+            output.close();
+            setCurrentWorkbook(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -62,7 +62,6 @@ public class SaveLoadFilePage extends javax.swing.JPanel {
         userType = input;
         if (userType.equals("MASTER"))
         {
-            loadTypeComboBox.addItem("All Course Periods");
         }
     }
     
@@ -127,61 +126,9 @@ public class SaveLoadFilePage extends javax.swing.JPanel {
     public SaveLoadFilePage() {
         initComponents();
         fc = new JFileChooser();
-        loadButton.setEnabled(false);
-        removeFileButton.setEnabled(false);
+        loadButton.setEnabled(true);
     }
-    
-    //=================================================================
-    //Load functions:
-    /*
-    public String getFilePathAsStringLoad()
-    {
-        checkFilePathLoad();
-        if (validFileLoad)
-        {
-            return loadPath_input.getText();
-        }
-        else
-        {
-            return "INVALID_FILE_PATH";
-        }
-        
-    }
-    
-    public Path getFilePathAsPathLoad()
-    {
-        checkFilePathLoad();
-        Path p1;
-        if (validFileLoad)
-        {
-            String temp1 = loadPath_input.getText();
-            p1 = Paths.get(temp1);
-        }
-        else
-        {
-            String temp1 = "INVALID_FILE_PATH";
-            p1 = Paths.get(temp1);
-        }
-        return p1;
-    }
-    
-    public void checkFilePathLoad()
-    {
-        File csvFile = new File(loadPath_input.getText());
-        if (csvFile.exists())
-        {
-            loadSchedule_error.setText("");
-            validFileLoad = true;
-        }
-        else
-        {
-            loadSchedule_error.setText("*");
-            validFileLoad = false;
-        }
-    }
-    */
-    //=================================================================
-    //Table functions:
+
     
     public void clearTable() //Needs testing!
     {
@@ -282,15 +229,12 @@ public class SaveLoadFilePage extends javax.swing.JPanel {
         loadSchedule_error = new javax.swing.JLabel();
         savePath_error = new javax.swing.JLabel();
         fileName_error = new javax.swing.JLabel();
-        loadTypeComboBox = new javax.swing.JComboBox<>();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         filePreviewTable = new javax.swing.JTable();
         selectFileComboBox = new javax.swing.JComboBox<>();
-        removeFileButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         debugText = new javax.swing.JTextArea();
-        saveButton = new javax.swing.JButton();
 
         fileChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
         fileChooser.setCurrentDirectory(new java.io.File("C:\\Users\\evilc\\Desktop"));
@@ -312,23 +256,15 @@ public class SaveLoadFilePage extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Load Spreadsheet");
 
-        loadTypeComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        loadTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Type", "Faculty Preferences", "Course Listing", "Room Listing" }));
-        loadTypeComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadTypeComboBoxActionPerformed(evt);
-            }
-        });
-
         filePreviewTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-
+                "Faculty Preference Count", "Room Count", "Course Count"
             }
         ));
         jScrollPane1.setViewportView(filePreviewTable);
@@ -341,25 +277,10 @@ public class SaveLoadFilePage extends javax.swing.JPanel {
             }
         });
 
-        removeFileButton.setText("Remove File");
-        removeFileButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeFileButtonActionPerformed(evt);
-            }
-        });
-
         debugText.setColumns(20);
         debugText.setRows(5);
-        debugText.setText("Test");
+        debugText.setText("Path of Excel File to Import Data.");
         jScrollPane2.setViewportView(debugText);
-
-        saveButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        saveButton.setText("Save");
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -374,61 +295,44 @@ public class SaveLoadFilePage extends javax.swing.JPanel {
                             .addComponent(fileName_error, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(savePath_error, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(loadTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(loadButton))
-                        .addGap(178, 178, 178)
-                        .addComponent(loadSchedule_error, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(loadButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(loadSchedule_error, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(selectFileComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(saveButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(removeFileButton)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(selectFileComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel1)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(fileName_error, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(savePath_error, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(loadTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(29, 29, 29)
-                                        .addComponent(loadButton))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addComponent(loadSchedule_error, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(99, 99, 99))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
+                        .addGap(40, 40, 40)
+                        .addComponent(fileName_error, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(savePath_error, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(loadSchedule_error, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(selectFileComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(removeFileButton)
-                    .addComponent(saveButton))
-                .addGap(11, 11, 11)
+                .addGap(4, 4, 4)
+                .addComponent(selectFileComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
@@ -436,7 +340,6 @@ public class SaveLoadFilePage extends javax.swing.JPanel {
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
         //Load button clicked
-        loadTypeComboBox.setSelectedItem("Select Type");
         int returnVal = fc.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) 
         {
@@ -481,73 +384,13 @@ public class SaveLoadFilePage extends javax.swing.JPanel {
         if (!selectFileComboBox.getSelectedItem().equals("Select File to View"))       
         {
             clearTable();
-            removeFileButton.setEnabled(true);
             //Set the table using the table functions and CSV parsers (making the CSV file parser is not my job)
         }
         else
         {
-            removeFileButton.setEnabled(false);
         }
         
     }//GEN-LAST:event_selectFileComboBoxActionPerformed
-
-    private void loadTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTypeComboBoxActionPerformed
-        if (!loadTypeComboBox.getSelectedItem().equals("Select Type"))       
-        {
-            loadButton.setEnabled(true);
-            loadType = getTypeFromCombo(loadTypeComboBox);
-        }
-        else
-        {
-            loadButton.setEnabled(false);
-        }
-    }//GEN-LAST:event_loadTypeComboBoxActionPerformed
-
-    private void removeFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeFileButtonActionPerformed
-        // TODO add your handling code here:
-        clearTable();
-    }//GEN-LAST:event_removeFileButtonActionPerformed
-
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        // TODO add your handling code here:
-        int returnVal = fc.showSaveDialog(this);
-        String fullPath = "";
-        if (returnVal == JFileChooser.APPROVE_OPTION) 
-        {
-            try 
-            {
-                File file = fc.getSelectedFile();
-                fullPath = file.getPath();      
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
-        
-        if (returnVal == JFileChooser.APPROVE_OPTION)
-        {
-            try 
-            {
-                File myObj = new File(fullPath);
-                if (myObj.createNewFile()) 
-                {
-                  FileWriter myWriter = new FileWriter(myObj);
-                  myWriter.write(debugText.getText());
-                  myWriter.close();
-                } 
-                else 
-                {
-                  System.out.println("File already exists.");
-                }
-           } 
-           catch (IOException e) 
-           {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-           }
-        }
-    }//GEN-LAST:event_saveButtonActionPerformed
 
     private void fileChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileChooserActionPerformed
         // TODO add your handling code here:
@@ -566,10 +409,7 @@ public class SaveLoadFilePage extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton loadButton;
     private javax.swing.JLabel loadSchedule_error;
-    private javax.swing.JComboBox<String> loadTypeComboBox;
     private javax.swing.JPopupMenu popupMenu;
-    private javax.swing.JButton removeFileButton;
-    private javax.swing.JButton saveButton;
     private javax.swing.JLabel savePath_error;
     private javax.swing.JComboBox<String> selectFileComboBox;
     // End of variables declaration//GEN-END:variables
