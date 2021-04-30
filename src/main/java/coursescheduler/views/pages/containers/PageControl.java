@@ -4,10 +4,12 @@
  * and open the template in the editor.
  */
 package coursescheduler.views.pages.containers;
+import coursescheduler.client.importer.ImportedData;
 import coursescheduler.views.pages.subpages.GenerateSchedulePage;
 import coursescheduler.views.pages.subpages.MasterSchedulerPage;
 import coursescheduler.views.pages.subpages.SaveLoadFilePage;
 import coursescheduler.views.pages.subpages.StandardSchedulerPage;
+import coursescheduler.client.objects.Course;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,8 @@ public class PageControl
     List<dummyCourse> allCoursesDummy = new ArrayList<>();
     List<dummyCourse> loadedCoursesDummy = new ArrayList<>();
     String type;
+    List<Course> listOfAllCourses = new ArrayList<>();
+    ImportedData importedData;
     //FOR CHRIS:
     //Database data;
     
@@ -34,6 +38,32 @@ public class PageControl
     {
 
 
+    }
+    
+    public void setCourses (ImportedData input, String type)
+    {
+        if (input.getCoursesOffered().size() > 0)
+        {
+            for (int i = 0; i < input.getCoursesOffered().size(); i++)
+            {
+                listOfAllCourses.add(input.getCoursesOffered().get(i));
+            }
+            if (type.equals("MASTER"))
+            {
+                for (int i = 0; i < listOfAllCourses.size(); i++)
+                {
+                    master.addCourse(listOfAllCourses.get(i));
+                }
+            }
+            else if (type.equals("STANDARD"))
+            {
+                for (int i = 0; i < listOfAllCourses.size(); i++)
+                {
+                    standard.addCourse(listOfAllCourses.get(i));
+                }
+            }
+        }
+        
     }
     
     

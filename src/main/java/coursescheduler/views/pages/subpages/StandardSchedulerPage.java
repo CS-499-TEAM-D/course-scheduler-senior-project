@@ -145,8 +145,10 @@ public class StandardSchedulerPage extends javax.swing.JPanel implements SubPage
     {
         DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
         Object[] temp = new Object[] 
-        {
-
+        { 
+            input.getId(),
+            input.getSection(),
+            input.getMaxEnroll(), 
         };
         
         model.addRow(temp);
@@ -262,11 +264,11 @@ public class StandardSchedulerPage extends javax.swing.JPanel implements SubPage
 
             },
             new String [] {
-                "Course", "Section", "Professor", "Room", "Times"
+                "Course", "Section", "Max Enrollment"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

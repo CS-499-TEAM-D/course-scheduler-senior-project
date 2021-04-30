@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package coursescheduler.views.pages.subpages;
+import coursescheduler.client.objects.Course;
 import coursescheduler.views.pages.SubPage;
 import coursescheduler.views.pages.containers.PageControl;
 import coursescheduler.views.pages.containers.dummyCourse;
@@ -23,7 +24,7 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<J
     PageControl control;
     String page = "MASTER";
     int textSize = 12;
-    boolean tableIsEditable = true;
+    boolean tableIsEditable = false;
 
     @Override
     public JPanel init() {
@@ -169,25 +170,23 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<J
         
     }
     
-    /*
+    
     //FOR CHRIS:
     public void addCourse(Course input)
     {
         DefaultTableModel model = (DefaultTableModel) currentCoursesTable.getModel();
         Object[] temp = new Object[] 
         { 
-            input.getID(), 
+            input.getId(),
             input.getSection(),
-            input.getProfessor(), 
-            input.getRoom(),
-            input.getTimes(), 
-            input.getOnlyOne() //True or false boolean
+            input.getMaxEnroll(), 
+            false
         };
         
         model.addRow(temp);
         model.fireTableDataChanged();
     }
-    */
+    
     
     /*
     //FOR CHRIS:
@@ -314,11 +313,11 @@ public class MasterSchedulerPage extends javax.swing.JPanel implements SubPage<J
 
             },
             new String [] {
-                "Course", "Section", "Professor", "Preferred Room", "Preferred Times", "Update Selection"
+                "Course", "Section", "Max Enrollment", "Update Selection"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
