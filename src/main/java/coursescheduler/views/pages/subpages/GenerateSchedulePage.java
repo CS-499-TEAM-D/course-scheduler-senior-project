@@ -12,7 +12,8 @@ import coursescheduler.client.objects.CourseEvent;
 import coursescheduler.managers.PanelController;
 import coursescheduler.security.utilties.SheetsService;
 import coursescheduler.views.pages.containers.PageControl;
-import java.awt.Font;
+
+import java.awt.*;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
@@ -411,6 +412,7 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
         courseConflictsTitle = new javax.swing.JTextField();
         saveRemotelyButton = new javax.swing.JButton();
         exportAsSheetButton = new javax.swing.JButton();
+        debugPeriodToggle = new javax.swing.JToggleButton();
 
         fileChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
         fileChooser.setCurrentDirectory(new java.io.File("C:\\Users\\evilc\\Desktop"));
@@ -491,25 +493,42 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
             }
         });
 
+        debugPeriodToggle.setBackground(new java.awt.Color(55, 55, 55));
+        debugPeriodToggle.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        debugPeriodToggle.setForeground(new java.awt.Color(255, 153, 153));
+        debugPeriodToggle.setText("Debug Period: OFF");
+        debugPeriodToggle.setToolTipText("Toggle this to use alternative 4 period system to debug the algorithm.");
+        debugPeriodToggle.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        debugPeriodToggle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                debugPeriodToggleActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(saveRemotelyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(exportAsSheetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                                    .addComponent(courseConflictsTitle))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(courseConflictsTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(debugPeriodToggle, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -517,7 +536,6 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
                                 .addComponent(savePath_error, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(selectScheduleSave_error, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(generateScheduleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -558,7 +576,9 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
                             .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(saveRemotelyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(exportAsSheetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(40, 40, 40)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(debugPeriodToggle)
+                        .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(errorBox, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -570,7 +590,7 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
         //Generate schedule button pressed
         try {
             PeriodDao periodDao = new BasePeriodDao(SheetsService.getSheetsService(), TIME_PERIODS_SPREADSHEET);
-            PreferenceSolver departmentScheduler = new PreferenceSolver(periodDao, true);
+            PreferenceSolver departmentScheduler = new PreferenceSolver(periodDao, debugPeriodToggle.isSelected());
             int schedulerCode = departmentScheduler.generateSchedule();
             System.out.print(schedulerCode);
             switch(schedulerCode){
@@ -634,6 +654,16 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
         ExcelService.getService().saveScheduleToNewSheet(this.currentSchedule);
     }//GEN-LAST:event_exportAsSheetButtonActionPerformed
 
+    private void debugPeriodToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_debugPeriodToggleActionPerformed
+        if(debugPeriodToggle.isSelected()){
+            debugPeriodToggle.setForeground(new java.awt.Color(153, 255, 153));
+            debugPeriodToggle.setText("Debug Period: ON");
+        }else{
+            debugPeriodToggle.setForeground(new java.awt.Color(255, 153, 153));
+            debugPeriodToggle.setText("Debug Period: OFF");
+        }
+    }//GEN-LAST:event_debugPeriodToggleActionPerformed
+
     public void setUpFC()
     {
         FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV", "xlxs");
@@ -646,6 +676,7 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
     private javax.swing.JTextPane conflictDisplay;
     private javax.swing.JTextField courseConflictsTitle;
     private javax.swing.JTable currentCoursesTable;
+    private javax.swing.JToggleButton debugPeriodToggle;
     private javax.swing.JLabel errorBox;
     private javax.swing.JButton exportAsSheetButton;
     private javax.swing.JFileChooser fileChooser;
