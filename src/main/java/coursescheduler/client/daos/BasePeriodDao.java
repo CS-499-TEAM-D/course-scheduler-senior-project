@@ -22,7 +22,6 @@ public class BasePeriodDao implements PeriodDao {
     private String spreadsheetId;
 
 
-
     public BasePeriodDao(Sheets service, String spreadsheetId) {
         this.service = service;
         this.spreadsheetId = spreadsheetId;
@@ -33,8 +32,8 @@ public class BasePeriodDao implements PeriodDao {
         // the id is equal to the index - 1, so we do not need to find the index of the id
         id--;
         // if user found, fetch information on the user and create a user object to return
-        String rangeOfPeriodToGet = TIME_PERIODS_SHEET+PERIOD_ID_COLUMN+id+":"+TIME_COLUMN+id;
-        ValueRange periodRange  = null;
+        String rangeOfPeriodToGet = TIME_PERIODS_SHEET + PERIOD_ID_COLUMN + id + ":" + TIME_COLUMN + id;
+        ValueRange periodRange = null;
         try {
             periodRange = service.spreadsheets().values().get(spreadsheetId, rangeOfPeriodToGet).execute();
             List<List<Object>> period = periodRange.getValues();
@@ -47,8 +46,13 @@ public class BasePeriodDao implements PeriodDao {
     }
 
     @Override
-    public List<Period> getAllPeriods() {
-        String rangeOfAllPeriods = TIME_PERIODS_SHEET+PERIOD_ID_COLUMN+":"+TIME_COLUMN;
+    public List<Period> getAllPeriods(Boolean debug) {
+        String rangeOfAllPeriods = "";
+        if (debug) {
+            rangeOfAllPeriods = TIME_PERIODS_SHEET_DEBUG + PERIOD_ID_COLUMN + ":" + TIME_COLUMN;
+        } else {
+            rangeOfAllPeriods = TIME_PERIODS_SHEET + PERIOD_ID_COLUMN + ":" + TIME_COLUMN;
+        }
         ValueRange periodRange = null;
 
         try {
@@ -59,7 +63,7 @@ public class BasePeriodDao implements PeriodDao {
 
             List<Period> periodList = new ArrayList<>();
 
-            for (List<Object> period : periodTable){
+            for (List<Object> period : periodTable) {
                 periodList.add(new Period(Integer.parseInt(String.valueOf(period.get(PERIOD_ID))), String.valueOf(period.get(DAY_SECTION)), String.valueOf(period.get(TIME_SECTION))));
             }
 

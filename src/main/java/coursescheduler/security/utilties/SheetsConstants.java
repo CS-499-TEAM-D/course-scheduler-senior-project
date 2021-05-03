@@ -14,9 +14,9 @@ public final class SheetsConstants {
     public static final String VERIFICATION_COLUMN = "E";
     public static final String DEPARTMENT_COLUMN = "F";
 
-
     public static final String TIME_PERIODS_SPREADSHEET = "1IyQDY7mXKaO-AKGKWKFuTOa7Getq5VM2ScW58SKyMio";
     public static final String TIME_PERIODS_SHEET = "TIMES!";
+    public static final String TIME_PERIODS_SHEET_DEBUG = "DEBUG_TIMES!";
     public static final String PERIOD_ID_COLUMN = "A";
     public static final String DAY_COLUMN = "B";
     public static final String TIME_COLUMN = "C";

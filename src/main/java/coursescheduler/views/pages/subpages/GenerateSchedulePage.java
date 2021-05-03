@@ -570,7 +570,7 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
         //Generate schedule button pressed
         try {
             PeriodDao periodDao = new BasePeriodDao(SheetsService.getSheetsService(), TIME_PERIODS_SPREADSHEET);
-            PreferenceSolver departmentScheduler = new PreferenceSolver(periodDao);
+            PreferenceSolver departmentScheduler = new PreferenceSolver(periodDao, true);
             int schedulerCode = departmentScheduler.generateSchedule();
             System.out.print(schedulerCode);
             switch(schedulerCode){

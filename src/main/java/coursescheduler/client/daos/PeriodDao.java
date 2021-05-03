@@ -8,5 +8,5 @@ import java.util.List;
  */
 public interface PeriodDao {
     Period getPeriodById(int id);
-    List<Period> getAllPeriods();
+    List<Period> getAllPeriods(Boolean debug);
 }

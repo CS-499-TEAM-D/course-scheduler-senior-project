@@ -31,9 +31,9 @@ public class PreferenceSolver {
         }
     }
 
-    public PreferenceSolver(PeriodDao periodDao){
+    public PreferenceSolver(PeriodDao periodDao, boolean debugPeriods){
         this.facultyPreferences = ImportedData.getInstance().getFacultyPreferences();
-        this.periods = periodDao.getAllPeriods();
+        this.periods = periodDao.getAllPeriods(debugPeriods);
         this.rooms = ImportedData.getInstance().getSanctionedRooms();
         this.courses = ImportedData.getInstance().getCoursesOffered();
         Collections.sort(rooms, new SortRoomByCapacityDescending());
