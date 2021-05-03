@@ -346,10 +346,10 @@ public class SaveLoadFilePage extends javax.swing.JPanel {
             try 
             {
                 File file = fc.getSelectedFile();
-                //TODO here is where the file is selected and needs to be imported
                 ImportedData importedData = ImportedData.getInstance();
                 importedData.update(file.getPath());
                 control.setCourses(importedData, userType);
+                debugText.setText(file.getPath());
             }
             catch(Exception e)
             {

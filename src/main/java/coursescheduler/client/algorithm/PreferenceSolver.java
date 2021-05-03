@@ -195,9 +195,9 @@ public class PreferenceSolver {
     }
 
     public void printScheduleToConsole(){
-        for(CourseEvent courseEvent : this.courseEvents){
-            courseEvent.print();
-        }
+        //for(CourseEvent courseEvent : this.courseEvents){
+        //    courseEvent.print();
+        //}
     }
 
     public int getCurrentFacultyPreferenceRow() {
