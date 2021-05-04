@@ -185,7 +185,6 @@ public class PreferenceSolver {
                 // if we get here, that means that the there is no value at room and period
                 // which means it is available
                 // so we add false to prevent it from being double booked, and we return true
-                roomPeriodAvailabilityMap.get(room.getRoomId()).put(period.getPeriodIndex(), false);
                 return true;
             }
         }else{
