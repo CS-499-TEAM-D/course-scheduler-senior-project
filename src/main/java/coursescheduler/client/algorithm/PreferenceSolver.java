@@ -31,6 +31,13 @@ public class PreferenceSolver {
         }
     }
 
+    class SortScheduleByRoomDescending implements  Comparator<CourseEvent>{
+        @Override
+        public int compare(CourseEvent o1, CourseEvent o2) {
+            return o1.getRoom().getRoomId().compareTo(o2.getRoom().getRoomId());
+        }
+    }
+
     public PreferenceSolver(PeriodDao periodDao, boolean debugPeriods){
         this.facultyPreferences = ImportedData.getInstance().getFacultyPreferences();
         this.periods = periodDao.getAllPeriods(debugPeriods);
@@ -78,7 +85,7 @@ public class PreferenceSolver {
                 return INVALID_COURSE_IN_PREFERENCE;
             }
             // if all is in compliance, attempt to schedule the faculty preference, or find alternatives
-            schedulerCode = attemptToSchedule(facultyPreference, roomPreferred, periodPreferred, coursePreferred);
+            schedulerCode = attemptToSchedule(true, facultyPreference, roomPreferred, periodPreferred, coursePreferred);
             if(schedulerCode != SUCCESSFULLY_COURSE_ADDED_TO_SCHEDULE){
                 return schedulerCode;
             }
@@ -95,6 +102,7 @@ public class PreferenceSolver {
      */
     public List<CourseEvent> getGeneratedSchedule(){
         if(this.scheduleIsGenerated){
+            this.courseEvents.sort(new SortScheduleByRoomDescending());
             return this.courseEvents;
         }else{
             return null;
@@ -109,7 +117,7 @@ public class PreferenceSolver {
      * @param coursePreferred the preferred course
      * @return
      */
-    public int attemptToSchedule(FacultyPreference facultyPreference, Room room, Period period, Course coursePreferred){
+    public int attemptToSchedule(Boolean preferencesPased, FacultyPreference facultyPreference, Room room, Period period, Course coursePreferred){
         if(courseAvailability.contains(facultyPreference.coursePreferenceId)){
             return COURSE_NOT_AVAILABLE;
         }
@@ -119,28 +127,29 @@ public class PreferenceSolver {
             if(courseFitsRoomPreferred(room, coursePreferred)){
                 return addCourseToSchedule(facultyPreference, room, period);
             }else{
-                // we need to find a bigger room
-                // if NOT at largest room (0th room) then try next largest room, else return not enough rooms
-                if(!(rooms.indexOf(room)>0)){
+                // we need to find a new room
+                // if we just checked preferred room, then start with smallest room
+                // else start with next big room
+                Room nextRoomToCheck = nextRoomToCheck(preferencesPased, room);
+                if(nextRoomToCheck == null){
                     return NOT_ENOUGH_ROOMS;
                 }
-                Room nextBigRoom = rooms.get(rooms.indexOf(room)-1);
-                return attemptToSchedule(facultyPreference, nextBigRoom, period, coursePreferred);
+                return attemptToSchedule(false, facultyPreference, nextRoomToCheck, period, coursePreferred);
             }
         }else{
             // we need to see if another time in the same room would work
             for(Period possiblePeriod : periods){
                 if(roomAndTimeIsAvailable(room, possiblePeriod)){
-                    return attemptToSchedule(facultyPreference, room, possiblePeriod, coursePreferred);
+                    return attemptToSchedule(false, facultyPreference, room, possiblePeriod, coursePreferred);
                 }
             }
             // if no other time would work, we need to iterate to the next largest room
             // if NOT at largest room (0th room) then try next largest room, else return not enough rooms
-            if(!(rooms.indexOf(room)>0)){
+            Room nextRoomToCheck = nextRoomToCheck(preferencesPased, room);
+            if(nextRoomToCheck == null){
                 return NOT_ENOUGH_ROOMS;
             }
-            Room nextBigRoom = rooms.get(rooms.indexOf(room)-1);
-            return attemptToSchedule(facultyPreference, nextBigRoom, period, coursePreferred);
+            return attemptToSchedule(false, facultyPreference, nextRoomToCheck, period, coursePreferred);
         }
     }
 
@@ -198,6 +207,18 @@ public class PreferenceSolver {
         //for(CourseEvent courseEvent : this.courseEvents){
         //    courseEvent.print();
         //}
+    }
+
+    public Room nextRoomToCheck(Boolean preferencePassed, Room currentRoom){
+        if(preferencePassed){
+            return rooms.get(rooms.size()-1); // start with smallest room if starting to find alternatives
+        }else{
+            if(rooms.indexOf(currentRoom)-1 >= 0){
+                return rooms.get(rooms.indexOf(currentRoom)-1); // if we are not using the initial preference, then interate to next big room
+            }else{
+                return null;
+            }
+        }
     }
 
     public int getCurrentFacultyPreferenceRow() {

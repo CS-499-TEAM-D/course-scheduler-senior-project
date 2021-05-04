@@ -8,7 +8,9 @@ import coursescheduler.client.algorithm.PreferenceSolver;
 import coursescheduler.client.daos.BasePeriodDao;
 import coursescheduler.client.daos.PeriodDao;
 import coursescheduler.client.importer.ExcelService;
+import coursescheduler.client.importer.ImportedData;
 import coursescheduler.client.objects.CourseEvent;
+import coursescheduler.client.objects.FacultyPreference;
 import coursescheduler.managers.PanelController;
 import coursescheduler.security.utilties.SheetsService;
 import coursescheduler.views.pages.containers.PageControl;
@@ -606,23 +608,23 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
                     break;
                 case NOT_ENOUGH_ROOMS:
                     courseConflictsTitle.setText(NOT_ENOUGH_ROOMS_TITLE);
-                    conflictDisplay.setText(NOT_ENOUGH_ROOMS_WARNING);
+                    conflictDisplay.setText(NOT_ENOUGH_ROOMS_WARNING+buildWarningText(departmentScheduler.getCurrentFacultyPreferenceRow()));
                     break;
                 case COURSE_NOT_AVAILABLE:
                     courseConflictsTitle.setText(COURSE_NOT_AVAILABLE_TITLE);
-                    conflictDisplay.setText(COURSE_NOT_AVAILABLE_WARNING+departmentScheduler.getCurrentFacultyPreferenceRow());
+                    conflictDisplay.setText(COURSE_NOT_AVAILABLE_WARNING+buildWarningText(departmentScheduler.getCurrentFacultyPreferenceRow()));
                     break;
                 case INVALID_ROOM_IN_PREFERENCE:
                     courseConflictsTitle.setText(INVALID_ROOM_IN_PREFERENCE_TITLE);
-                    conflictDisplay.setText(INVALID_ROOM_IN_PREFERENCE_WARNING+departmentScheduler.getCurrentFacultyPreferenceRow());
+                    conflictDisplay.setText(INVALID_ROOM_IN_PREFERENCE_WARNING+buildWarningText(departmentScheduler.getCurrentFacultyPreferenceRow()));
                     break;
                 case INVALID_PERIOD_IN_PREFERENCE:
                     courseConflictsTitle.setText(INVALID_PERIOD_IN_PREFERENCE_TITLE);
-                    conflictDisplay.setText(INVALID_PERIOD_IN_PREFERENCE_WARNING+departmentScheduler.getCurrentFacultyPreferenceRow());
+                    conflictDisplay.setText(INVALID_PERIOD_IN_PREFERENCE_WARNING+buildWarningText(departmentScheduler.getCurrentFacultyPreferenceRow()));
                     break;
                 case INVALID_COURSE_IN_PREFERENCE:
                     courseConflictsTitle.setText(INVALID_COURSE_IN_PREFERENCE_TITLE);
-                    conflictDisplay.setText(INVALID_COURSE_IN_PREFERENCE_WARNING+departmentScheduler.getCurrentFacultyPreferenceRow());
+                    conflictDisplay.setText(INVALID_COURSE_IN_PREFERENCE_WARNING+buildWarningText(departmentScheduler.getCurrentFacultyPreferenceRow()));
                     break;
             }
         } catch (IOException | GeneralSecurityException e) {
@@ -633,6 +635,17 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_generateScheduleButtonActionPerformed
+
+    public String buildWarningText(int rowOfFacultyPreference){
+        ImportedData data = ImportedData.getInstance();
+        FacultyPreference fp = data.getFacultyPreferences().get(rowOfFacultyPreference-2); // convert to 0th and account for header
+        String warning = "\nPreference Row: "+rowOfFacultyPreference+
+                "\nProfessor: "+fp.professorEmail+
+                "\nCourse Preferred: "+fp.coursePreferenceId+
+                "\nRoom Preferred: "+fp.roomId+
+                "\nPeriod Preferred: "+fp.periodId;
+        return warning;
+    }
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         clearTable();
