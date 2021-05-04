@@ -17,7 +17,7 @@ public class PreferenceSolver {
     private final List<Period> periods;
     private final List<Room> rooms;
     private final List<Course> courses;
-    private final HashMap<Room, HashMap<Period, Boolean>> roomPeriodAvailabilityMap;
+    private final HashMap<String, HashMap<Integer, Boolean>> roomPeriodAvailabilityMap;
     private final List<Integer> courseAvailability;
     private final List<FacultyPreference> facultyPreferencesNotHonored;
     private final List<CourseEvent> courseEvents;
@@ -152,7 +152,7 @@ public class PreferenceSolver {
      */
     public int addCourseToSchedule(FacultyPreference facultyPreference, Room room, Period period){
         // update the room and time availability
-        roomPeriodAvailabilityMap.get(room).put(period, true);
+        roomPeriodAvailabilityMap.get(room.getRoomId()).put(period.getPeriodIndex(), false);
         // check to see if room and period match preference, if not add to preference not honored list
         if(facultyPreference.periodId != period.getPeriodIndex() || facultyPreference.roomId != room.getRoomId()){
             facultyPreferencesNotHonored.add(facultyPreference);
@@ -169,18 +169,18 @@ public class PreferenceSolver {
      * @return returns true if both the room and period combination are available, else returns false
      */
     public boolean roomAndTimeIsAvailable(Room room, Period period){
-        if(roomPeriodAvailabilityMap.containsKey(room)){
-            if(roomPeriodAvailabilityMap.get(room).containsKey(period)){
-                return roomPeriodAvailabilityMap.get(room).get(period); // if we get here, it will always return false
+        if(roomPeriodAvailabilityMap.containsKey(room.getRoomId())){
+            if(roomPeriodAvailabilityMap.get(room.getRoomId()).containsKey(period.getPeriodIndex())){
+                return roomPeriodAvailabilityMap.get(room.getRoomId()).get(period.getPeriodIndex()); // if we get here, it will always return false
             }else{
                 // if we get here, that means that the there is no value at room and period
                 // which means it is available
                 // so we add false to prevent it from being double booked, and we return true
-                roomPeriodAvailabilityMap.get(room).put(period, false);
+                roomPeriodAvailabilityMap.get(room.getRoomId()).put(period.getPeriodIndex(), false);
                 return true;
             }
         }else{
-            roomPeriodAvailabilityMap.put(room, new HashMap<Period, Boolean>());
+            roomPeriodAvailabilityMap.put(room.getRoomId(), new HashMap<Integer, Boolean>());
             return roomAndTimeIsAvailable(room, period);
         }
     }

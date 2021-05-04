@@ -588,6 +588,7 @@ public class GenerateSchedulePage extends javax.swing.JPanel {
 
     private void generateScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateScheduleButtonActionPerformed
         //Generate schedule button pressed
+        clearTable();
         try {
             PeriodDao periodDao = new BasePeriodDao(SheetsService.getSheetsService(), TIME_PERIODS_SPREADSHEET);
             PreferenceSolver departmentScheduler = new PreferenceSolver(periodDao, debugPeriodToggle.isSelected());
